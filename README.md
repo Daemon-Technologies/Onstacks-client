@@ -1,8 +1,6 @@
-To Read setp by step procedure open [Blog](https://medium.com/p/c92ebf14a896)
-
 ## Developing
 
-To set up your local environment, go to the `mining-monitor-client` directory and then run the following:<br>
+To set up your local environment, run the following:<br>
 `yarn install`<br>
 `yarn start` <br>
 
