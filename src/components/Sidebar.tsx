@@ -4,7 +4,6 @@ import {
   Menu,
   MenuItem,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
