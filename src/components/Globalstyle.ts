@@ -27,6 +27,11 @@ export const GlobalStyles = createGlobalStyle`
     /* padding: 12px; */
   }
 
+  .pro-sidebar .pro-menu {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
   .menu-content {
     padding: 0 24px;
     display: flex !important;
@@ -67,8 +72,9 @@ export const GlobalStyles = createGlobalStyle`
     width: 12px;
     height: 18px;
   }
+
   .download {
-    background: #FFFFFF;
+    background: ${({ theme }: any) => theme.background} !important;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -95,11 +101,58 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     justify-content: center;
     padding-bottom: 10px;
+    border-bottom: 0px;
+    margin-bottom: 32px;
   }
+
   .container {
     display: flex;
     flex: 1;
     align-items: flex-start;
     height: 100vh;
+  }
+  .header {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .screen-container {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-start;
+    height: 100vh;
+  }
+
+  .screen-title {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 36px;
+  }
+
+  .info-card {
+    filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
+    box-shadow: 0px 1px 3px 0px #0000001F;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    div {
+      padding: 31px 68px 16px 31px;
+      .title {
+        font-weight: 500;
+        font-size: 14px;
+        color: ${({ theme }: any) => theme.greyText} !important;    
+        line-height: 20px;
+      }
+      .sub-title {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 28px;
+      }
+    }
   }
   `;
