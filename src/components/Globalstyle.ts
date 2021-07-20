@@ -21,6 +21,7 @@ export const GlobalStyles = createGlobalStyle`
   .pro-sidebar {
     height: 92vh;
   }
+  
   .pro-sidebar > .pro-sidebar-inner {
     background: ${({ theme }: any) => theme.background} !important;
     color: ${({ theme }: any) => theme.text};
@@ -53,10 +54,12 @@ export const GlobalStyles = createGlobalStyle`
     p {
       font-size: 14px;
       font-weight: 600;
+      margin-bottom: 12px;
       color: ${({ theme }: any) => theme.greyText} !important;    
     }
     .download > p {
       margin-left: 12px !important;
+      margin-bottom: 0px;
       color: ${({ theme }: any) => theme.text} !important;
     }
   }
@@ -91,11 +94,14 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     border-radius: 4px;
-    padding: 0 16px;
+    padding: 12px 16px;
     border: 1px solid #EBEAED;
     margin: 16px 0;
   }
 
+  h3 {
+    margin-bottom: 12px;
+  }
   .mobile-header {
     display:flex;
     flex-direction: row;
@@ -182,6 +188,7 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: var(--main-radius);
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
     box-shadow: 0px 1px 3px 0px #0000001F;
+    max-height: 300px;
   }
 
   #content4 {
@@ -190,6 +197,7 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: var(--main-radius);
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
     box-shadow: 0px 1px 3px 0px #0000001F;
+    max-height: 300px;
   } 
 
   .screen-title {
@@ -223,6 +231,29 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
+  table {
+    td:first-child {
+      color: ${({ theme }: any) => theme.primaryColor} !important;    
+    }
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 16px; 
+    color: ${({ theme }: any) => theme.greyText} !important;    
+    thead {
+      text-align: left;
+      padding: 7px 0;
+      tr {
+        border-top: 1pt solid #EBEAED;
+        border-bottom: 1pt solid #EBEAED;
+      }
+    }
+    tbody {
+      vertical-align: top;
+    }
+  }
+
+
+
   @media only screen and (max-width: 550px) {
   .container {
     grid-template-columns: 1fr;
@@ -249,4 +280,6 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
   }
+
+ 
   `;

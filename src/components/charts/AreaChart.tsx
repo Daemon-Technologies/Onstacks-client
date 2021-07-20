@@ -1,10 +1,30 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import { darkTheme, lightTheme } from "../Themes";
 
-export const AreaChart: React.FC = () => {
+interface Props {
+  theme: any;
+}
+
+export const AreaChart: React.FC<Props> = ({ theme }) => {
+  const themeMode = theme === "light" ? lightTheme : darkTheme;
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
     xaxis: {
-      categories: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      categories: [
+        "18000",
+        "18500",
+        "19000",
+        "19500",
+        "20000",
+        "20500",
+        "21000",
+        "21500",
+      ],
+      labels: {
+        style: {
+          colors: themeMode.text,
+        },
+      },
     },
     stroke: {
       curve: "smooth",
@@ -15,6 +35,9 @@ export const AreaChart: React.FC = () => {
       offsetY: -20,
       fontSize: "20px",
     },
+    tooltip: {
+      theme,
+    },
     title: {
       text: "Total Sats Commited",
       align: "left",
@@ -23,7 +46,7 @@ export const AreaChart: React.FC = () => {
       style: {
         fontSize: "14px",
         fontFamily: undefined,
-        color: "##84818A",
+        color: themeMode.greyText,
       },
     },
     subtitle: {
@@ -34,7 +57,7 @@ export const AreaChart: React.FC = () => {
       style: {
         fontSize: "30px",
         fontFamily: undefined,
-        color: "##84818A",
+        color: themeMode.greyText,
       },
     },
     yaxis: {
@@ -45,10 +68,11 @@ export const AreaChart: React.FC = () => {
 
   const [series, setSeries] = useState([
     {
-      name: "series-1",
+      name: "#19021",
       data: [30, 40, 25, 50, 49, 21, 70, 51],
     },
   ]);
+
   return (
     <ReactApexChart
       options={options}

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import { InfoCard } from "../components/InfoCard";
-import ReactApexChart from "react-apexcharts";
 import { AreaChart } from "../components/charts/AreaChart";
 import { LineChart } from "../components/charts/LineChart";
+import { RecentBlocks } from "../components/RecentBlocks";
+import { PieChart } from "../components/charts/PieChart";
 
-export const Overview: React.FC = () => {
-  const colorPalette = [
-    "#FFA043",
-    "#5542F6",
-    "#00A5FF",
-    "#20C9AC",
-    "#FF4560",
-    "#FA699D",
-  ];
+interface Props {
+  theme: any;
+}
+
+export const Overview: React.FC<Props> = ({ theme }) => {
+  useEffect(() => {
+    console.log(theme);
+  }, [theme]);
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     const { innerWidth: width } = window;
@@ -27,29 +27,19 @@ export const Overview: React.FC = () => {
         <InfoCard />
       </div>
       <div id="content1">
-        <AreaChart />
+        <AreaChart theme={theme} />
       </div>
       <div id="content2">
-        <LineChart />
+        <LineChart theme={theme} />
       </div>
       <div id="content3">
-        <ReactApexChart
-          options={{
-            noData: {
-              text: undefined,
-            },
-            dataLabels: {
-              enabled: false,
-            },
-            colors: colorPalette,
-          }}
-          series={[44, 55, 41, 17, 15]}
-          type="donut"
-          width="60%"
-          height="177"
-        />
+        <p>Block reward distribution to miners (last 100 blocks)</p>
+        <PieChart theme={theme} />
       </div>
-      <div id="content4"></div>
+      <div id="content4">
+        <p>Recent blocks</p>
+        <RecentBlocks />
+      </div>
     </>
   );
 };

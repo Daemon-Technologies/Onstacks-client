@@ -22,7 +22,7 @@ const App: React.FC = () => {
           <Router>
             <Switch>
               <Route path="/">
-                <Overview />
+                <Overview theme={theme} />
               </Route>
             </Switch>
           </Router>
