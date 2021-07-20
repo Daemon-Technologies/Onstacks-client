@@ -9,7 +9,7 @@ interface Props {
 }
 export const MobileHeader: React.FC<Props> = ({ setToggle, toggle }) => {
   return (
-    <div className={"mobile-header"}>
+    <div id="nav" className={"mobile-header"}>
       <img alt="menu" onClick={() => setToggle(true)} src={Menu} />
       <img alt="logo" src={Logo} />
       <img alt="notifications" src={Notification} />

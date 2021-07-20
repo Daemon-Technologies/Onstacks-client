@@ -35,14 +35,12 @@ export const Sidebar: React.FC<Props> = ({ theme, themeToggler }) => {
     <>
       {!toggle && <MobileHeader toggle={toggle} setToggle={setToggle} />}
       <ProSidebar
+        id="sidebar"
         toggled={toggle}
         onToggle={setToggle}
         breakPoint="sm"
         className="side-bar"
       >
-        <SidebarHeader>
-          <Logo />
-        </SidebarHeader>
         <SidebarContent>
           <Menu iconShape="square">
             <MenuItem

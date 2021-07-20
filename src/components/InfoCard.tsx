@@ -19,6 +19,10 @@ export const InfoCard: React.FC = () => {
         <p className="title">Last transaction fees</p>
         <p className="sub-title">100 STX</p>
       </div>
+      <div className="inner-info-card">
+        <p className="title">Active Miners</p>
+        <p className="sub-title">4 Miners</p>
+      </div>
     </div>
   );
 };
