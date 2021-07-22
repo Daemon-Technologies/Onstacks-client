@@ -10,7 +10,7 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
     grid: {
-      strokeDashArray: 4,
+      strokeDashArray: 2,
       xaxis: {
         lines: {
           show: true,
@@ -56,7 +56,7 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
       show: false,
       tickAmount: 1,
     },
-    colors: ["#FFA043", "#FFCE74"],
+    colors: ["#FFCE74"],
   });
 
   const [series] = useState([

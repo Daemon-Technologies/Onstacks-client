@@ -1,14 +1,14 @@
 export const lightTheme = {
-  body: "#FFF",
+  body: "#FAFAFA",
   text: "#2E2C34",
   greyText: "#84818A",
   primaryColor: "#FFA043",
-  background: "#fff",
+  background: "#FFFFFF",
   hoverColor: "rgba(255, 160, 67, 0.1)",
 };
 
 export const darkTheme = {
-  body: "#2E2C34",
+  body: "#222127",
   text: "#EBEAED",
   primaryColor: "#FFA043",
   greyText: "#84818A",

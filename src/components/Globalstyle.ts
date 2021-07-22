@@ -223,6 +223,10 @@ export const GlobalStyles = createGlobalStyle`
     max-height: 300px;
   }
 
+  td {
+    font-weight: 600;
+  }
+  
   #content4 {
     padding: 24px 29px 24px 24px;
     grid-area: content4;

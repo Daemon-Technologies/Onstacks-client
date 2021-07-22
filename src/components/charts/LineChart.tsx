@@ -20,7 +20,7 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
 
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
     grid: {
-      strokeDashArray: 4,
+      strokeDashArray: 2,
       xaxis: {
         lines: {
           show: true,
