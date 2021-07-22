@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: 'Manrope', sans-serif;
   }
   body {
     background: ${({ theme }: any) => theme.body};
@@ -35,6 +36,10 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.text} !important;
     }
     /* padding: 12px; */
+  }
+
+  .pro-item-content {
+    font-weight: 600;
   }
 
   .pro-sidebar .pro-menu {
@@ -68,6 +73,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
     display: flex;
     margin-top: 24px;
+    font-weight: 600;
     margin-bottom: 16px;
     align-items: center;
     justify-content: space-between;
@@ -144,11 +150,11 @@ export const GlobalStyles = createGlobalStyle`
 
   #nav {
     grid-area: nav;
-    margin-bottom: 16px;
     display: flex;
+    height: 70px;
     justify-content: space-between;
     align-items: center;
-    padding: 0 32px;
+    padding: 32px;
     .logo {
       width: 160px;
       height: 36px;
@@ -162,24 +168,50 @@ export const GlobalStyles = createGlobalStyle`
   #sidebar {
     grid-area: sidebar;
     border-radius: var(--main-radius);
+    margin-right: 40px;
   }
 
   #content1 {
     grid-area: content1;
-    padding: 16px;
+    padding: 24px;
     width: 100%;
     height: 100%;
     border-radius: var(--main-radius);
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
     box-shadow: 0px 1px 3px 0px #0000001F;
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      margin-bottom: 12px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.greyText} !important;
+    }
+    .sub-title {
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 40px;
+      color: ${({ theme }: any) => theme.text} !important;
+    }
   }
-
+  .seprator {
+      margin-left: 12px;
+      width: 100%;
+    }
   #content2 {
-    padding: 16px;
+    padding: 24px;
     grid-area: content2;
     border-radius: var(--main-radius);
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
     box-shadow: 0px 1px 3px 0px #0000001F;
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      margin-bottom: 12px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.greyText} !important;
+    }
   }
 
   #content3 {
@@ -192,12 +224,18 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   #content4 {
-    padding: 16px;
+    padding: 24px 29px 24px 24px;
     grid-area: content4;
     border-radius: var(--main-radius);
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
     box-shadow: 0px 1px 3px 0px #0000001F;
     max-height: 300px;
+    p {
+      font-size: 14px;
+      color: ${({ theme }: any) => theme.greyText} !important;
+      font-weight: 500;
+      margin-left: 14px;
+    }
   } 
 
   .screen-title {
@@ -216,7 +254,7 @@ export const GlobalStyles = createGlobalStyle`
     align-items: flex-start;
     justify-content: space-between;
     div {
-      padding: 31px 68px 16px 31px;
+      padding: 31px 68px 31px 16px;
       .title {
         font-weight: 500;
         font-size: 14px;
@@ -278,6 +316,13 @@ export const GlobalStyles = createGlobalStyle`
       width: 100%;
       border-bottom: 1px solid  #EBEAED;
     }
+  }
+  #content4 {
+    max-height: 600px;
+  }
+  #sidebar {
+    height: 100%;
+    top: 0;
   }
   }
 

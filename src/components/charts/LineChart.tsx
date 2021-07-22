@@ -19,6 +19,19 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
+    grid: {
+      strokeDashArray: 4,
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: false,
+        },
+      },
+    },
     xaxis: {
       categories: [
         "18000",
@@ -42,21 +55,13 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
     legend: {
       show: true,
       position: "top",
+      containerMargin: { left: 12 },
+      fontWeight: 500,
+      horizontalAlign: "left",
       offsetY: -5,
-      fontSize: "16px",
+      fontSize: "14px",
       labels: {
-        colors: themeMode.text,
-      },
-    },
-    title: {
-      text: "Top miner burned fees",
-      align: "left",
-      margin: 10,
-      floating: false,
-      style: {
-        fontSize: "14px",
-        fontFamily: undefined,
-        color: themeMode.greyText,
+        colors: themeMode.greyText,
       },
     },
     tooltip: {
@@ -112,7 +117,7 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
           "21500",
         ],
       },
-      legend: { labels: { colors: themeMode.text } },
+      legend: { labels: { colors: themeMode.greyText } },
     }));
   }, [theme, themeMode.greyText, themeMode.text]);
 
@@ -122,7 +127,7 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
       series={series}
       type="line"
       width="100%"
-      height="300"
+      height="260"
     />
   );
 };

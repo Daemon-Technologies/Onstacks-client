@@ -11,9 +11,6 @@ interface Props {
 }
 
 export const Overview: React.FC<Props> = ({ theme }) => {
-  useEffect(() => {
-    console.log(theme);
-  }, [theme]);
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     const { innerWidth: width } = window;
@@ -27,13 +24,20 @@ export const Overview: React.FC<Props> = ({ theme }) => {
         <InfoCard />
       </div>
       <div id="content1">
-        <AreaChart theme={theme} />
+        <p className="title">Total sats committed</p>
+        <p className="sub-title">1,483,482 Sats</p>
+        <div className="seprator">
+          <AreaChart theme={theme} />
+        </div>
       </div>
       <div id="content2">
-        <LineChart theme={theme} />
+        <p className="title">Total sats committed</p>
+        <div className="seprator">
+          <LineChart theme={theme} />
+        </div>
       </div>
       <div id="content3">
-        <p>Block reward distribution to miners (last 100 blocks)</p>
+        {/* <p></p> */}
         <PieChart theme={theme} />
       </div>
       <div id="content4">

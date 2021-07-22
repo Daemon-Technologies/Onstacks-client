@@ -12,7 +12,6 @@ import { ReactComponent as Moon } from "../assets/side-menu/cloud-dark.svg";
 import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
 import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
 import { MobileHeader } from "./MobileHeader";
-
 interface Props {
   theme: any;
   themeToggler: any;

@@ -20,6 +20,17 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
   return (
     <ReactApexChart
       options={{
+        title: {
+          text: "Block reward distribution to miners (last 100 blocks)",
+          align: "left",
+          margin: 10,
+          floating: false,
+          style: {
+            fontSize: "14px",
+            fontWeight: 500,
+            color: themeMode.greyText,
+          },
+        },
         labels: [
           "SP4VJD..UDH7SB",
           "SP4VJD..UDH7SB",
@@ -29,25 +40,43 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
         ],
         plotOptions: {
           pie: {
-            customScale: 1,
+            customScale: 0.8,
             donut: {
+              size: "85%",
               labels: {
                 show: true,
+                total: {
+                  showAlways: true,
+                  show: true,
+                  fontSize: "20px",
+                  fontWeight: 500,
+                  label: "Reward block",
+                },
                 name: {
-                  show: false,
+                  show: true,
                 },
                 value: {
-                  fontWeight: 600,
+                  fontWeight: 700,
+                  show: true,
+                  fontSize: "30px",
                 },
               },
             },
           },
         },
         legend: {
+          fontSize: "12px",
+          fontWeight: 500,
+          offsetY: 20,
+          position: "right",
+          itemMargin: {
+            vertical: 8,
+          },
           labels: {
             colors: themeMode.text,
           },
         },
+
         dataLabels: {
           enabled: false,
         },
@@ -60,8 +89,8 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
       }}
       series={[44, 55, 41, 17, 15]}
       type="donut"
-      width="100%"
-      height="200"
+      width="60%"
+      height="100%"
     />
   );
 };

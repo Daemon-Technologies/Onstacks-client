@@ -9,7 +9,21 @@ interface Props {
 export const AreaChart: React.FC<Props> = ({ theme }) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
+    grid: {
+      strokeDashArray: 4,
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: false,
+        },
+      },
+    },
     xaxis: {
+      tickAmount: 3,
       categories: [
         "18000",
         "18500",
@@ -38,32 +52,11 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
     tooltip: {
       theme,
     },
-    title: {
-      text: "Total Sats Commited",
-      align: "left",
-      margin: 10,
-      floating: false,
-      style: {
-        fontSize: "14px",
-        fontFamily: undefined,
-        color: themeMode.greyText,
-      },
-    },
-    subtitle: {
-      text: "1,483,482 Sats",
-      align: "left",
-      margin: 10,
-      floating: false,
-      style: {
-        fontSize: "30px",
-        fontFamily: undefined,
-        color: themeMode.greyText,
-      },
-    },
     yaxis: {
       show: false,
+      tickAmount: 1,
     },
-    colors: ["#FFA043"],
+    colors: ["#FFA043", "#FFCE74"],
   });
 
   const [series] = useState([
@@ -79,7 +72,7 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
       tooltip: {
         theme,
       },
-      subtitle: { style: { color: themeMode.greyText } },
+      subtitle: { style: { color: themeMode.text } },
       title: { style: { color: themeMode.greyText } },
       xaxis: {
         labels: { style: { colors: themeMode.text } },
@@ -103,7 +96,7 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
       series={series}
       type="area"
       width="100%"
-      height="300"
+      height="220"
     />
   );
 };
