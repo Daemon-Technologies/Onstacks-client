@@ -14,7 +14,7 @@ export const Overview: React.FC<Props> = ({ theme }) => {
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     const { innerWidth: width } = window;
-    setToggle(width >= 420);
+    setToggle(width >= 600);
   }, [toggle]);
   return (
     <>

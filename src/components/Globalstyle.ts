@@ -24,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   
   .pro-sidebar > .pro-sidebar-inner {
-    background: ${({ theme }: any) => theme.background} !important;
+    background: ${({ theme }: any) => theme.body} !important;
     color: ${({ theme }: any) => theme.text};
     transition: all 0.50s linear;
   }
@@ -96,12 +96,10 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 1px solid #EBEAED;
     box-sizing: border-box;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     border-radius: 4px;
     padding: 12px 16px;
-    border: 1px solid #EBEAED;
     margin: 16px 0;
   }
 
@@ -176,6 +174,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 24px;
     width: 100%;
     height: 100%;
+    background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
     box-shadow: 0px 1px 3px 0px #0000001F;
@@ -200,6 +199,7 @@ export const GlobalStyles = createGlobalStyle`
     }
   #content2 {
     padding: 24px;
+    background: ${({ theme }: any) => theme.background} !important;
     grid-area: content2;
     border-radius: var(--main-radius);
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
@@ -218,6 +218,7 @@ export const GlobalStyles = createGlobalStyle`
     grid-area: content3;
     padding: 16px;
     border-radius: var(--main-radius);
+    background: ${({ theme }: any) => theme.background} !important;
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
     box-shadow: 0px 1px 3px 0px #0000001F;
     max-height: 300px;
@@ -226,10 +227,11 @@ export const GlobalStyles = createGlobalStyle`
   td {
     font-weight: 600;
   }
-  
+
   #content4 {
     padding: 24px 29px 24px 24px;
     grid-area: content4;
+    background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
     box-shadow: 0px 1px 3px 0px #0000001F;
@@ -254,6 +256,7 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: 0px 1px 3px 0px #0000001F;
     border-radius: 4px;
     display: flex;
+    background: ${({ theme }: any) => theme.background} !important;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
@@ -294,8 +297,6 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-
-
   @media only screen and (max-width: 550px) {
   .container {
     grid-template-columns: 1fr;
@@ -326,6 +327,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   #sidebar {
     height: 100%;
+    background: ${({ theme }: any) => theme.body} !important;
     top: 0;
   }
   }

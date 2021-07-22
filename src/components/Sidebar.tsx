@@ -7,8 +7,10 @@ import { ReactComponent as OverviewLogo } from "../assets/side-menu/overview.svg
 import { ReactComponent as MiningData } from "../assets/side-menu/profile.svg";
 import { ReactComponent as Trending } from "../assets/side-menu/trending.svg";
 import { ReactComponent as MiningDocs } from "../assets/side-menu/book.svg";
-import { ReactComponent as Sun } from "../assets/side-menu/sun.svg";
+import { ReactComponent as HighLightedSun } from "../assets/side-menu/sun.svg";
 import { ReactComponent as Moon } from "../assets/side-menu/cloud-dark.svg";
+import { ReactComponent as Sun } from "../assets/side-menu/sun-dark.svg";
+import { ReactComponent as HighLightedMoon } from "../assets/side-menu/cloud-light.svg";
 import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
 import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
 import { MobileHeader } from "./MobileHeader";
@@ -21,7 +23,7 @@ export const Sidebar: React.FC<Props> = ({ theme, themeToggler }) => {
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     const { innerWidth: width } = window;
-    setToggle(width >= 420);
+    setToggle(width >= 600);
   }, []);
   return (
     <>
@@ -99,9 +101,23 @@ export const Sidebar: React.FC<Props> = ({ theme, themeToggler }) => {
               </p>
             </div>
             <div>
-              <Sun style={{ cursor: "pointer" }} onClick={themeToggler} />{" "}
+              {theme === "dark" ? (
+                <Sun style={{ cursor: "pointer" }} onClick={themeToggler} />
+              ) : (
+                <HighLightedSun
+                  style={{ cursor: "pointer" }}
+                  onClick={themeToggler}
+                />
+              )}
               <Slash className={"slash"} />{" "}
-              <Moon style={{ cursor: "pointer" }} onClick={themeToggler} />
+              {theme === "dark" ? (
+                <HighLightedMoon
+                  style={{ cursor: "pointer" }}
+                  onClick={themeToggler}
+                />
+              ) : (
+                <Moon style={{ cursor: "pointer" }} onClick={themeToggler} />
+              )}
               <div className="download">
                 <Arrow />
                 <p>Export data</p>

@@ -20,6 +20,10 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
   return (
     <ReactApexChart
       options={{
+        stroke: {
+          show: true,
+          colors: [themeMode.background],
+        },
         title: {
           text: "Block reward distribution to miners (last 100 blocks)",
           align: "left",
@@ -48,8 +52,9 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
                 total: {
                   showAlways: true,
                   show: true,
-                  fontSize: "20px",
+                  fontSize: "16px",
                   fontWeight: 500,
+                  color: themeMode.greyText,
                   label: "Reward block",
                 },
                 name: {
@@ -57,8 +62,9 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
                 },
                 value: {
                   fontWeight: 700,
+                  color: themeMode.greyText,
                   show: true,
-                  fontSize: "30px",
+                  fontSize: "25px",
                 },
               },
             },
@@ -81,6 +87,7 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
           enabled: false,
         },
         colors: colorPalette,
+
         // dataLabels: {
         //   style: {
         //     colors: themeMode.te
@@ -89,7 +96,7 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
       }}
       series={[44, 55, 41, 17, 15]}
       type="donut"
-      width="60%"
+      width="100%"
       height="100%"
     />
   );

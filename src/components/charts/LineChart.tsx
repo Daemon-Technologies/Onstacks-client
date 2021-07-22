@@ -19,6 +19,15 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
+    chart: {
+      animations: {
+        speed: 3,
+      },
+      redrawOnParentResize: false,
+      toolbar: {
+        show: false,
+      },
+    },
     grid: {
       strokeDashArray: 2,
       xaxis: {
@@ -101,6 +110,9 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
       ...data,
       tooltip: {
         theme,
+      },
+      chart: {
+        width: "100%",
       },
       subtitle: { style: { color: themeMode.greyText } },
       title: { style: { color: themeMode.greyText } },

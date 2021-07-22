@@ -22,6 +22,16 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
         },
       },
     },
+    chart: {
+      redrawOnParentResize: false,
+      toolbar: {
+        show: false,
+      },
+      zoom: {
+        enabled: false,
+      },
+      width: "100%",
+    },
     xaxis: {
       tickAmount: 3,
       categories: [
@@ -72,20 +82,17 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
       tooltip: {
         theme,
       },
+      chart: {
+        width: "100%",
+        redrawOnParentResize: false,
+        animations: {
+          enabled: false,
+        },
+      },
       subtitle: { style: { color: themeMode.text } },
       title: { style: { color: themeMode.greyText } },
       xaxis: {
         labels: { style: { colors: themeMode.text } },
-        categories: [
-          "18000",
-          "18500",
-          "19000",
-          "19500",
-          "20000",
-          "20500",
-          "21000",
-          "21500",
-        ],
       },
     }));
   }, [theme, themeMode.greyText, themeMode.text]);
