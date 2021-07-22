@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  ProSidebar,
-  Menu,
-  MenuItem,
-  SidebarContent,
-  SidebarHeader,
-} from "react-pro-sidebar";
+import { ProSidebar, Menu, MenuItem, SidebarContent } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
 import Stacks from "../assets/side-menu/stacks.svg";
@@ -13,7 +7,6 @@ import { ReactComponent as OverviewLogo } from "../assets/side-menu/overview.svg
 import { ReactComponent as MiningData } from "../assets/side-menu/profile.svg";
 import { ReactComponent as Trending } from "../assets/side-menu/trending.svg";
 import { ReactComponent as MiningDocs } from "../assets/side-menu/book.svg";
-import { ReactComponent as Logo } from "../assets/side-menu/logo.svg";
 import { ReactComponent as Sun } from "../assets/side-menu/sun.svg";
 import { ReactComponent as Moon } from "../assets/side-menu/cloud-dark.svg";
 import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";

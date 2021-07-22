@@ -68,7 +68,7 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
     colors: colorPalette,
   });
 
-  const [series, setSeries] = useState([
+  const [series] = useState([
     {
       name: "SP4V..H7SB",
       data: [30, 40, 25, 50, 49, 21, 70, 51],
@@ -90,6 +90,31 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
       data: [34, 45, 10, 30, 19, 24, 40, 51],
     },
   ]);
+
+  useEffect(() => {
+    setOptions((data) => ({
+      ...data,
+      tooltip: {
+        theme,
+      },
+      subtitle: { style: { color: themeMode.greyText } },
+      title: { style: { color: themeMode.greyText } },
+      xaxis: {
+        labels: { style: { colors: themeMode.text } },
+        categories: [
+          "18000",
+          "18500",
+          "19000",
+          "19500",
+          "20000",
+          "20500",
+          "21000",
+          "21500",
+        ],
+      },
+      legend: { labels: { colors: themeMode.text } },
+    }));
+  }, [theme, themeMode.greyText, themeMode.text]);
 
   return (
     <ReactApexChart
