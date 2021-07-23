@@ -138,8 +138,8 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
       options={options}
       series={series}
       type="line"
-      width="100%"
-      height="260"
+      width="99%"
+      height="100%"
     />
   );
 };

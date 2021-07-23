@@ -23,7 +23,8 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
       },
     },
     chart: {
-      redrawOnParentResize: false,
+      redrawOnParentResize: true,
+
       toolbar: {
         show: false,
       },
@@ -66,7 +67,7 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
       show: false,
       tickAmount: 1,
     },
-    colors: ["#FFCE74"],
+    colors: ["#FFA043"],
   });
 
   const [series] = useState([
@@ -102,8 +103,8 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
       options={options}
       series={series}
       type="area"
-      width="100%"
-      height="220"
+      width="99%"
+      height="100%"
     />
   );
 };
