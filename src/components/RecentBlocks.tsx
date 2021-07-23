@@ -28,6 +28,12 @@ export const RecentBlocks: React.FC = () => {
         col3: "1,000,000",
         col4: "SP4VJD..UDH7SB",
       },
+      {
+        col1: "#19010",
+        col2: "1hr 15 mins",
+        col3: "1,000,000",
+        col4: "SP4VJD..UDH7SB",
+      },
     ],
     []
   );

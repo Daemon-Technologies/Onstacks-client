@@ -184,8 +184,7 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
-    filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
-    box-shadow: 0px 1px 3px 0px #0000001F;
+    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -211,8 +210,7 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }: any) => theme.background} !important;
     grid-area: content2;
     border-radius: var(--main-radius);
-    filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
-    box-shadow: 0px 1px 3px 0px #0000001F;
+    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -228,8 +226,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 16px;
     border-radius: var(--main-radius);
     background: ${({ theme }: any) => theme.background} !important;
-    filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
-    box-shadow: 0px 1px 3px 0px #0000001F;
+    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
     max-height: 300px;
   }
 
@@ -242,14 +239,13 @@ export const GlobalStyles = createGlobalStyle`
     grid-area: content4;
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
-    filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
-    box-shadow: 0px 1px 3px 0px #0000001F;
+    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
     max-height: 300px;
     p {
       font-size: 14px;
       color: ${({ theme }: any) => theme.greyText} !important;
       font-weight: 500;
-      margin-left: 14px;
+      margin-bottom: 8px;
     }
   } 
 
@@ -261,8 +257,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .info-card {
-    filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));
-    box-shadow: 0px 1px 3px 0px #0000001F;
+    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
     border-radius: 4px;
     display: flex;
     background: ${({ theme }: any) => theme.background} !important;
@@ -289,13 +284,23 @@ export const GlobalStyles = createGlobalStyle`
     td:first-child {
       color: ${({ theme }: any) => theme.primaryColor} !important;    
     }
+    td {
+      padding: 8px;
+      padding-left: 0;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+    }
+    th {
+      padding: 4px;
+      padding-left: 0;
+    }
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 16px; 
+    border-collapse: collapse;
     color: ${({ theme }: any) => theme.greyText} !important;    
     thead {
       text-align: left;
-      padding: 7px 0;
+      padding: 8px;
       tr {
         border-top: 1pt solid #EBEAED;
         border-bottom: 1pt solid #EBEAED;
