@@ -1,0 +1,9 @@
+export const getOverviewData = `getOverviewData`;
+export const getSatsCommittedPerBlock = `getSatsCommittedPerBlock`;
+export const getTopBurnFeePerBlock = `getTopBurnFeePerBlock`;
+export const getRewardDistribution = `getRewardDistribution`;
+export const getBlocks = `getBlocks`;
+export const getMinerSatsCommittedPerBlock = `getMinerSatsCommittedPerBlock`;
+export const getMinersInfo = `getMinersInfo`;
+export const getTokenPrice = `getTokenPrice`;
+export const getMiningInfo = `getMiningInfo`;

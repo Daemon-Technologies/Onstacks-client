@@ -6,9 +6,12 @@ import { GlobalStyles } from "./components/Globalstyle";
 import { lightTheme, darkTheme } from "./components/Themes";
 import { Overview } from "./screens/Overview";
 import { Sidebar } from "./components/Sidebar";
+import { useOverview } from "./hooks/useOverview";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
+  const { overviewData, tokens, satsCommitted, topMinerFees, blocks } =
+    useOverview();
 
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
@@ -18,11 +21,22 @@ const App: React.FC = () => {
       <>
         <GlobalStyles />
         <div className="container">
-          <Sidebar theme={theme} themeToggler={themeToggler} />
+          <Sidebar
+            tokens={tokens}
+            overviewData={overviewData}
+            theme={theme}
+            themeToggler={themeToggler}
+          />
           <Router>
             <Switch>
               <Route path="/">
-                <Overview theme={theme} />
+                <Overview
+                  blocks={blocks}
+                  topMinerFees={topMinerFees}
+                  satsCommitted={satsCommitted}
+                  overviewData={overviewData}
+                  theme={theme}
+                />
               </Route>
             </Switch>
           </Router>

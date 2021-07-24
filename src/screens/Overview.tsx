@@ -5,35 +5,57 @@ import { AreaChart } from "../components/charts/AreaChart";
 import { LineChart } from "../components/charts/LineChart";
 import { RecentBlocks } from "../components/RecentBlocks";
 import { PieChart } from "../components/charts/PieChart";
-
+import {
+  Blocks,
+  OverviewProps,
+  SatsCommittedProps,
+  TotalBurnedMinerFees,
+} from "../hooks/useOverview";
 interface Props {
   theme: any;
+  overviewData: OverviewProps;
+  satsCommitted: SatsCommittedProps;
+  topMinerFees: TotalBurnedMinerFees | undefined;
+  blocks: Blocks[];
 }
 
-export const Overview: React.FC<Props> = ({ theme }) => {
+export const Overview: React.FC<Props> = ({
+  theme,
+  overviewData,
+  satsCommitted,
+  topMinerFees,
+  blocks,
+}) => {
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     const { innerWidth: width } = window;
     setToggle(width >= 600);
   }, [toggle]);
+
   return (
     <>
       {toggle && <Header />}
       <div id="main">
         <p className="screen-title">Overview</p>
-        <InfoCard />
+        <InfoCard overviewData={overviewData} />
       </div>
       <div id="content1">
         <p className="title">Total sats committed</p>
-        <p className="sub-title">1,483,482 Sats</p>
+        <p className="sub-title">
+          {overviewData.total_sats_committed.toLocaleString()} Sats
+        </p>
         <div className="seprator">
-          <AreaChart theme={theme} />
+          {satsCommitted.block_number.length > 0 && (
+            <AreaChart satsCommitted={satsCommitted} theme={theme} />
+          )}
         </div>
       </div>
       <div id="content2">
-        <p className="title">Total sats committed</p>
+        <p className="title">Top miner burned fees</p>
         <div className="seprator">
-          <LineChart theme={theme} />
+          {topMinerFees && (
+            <LineChart topMinerFees={topMinerFees} theme={theme} />
+          )}
         </div>
       </div>
       <div id="content3">
@@ -42,7 +64,7 @@ export const Overview: React.FC<Props> = ({ theme }) => {
       </div>
       <div id="content4">
         <p>Recent blocks</p>
-        <RecentBlocks />
+        {blocks.length > 0 && <RecentBlocks blocks={blocks} />}
       </div>
     </>
   );

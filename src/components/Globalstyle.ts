@@ -5,6 +5,7 @@ export const GlobalStyles = createGlobalStyle`
     --main-radius: 5px;
     --main-padding: 16px;
     overflow-x: hidden;
+    overflow-y: hidden;
     height: 100%;
   }
 
@@ -53,7 +54,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .menu-content {
-    padding: 0 24px;
+    padding: 0 16px;
     display: flex !important;
     height: 60%;
     flex-direction: column;
@@ -64,7 +65,7 @@ export const GlobalStyles = createGlobalStyle`
     p {
       font-size: 14px;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       color: ${({ theme }: any) => theme.greyText} !important;    
     }
     .download > p {
@@ -105,7 +106,8 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     border-radius: 4px;
     padding: 12px 16px;
-    margin: 16px 0;
+    margin: 40px 0 16px 0;
+    width: 80%;
   }
 
   h3 {

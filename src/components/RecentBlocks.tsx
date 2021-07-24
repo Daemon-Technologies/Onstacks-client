@@ -1,59 +1,29 @@
 import React, { useMemo } from "react";
 import { useTable } from "react-table";
+import { Blocks } from "../hooks/useOverview";
 
-export const RecentBlocks: React.FC = () => {
-  const data = useMemo(
-    () => [
-      {
-        col1: "#19010",
-        col2: "1hr 15 mins",
-        col3: "1,000,000",
-        col4: "SP4VJD..UDH7SB",
-      },
-      {
-        col1: "#19010",
-        col2: "1hr 15 mins",
-        col3: "1,000,000",
-        col4: "SP4VJD..UDH7SB",
-      },
-      {
-        col1: "#19010",
-        col2: "1hr 15 mins",
-        col3: "1,000,000",
-        col4: "SP4VJD..UDH7SB",
-      },
-      {
-        col1: "#19010",
-        col2: "1hr 15 mins",
-        col3: "1,000,000",
-        col4: "SP4VJD..UDH7SB",
-      },
-      {
-        col1: "#19010",
-        col2: "1hr 15 mins",
-        col3: "1,000,000",
-        col4: "SP4VJD..UDH7SB",
-      },
-    ],
-    []
-  );
+interface Props {
+  blocks: Blocks[];
+}
+export const RecentBlocks: React.FC<Props> = ({ blocks }) => {
+  const data = useMemo(() => blocks, [blocks]);
   const columns: any = useMemo(
     () => [
       {
         Header: "Block No.",
-        accessor: "col1", // accessor is the "key" in the data
+        accessor: "block_number", // accessor is the "key" in the data
       },
       {
         Header: "Mined",
-        accessor: "col2",
+        accessor: "mined_at",
       },
       {
         Header: "Stats spent",
-        accessor: "col3",
+        accessor: "sats_spent",
       },
       {
         Header: "Winner Address",
-        accessor: "col4",
+        accessor: "winner_address",
       },
     ],
     []

@@ -14,11 +14,20 @@ import { ReactComponent as HighLightedMoon } from "../assets/side-menu/cloud-lig
 import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
 import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
 import { MobileHeader } from "./MobileHeader";
+import { OverviewProps, TokenPriceProps } from "../hooks/useOverview";
 interface Props {
   theme: any;
   themeToggler: any;
+  overviewData: OverviewProps;
+  tokens: TokenPriceProps;
 }
-export const Sidebar: React.FC<Props> = ({ theme, themeToggler }) => {
+
+export const Sidebar: React.FC<Props> = ({
+  theme,
+  themeToggler,
+  overviewData,
+  tokens,
+}) => {
   const [active, setActive] = useState(0);
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
@@ -80,24 +89,25 @@ export const Sidebar: React.FC<Props> = ({ theme, themeToggler }) => {
             <div>
               <div className="crypto">
                 <div>
-                  <img alt="bitcoin" src={Bitcoin} /> $40,137.45
+                  <img alt="bitcoin" src={Bitcoin} /> ${+tokens.BTC}
                 </div>
                 <div>
                   {" "}
-                  <img alt="stacks" src={Stacks} /> $1.25
+                  <img alt="stacks" src={Stacks} /> ${+tokens.STX}
                 </div>
               </div>
               <p>
-                <span>#19,010</span> STX Blockheight
+                <span>#{overviewData.stx_block_height}</span> STX Blockheight
               </p>
               <p>
-                <span>#688,034</span> BTC Blockheight
+                <span>#{overviewData.btc_block_height}</span> BTC Blockheight
               </p>
               <p>
-                <span>1026 days</span> Next STX halving
+                <span>{overviewData.next_stx_halving} days</span> Next STX
+                halving
               </p>
               <p>
-                <span>87.5 EH/s</span> BTC Hashrate
+                <span>{overviewData.btc_hash_rate} EH/s</span> BTC Hashrate
               </p>
             </div>
             <div>

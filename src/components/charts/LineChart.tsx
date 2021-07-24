@@ -5,9 +5,10 @@ import { lightTheme, darkTheme } from "../Themes";
 
 interface Props {
   theme: any;
+  topMinerFees: any;
 }
 
-export const LineChart: React.FC<Props> = ({ theme }) => {
+export const LineChart: React.FC<Props> = ({ theme, topMinerFees }) => {
   const colorPalette = [
     "#FFA043",
     "#5542F6",
@@ -42,16 +43,7 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
       },
     },
     xaxis: {
-      categories: [
-        "18000",
-        "18500",
-        "19000",
-        "19500",
-        "20000",
-        "20500",
-        "21000",
-        "21500",
-      ],
+      categories: topMinerFees.slice(0, 5).map((r: any) => r.block_number),
       labels: {
         style: {
           colors: themeMode.text,
@@ -81,29 +73,14 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
     },
     colors: colorPalette,
   });
-
-  const [series] = useState([
-    {
-      name: "SP4V..H7SB",
-      data: [30, 40, 25, 50, 49, 21, 70, 51],
-    },
-    {
-      name: "SP4V..H7SB",
-      data: [50, 20, 45, 30, 29, 11, 20, 41],
-    },
-    {
-      name: "SP4V..H7SB",
-      data: [34, 45, 10, 30, 19, 24, 40, 51],
-    },
-    {
-      name: "SP4V..H7SB",
-      data: [12, 25, 40, 10, 49, 14, 30, 51],
-    },
-    {
-      name: "SP4V..H7SB",
-      data: [34, 45, 10, 30, 19, 24, 40, 51],
-    },
-  ]);
+  const [series] = useState<ApexAxisChartSeries>(
+    topMinerFees.slice(0, 5).map((r: any) => {
+      return {
+        name: r.miner_list[0].leader_key_address,
+        data: [r.miner_list.map((r: any) => r.burn_fee)],
+      };
+    })
+  );
 
   useEffect(() => {
     setOptions((data) => ({
@@ -118,20 +95,11 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
       title: { style: { color: themeMode.greyText } },
       xaxis: {
         labels: { style: { colors: themeMode.text } },
-        categories: [
-          "18000",
-          "18500",
-          "19000",
-          "19500",
-          "20000",
-          "20500",
-          "21000",
-          "21500",
-        ],
+        categories: topMinerFees.slice(0, 5).map((r: any) => r.block_number),
       },
-      legend: { labels: { colors: themeMode.greyText } },
+      legend: { labels: { colors: themeMode.greyText }, show: false },
     }));
-  }, [theme, themeMode.greyText, themeMode.text]);
+  }, [theme, themeMode.greyText, themeMode.text, topMinerFees]);
 
   return (
     <ReactApexChart
