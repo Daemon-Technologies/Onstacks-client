@@ -37,8 +37,6 @@ export const Overview: React.FC<Props> = ({
     setToggle(width >= 600);
   }, [toggle]);
 
-  const [accumlateWinners, setAccumlateWinners] = useState(1);
-
   useEffect(() => {}, [totalWinners]);
   return (
     <>

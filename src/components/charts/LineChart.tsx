@@ -109,7 +109,7 @@ export const LineChart: React.FC<Props> = ({
       };
     });
     setSeries(s);
-  }, [theme, themeMode.greyText, themeMode.text, areaSeries]);
+  }, [theme, themeMode.greyText, themeMode.text, areaSeries, areaBlocks]);
 
   return (
     <ReactApexChart

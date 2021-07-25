@@ -122,7 +122,6 @@ export const useOverview = () => {
     axios.get(getRewardDistribution).then((data: any) => {
       setwinnersAddresses(data.map((b: any) => b.stx_address));
       setTotalWinners(data.map((b: any) => b.total_win));
-      console.log(totalWinners, winnersAddresses);
     });
     axios.get(getBlocks).then((data: any) => {
       setBlocks(
@@ -142,7 +141,7 @@ export const useOverview = () => {
         })
       );
     });
-  }, []);
+  });
 
   const numberWithCommas = (x: string) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
