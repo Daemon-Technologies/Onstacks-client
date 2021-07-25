@@ -4,9 +4,15 @@ import { lightTheme, darkTheme } from "../Themes";
 
 interface Props {
   theme: any;
+  winnerAddresses: string[];
+  totalWinners: number[];
 }
 
-export const PieChart: React.FC<Props> = ({ theme }) => {
+export const PieChart: React.FC<Props> = ({
+  theme,
+  totalWinners,
+  winnerAddresses,
+}) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   const colorPalette = [
@@ -35,18 +41,19 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
             color: themeMode.greyText,
           },
         },
-        labels: [
-          "SP4VJD..UDH7SB",
-          "SP4VJD..UDH7SB",
-          "SP4VJD..UDH7SB",
-          "SP4VJD..UDH7SB",
-          "SP4VJD..UDH7SB",
-        ],
+        labels: winnerAddresses.map((address) => {
+          return (
+            address.substring(0, 6) +
+            ".." +
+            address.substring(address.length - 6, address.length - 1)
+          );
+        }),
         plotOptions: {
           pie: {
-            customScale: 0.8,
+            expandOnClick: true,
+            customScale: 1,
             donut: {
-              size: "85%",
+              size: "90%",
               labels: {
                 show: true,
                 total: {
@@ -76,7 +83,7 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
           offsetY: 20,
           position: "right",
           itemMargin: {
-            vertical: 8,
+            vertical: 4,
           },
           labels: {
             colors: themeMode.text,
@@ -87,16 +94,10 @@ export const PieChart: React.FC<Props> = ({ theme }) => {
           enabled: false,
         },
         colors: colorPalette,
-
-        // dataLabels: {
-        //   style: {
-        //     colors: themeMode.te
-        //   }
-        // }
       }}
-      series={[44, 55, 41, 17, 15]}
+      series={totalWinners}
       type="donut"
-      width="100%"
+      width="70%"
       height="100%"
     />
   );

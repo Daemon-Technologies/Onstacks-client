@@ -1,5 +1,6 @@
 import {
   getBlocks,
+  getRewardDistribution,
   getSatsCommittedPerBlock,
   getTokenPrice,
   getTopBurnFeePerBlock,
@@ -63,12 +64,16 @@ export const useOverview = () => {
     STX: "0",
   });
 
+  const [totalWinners, setTotalWinners] = useState<number[]>([]);
+  const [winnersAddresses, setwinnersAddresses] = useState<string[]>([]);
+
   const [satsCommitted, setSatsCommitted] = useState<SatsCommittedProps>({
     block_number: [],
     total_sats_committed: [],
   });
 
-  const [topMinerFees, setTopMinerFees] = useState<TotalBurnedMinerFees>();
+  const [areaBlocks, setAreaBlocks] = useState<string[]>([]);
+  const [areaSeries, setAreaSeries] = useState<ApexAxisChartSeries>([]);
 
   const [blocks, setBlocks] = useState<Blocks[]>([]);
 
@@ -91,7 +96,33 @@ export const useOverview = () => {
       });
     });
     axios.get(getTopBurnFeePerBlock).then((data: any) => {
-      setTopMinerFees(data);
+      let currentData: TotalBurnedMinerFees[] = data;
+      let series: ApexAxisChartSeries = [];
+      let blocks: any[] = [];
+      currentData.splice(0, 5).forEach((block: any) => {
+        blocks.push(block.block_number);
+        block.miner_list.forEach((element: any) => {
+          let index = series.findIndex(
+            (e) => e.name === element.leader_key_address
+          );
+          console.log(index);
+          if (index !== -1) {
+            series[index].data.push(element.burn_fee);
+          } else {
+            series.push({
+              name: element.leader_key_address,
+              data: [element.burn_fee],
+            });
+          }
+        });
+      });
+      setAreaBlocks(blocks);
+      setAreaSeries(series);
+    });
+    axios.get(getRewardDistribution).then((data: any) => {
+      setwinnersAddresses(data.map((b: any) => b.stx_address));
+      setTotalWinners(data.map((b: any) => b.total_win));
+      console.log(totalWinners, winnersAddresses);
     });
     axios.get(getBlocks).then((data: any) => {
       setBlocks(
@@ -119,8 +150,11 @@ export const useOverview = () => {
   return {
     overviewData,
     tokens,
-    topMinerFees,
+    areaBlocks,
+    areaSeries,
     satsCommitted,
     blocks,
+    totalWinners,
+    winnersAddresses,
   };
 };

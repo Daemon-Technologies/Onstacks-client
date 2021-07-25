@@ -40,6 +40,9 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       width: "100%",
     },
     xaxis: {
+      tooltip: {
+        enabled: false,
+      },
       range: 8,
       categories: satsCommitted.block_number,
       labels: {
@@ -65,12 +68,12 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
     yaxis: {
       show: false,
     },
-    colors: ["rgba(255, 160, 67, 0.1)"],
+    colors: ["#FFCE74"],
   });
 
   const [series] = useState([
     {
-      name: "Sats",
+      name: "",
       data: satsCommitted.total_sats_committed,
     },
   ]);

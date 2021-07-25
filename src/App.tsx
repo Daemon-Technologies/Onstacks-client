@@ -10,8 +10,16 @@ import { useOverview } from "./hooks/useOverview";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
-  const { overviewData, tokens, satsCommitted, topMinerFees, blocks } =
-    useOverview();
+  const {
+    overviewData,
+    tokens,
+    satsCommitted,
+    areaBlocks,
+    areaSeries,
+    blocks,
+    totalWinners,
+    winnersAddresses,
+  } = useOverview();
 
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
@@ -31,8 +39,11 @@ const App: React.FC = () => {
             <Switch>
               <Route path="/">
                 <Overview
+                  totalWinners={totalWinners}
+                  winnerAddresses={winnersAddresses}
                   blocks={blocks}
-                  topMinerFees={topMinerFees}
+                  areaBlocks={areaBlocks}
+                  areaSeries={areaSeries}
                   satsCommitted={satsCommitted}
                   overviewData={overviewData}
                   theme={theme}

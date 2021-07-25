@@ -5,10 +5,15 @@ import { lightTheme, darkTheme } from "../Themes";
 
 interface Props {
   theme: any;
-  topMinerFees: any;
+  areaBlocks: string[];
+  areaSeries: ApexAxisChartSeries;
 }
 
-export const LineChart: React.FC<Props> = ({ theme, topMinerFees }) => {
+export const LineChart: React.FC<Props> = ({
+  theme,
+  areaBlocks,
+  areaSeries,
+}) => {
   const colorPalette = [
     "#FFA043",
     "#5542F6",
@@ -43,7 +48,10 @@ export const LineChart: React.FC<Props> = ({ theme, topMinerFees }) => {
       },
     },
     xaxis: {
-      categories: topMinerFees.slice(0, 5).map((r: any) => r.block_number),
+      categories: areaBlocks,
+      tooltip: {
+        enabled: false,
+      },
       labels: {
         style: {
           colors: themeMode.text,
@@ -73,15 +81,7 @@ export const LineChart: React.FC<Props> = ({ theme, topMinerFees }) => {
     },
     colors: colorPalette,
   });
-  const [series] = useState<ApexAxisChartSeries>(
-    topMinerFees.slice(0, 5).map((r: any) => {
-      return {
-        name: r.miner_list[0].leader_key_address,
-        data: [r.miner_list.map((r: any) => r.burn_fee)],
-      };
-    })
-  );
-
+  const [series, setSeries] = useState<ApexAxisChartSeries>(areaSeries);
   useEffect(() => {
     setOptions((data) => ({
       ...data,
@@ -95,11 +95,21 @@ export const LineChart: React.FC<Props> = ({ theme, topMinerFees }) => {
       title: { style: { color: themeMode.greyText } },
       xaxis: {
         labels: { style: { colors: themeMode.text } },
-        categories: topMinerFees.slice(0, 5).map((r: any) => r.block_number),
+        categories: areaBlocks,
       },
-      legend: { labels: { colors: themeMode.greyText }, show: false },
+      legend: { labels: { colors: themeMode.greyText }, show: true },
     }));
-  }, [theme, themeMode.greyText, themeMode.text, topMinerFees]);
+    let s = areaSeries.map((s: any) => {
+      return {
+        ...s,
+        name:
+          s.name.substring(0, 4) +
+          ".." +
+          s.name.substring(s.name.length - 5, s.name.length - 1),
+      };
+    });
+    setSeries(s);
+  }, [theme, themeMode.greyText, themeMode.text, areaSeries]);
 
   return (
     <ReactApexChart
@@ -107,7 +117,7 @@ export const LineChart: React.FC<Props> = ({ theme, topMinerFees }) => {
       series={series}
       type="line"
       width="99%"
-      height="100%"
+      height="200"
     />
   );
 };

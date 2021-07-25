@@ -9,22 +9,27 @@ import {
   Blocks,
   OverviewProps,
   SatsCommittedProps,
-  TotalBurnedMinerFees,
 } from "../hooks/useOverview";
 interface Props {
   theme: any;
   overviewData: OverviewProps;
   satsCommitted: SatsCommittedProps;
-  topMinerFees: TotalBurnedMinerFees | undefined;
+  areaBlocks: string[];
+  areaSeries: ApexAxisChartSeries;
   blocks: Blocks[];
+  winnerAddresses: string[];
+  totalWinners: number[];
 }
 
 export const Overview: React.FC<Props> = ({
   theme,
   overviewData,
   satsCommitted,
-  topMinerFees,
+  areaBlocks,
+  areaSeries,
   blocks,
+  winnerAddresses,
+  totalWinners,
 }) => {
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
@@ -32,6 +37,9 @@ export const Overview: React.FC<Props> = ({
     setToggle(width >= 600);
   }, [toggle]);
 
+  const [accumlateWinners, setAccumlateWinners] = useState(1);
+
+  useEffect(() => {}, [totalWinners]);
   return (
     <>
       {toggle && <Header />}
@@ -53,14 +61,21 @@ export const Overview: React.FC<Props> = ({
       <div id="content2">
         <p className="title">Top miner burned fees</p>
         <div className="seprator">
-          {topMinerFees && (
-            <LineChart topMinerFees={topMinerFees} theme={theme} />
+          {areaBlocks.length > 0 && (
+            <LineChart
+              areaBlocks={areaBlocks}
+              areaSeries={areaSeries}
+              theme={theme}
+            />
           )}
         </div>
       </div>
       <div id="content3">
-        {/* <p></p> */}
-        <PieChart theme={theme} />
+        <PieChart
+          totalWinners={totalWinners}
+          winnerAddresses={winnerAddresses}
+          theme={theme}
+        />
       </div>
       <div id="content4">
         <p>Recent blocks</p>
