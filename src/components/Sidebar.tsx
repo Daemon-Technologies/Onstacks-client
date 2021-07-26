@@ -87,7 +87,7 @@ export const Sidebar: React.FC<Props> = ({
             >
               Mining Docs
             </MenuItem>
-            <hr style={{ margin: "24px" }} />
+            <hr style={{ margin: "24px 10px" }} />
           </Menu>
 
           <div className="menu-content">

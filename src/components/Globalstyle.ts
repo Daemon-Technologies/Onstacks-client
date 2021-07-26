@@ -57,7 +57,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .menu-content {
-    padding: 0 16px;
+    padding: 0 8px;
     display: flex !important;
     height: 60%;
     flex-direction: column;
@@ -85,6 +85,8 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 600;
     margin-bottom: 16px;
     align-items: center;
+    flex-wrap: wrap;
+    line-height: 2;
     justify-content: space-between;
     div {
       display: flex;

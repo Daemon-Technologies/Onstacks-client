@@ -83,7 +83,7 @@ export const PieChart: React.FC<Props> = ({
           offsetY: 20,
           position: "right",
           itemMargin: {
-            vertical: 4,
+            vertical: 3,
           },
           labels: {
             colors: themeMode.text,
@@ -97,7 +97,7 @@ export const PieChart: React.FC<Props> = ({
       }}
       series={totalWinners}
       type="donut"
-      width="70%"
+      width="90%"
       height="100%"
     />
   );
