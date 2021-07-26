@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "mining-monitor-client",
   "private": true,
+  "main": "src/index.tsx",
   "author": "Raj",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

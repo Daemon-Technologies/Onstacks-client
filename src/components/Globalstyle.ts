@@ -27,8 +27,11 @@ export const GlobalStyles = createGlobalStyle`
     min-width: 100% !important;
     width: 100% !important;
     height: 92vh;
+   
   }
-  
+  hr {
+      border-color: #EBEAED;
+    }
   .pro-sidebar > .pro-sidebar-inner {
     background: ${({ theme }: any) => theme.body} !important;
     color: ${({ theme }: any) => theme.text};
@@ -314,6 +317,9 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   @media only screen and (max-width: 550px) {
+  :root {
+    overflow-y: auto;
+  }
   .container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ;
@@ -328,6 +334,12 @@ export const GlobalStyles = createGlobalStyle`
     }
     #nav {
     padding: 0;
+  }
+  #content1, #content2, #content3, #content4, .info-card {
+    width: 98%;
+  }
+  .pro-sidebar.sm {
+    left: 100%;
   }
   .info-card {
     flex-direction: column;

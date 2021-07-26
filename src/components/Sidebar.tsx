@@ -36,7 +36,9 @@ export const Sidebar: React.FC<Props> = ({
   }, []);
   return (
     <>
-      {!toggle && <MobileHeader toggle={toggle} setToggle={setToggle} />}
+      {window.innerWidth < 600 && (
+        <MobileHeader toggle={toggle} setToggle={setToggle} />
+      )}
       <ProSidebar
         id="sidebar"
         toggled={toggle}
@@ -45,6 +47,9 @@ export const Sidebar: React.FC<Props> = ({
         className="side-bar"
       >
         <SidebarContent>
+          {window.innerWidth < 600 && (
+            <MobileHeader toggle={toggle} setToggle={setToggle} />
+          )}
           <Menu iconShape="square">
             <MenuItem
               onClick={() => {
