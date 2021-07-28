@@ -73,7 +73,7 @@ export const Sidebar: React.FC<Props> = ({
               <a
                 target="_blank"
                 href="https://explorer.stacks.co/?chain=mainnet"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Network Activity
               </a>
@@ -88,7 +88,7 @@ export const Sidebar: React.FC<Props> = ({
               <a
                 target="_blank"
                 href="https://docs.stacks.co/understand-stacks/mining"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Mining docs
               </a>
