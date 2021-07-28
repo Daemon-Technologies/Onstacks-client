@@ -51,27 +51,29 @@ export const PieChart: React.FC<Props> = ({
         plotOptions: {
           pie: {
             expandOnClick: true,
-            customScale: 1,
+            customScale: window.innerWidth > 600 ? 1 : 1.2,
             donut: {
-              size: "90%",
+              size: window.innerWidth > 600 ? "90%" : "80%",
               labels: {
                 show: true,
                 total: {
                   showAlways: true,
                   show: true,
-                  fontSize: "16px",
+                  fontSize: window.innerWidth > 600 ? "16px" : "12px",
                   fontWeight: 500,
                   color: themeMode.greyText,
                   label: "Reward block",
                 },
                 name: {
                   show: true,
+                  offsetY: window.innerWidth > 600 ? -10 : 0,
                 },
                 value: {
                   fontWeight: 700,
                   color: themeMode.greyText,
                   show: true,
-                  fontSize: "25px",
+                  offsetY: window.innerWidth > 600 ? 0 : -1,
+                  fontSize: window.innerWidth > 600 ? "25px" : "16px",
                 },
               },
             },
@@ -81,7 +83,7 @@ export const PieChart: React.FC<Props> = ({
           fontSize: "12px",
           fontWeight: 500,
           offsetY: 20,
-          position: "right",
+          position: window.innerWidth > 600 ? "right" : "bottom",
           itemMargin: {
             vertical: 3,
           },

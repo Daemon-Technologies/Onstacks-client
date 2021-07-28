@@ -105,7 +105,6 @@ export const useOverview = () => {
           let index = series.findIndex(
             (e) => e.name === element.leader_key_address
           );
-          console.log(index);
           if (index !== -1) {
             series[index].data.push(element.burn_fee);
           } else {
@@ -128,10 +127,10 @@ export const useOverview = () => {
         data.slice(0, 5).map((r: Blocks) => {
           return {
             block_number: "#" + r.block_number,
-            mined_at: r.mined_at + " Mins",
+            mined_at: r.mined_at + (window.innerWidth > 600 ? " Mins" : ""),
             sats_spent: numberWithCommas(r.sats_spent),
             winner_address:
-              r.winner_address.substring(0, 8) +
+              r.winner_address.substring(0, window.innerWidth > 600 ? 8 : 4) +
               ".." +
               r.winner_address.substring(
                 r.winner_address.length - 5,

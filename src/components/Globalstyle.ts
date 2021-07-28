@@ -30,7 +30,7 @@ export const GlobalStyles = createGlobalStyle`
    
   }
   hr {
-      border-color: #EBEAED;
+      border-color:  ${({ theme }: any) => theme.border} !important;
     }
   .pro-sidebar > .pro-sidebar-inner {
     background: ${({ theme }: any) => theme.body} !important;
@@ -47,6 +47,9 @@ export const GlobalStyles = createGlobalStyle`
     /* padding: 12px; */
   }
 
+  .pro-inner-item {
+    padding: 8px 16px;
+  }
   .pro-item-content {
     font-weight: 600;
   }
@@ -57,9 +60,9 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .menu-content {
-    padding: 0 8px;
+    padding: 0 16px;
     display: flex !important;
-    height: 60%;
+    height: 65%;
     flex-direction: column;
     justify-content: space-between;
     span {
@@ -87,7 +90,9 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     flex-wrap: wrap;
     line-height: 2;
-    justify-content: space-between;
+    #stacks {
+      margin-left: 16px;
+    }
     div {
       display: flex;
       align-items: center;
@@ -309,8 +314,8 @@ export const GlobalStyles = createGlobalStyle`
       text-align: left;
       padding: 8px;
       tr {
-        border-top: 1pt solid #EBEAED;
-        border-bottom: 1pt solid #EBEAED;
+        border-top: 1pt solid ${({ theme }: any) => theme.border};
+        border-bottom: 1pt solid ${({ theme }: any) => theme.border};
       }
     }
     tbody {
@@ -339,6 +344,9 @@ export const GlobalStyles = createGlobalStyle`
   }
   #content1, #content2, #content3, #content4, .info-card {
     width: 98%;
+  }
+  #content3, #content4 {
+    height: 400px;
   }
   .pro-sidebar.sm {
     left: 100%;

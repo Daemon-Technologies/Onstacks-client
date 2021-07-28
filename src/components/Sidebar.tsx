@@ -96,7 +96,7 @@ export const Sidebar: React.FC<Props> = ({
                 <div>
                   <img alt="bitcoin" src={Bitcoin} /> ${+tokens.BTC}
                 </div>
-                <div>
+                <div id="stacks">
                   {" "}
                   <img alt="stacks" src={Stacks} /> ${+tokens.STX}
                 </div>
