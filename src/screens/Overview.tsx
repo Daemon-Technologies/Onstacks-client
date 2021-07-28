@@ -9,7 +9,9 @@ import {
   Blocks,
   OverviewProps,
   SatsCommittedProps,
+  TokenPriceProps,
 } from "../hooks/useOverview";
+import { Sidebar } from "../components/Sidebar";
 interface Props {
   theme: any;
   overviewData: OverviewProps;
@@ -19,6 +21,8 @@ interface Props {
   blocks: Blocks[];
   winnerAddresses: string[];
   totalWinners: number[];
+  themeToggler: any;
+  tokens: TokenPriceProps;
 }
 
 export const Overview: React.FC<Props> = ({
@@ -26,6 +30,8 @@ export const Overview: React.FC<Props> = ({
   overviewData,
   satsCommitted,
   areaBlocks,
+  tokens,
+  themeToggler,
   areaSeries,
   blocks,
   winnerAddresses,
@@ -39,7 +45,13 @@ export const Overview: React.FC<Props> = ({
 
   useEffect(() => {}, [totalWinners]);
   return (
-    <>
+    <div className="container">
+      <Sidebar
+        tokens={tokens}
+        overviewData={overviewData}
+        theme={theme}
+        themeToggler={themeToggler}
+      />
       {toggle && <Header />}
       <div id="main">
         <p className="screen-title">Overview</p>
@@ -79,6 +91,6 @@ export const Overview: React.FC<Props> = ({
         <p>Recent blocks</p>
         {blocks.length > 0 && <RecentBlocks blocks={blocks} />}
       </div>
-    </>
+    </div>
   );
 };

@@ -5,8 +5,8 @@ import { useDarkMode } from "./components/useDarkMode.js";
 import { GlobalStyles } from "./components/Globalstyle";
 import { lightTheme, darkTheme } from "./components/Themes";
 import { Overview } from "./screens/Overview";
-import { Sidebar } from "./components/Sidebar";
 import { useOverview } from "./hooks/useOverview";
+import { Notfound } from "./screens/Notfound";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -28,30 +28,27 @@ const App: React.FC = () => {
     <ThemeProvider theme={themeMode}>
       <>
         <GlobalStyles />
-        <div className="container">
-          <Sidebar
-            tokens={tokens}
-            overviewData={overviewData}
-            theme={theme}
-            themeToggler={themeToggler}
-          />
-          <Router>
-            <Switch>
-              <Route path="/">
-                <Overview
-                  totalWinners={totalWinners}
-                  winnerAddresses={winnersAddresses}
-                  blocks={blocks}
-                  areaBlocks={areaBlocks}
-                  areaSeries={areaSeries}
-                  satsCommitted={satsCommitted}
-                  overviewData={overviewData}
-                  theme={theme}
-                />
-              </Route>
-            </Switch>
-          </Router>
-        </div>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Overview
+                themeToggler={themeToggler}
+                tokens={tokens}
+                totalWinners={totalWinners}
+                winnerAddresses={winnersAddresses}
+                blocks={blocks}
+                areaBlocks={areaBlocks}
+                areaSeries={areaSeries}
+                satsCommitted={satsCommitted}
+                overviewData={overviewData}
+                theme={theme}
+              />
+            </Route>
+            <Route path="*">
+              <Notfound />
+            </Route>
+          </Switch>
+        </Router>
       </>
     </ThemeProvider>
   );

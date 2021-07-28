@@ -69,14 +69,14 @@ export const Sidebar: React.FC<Props> = ({
             >
               Mining Data
             </MenuItem>
-            <MenuItem
-              onClick={() => {
-                setActive(2);
-              }}
-              active={active === 2}
-              icon={<Trending />}
-            >
-              Network Activity
+            <MenuItem active={active === 2} icon={<Trending />}>
+              <a
+                target="_blank"
+                href="https://explorer.stacks.co/?chain=mainnet"
+                rel="noreferrer"
+              >
+                Network Activity
+              </a>
             </MenuItem>
             <MenuItem
               onClick={() => {
@@ -85,9 +85,15 @@ export const Sidebar: React.FC<Props> = ({
               active={active === 3}
               icon={<MiningDocs />}
             >
-              Mining Docs
+              <a
+                target="_blank"
+                href="https://docs.stacks.co/understand-stacks/mining"
+                rel="noreferrer"
+              >
+                Mining docs
+              </a>
             </MenuItem>
-            <hr style={{ margin: "24px 10px" }} />
+            <div className="hr" />
           </Menu>
 
           <div className="menu-content">

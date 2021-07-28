@@ -29,8 +29,13 @@ export const GlobalStyles = createGlobalStyle`
     height: 92vh;
    
   }
-  hr {
-      border-color:  ${({ theme }: any) => theme.border} !important;
+  .pro-sidebar .pro-menu a {
+    color: ${({ theme }: any) => theme.text};
+  }
+  .hr {
+      background:  ${({ theme }: any) => theme.border} !important;
+      margin: 24px 10px;
+      height: 1px;
     }
   .pro-sidebar > .pro-sidebar-inner {
     background: ${({ theme }: any) => theme.body} !important;
@@ -162,6 +167,36 @@ export const GlobalStyles = createGlobalStyle`
     grid-gap: 16px;
     width: 100%;
     padding-right: 32px;
+  }
+
+  .not-found {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 25px;
+    }
+    .button {
+      background: ${({ theme }: any) => theme.primaryColor} !important;
+      padding: 8px 60px;
+      border-radius: 4px;
+      margin-top: 33px;
+      cursor: pointer;
+      p {
+        color: white;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+        letter-spacing: 0px;
+      }
+    }
   }
 
   #main {
