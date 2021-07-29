@@ -22,6 +22,13 @@ export const PieChart: React.FC<Props> = ({
     "#20C9AC",
     "#FF4560",
     "#FA699D",
+    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
   ];
   return (
     <ReactApexChart

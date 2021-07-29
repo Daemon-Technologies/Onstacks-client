@@ -47,7 +47,7 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 4px;
     background: ${({ theme }: any) => theme.hoverColor} !important;
     .pro-item-content {
-      color: ${({ theme }: any) => theme.text} !important;
+      color: ${({ theme }: any) => theme.primaryColor} !important;
     }
     /* padding: 12px; */
   }
@@ -182,7 +182,8 @@ export const GlobalStyles = createGlobalStyle`
       object-fit: contain;
       margin-bottom: 25px;
     }
-    .button {
+  }
+  .button {
       background: ${({ theme }: any) => theme.primaryColor} !important;
       padding: 8px 60px;
       border-radius: 4px;
@@ -197,7 +198,6 @@ export const GlobalStyles = createGlobalStyle`
         letter-spacing: 0px;
       }
     }
-  }
 
   #main {
     grid-area: main;
@@ -404,6 +404,9 @@ export const GlobalStyles = createGlobalStyle`
     top: 0;
   }
   }
-
+  .TransformComponent-module_container__3NwNd, .TransformComponent-module_content__TZU5O, .fkhEhr {
+    width: 100% !important;
+    height: 100% !important;
+  }
  
   `;

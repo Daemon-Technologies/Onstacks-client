@@ -3,8 +3,10 @@ import { ProSidebar, Menu, MenuItem, SidebarContent } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
 import Stacks from "../assets/side-menu/stacks.svg";
-import { ReactComponent as OverviewLogo } from "../assets/side-menu/overview.svg";
-import { ReactComponent as MiningData } from "../assets/side-menu/profile.svg";
+import { ReactComponent as OverviewLogo } from "../assets/side-menu/overview-grey.svg";
+import { ReactComponent as OverviewActive } from "../assets/side-menu/overview.svg";
+import { ReactComponent as MiningData } from "../assets/side-menu/person-grey.svg";
+import { ReactComponent as MiningDataActive } from "../assets/side-menu/person.svg";
 import { ReactComponent as Trending } from "../assets/side-menu/trending.svg";
 import { ReactComponent as MiningDocs } from "../assets/side-menu/book.svg";
 import { ReactComponent as HighLightedSun } from "../assets/side-menu/sun.svg";
@@ -15,6 +17,7 @@ import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
 import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
 import { MobileHeader } from "./MobileHeader";
 import { OverviewProps, TokenPriceProps } from "../hooks/useOverview";
+import { useHistory } from "react-router-dom";
 interface Props {
   theme: any;
   themeToggler: any;
@@ -30,6 +33,7 @@ export const Sidebar: React.FC<Props> = ({
 }) => {
   const [active, setActive] = useState(0);
   const [toggle, setToggle] = useState(false);
+  const { push } = useHistory();
   useEffect(() => {
     const { innerWidth: width } = window;
     setToggle(width >= 600);
@@ -52,20 +56,26 @@ export const Sidebar: React.FC<Props> = ({
           )}
           <Menu iconShape="square">
             <MenuItem
+              style={{
+                color: active === 0 ? "#FFA043 !important" : "white !important",
+              }}
               onClick={() => {
+                push("/");
                 setActive(0);
               }}
               active={active === 0}
-              icon={<OverviewLogo />}
+              icon={active === 0 ? <OverviewActive /> : <OverviewLogo />}
             >
               Overview
             </MenuItem>
             <MenuItem
+              style={{ color: active === 1 ? "#FFA043" : "white" }}
               onClick={() => {
+                push("/mining-data");
                 setActive(1);
               }}
               active={active === 1}
-              icon={<MiningData />}
+              icon={active === 1 ? <MiningDataActive /> : <MiningData />}
             >
               Mining Data
             </MenuItem>

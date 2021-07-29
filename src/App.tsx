@@ -7,6 +7,7 @@ import { lightTheme, darkTheme } from "./components/Themes";
 import { Overview } from "./screens/Overview";
 import { useOverview } from "./hooks/useOverview";
 import { Notfound } from "./screens/Notfound";
+import { MiningData } from "./screens/MiningData";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -40,6 +41,14 @@ const App: React.FC = () => {
                 areaBlocks={areaBlocks}
                 areaSeries={areaSeries}
                 satsCommitted={satsCommitted}
+                overviewData={overviewData}
+                theme={theme}
+              />
+            </Route>
+            <Route exact path="/mining-data">
+              <MiningData
+                themeToggler={themeToggler}
+                tokens={tokens}
                 overviewData={overviewData}
                 theme={theme}
               />

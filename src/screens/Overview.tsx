@@ -12,6 +12,7 @@ import {
   TokenPriceProps,
 } from "../hooks/useOverview";
 import { Sidebar } from "../components/Sidebar";
+
 interface Props {
   theme: any;
   overviewData: OverviewProps;
