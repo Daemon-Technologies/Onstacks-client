@@ -8,7 +8,7 @@ const handleError = (error: AxiosError) => {
 };
 
 const instance = axios.create({
-  baseURL: "http://47.242.239.96:8889/api/v2/",
+  baseURL: "https://api.stxmining.club/api/v2/",
   headers: {
     "Content-Type": "application/json",
   },

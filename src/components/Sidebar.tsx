@@ -23,15 +23,17 @@ interface Props {
   themeToggler: any;
   overviewData: OverviewProps;
   tokens: TokenPriceProps;
+  active: number;
 }
 
 export const Sidebar: React.FC<Props> = ({
   theme,
   themeToggler,
   overviewData,
+  active: activeState,
   tokens,
 }) => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(activeState);
   const [toggle, setToggle] = useState(false);
   const { push } = useHistory();
   useEffect(() => {
@@ -56,12 +58,9 @@ export const Sidebar: React.FC<Props> = ({
           )}
           <Menu iconShape="square">
             <MenuItem
-              style={{
-                color: active === 0 ? "#FFA043 !important" : "white !important",
-              }}
               onClick={() => {
-                push("/");
                 setActive(0);
+                push("/");
               }}
               active={active === 0}
               icon={active === 0 ? <OverviewActive /> : <OverviewLogo />}
@@ -69,10 +68,9 @@ export const Sidebar: React.FC<Props> = ({
               Overview
             </MenuItem>
             <MenuItem
-              style={{ color: active === 1 ? "#FFA043" : "white" }}
               onClick={() => {
-                push("/mining-data");
                 setActive(1);
+                push("/mining-data");
               }}
               active={active === 1}
               icon={active === 1 ? <MiningDataActive /> : <MiningData />}
@@ -123,13 +121,13 @@ export const Sidebar: React.FC<Props> = ({
               <p>
                 <span>#{overviewData.btc_block_height}</span> BTC Blockheight
               </p>
-              <p>
+              {/* <p>
                 <span>{overviewData.next_stx_halving} days</span> Next STX
                 halving
               </p>
               <p>
                 <span>{overviewData.btc_hash_rate} EH/s</span> BTC Hashrate
-              </p>
+              </p> */}
             </div>
             <div>
               {theme === "dark" ? (

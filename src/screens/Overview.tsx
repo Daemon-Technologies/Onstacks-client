@@ -49,6 +49,7 @@ export const Overview: React.FC<Props> = ({
     <div className="container">
       <Sidebar
         tokens={tokens}
+        active={0}
         overviewData={overviewData}
         theme={theme}
         themeToggler={themeToggler}

@@ -33,6 +33,7 @@ export const MiningData: React.FC<Props> = ({
         tokens={tokens}
         overviewData={overviewData}
         theme={theme}
+        active={1}
         themeToggler={themeToggler}
       />
       {toggle && <Header />}
