@@ -201,6 +201,11 @@ export const GlobalStyles = createGlobalStyle`
 
   #main {
     grid-area: main;
+    .data {
+      font-size: 13px;
+      color: ${({ theme }: any) => theme.greyText} !important;
+      text-align: right;
+    }
   }
 
   #nav {
@@ -300,7 +305,7 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 28px;
     font-weight: 600;
     line-height: 36px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .info-card {
