@@ -1,6 +1,7 @@
 import { ApexOptions } from "apexcharts";
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import { format, randomColorGenerator } from "../../utils/helper";
 import { lightTheme, darkTheme } from "../Themes";
 
 interface Props {
@@ -14,14 +15,8 @@ export const LineChart: React.FC<Props> = ({
   areaBlocks,
   areaSeries,
 }) => {
-  const colorPalette = [
-    "#FFA043",
-    "#5542F6",
-    "#00A5FF",
-    "#20C9AC",
-    "#FF4560",
-    "#FA699D",
-  ];
+  const colorPalette = randomColorGenerator();
+
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
@@ -96,8 +91,18 @@ export const LineChart: React.FC<Props> = ({
       xaxis: {
         labels: { style: { colors: themeMode.text } },
         categories: areaBlocks,
+        tickAmount: 5,
+        type: "numeric",
+        range: 49,
       },
       legend: { labels: { colors: themeMode.greyText }, show: true },
+      yaxis: {
+        show: true,
+        tickAmount: 3,
+        labels: {
+          formatter: (val) => format(val),
+        },
+      },
     }));
     let s = areaSeries.map((s: any) => {
       return {
@@ -110,7 +115,6 @@ export const LineChart: React.FC<Props> = ({
     });
     setSeries(s);
   }, [theme, themeMode.greyText, themeMode.text, areaSeries, areaBlocks]);
-
   return (
     <ReactApexChart
       options={options}

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
+import { randomColorGenerator } from "../../utils/helper";
 import { lightTheme, darkTheme } from "../Themes";
 
 interface Props {
@@ -15,21 +16,8 @@ export const PieChart: React.FC<Props> = ({
 }) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
-  const colorPalette = [
-    "#FFA043",
-    "#5542F6",
-    "#00A5FF",
-    "#20C9AC",
-    "#FF4560",
-    "#FA699D",
-    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-    `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-  ];
+  const colorPalette = randomColorGenerator();
+
   return (
     <ReactApexChart
       options={{

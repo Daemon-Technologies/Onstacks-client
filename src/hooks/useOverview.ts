@@ -89,9 +89,9 @@ export const useOverview = () => {
     });
     axios.get(getSatsCommittedPerBlock).then((data: any) => {
       setSatsCommitted({
-        block_number: data.map((item: any) => item.block_number),
+        block_number: data.map((item: any) => +item.block_number),
         total_sats_committed: data.map(
-          (item: any) => item.total_sats_committed
+          (item: any) => +item.total_sats_committed
         ),
       });
     });
@@ -99,8 +99,8 @@ export const useOverview = () => {
       let currentData: TotalBurnedMinerFees[] = data;
       let series: ApexAxisChartSeries = [];
       let blocks: any[] = [];
-      currentData.splice(0, 5).forEach((block: any) => {
-        blocks.push(block.block_number);
+      currentData.forEach((block: any) => {
+        blocks.push(+block.block_number);
         block.miner_list.forEach((element: any) => {
           let index = series.findIndex(
             (e) => e.name === element.leader_key_address

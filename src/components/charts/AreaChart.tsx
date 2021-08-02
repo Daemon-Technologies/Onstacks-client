@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import { format } from "../../utils/helper";
 import { SatsCommittedProps } from "../../hooks/useOverview";
 import { darkTheme, lightTheme } from "../Themes";
 
@@ -43,8 +44,10 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       tooltip: {
         enabled: false,
       },
-      range: 8,
+      tickAmount: 5,
+      type: "numeric",
       categories: satsCommitted.block_number,
+      decimalsInFloat: 0,
       labels: {
         style: {
           colors: themeMode.text,
@@ -66,7 +69,11 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       theme,
     },
     yaxis: {
-      show: false,
+      show: true,
+      tickAmount: 3,
+      labels: {
+        formatter: (val) => format(val),
+      },
     },
     colors: ["#FFCE74"],
   });
@@ -88,14 +95,33 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
           autoSelected: "pan",
           show: false,
         },
+        xaxis: {
+          min: satsCommitted.block_number[0],
+          range: 5,
+          max: satsCommitted.block_number[
+            satsCommitted.block_number.length - 1
+          ],
+        },
         width: "100%",
         redrawOnParentResize: false,
       },
       subtitle: { style: { color: themeMode.text } },
       title: { style: { color: themeMode.greyText } },
       xaxis: {
+        tickAmount: 5,
+        type: "numeric",
+        min: satsCommitted.block_number[0],
+        range: 49,
+        max: satsCommitted.block_number[satsCommitted.block_number.length - 1],
         labels: { style: { colors: themeMode.text } },
         categories: satsCommitted.block_number,
+      },
+      yaxis: {
+        show: true,
+        tickAmount: 3,
+        labels: {
+          formatter: (val) => format(val),
+        },
       },
     }));
   }, [
@@ -105,7 +131,6 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
     satsCommitted.total_sats_committed,
     satsCommitted.block_number,
   ]);
-
   return (
     <ReactApexChart
       options={options}
