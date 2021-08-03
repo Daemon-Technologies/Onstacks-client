@@ -55,6 +55,7 @@ export const LineChart: React.FC<Props> = ({
     },
     stroke: {
       curve: "smooth",
+      width: 2,
     },
     legend: {
       show: true,
@@ -100,6 +101,7 @@ export const LineChart: React.FC<Props> = ({
         show: true,
         tickAmount: 3,
         labels: {
+          style: { colors: themeMode.text },
           formatter: (val) => format(val),
         },
       },

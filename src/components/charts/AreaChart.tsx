@@ -120,6 +120,7 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
         show: true,
         tickAmount: 3,
         labels: {
+          style: { colors: themeMode.text },
           formatter: (val) => format(val),
         },
       },

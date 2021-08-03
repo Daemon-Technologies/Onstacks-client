@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "../axios/axios";
 import { getOverviewData } from "../axios/requests";
+import differenceInMinutes from "date-fns/differenceInMinutes";
 
 export interface OverviewProps {
   active_miners: number;
@@ -19,6 +20,7 @@ export interface OverviewProps {
   reward_payout_interval: number;
   stx_block_height: number;
   total_sats_committed: number;
+  btc_total: number;
 }
 
 export interface TokenPriceProps {
@@ -58,6 +60,7 @@ export const useOverview = () => {
     reward_payout_interval: 0,
     stx_block_height: 0,
     total_sats_committed: 0,
+    btc_total: 0,
   });
   const [tokens, setTokens] = useState<TokenPriceProps>({
     BTC: "0",
@@ -127,7 +130,9 @@ export const useOverview = () => {
         data.slice(0, 5).map((r: Blocks) => {
           return {
             block_number: "#" + r.block_number,
-            mined_at: r.mined_at + (window.innerWidth > 600 ? " Mins" : ""),
+            mined_at:
+              differenceInMinutes(new Date(), r.mined_at * 1000) +
+              (window.innerWidth > 600 ? " Mins" : ""),
             sats_spent: numberWithCommas(r.sats_spent),
             winner_address:
               r.winner_address.substring(0, window.innerWidth > 600 ? 8 : 4) +

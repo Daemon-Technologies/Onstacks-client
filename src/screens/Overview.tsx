@@ -74,7 +74,7 @@ export const Overview: React.FC<Props> = ({
       <div id="content2">
         <p className="title">Top miner burned fees</p>
         <div className="seprator">
-          {areaBlocks.length > 0 && (
+          {areaBlocks.length > 0 && areaSeries.length > 0 && (
             <LineChart
               areaBlocks={areaBlocks}
               areaSeries={areaSeries}
@@ -84,11 +84,13 @@ export const Overview: React.FC<Props> = ({
         </div>
       </div>
       <div id="content3">
-        <PieChart
-          totalWinners={totalWinners}
-          winnerAddresses={winnerAddresses}
-          theme={theme}
-        />
+        {totalWinners.length > 0 && winnerAddresses.length > 0 && (
+          <PieChart
+            totalWinners={totalWinners}
+            winnerAddresses={winnerAddresses}
+            theme={theme}
+          />
+        )}
       </div>
       <div id="content4">
         <p>Recent blocks</p>
