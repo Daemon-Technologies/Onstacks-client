@@ -86,7 +86,6 @@ export const PieChart: React.FC<Props> = ({
             colors: themeMode.text,
           },
         },
-
         dataLabels: {
           enabled: false,
         },

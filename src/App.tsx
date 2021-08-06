@@ -49,6 +49,9 @@ const App: React.FC = () => {
               <MiningData
                 themeToggler={themeToggler}
                 tokens={tokens}
+                blocks={blocks}
+                areaBlocks={areaBlocks}
+                areaSeries={areaSeries}
                 overviewData={overviewData}
                 theme={theme}
               />

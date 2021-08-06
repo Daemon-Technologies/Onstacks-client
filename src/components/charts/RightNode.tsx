@@ -1,0 +1,43 @@
+import React from "react";
+
+import { Handle, Position } from "react-flow-renderer";
+
+export const RightNode = ({ data, bgColor }: any) => {
+  const styles = {
+    circle: {
+      background: data.bgColor,
+      width: 16,
+      height: 16,
+      marginRight: 8,
+      borderRadius: 8,
+    },
+    left: {
+      borderWidth: 0,
+      backgroundColor: "transparent",
+      borderColor: data.bgColor,
+      width: 14,
+      height: 14,
+    },
+    node: { display: "flex", marginLeft: 16 },
+    title: { fontSize: 14, fontWeight: 500 },
+    subtitle: { color: "#84818A", fontSize: 12 },
+  };
+  return (
+    <>
+      <Handle
+        type="source"
+        position={Position.Left}
+        id="a"
+        style={styles.left}
+      />
+      <i style={{ borderColor: data.bgColor }} className="arrow right"></i>
+      <div style={styles.node}>
+        <div style={styles.circle} />
+        <div>
+          <p style={styles.title}>{data.title}</p>
+          <p style={styles.subtitle}>{data.subtitle}</p>
+        </div>
+      </div>
+    </>
+  );
+};
