@@ -345,6 +345,27 @@ export const GlobalStyles = createGlobalStyle`
     margin: auto;
   }
 
+  .miningData {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: repeat( 12, 1fr );
+    grid-template-rows: repeat( 10, 1fr );
+    grid-template-areas:
+        "nav nav nav nav nav nav nav nav nav nav nav nav"
+        "sidebar sidebar main main main main main main main main main main"
+        "sidebar sidebar main main main main main main main main main main"
+        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4"
+        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4"
+        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4";
+    grid-gap: 16px;
+    width: 100%;
+    padding-right: 32px;
+  }
+
   .not-found {
     display: flex;
     flex: 1;
@@ -388,7 +409,19 @@ export const GlobalStyles = createGlobalStyle`
       }
     }
   }
-
+  .arrow {
+    border: solid;
+    border-width: 0px 5px 5px 0;
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: -19px;
+    margin-left: -16px;
+    }
+    
+    .right {
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
   #nav {
     grid-area: nav;
     display: flex;
