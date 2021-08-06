@@ -58,7 +58,7 @@ export const LineChart: React.FC<Props> = ({
       width: 2,
     },
     legend: {
-      show: true,
+      show: false,
       position: "top",
       containerMargin: { left: 12 },
       fontWeight: 500,
@@ -96,7 +96,10 @@ export const LineChart: React.FC<Props> = ({
         type: "numeric",
         range: 49,
       },
-      legend: { labels: { colors: themeMode.greyText }, show: true },
+      legend: {
+        labels: { colors: themeMode.greyText },
+        show: window.innerWidth > 800 ? true : false,
+      },
       yaxis: {
         show: true,
         tickAmount: 3,
@@ -123,7 +126,7 @@ export const LineChart: React.FC<Props> = ({
       series={series}
       type="line"
       width="99%"
-      height="200"
+      height={window.innerWidth > 600 ? "220" : "320"}
     />
   );
 };

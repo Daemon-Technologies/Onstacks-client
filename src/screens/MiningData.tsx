@@ -20,7 +20,7 @@ export const MiningData: React.FC<Props> = ({
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     const { innerWidth: width } = window;
-    setToggle(width >= 600);
+    setToggle(width >= 1025);
   }, [toggle]);
   const { push } = useHistory();
 

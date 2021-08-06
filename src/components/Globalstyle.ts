@@ -24,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   //SIDEBAR
   .pro-sidebar {
-    min-width: 100% !important;
+    min-width: 270px !important;
     width: 100% !important;
     height: 92vh;
    
@@ -43,6 +43,16 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.50s linear;
   }
 
+  .headerLogo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    p {
+      font-size: 12px;
+      font-weight: bolder;
+      color: ${({ theme }: any) => theme.text};
+    }
+  }
   .pro-sidebar .pro-menu .pro-menu-item.active {
     border-radius: 4px;
     background: ${({ theme }: any) => theme.hoverColor} !important;
@@ -95,8 +105,8 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     flex-wrap: wrap;
     line-height: 2;
-    #stacks {
-      margin-left: 16px;
+    #btc {
+      margin-right: 16px;
     }
     div {
       display: flex;
@@ -216,8 +226,9 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     padding: 32px;
     .logo {
-      width: 160px;
-      height: 36px;
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
     }
     .notification {
       width: 28px;
@@ -236,7 +247,10 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
-    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
+    box-shadow: ${({ theme }: any) =>
+      theme.background === "#FFFFFF"
+        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
+        : "0px"};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -253,7 +267,6 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
   .seprator {
-      margin-left: 12px;
       width: 100%;
     }
   #content2 {
@@ -262,7 +275,10 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }: any) => theme.background} !important;
     grid-area: content2;
     border-radius: var(--main-radius);
-    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
+    box-shadow: ${({ theme }: any) =>
+      theme.background === "#FFFFFF"
+        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
+        : "0px"};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -278,7 +294,10 @@ export const GlobalStyles = createGlobalStyle`
     padding: 16px;
     border-radius: var(--main-radius);
     background: ${({ theme }: any) => theme.background} !important;
-    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
+    box-shadow: ${({ theme }: any) =>
+      theme.background === "#FFFFFF"
+        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
+        : "0px"};
     max-height: 300px;
   }
 
@@ -291,7 +310,10 @@ export const GlobalStyles = createGlobalStyle`
     grid-area: content4;
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
-    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
+    box-shadow: ${({ theme }: any) =>
+      theme.background === "#FFFFFF"
+        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
+        : "0px"};
     max-height: 300px;
     p {
       font-size: 14px;
@@ -309,7 +331,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .info-card {
-    box-shadow: 0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%);
+    box-shadow: ${({ theme }: any) =>
+      theme.background === "#FFFFFF"
+        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
+        : "0px"};
     border-radius: 4px;
     display: flex;
     background: ${({ theme }: any) => theme.background} !important;
@@ -363,10 +388,68 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
+
+
+  @media only screen and (max-width: 1024px) {
+  .pro-sidebar.md {
+    position: fixed;
+    left: 100%;
+    height: 100%;
+  }
+  .toggled {
+    left: 0 !important;
+  }
+  #content4, #content3, #content2, #content1 {
+    max-height: 600px;
+    height: 100%;
+  }
+  .info-card div .sub-title {
+    font-size: 16px;
+  }
+  :root {
+    overflow-y: auto;
+  }
+  .container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ;
+    grid-template-areas:
+    "nav"
+    "main"
+    "content1"
+    "content2"
+    "content3"
+    "content4";
+    grid-gap: 16px;
+    width: 100%;
+    padding: 32px;
+    padding-top: 0;
+  }
+  .info-card div {
+    padding: 16px
+  }
+  #content4 {
+    padding: 16px !important;
+  }
+  th {
+    font-size: 12px;
+  }
+  td {
+    font-size: 12px;
+  }
+  }
+  .TransformComponent-module_container__3NwNd, .TransformComponent-module_content__TZU5O, .fkhEhr {
+    width: 100% !important;
+    height: 100% !important;
+  }
   @media only screen and (max-width: 550px) {
   :root {
     overflow-y: auto;
   }
+  th {
+      font-size: 12px;
+    }
   .container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ;
@@ -387,7 +470,9 @@ export const GlobalStyles = createGlobalStyle`
   }
   #content3, #content4 {
     height: 400px;
+    max-height: 400px;
   }
+
   .pro-sidebar.sm {
     left: 100%;
   }
@@ -409,9 +494,4 @@ export const GlobalStyles = createGlobalStyle`
     top: 0;
   }
   }
-  .TransformComponent-module_container__3NwNd, .TransformComponent-module_content__TZU5O, .fkhEhr {
-    width: 100% !important;
-    height: 100% !important;
-  }
- 
   `;

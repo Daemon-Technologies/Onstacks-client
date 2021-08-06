@@ -17,7 +17,7 @@ export const PieChart: React.FC<Props> = ({
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   const colorPalette = randomColorGenerator();
-
+  console.log(totalWinners, winnerAddresses);
   return (
     <ReactApexChart
       options={{
@@ -28,7 +28,7 @@ export const PieChart: React.FC<Props> = ({
         title: {
           text: "Block reward distribution to miners (last 100 blocks)",
           align: "left",
-          margin: 10,
+          margin: window.innerWidth > 800 ? 10 : 30,
           floating: false,
           style: {
             fontSize: "14px",
@@ -36,39 +36,33 @@ export const PieChart: React.FC<Props> = ({
             color: themeMode.greyText,
           },
         },
-        labels: winnerAddresses.map((address) => {
-          return (
-            address.substring(0, 6) +
-            ".." +
-            address.substring(address.length - 6, address.length - 1)
-          );
-        }),
+        labels: winnerAddresses,
         plotOptions: {
           pie: {
             expandOnClick: true,
-            customScale: window.innerWidth > 600 ? 1 : 1.2,
+            customScale: window.innerWidth > 800 ? 1 : 1.2,
             donut: {
-              size: window.innerWidth > 600 ? "90%" : "80%",
+              size: window.innerWidth > 800 ? "90%" : "80%",
               labels: {
                 show: true,
                 total: {
                   showAlways: true,
                   show: true,
-                  fontSize: window.innerWidth > 600 ? "16px" : "12px",
+                  fontSize: window.innerWidth > 800 ? "16px" : "12px",
                   fontWeight: 500,
                   color: themeMode.greyText,
                   label: "Reward block",
                 },
                 name: {
                   show: true,
-                  offsetY: window.innerWidth > 600 ? -10 : 0,
+                  offsetY: window.innerWidth > 800 ? -10 : 0,
                 },
                 value: {
                   fontWeight: 700,
                   color: themeMode.greyText,
                   show: true,
-                  offsetY: window.innerWidth > 600 ? 0 : -1,
-                  fontSize: window.innerWidth > 600 ? "25px" : "16px",
+                  offsetY: window.innerWidth > 800 ? 0 : -1,
+                  fontSize: window.innerWidth > 800 ? "25px" : "16px",
                 },
               },
             },
@@ -78,9 +72,9 @@ export const PieChart: React.FC<Props> = ({
           fontSize: "12px",
           fontWeight: 500,
           offsetY: 20,
-          position: window.innerWidth > 600 ? "right" : "bottom",
+          position: window.innerWidth > 800 ? "right" : "bottom",
           itemMargin: {
-            vertical: 3,
+            vertical: 2,
           },
           labels: {
             colors: themeMode.text,
@@ -95,7 +89,7 @@ export const PieChart: React.FC<Props> = ({
       series={totalWinners}
       type="donut"
       width="90%"
-      height="100%"
+      height={window.innerWidth > 800 ? "220" : "320"}
     />
   );
 };

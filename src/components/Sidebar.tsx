@@ -38,22 +38,22 @@ export const Sidebar: React.FC<Props> = ({
   const { push } = useHistory();
   useEffect(() => {
     const { innerWidth: width } = window;
-    setToggle(width >= 600);
+    setToggle(width >= 1025);
   }, []);
   return (
     <>
-      {window.innerWidth < 600 && (
+      {window.innerWidth < 1025 && (
         <MobileHeader toggle={toggle} setToggle={setToggle} />
       )}
       <ProSidebar
         id="sidebar"
         toggled={toggle}
         onToggle={setToggle}
-        breakPoint="sm"
+        breakPoint="md"
         className="side-bar"
       >
         <SidebarContent>
-          {window.innerWidth < 600 && (
+          {window.innerWidth < 1025 && (
             <MobileHeader toggle={toggle} setToggle={setToggle} />
           )}
           <Menu iconShape="square">
@@ -107,12 +107,14 @@ export const Sidebar: React.FC<Props> = ({
           <div className="menu-content">
             <div>
               <div className="crypto">
-                <div>
-                  <img alt="bitcoin" src={Bitcoin} /> ${+tokens.BTC}
+                <div id="btc">
+                  <img alt="bitcoin" src={Bitcoin} /> $
+                  {Number.parseFloat(tokens.BTC).toFixed(2)}
                 </div>
-                <div id="stacks">
+                <div>
                   {" "}
-                  <img alt="stacks" src={Stacks} /> ${+tokens.STX}
+                  <img alt="stacks" src={Stacks} /> $
+                  {Number.parseFloat(tokens.STX).toFixed(2)}
                 </div>
               </div>
               <p>

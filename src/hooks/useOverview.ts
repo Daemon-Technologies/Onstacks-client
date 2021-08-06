@@ -67,8 +67,8 @@ export const useOverview = () => {
     STX: "0",
   });
 
-  const [totalWinners, setTotalWinners] = useState<number[]>([]);
-  const [winnersAddresses, setwinnersAddresses] = useState<string[]>([]);
+  const [totalWinners, setTotalWinners] = useState<[]>([]);
+  const [winnersAddresses, setwinnersAddresses] = useState<[]>([]);
 
   const [satsCommitted, setSatsCommitted] = useState<SatsCommittedProps>({
     block_number: [],
@@ -122,7 +122,22 @@ export const useOverview = () => {
       setAreaSeries(series);
     });
     axios.get(getRewardDistribution).then((data: any) => {
-      setwinnersAddresses(data.map((b: any) => b.stx_address));
+      setwinnersAddresses(
+        data.map((b: any) => {
+          if (b.stx_address && b.stx_address.length > 0) {
+            return (
+              b.stx_address.substring(0, 6) +
+              ".." +
+              b.stx_address.substring(
+                b.stx_address.length - 6,
+                b.stx_address.length - 1
+              )
+            );
+          } else {
+            return "";
+          }
+        })
+      );
       setTotalWinners(data.map((b: any) => b.total_win));
     });
     axios.get(getBlocks).then((data: any) => {
@@ -132,7 +147,7 @@ export const useOverview = () => {
             block_number: "#" + r.block_number,
             mined_at:
               differenceInMinutes(new Date(), r.mined_at * 1000) +
-              (window.innerWidth > 600 ? " Mins" : ""),
+              (window.innerWidth > 800 ? " Mins" : ""),
             sats_spent: numberWithCommas(r.sats_spent),
             winner_address:
               r.winner_address.substring(0, window.innerWidth > 600 ? 8 : 4) +

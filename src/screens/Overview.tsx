@@ -41,7 +41,7 @@ export const Overview: React.FC<Props> = ({
   const [toggle, setToggle] = useState(false);
   useEffect(() => {
     const { innerWidth: width } = window;
-    setToggle(width >= 600);
+    setToggle(width >= 1025);
   }, [toggle]);
 
   useEffect(() => {}, [totalWinners]);
@@ -84,13 +84,11 @@ export const Overview: React.FC<Props> = ({
         </div>
       </div>
       <div id="content3">
-        {totalWinners.length > 0 && winnerAddresses.length > 0 && (
-          <PieChart
-            totalWinners={totalWinners}
-            winnerAddresses={winnerAddresses}
-            theme={theme}
-          />
-        )}
+        <PieChart
+          totalWinners={totalWinners || []}
+          winnerAddresses={winnerAddresses || []}
+          theme={theme}
+        />
       </div>
       <div id="content4">
         <p>Recent blocks</p>

@@ -16,7 +16,10 @@ export const MobileHeader: React.FC<Props> = ({ setToggle, toggle }) => {
         onClick={() => setToggle(!toggle)}
         src={toggle ? Close : Menu}
       />
-      <img alt="logo" src={Logo} />
+      <div className={"headerLogo"}>
+        <img className="logo" alt="notifications" src={Logo} />
+        <p>STX Mining Monitor</p>
+      </div>
       <img alt="notifications" src={Notification} />
     </div>
   );
