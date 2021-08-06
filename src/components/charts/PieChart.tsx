@@ -17,7 +17,6 @@ export const PieChart: React.FC<Props> = ({
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   const colorPalette = randomColorGenerator();
-  console.log(totalWinners, winnerAddresses);
   return (
     <ReactApexChart
       options={{
@@ -71,7 +70,7 @@ export const PieChart: React.FC<Props> = ({
         legend: {
           fontSize: "12px",
           fontWeight: 500,
-          offsetY: 20,
+          offsetY: window.innerWidth > 800 ? 0 : 20,
           position: window.innerWidth > 800 ? "right" : "bottom",
           itemMargin: {
             vertical: 2,
@@ -86,7 +85,7 @@ export const PieChart: React.FC<Props> = ({
         },
         colors: colorPalette,
       }}
-      series={totalWinners}
+      series={totalWinners || []}
       type="donut"
       width="90%"
       height={window.innerWidth > 800 ? "220" : "320"}

@@ -1,7 +1,7 @@
 export const randomColorGenerator = () => {
   const colorPalette: string[] = [
     "#FFA043",
-    "#5542F6",
+    "#5546ff",
     "#00A5FF",
     "#20C9AC",
     "#FF4560",

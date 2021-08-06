@@ -54,7 +54,7 @@ export const Overview: React.FC<Props> = ({
         theme={theme}
         themeToggler={themeToggler}
       />
-      {toggle && <Header />}
+      {toggle && <Header theme={theme} />}
       <div id="main">
         <p className="screen-title">Overview</p>
         <InfoCard overviewData={overviewData} />
@@ -84,11 +84,15 @@ export const Overview: React.FC<Props> = ({
         </div>
       </div>
       <div id="content3">
-        <PieChart
-          totalWinners={totalWinners || []}
-          winnerAddresses={winnerAddresses || []}
-          theme={theme}
-        />
+        {totalWinners.length > 0 &&
+          winnerAddresses.length > 0 &&
+          totalWinners.length === winnerAddresses.length && (
+            <PieChart
+              totalWinners={totalWinners}
+              winnerAddresses={winnerAddresses}
+              theme={theme}
+            />
+          )}
       </div>
       <div id="content4">
         <p>Recent blocks</p>

@@ -24,7 +24,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   //SIDEBAR
   .pro-sidebar {
-    min-width: 270px !important;
+    min-width: 100% !important;
     width: 100% !important;
     height: 92vh;
    
@@ -132,7 +132,7 @@ export const GlobalStyles = createGlobalStyle`
     border-radius: 4px;
     padding: 12px 16px;
     margin: 40px 0 16px 0;
-    width: 80%;
+    max-width: 200px;
   }
 
   h3 {
@@ -144,7 +144,7 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     justify-content: space-between;
     flex: 1;
-    margin: 16px;
+    margin: 16px 0px;
   }
 
   .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout .pro-sidebar-header {
@@ -226,9 +226,8 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     padding: 32px;
     .logo {
-      width: 30px;
-      height: 30px;
-      margin-right: 10px;
+      width: 160px;
+      height: 36px;
     }
     .notification {
       width: 28px;
@@ -391,6 +390,12 @@ export const GlobalStyles = createGlobalStyle`
 
 
   @media only screen and (max-width: 1024px) {
+  #nav {
+    padding: 0px;
+  }
+  .mobile-header {
+    margin: 8px;
+  }
   .pro-sidebar.md {
     position: fixed;
     left: 100%;

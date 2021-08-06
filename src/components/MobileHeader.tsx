@@ -1,14 +1,15 @@
 import React from "react";
 import Menu from "../assets/side-menu/menu.svg";
-import Logo from "../assets/side-menu/logo.svg";
 import Notification from "../assets/side-menu/notifications.svg";
 import Close from "../assets/side-menu/close.svg";
-
+import LogoLight from "../assets/side-menu/stx-dark.svg";
+import LogoDark from "../assets/side-menu/stx-light.svg";
 interface Props {
   toggle: boolean;
   setToggle: (x: boolean) => void;
+  theme: any;
 }
-export const MobileHeader: React.FC<Props> = ({ setToggle, toggle }) => {
+export const MobileHeader: React.FC<Props> = ({ setToggle, toggle, theme }) => {
   return (
     <div id="nav" className={"mobile-header"}>
       <img
@@ -16,10 +17,11 @@ export const MobileHeader: React.FC<Props> = ({ setToggle, toggle }) => {
         onClick={() => setToggle(!toggle)}
         src={toggle ? Close : Menu}
       />
-      <div className={"headerLogo"}>
-        <img className="logo" alt="notifications" src={Logo} />
-        <p>STX Mining Monitor</p>
-      </div>
+      <img
+        className="logo"
+        alt="logo"
+        src={theme === "light" ? LogoDark : LogoLight}
+      />
       <img alt="notifications" src={Notification} />
     </div>
   );

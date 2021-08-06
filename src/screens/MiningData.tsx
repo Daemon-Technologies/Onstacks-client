@@ -36,7 +36,7 @@ export const MiningData: React.FC<Props> = ({
         active={1}
         themeToggler={themeToggler}
       />
-      {toggle && <Header />}
+      {toggle && <Header theme={theme} />}
       <div
         style={{
           position: "absolute",
