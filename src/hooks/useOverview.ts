@@ -138,7 +138,7 @@ export const useOverview = () => {
           }
         })
       );
-      setTotalWinners(data.map((b: any) => b.total_win));
+      setTotalWinners(data.map((b: any) => b.actual_win));
     });
     axios.get(getBlocks).then((data: any) => {
       setBlocks(

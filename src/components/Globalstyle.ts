@@ -225,10 +225,6 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: space-between;
     align-items: center;
     padding: 32px;
-    .logo {
-      width: 160px;
-      height: 36px;
-    }
     .notification {
       width: 28px;
       height: 28px;

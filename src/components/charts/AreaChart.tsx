@@ -138,7 +138,7 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       series={series}
       type="area"
       width="99%"
-      height="100%"
+      height="95%"
     />
   );
 };
