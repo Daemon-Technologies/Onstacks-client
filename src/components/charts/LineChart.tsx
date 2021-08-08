@@ -48,7 +48,10 @@ export const LineChart: React.FC<Props> = ({
         enabled: false,
       },
       labels: {
+        rotate: 0,
         rotateAlways: false,
+        hideOverlappingLabels: true,
+        showDuplicates: false,
         style: {
           colors: themeMode.text,
         },
@@ -127,7 +130,7 @@ export const LineChart: React.FC<Props> = ({
       series={series}
       type="line"
       width="99%"
-      height={window.innerWidth > 600 ? "200" : "320"}
+      height={window.innerWidth > 600 ? "180" : "320"}
     />
   );
 };
