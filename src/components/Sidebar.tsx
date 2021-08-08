@@ -13,7 +13,7 @@ import { ReactComponent as HighLightedSun } from "../assets/side-menu/sun.svg";
 import { ReactComponent as Moon } from "../assets/side-menu/cloud-dark.svg";
 import { ReactComponent as Sun } from "../assets/side-menu/sun-dark.svg";
 import { ReactComponent as HighLightedMoon } from "../assets/side-menu/cloud-light.svg";
-import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
+// import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
 import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
 import { MobileHeader } from "./MobileHeader";
 import { OverviewProps, TokenPriceProps } from "../hooks/useOverview";
@@ -149,10 +149,10 @@ export const Sidebar: React.FC<Props> = ({
               ) : (
                 <Moon style={{ cursor: "pointer" }} onClick={themeToggler} />
               )}
-              <div className="download">
+              {/* <div className="download">
                 <Arrow />
                 <p>Export data</p>
-              </div>
+              </div> */}
               <h3>STX Mining Monitor</h3>
               <p>A non-profit initiative from Daemon Technologies © 2021 </p>
             </div>

@@ -43,6 +43,10 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.50s linear;
   }
 
+  .logo {
+    width: 200px;
+    height: 36px;
+  }
   .headerLogo {
     display: flex;
     flex-direction: row;
@@ -383,7 +387,32 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-
+  @media only screen and (max-height: 768px) { 
+    .info-card div{
+      padding: 16px;
+    }
+    #content1, #content2, #content3, #content4 {
+      padding: 16px;
+      max-height: 275px;
+    }
+    #content2 {
+      .title {
+        margin-bottom: 0px;
+      }
+    }
+    .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
+      padding: 8px;
+    }
+    .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout {
+      overflow-y: hidden;
+    }
+    .crypto {
+      margin: 8px 0px;
+    }
+    .download {
+      margin: 16px 0 16px 0;
+    }
+  }
 
   @media only screen and (max-width: 1024px) {
   #nav {
@@ -469,9 +498,13 @@ export const GlobalStyles = createGlobalStyle`
   #content1, #content2, #content3, #content4, .info-card {
     width: 98%;
   }
-  #content3, #content4 {
+  #content3 {
     height: 400px;
     max-height: 400px;
+  }
+  
+  #content4 {
+    height: 300px;
   }
 
   .pro-sidebar.sm {

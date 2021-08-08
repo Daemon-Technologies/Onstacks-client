@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "../assets/side-menu/menu.svg";
-import Notification from "../assets/side-menu/notifications.svg";
+// import Notification from "../assets/side-menu/notifications.svg";
 import Close from "../assets/side-menu/close.svg";
 import LogoLight from "../assets/side-menu/stx-dark.svg";
 import LogoDark from "../assets/side-menu/stx-light.svg";
@@ -22,7 +22,8 @@ export const MobileHeader: React.FC<Props> = ({ setToggle, toggle, theme }) => {
         alt="logo"
         src={theme === "light" ? LogoDark : LogoLight}
       />
-      <img alt="notifications" src={Notification} />
+      <div></div>
+      {/* <img alt="notifications" src={Notification} /> */}
     </div>
   );
 };

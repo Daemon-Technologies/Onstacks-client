@@ -48,6 +48,7 @@ export const LineChart: React.FC<Props> = ({
         enabled: false,
       },
       labels: {
+        rotateAlways: false,
         style: {
           colors: themeMode.text,
         },
