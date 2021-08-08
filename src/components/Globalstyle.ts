@@ -387,7 +387,7 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  @media only screen and (max-height: 768px) { 
+  @media only screen and (max-height: 820px) { 
     .info-card div{
       padding: 16px;
     }

@@ -130,7 +130,7 @@ export const LineChart: React.FC<Props> = ({
       series={series}
       type="line"
       width="99%"
-      height={window.innerWidth > 600 ? "180" : "320"}
+      height={window.innerHeight > 820 ? "120%" : "100%"}
     />
   );
 };
