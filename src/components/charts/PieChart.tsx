@@ -27,7 +27,7 @@ export const PieChart: React.FC<Props> = ({
         title: {
           text: "Block reward distribution to miners (last 100 blocks)",
           align: "left",
-          margin: window.innerWidth > 800 ? 10 : 30,
+          margin: 30,
           floating: false,
           style: {
             fontSize: "14px",
@@ -70,7 +70,7 @@ export const PieChart: React.FC<Props> = ({
         legend: {
           fontSize: "12px",
           fontWeight: 500,
-          offsetY: window.innerWidth > 800 ? 0 : 20,
+          offsetY: window.innerWidth > 800 ? 10 : 20,
           position: window.innerWidth > 800 ? "right" : "bottom",
           itemMargin: {
             vertical: 2,

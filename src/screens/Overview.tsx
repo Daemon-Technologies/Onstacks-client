@@ -58,7 +58,6 @@ export const Overview: React.FC<Props> = ({
       <div id="main">
         <p className="screen-title">Overview</p>
         <InfoCard overviewData={overviewData} />
-        <p className="data">*Data is based on the last 100 blocks</p>
       </div>
       <div id="content1">
         <p className="title">Total sats committed in current block</p>

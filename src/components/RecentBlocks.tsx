@@ -18,7 +18,7 @@ export const RecentBlocks: React.FC<Props> = ({ blocks }) => {
         accessor: "mined_at",
       },
       {
-        Header: "Stats spent",
+        Header: "Sats spent",
         accessor: "sats_spent",
       },
       {

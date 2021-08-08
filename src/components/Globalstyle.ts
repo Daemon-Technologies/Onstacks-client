@@ -395,11 +395,6 @@ export const GlobalStyles = createGlobalStyle`
       padding: 16px;
       max-height: 275px;
     }
-    #content2 {
-      .title {
-        margin-bottom: 0px;
-      }
-    }
     .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
       padding: 8px;
     }
@@ -411,6 +406,9 @@ export const GlobalStyles = createGlobalStyle`
     }
     .download {
       margin: 16px 0 16px 0;
+    }
+    .menu-content {
+      height: 60%;
     }
   }
 

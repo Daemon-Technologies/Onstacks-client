@@ -153,7 +153,7 @@ export const useOverview = () => {
               r.winner_address.substring(0, window.innerWidth > 600 ? 8 : 4) +
               ".." +
               r.winner_address.substring(
-                r.winner_address.length - 5,
+                r.winner_address.length - 8,
                 r.winner_address.length - 1
               ),
           };
