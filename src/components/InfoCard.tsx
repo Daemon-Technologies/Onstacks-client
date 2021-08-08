@@ -7,7 +7,7 @@ export const InfoCard: React.FC<{ overviewData: OverviewProps }> = ({
   return (
     <div className={"info-card"}>
       <div className="inner-info-card">
-        <p className="title">Total sats commited</p>
+        <p className="title">Total sats spent*</p>
         <p className="sub-title">
           {overviewData.total_sats_committed.toLocaleString()} Sats
         </p>
@@ -25,7 +25,7 @@ export const InfoCard: React.FC<{ overviewData: OverviewProps }> = ({
         <p className="sub-title">{overviewData.btc_hash_rate} EH/s</p>
       </div>
       <div className="inner-info-card">
-        <p className="title">Active Miners</p>
+        <p className="title">Active Miners*</p>
         <p className="sub-title">{overviewData.active_miners} Miners</p>
       </div>
     </div>

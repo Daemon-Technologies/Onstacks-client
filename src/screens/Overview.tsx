@@ -58,12 +58,16 @@ export const Overview: React.FC<Props> = ({
       <div id="main">
         <p className="screen-title">Overview</p>
         <InfoCard overviewData={overviewData} />
-        {/* <p className="data">Data shown above is based on the last 100 blocks</p> */}
+        <p className="data">*Data is based on the last 100 blocks</p>
       </div>
       <div id="content1">
-        <p className="title">Total sats committed</p>
+        <p className="title">Total sats committed in current block</p>
         <p className="sub-title">
-          {overviewData.total_sats_committed.toLocaleString()} Sats
+          {satsCommitted.block_number.length > 0 &&
+            satsCommitted.total_sats_committed[
+              satsCommitted.block_number.length - 1
+            ].toLocaleString()}{" "}
+          Sats
         </p>
         <div className="seprator">
           {satsCommitted.block_number.length > 0 && (
