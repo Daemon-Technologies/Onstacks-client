@@ -9,11 +9,11 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-  body: "#222127",
+  body: "#141721",
   text: "#EBEAED",
   primaryColor: "#FFA043",
   greyText: "#84818A",
   border: "#423F4B",
-  background: "#2E2C34",
+  background: "#1F222C",
   hoverColor: "rgba(255, 160, 67, 0.1)",
 };

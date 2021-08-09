@@ -18,7 +18,7 @@ export const InfoCard: React.FC<{ overviewData: OverviewProps }> = ({
         <p className="sub-title">{overviewData.btc_total} BTC</p>
       </div>
       <div className="inner-info-card">
-        <p className="title">Avg tx fees per block</p>
+        <p className="title">Avg tx fees (100 blocks)</p>
         <p className="sub-title">{overviewData.avg_tx_fees_per_block} STX</p>
       </div>
       <div className="inner-info-card">
