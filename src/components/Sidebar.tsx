@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ProSidebar, Menu, MenuItem, SidebarContent } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
@@ -18,6 +18,7 @@ import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
 import { MobileHeader } from "./MobileHeader";
 import { OverviewProps, TokenPriceProps } from "../hooks/useOverview";
 import { useHistory } from "react-router-dom";
+import useWindowDimensions from "../hooks/useWindowDimension";
 interface Props {
   theme: any;
   themeToggler: any;
@@ -34,15 +35,13 @@ export const Sidebar: React.FC<Props> = ({
   tokens,
 }) => {
   const [active, setActive] = useState(activeState);
-  const [toggle, setToggle] = useState(false);
+  const dims = useWindowDimensions();
+  const [toggle, setToggle] = useState(dims.width >= 1025);
   const { push } = useHistory();
-  useEffect(() => {
-    const { innerWidth: width } = window;
-    setToggle(width >= 1025);
-  }, []);
+
   return (
     <>
-      {window.innerWidth < 1025 && (
+      {dims.width < 1025 && (
         <MobileHeader theme={theme} toggle={toggle} setToggle={setToggle} />
       )}
       <ProSidebar
@@ -53,7 +52,7 @@ export const Sidebar: React.FC<Props> = ({
         className="side-bar"
       >
         <SidebarContent>
-          {window.innerWidth < 1025 && (
+          {dims.width < 1025 && (
             <MobileHeader theme={theme} toggle={toggle} setToggle={setToggle} />
           )}
           <Menu iconShape="square">

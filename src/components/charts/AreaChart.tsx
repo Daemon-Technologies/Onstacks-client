@@ -3,6 +3,7 @@ import ReactApexChart from "react-apexcharts";
 import { format } from "../../utils/helper";
 import { SatsCommittedProps } from "../../hooks/useOverview";
 import { darkTheme, lightTheme } from "../Themes";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 
 interface Props {
   theme: any;
@@ -11,6 +12,7 @@ interface Props {
 
 export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
+  const dims = useWindowDimensions();
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
     grid: {
       strokeDashArray: 2,
@@ -105,8 +107,8 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
         width: "100%",
         redrawOnParentResize: false,
       },
-      subtitle: { style: { color: themeMode.text } },
-      title: { style: { color: themeMode.greyText } },
+      // subtitle: { style: { color: themeMode.text } },
+      // title: { style: { color: themeMode.greyText } },
       xaxis: {
         tickAmount: 5,
         type: "numeric",
@@ -138,7 +140,7 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       series={series}
       type="area"
       width="99%"
-      height={window.innerHeight > 820 ? "90%" : "75%"}
+      height={dims.height > 820 ? "100%" : dims.height > 700 ? "75%" : "80%"}
     />
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 import { randomColorGenerator } from "../../utils/helper";
 import { lightTheme, darkTheme } from "../Themes";
 
@@ -15,7 +16,7 @@ export const PieChart: React.FC<Props> = ({
   winnerAddresses,
 }) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
-
+  const dims = useWindowDimensions();
   const colorPalette = randomColorGenerator();
   return (
     <ReactApexChart
@@ -39,29 +40,29 @@ export const PieChart: React.FC<Props> = ({
         plotOptions: {
           pie: {
             expandOnClick: true,
-            customScale: window.innerWidth > 800 ? 1 : 1.2,
+            customScale: dims.width > 800 ? 1 : 1.2,
             donut: {
-              size: window.innerWidth > 800 ? "90%" : "80%",
+              size: dims.width > 800 ? "90%" : "80%",
               labels: {
                 show: true,
                 total: {
                   showAlways: true,
                   show: true,
-                  fontSize: window.innerWidth > 800 ? "16px" : "12px",
+                  fontSize: dims.width > 800 ? "16px" : "12px",
                   fontWeight: 500,
                   color: themeMode.greyText,
                   label: "Reward block",
                 },
                 name: {
                   show: true,
-                  offsetY: window.innerWidth > 800 ? -10 : 0,
+                  offsetY: dims.width > 800 ? -10 : 0,
                 },
                 value: {
                   fontWeight: 700,
                   color: themeMode.greyText,
                   show: true,
-                  offsetY: window.innerWidth > 800 ? 0 : -1,
-                  fontSize: window.innerWidth > 800 ? "25px" : "16px",
+                  offsetY: dims.width > 800 ? 0 : -1,
+                  fontSize: dims.width > 800 ? "25px" : "16px",
                 },
               },
             },
@@ -70,8 +71,8 @@ export const PieChart: React.FC<Props> = ({
         legend: {
           fontSize: "12px",
           fontWeight: 500,
-          offsetY: window.innerWidth > 800 ? 10 : 20,
-          position: window.innerWidth > 800 ? "right" : "bottom",
+          offsetY: dims.width > 800 ? 10 : 20,
+          position: dims.width > 800 ? "right" : "bottom",
           itemMargin: {
             vertical: 2,
           },
@@ -88,7 +89,7 @@ export const PieChart: React.FC<Props> = ({
       series={totalWinners || []}
       type="donut"
       width="90%"
-      height={window.innerWidth > 800 ? "220" : "320"}
+      height={dims.width > 800 ? "220" : "320"}
     />
   );
 };

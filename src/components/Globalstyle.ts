@@ -83,7 +83,8 @@ export const GlobalStyles = createGlobalStyle`
     display: flex !important;
     height: 65%;
     flex-direction: column;
-    justify-content: space-between;
+    -webkit-justify-content: space-between !important;
+    justify-content: space-between !important;
     span {
       color: ${({ theme }: any) => theme.primaryColor};
     }
@@ -253,8 +254,7 @@ export const GlobalStyles = createGlobalStyle`
     .title {
       font-size: 14px;
       font-weight: 500;
-      line-height: 20px;
-      margin-bottom: 12px;
+      /* margin-bottom: 12px; */
       text-align: left;
       color: ${({ theme }: any) => theme.greyText} !important;
     }
@@ -341,7 +341,7 @@ export const GlobalStyles = createGlobalStyle`
     align-items: flex-start;
     justify-content: space-between;
     div {
-      padding: 31px 68px 31px 16px;
+      padding: 16px;
       .title {
         font-weight: 500;
         font-size: 14px;

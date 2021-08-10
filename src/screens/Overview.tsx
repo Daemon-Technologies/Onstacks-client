@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Header } from "../components/Header";
 import { InfoCard } from "../components/InfoCard";
 import { AreaChart } from "../components/charts/AreaChart";
@@ -12,6 +12,7 @@ import {
   TokenPriceProps,
 } from "../hooks/useOverview";
 import { Sidebar } from "../components/Sidebar";
+import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
   theme: any;
@@ -38,11 +39,7 @@ export const Overview: React.FC<Props> = ({
   winnerAddresses,
   totalWinners,
 }) => {
-  const [toggle, setToggle] = useState(false);
-  useEffect(() => {
-    const { innerWidth: width } = window;
-    setToggle(width >= 1025);
-  }, [toggle]);
+  const dims = useWindowDimensions();
 
   useEffect(() => {}, [totalWinners]);
   return (
@@ -54,20 +51,24 @@ export const Overview: React.FC<Props> = ({
         theme={theme}
         themeToggler={themeToggler}
       />
-      {toggle && <Header theme={theme} />}
+      {dims.width >= 1025 && <Header theme={theme} />}
       <div id="main">
         <p className="screen-title">Overview</p>
         <InfoCard overviewData={overviewData} />
       </div>
       <div id="content1">
         <p className="title">Total sats committed in current block</p>
-        <p className="sub-title">
-          {satsCommitted.block_number.length > 0 &&
-            satsCommitted.total_sats_committed[
-              satsCommitted.block_number.length - 1
-            ].toLocaleString()}{" "}
-          Sats
-        </p>
+        {dims.height > 700 && (
+          <>
+            <p className="sub-title">
+              {satsCommitted.block_number.length > 0 &&
+                satsCommitted.total_sats_committed[
+                  satsCommitted.block_number.length - 1
+                ].toLocaleString()}{" "}
+              Sats
+            </p>
+          </>
+        )}
         <div className="seprator">
           {satsCommitted.block_number.length > 0 && (
             <AreaChart satsCommitted={satsCommitted} theme={theme} />

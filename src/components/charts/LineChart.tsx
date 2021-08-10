@@ -1,6 +1,7 @@
 import { ApexOptions } from "apexcharts";
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 import { format, randomColorGenerator } from "../../utils/helper";
 import { lightTheme, darkTheme } from "../Themes";
 
@@ -16,7 +17,7 @@ export const LineChart: React.FC<Props> = ({
   areaSeries,
 }) => {
   const colorPalette = randomColorGenerator();
-
+  const dims = useWindowDimensions();
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
@@ -102,13 +103,13 @@ export const LineChart: React.FC<Props> = ({
       },
       legend: {
         labels: { colors: themeMode.greyText },
-        show: window.innerWidth > 800 ? true : false,
+        show: dims.width > 800 && dims.height > 700 ? true : false,
       },
       yaxis: {
         show: true,
         tickAmount: 3,
         labels: {
-          style: { colors: themeMode.text },
+          style: { colors: themeMode.text, marginBottom: 4 },
           formatter: (val) => format(val),
         },
       },
@@ -123,14 +124,22 @@ export const LineChart: React.FC<Props> = ({
       };
     });
     setSeries(s);
-  }, [theme, themeMode.greyText, themeMode.text, areaSeries, areaBlocks]);
+  }, [theme, themeMode.greyText, themeMode.text, areaSeries, areaBlocks, dims]);
   return (
     <ReactApexChart
       options={options}
       series={series}
       type="line"
       width="99%"
-      height={window.innerHeight > 820 ? "120%" : "100%"}
+      height={
+        dims.height > 820
+          ? "120%"
+          : dims.height > 700
+          ? "100%"
+          : dims.height > 600
+          ? "80%"
+          : "60%"
+      }
     />
   );
 };
