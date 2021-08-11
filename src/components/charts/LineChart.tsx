@@ -112,7 +112,6 @@ export const LineChart: React.FC<Props> = ({
         },
         legend: {
           labels: { colors: themeMode.greyText },
-          show: dims.width > 800 && dims.height > 700 ? true : false,
         },
         yaxis: {
           show: true,
@@ -124,15 +123,18 @@ export const LineChart: React.FC<Props> = ({
         },
       }));
     }
-  }, [
-    areaBlocks,
-    areaSeries,
-    dims.height,
-    dims.width,
-    theme,
-    themeMode.greyText,
-    themeMode.text,
-  ]);
+  }, [areaBlocks, areaSeries, theme, themeMode.greyText, themeMode.text]);
+
+  useEffect(() => {
+    if (dims.width > 500) {
+      setOptions((s) => ({
+        ...s,
+        legend: {
+          show: dims.width > 800 && dims.height > 700 ? true : false,
+        },
+      }));
+    }
+  }, [dims.width, dims.height]);
   return (
     <>
       {areaSeries.length > 0 && areaBlocks.length === 50 && (
@@ -142,7 +144,7 @@ export const LineChart: React.FC<Props> = ({
           type="line"
           width="99%"
           height={
-            dims.height > 820
+            dims.width > 500 && dims.height > 820
               ? "120%"
               : dims.height > 700
               ? "100%"

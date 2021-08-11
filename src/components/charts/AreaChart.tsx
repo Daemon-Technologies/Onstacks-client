@@ -134,13 +134,20 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
     satsCommitted.total_sats_committed,
     satsCommitted.block_number,
   ]);
+
   return (
     <ReactApexChart
       options={options}
       series={series}
       type="area"
       width="99%"
-      height={dims.height > 820 ? "100%" : dims.height > 700 ? "75%" : "80%"}
+      height={
+        dims.width > 500 && dims.height > 820
+          ? "100%"
+          : dims.height > 700
+          ? "75%"
+          : "80%"
+      }
     />
   );
 };
