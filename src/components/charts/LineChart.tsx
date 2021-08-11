@@ -22,10 +22,7 @@ export const LineChart: React.FC<Props> = ({
 
   const [options, setOptions] = useState<ApexCharts.ApexOptions>({
     chart: {
-      animations: {
-        speed: 3,
-      },
-      redrawOnParentResize: false,
+      redrawOnParentResize: true,
       toolbar: {
         show: false,
       },
@@ -84,62 +81,77 @@ export const LineChart: React.FC<Props> = ({
   });
   const [series, setSeries] = useState<ApexAxisChartSeries>(areaSeries);
   useEffect(() => {
-    setOptions((data) => ({
-      ...data,
-      tooltip: {
-        theme,
-      },
-      chart: {
-        width: "100%",
-      },
-      subtitle: { style: { color: themeMode.greyText } },
-      title: { style: { color: themeMode.greyText } },
-      xaxis: {
-        labels: { style: { colors: themeMode.text } },
-        categories: areaBlocks,
-        tickAmount: 5,
-        type: "numeric",
-        range: 49,
-      },
-      legend: {
-        labels: { colors: themeMode.greyText },
-        show: dims.width > 800 && dims.height > 700 ? true : false,
-      },
-      yaxis: {
-        show: true,
-        tickAmount: 3,
-        labels: {
-          style: { colors: themeMode.text, marginBottom: 4 },
-          formatter: (val) => format(val),
+    if (areaSeries.length > 0 && areaBlocks.length > 0) {
+      setSeries(
+        areaSeries.map((s: any) => {
+          return {
+            ...s,
+            name:
+              s.name.substring(0, 4) +
+              ".." +
+              s.name.substring(s.name.length - 5, s.name.length - 1),
+          };
+        })
+      );
+      setOptions((data) => ({
+        ...data,
+        tooltip: {
+          theme,
         },
-      },
-    }));
-    let s = areaSeries.map((s: any) => {
-      return {
-        ...s,
-        name:
-          s.name.substring(0, 4) +
-          ".." +
-          s.name.substring(s.name.length - 5, s.name.length - 1),
-      };
-    });
-    setSeries(s);
-  }, [theme, themeMode.greyText, themeMode.text, areaSeries, areaBlocks, dims]);
+        chart: {
+          width: "100%",
+        },
+        subtitle: { style: { color: themeMode.greyText } },
+        title: { style: { color: themeMode.greyText } },
+        xaxis: {
+          labels: { style: { colors: themeMode.text } },
+          categories: areaBlocks,
+          tickAmount: 5,
+          type: "numeric",
+          range: 49,
+        },
+        legend: {
+          labels: { colors: themeMode.greyText },
+          show: dims.width > 800 && dims.height > 700 ? true : false,
+        },
+        yaxis: {
+          show: true,
+          tickAmount: 3,
+          labels: {
+            style: { colors: themeMode.text },
+            formatter: (val) => format(val),
+          },
+        },
+      }));
+    }
+  }, [
+    areaBlocks,
+    areaSeries,
+    dims.height,
+    dims.width,
+    theme,
+    themeMode.greyText,
+    themeMode.text,
+  ]);
   return (
-    <ReactApexChart
-      options={options}
-      series={series}
-      type="line"
-      width="99%"
-      height={
-        dims.height > 820
-          ? "120%"
-          : dims.height > 700
-          ? "100%"
-          : dims.height > 600
-          ? "80%"
-          : "60%"
-      }
-    />
+    <>
+      {areaSeries.length > 0 && areaBlocks.length === 50 && (
+        <ReactApexChart
+          options={options}
+          series={series}
+          type="line"
+          width="99%"
+          height={
+            dims.height > 820
+              ? "120%"
+              : dims.height > 700
+              ? "100%"
+              : dims.height > 600
+              ? "80%"
+              : "60%"
+          }
+        />
+      )}
+    </>
   );
 };
