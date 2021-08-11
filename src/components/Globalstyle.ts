@@ -81,7 +81,8 @@ export const GlobalStyles = createGlobalStyle`
   .menu-content {
     padding: 0 16px;
     display: flex !important;
-    height: 65%;
+    max-height: 60%;
+    height: 100%;
     flex-direction: column;
     -webkit-justify-content: space-between !important;
     justify-content: space-between !important;
@@ -387,9 +388,34 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  @media only screen and (max-height: 820px) { 
+  @media only screen and (max-width: 1480px) { 
+    .pro-item-content {
+      font-size: 14px;
+    }
+    .menu-content {
+      padding: 0px;
+      max-height: 55%;
+    }
+  }
+  @media only screen and (max-height: 828px) { 
+    @media only screen and (max-height: 700px) { 
+      .info-card div{
+        padding: 8px !important;
+      }
+      #nav {
+        padding: 0 14px;
+        height: auto;
+      }
+    }
+    .pro-item-content {
+      font-size: 14px;
+    }
     .info-card div{
       padding: 16px;
+    }
+    .menu-content {
+      padding: 0px;
+      max-height: 55%;
     }
     #content1, #content2, #content3, #content4 {
       padding: 16px;
@@ -406,9 +432,6 @@ export const GlobalStyles = createGlobalStyle`
     }
     .download {
       margin: 16px 0 16px 0;
-    }
-    .menu-content {
-      height: 60%;
     }
   }
 
@@ -525,5 +548,7 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }: any) => theme.body} !important;
     top: 0;
   }
+
   }
+  
   `;

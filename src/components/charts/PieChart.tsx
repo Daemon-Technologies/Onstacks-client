@@ -88,7 +88,6 @@ export const PieChart: React.FC<Props> = ({
     colors: colorPalette,
   });
   useEffect(() => {
-    console.log(totalWinners, winnerAddresses);
     if (
       totalWinners.length > 0 &&
       winnerAddresses.length > 0 &&
