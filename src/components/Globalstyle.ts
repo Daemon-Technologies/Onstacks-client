@@ -388,9 +388,15 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  @media only screen and (max-width: 1480px) { 
+  @media only screen and (max-width: 1580px) { 
     .pro-item-content {
       font-size: 14px;
+    }
+    .logo {
+      width: 150px
+    }
+    .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
+      padding: 8px;
     }
     .menu-content {
       padding: 0px;
