@@ -18,7 +18,6 @@ export const LineChart: React.FC<Props> = ({
   const colorPalette = randomColorGenerator();
   const dims = useWindowDimensions();
   const themeMode = theme === "light" ? lightTheme : darkTheme;
-  let chartRef: any = useRef(null);
 
   const [data, setData] = useState<any[][]>([]);
   const [options, setOptions] = useState({
