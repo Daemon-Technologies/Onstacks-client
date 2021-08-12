@@ -77,12 +77,6 @@ export const LineChart: React.FC<Props> = ({
         },
         vAxis: { textStyle: { color: themeMode.text } },
       }));
-      setTimeout(() => {
-        console.log(chartRef);
-        // if (chartRef.current) {
-        //   chartRef.current.draw();
-        // }
-      }, 1000);
     }
   }, [dims.height, dims.width, theme, themeMode]);
 
