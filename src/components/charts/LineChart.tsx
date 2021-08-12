@@ -116,9 +116,6 @@ export const LineChart: React.FC<Props> = ({
           loader={<div>Loading Chart</div>}
           options={options}
           data={data}
-          getChartWrapper={(chartWrapper) => {
-            chartRef = chartWrapper;
-          }}
           rootProps={{ "data-testid": "2" }}
         />
       )}
