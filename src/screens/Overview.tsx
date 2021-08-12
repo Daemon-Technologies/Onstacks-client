@@ -88,6 +88,9 @@ export const Overview: React.FC<Props> = ({
         </div>
       </div>
       <div id="content3">
+        <p className="title">
+          Block reward distribution to miners (last 100 blocks)
+        </p>
         {totalWinners.length > 0 &&
           winnerAddresses.length > 0 &&
           totalWinners.length === winnerAddresses.length && (

@@ -282,8 +282,6 @@ export const GlobalStyles = createGlobalStyle`
     .title {
       font-size: 14px;
       font-weight: 500;
-      line-height: 20px;
-      margin-bottom: 12px;
       text-align: left;
       color: ${({ theme }: any) => theme.greyText} !important;
     }
@@ -299,6 +297,13 @@ export const GlobalStyles = createGlobalStyle`
         ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
         : "0px"};
     max-height: 300px;
+    .title {
+      font-size: 14px;
+      font-weight: 500;
+      /* margin-bottom: 12px; */
+      text-align: left;
+      color: ${({ theme }: any) => theme.greyText} !important;
+    }
   }
 
   td {

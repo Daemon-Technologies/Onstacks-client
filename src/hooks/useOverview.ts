@@ -100,10 +100,10 @@ export const useOverview = () => {
     });
     axios.get(getTopBurnFeePerBlock).then((data: any) => {
       let currentData: TotalBurnedMinerFees[] = data;
-      let series: ApexAxisChartSeries = [];
+      let series: { name: string; data: any[] }[] = [];
       let blocks: any[] = [];
       currentData.forEach((block: any) => {
-        blocks.push(+block.block_number);
+        blocks.push(block.block_number);
         block.miner_list.forEach((element: any) => {
           let index = series.findIndex(
             (e) => e.name === element.leader_key_address

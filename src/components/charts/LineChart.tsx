@@ -1,8 +1,7 @@
-import { ApexOptions } from "apexcharts";
-import React, { useEffect, useState } from "react";
-import ReactApexChart from "react-apexcharts";
+import React, { useEffect, useRef, useState } from "react";
+import Chart from "react-google-charts";
 import useWindowDimensions from "../../hooks/useWindowDimension";
-import { format, randomColorGenerator } from "../../utils/helper";
+import { randomColorGenerator } from "../../utils/helper";
 import { lightTheme, darkTheme } from "../Themes";
 
 interface Props {
@@ -19,139 +18,115 @@ export const LineChart: React.FC<Props> = ({
   const colorPalette = randomColorGenerator();
   const dims = useWindowDimensions();
   const themeMode = theme === "light" ? lightTheme : darkTheme;
+  let chartRef: any = useRef(null);
 
-  const [options, setOptions] = useState<ApexCharts.ApexOptions>({
-    chart: {
-      redrawOnParentResize: true,
-      toolbar: {
-        show: false,
-      },
-    },
-    grid: {
-      strokeDashArray: 2,
-      xaxis: {
-        lines: {
-          show: true,
-        },
-      },
-      yaxis: {
-        lines: {
-          show: false,
-        },
-      },
-    },
-    xaxis: {
-      categories: areaBlocks,
-      tooltip: {
-        enabled: false,
-      },
-      labels: {
-        rotate: 0,
-        rotateAlways: false,
-        hideOverlappingLabels: true,
-        showDuplicates: false,
-        style: {
-          colors: themeMode.text,
-        },
-      },
-    },
-    stroke: {
-      curve: "smooth",
-      width: 2,
-    },
+  const [data, setData] = useState<any[][]>([]);
+  const [options, setOptions] = useState({
+    backgroundColor: "transparent",
+    isStacked: "percent",
     legend: {
-      show: false,
       position: "top",
-      containerMargin: { left: 12 },
-      fontWeight: 500,
-      horizontalAlign: "left",
-      offsetY: -5,
-      fontSize: "14px",
-      labels: {
-        colors: themeMode.greyText,
-      },
-    },
-    tooltip: {
-      theme,
-    },
-    yaxis: {
-      show: false,
     },
     colors: colorPalette,
+    hAxis: {
+      textStyle: { color: themeMode.text },
+      viewWindow: {
+        min: 0,
+        max: 10,
+      },
+    },
+    vAxis: { textStyle: { color: themeMode.text } },
   });
-  const [series, setSeries] = useState<ApexAxisChartSeries>(areaSeries);
-  useEffect(() => {
-    if (areaSeries.length > 0 && areaBlocks.length > 0) {
-      setSeries(
-        areaSeries.map((s: any) => {
-          return {
-            ...s,
-            name:
-              s.name.substring(0, 4) +
-              ".." +
-              s.name.substring(s.name.length - 5, s.name.length - 1),
-          };
-        })
-      );
-      setOptions((data) => ({
-        ...data,
-        tooltip: {
-          theme,
-        },
-        chart: {
-          width: "100%",
-        },
-        subtitle: { style: { color: themeMode.greyText } },
-        title: { style: { color: themeMode.greyText } },
-        xaxis: {
-          labels: { style: { colors: themeMode.text } },
-          categories: areaBlocks,
-          tickAmount: 5,
-          type: "numeric",
-          range: 49,
-        },
-        legend: {
-          labels: { colors: themeMode.greyText },
-        },
-        yaxis: {
-          show: true,
-          tickAmount: 3,
-          labels: {
-            style: { colors: themeMode.text },
-            formatter: (val) => format(val),
-          },
-        },
-      }));
-    }
-  }, [areaBlocks, areaSeries, theme, themeMode.greyText, themeMode.text]);
 
   useEffect(() => {
-    if (dims.width > 500) {
-      setOptions((s) => ({
-        ...s,
+    const values: any = [
+      areaSeries.map((series: any, index) => {
+        return series.name;
+      }),
+    ];
+    values[0].unshift("Miners");
+    areaBlocks.forEach((e, index) => {
+      values[index + 1] = [e];
+      areaSeries.forEach((x: any, i) => {
+        values[index + 1][i + 1] = parseFloat(x.data[index]) || null;
+      });
+    });
+    setData(values);
+  }, [areaBlocks, areaBlocks.length, areaSeries, areaSeries.length]);
+
+  useEffect(() => {
+    if (dims.height > 800) {
+      setOptions((o) => ({
+        ...o,
         legend: {
-          show: dims.width > 800 && dims.height > 700 ? true : false,
+          maxLines: 2,
+          position: dims.width > 500 && dims.height < 800 ? "none" : "top",
+          textStyle: { color: themeMode.text },
+          scrollArrows: {
+            inactiveColor: themeMode.text,
+            activeColor: themeMode.text,
+            pagingTextStyle: { color: theme.text },
+          },
         },
+        hAxis: {
+          textStyle: { color: themeMode.text },
+          viewWindow: {
+            min: 0,
+            max: 50,
+          },
+        },
+        vAxis: { textStyle: { color: themeMode.text } },
+      }));
+      setTimeout(() => {
+        console.log(chartRef);
+        // if (chartRef.current) {
+        //   chartRef.current.draw();
+        // }
+      }, 1000);
+    }
+  }, [dims.height, dims.width, theme, themeMode]);
+
+  useEffect(() => {
+    if (dims.width > 500 && dims.height < 800) {
+      setOptions((o) => ({
+        ...o,
+        chartArea: { top: 10, width: "80%", height: 100 },
+        legend: {
+          maxLines: 2,
+          position: dims.width > 500 && dims.height < 800 ? "none" : "top",
+          textStyle: { color: themeMode.text },
+          scrollArrows: {
+            inactiveColor: themeMode.text,
+            activeColor: themeMode.text,
+            pagingTextStyle: { color: theme.text },
+          },
+        },
+        hAxis: {
+          textStyle: { color: themeMode.text },
+          viewWindow: {
+            min: 0,
+            max: 10,
+          },
+        },
+        vAxis: { textStyle: { color: themeMode.text } },
       }));
     }
-  }, [dims.width, dims.height]);
+  }, [dims, theme.text, themeMode.text]);
+
   return (
     <>
       {areaSeries.length > 0 && areaBlocks.length === 50 && (
-        <ReactApexChart
+        <Chart
+          width={"100%"}
+          height={"100%"}
+          chartType="LineChart"
+          loader={<div>Loading Chart</div>}
           options={options}
-          series={series}
-          type="line"
-          width="99%"
-          height={
-            dims.width > 500 && dims.height > 820
-              ? "120%"
-              : dims.height > 700
-              ? "100%"
-              : dims.height > 600
-              ? "80%"
-              : "60%"
-          }
+          data={data}
+          getChartWrapper={(chartWrapper) => {
+            chartRef = chartWrapper;
+          }}
+          rootProps={{ "data-testid": "2" }}
         />
       )}
     </>
