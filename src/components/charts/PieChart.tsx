@@ -20,7 +20,8 @@ export const PieChart: React.FC<Props> = ({
 }) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
   const colorPalette = randomColorGenerator();
-
+  const [value, setValue] = useState(100);
+  const [valueText, setValueText] = useState("Reward Block");
   const [data, setData] = useState<any[][]>([
     ["Total winners", "Winner Addresses"],
   ]);
@@ -29,7 +30,8 @@ export const PieChart: React.FC<Props> = ({
     colors: colorPalette,
     legend: { position: "right", textStyle: { color: themeMode.text } },
     backgroundColor: "transparent",
-    tooltip: { trigger: "selection" },
+    // tooltip: { trigger: "selection" },
+    pieSliceText: "none",
     enableInteractivity: true,
     pieHole: 0.9,
   });
@@ -61,9 +63,16 @@ export const PieChart: React.FC<Props> = ({
     //   chartRef.current.draw();
     // }, 1000);
   }, [theme, themeMode, dims]);
-
   return (
-    <div style={{ width: "100%", height: "100%", position: "relative" }}>
+    <div
+      id="pie"
+      style={{
+        width: "100%",
+        height: "100%",
+        position: "relative",
+        strokeWidth: 0,
+      }}
+    >
       {totalWinners.length > 0 &&
         winnerAddresses.length > 0 &&
         totalWinners.length === winnerAddresses.length && (
@@ -75,15 +84,34 @@ export const PieChart: React.FC<Props> = ({
             loader={<div>Loading Chart</div>}
             data={data}
             options={options}
-            rootProps={{ "data-testid": "3" }}
+            chartEvents={[
+              {
+                eventName: "select",
+                callback: ({ chartWrapper }) => {
+                  const chart = chartWrapper.getChart();
+                  const selection = chart.getSelection();
+                  setValue(
+                    totalWinners[selection[0].row] === value
+                      ? 100
+                      : totalWinners[selection[0].row]
+                  );
+                  setValueText(
+                    winnerAddresses[selection[0].row] === valueText
+                      ? "Reward Block"
+                      : winnerAddresses[selection[0].row]
+                  );
+                  chartWrapper.draw();
+                },
+              },
+            ]}
             getChartWrapper={(chartWrapper) => {
               chartWrapper.draw();
             }}
           />
         )}
       <div id="labelOverlay">
-        <p className="used-size">100</p>
-        <p className="total-size"> Reward Block</p>
+        <p className="used-size">{value}</p>
+        <p className="total-size">{valueText}</p>
       </div>
     </div>
   );

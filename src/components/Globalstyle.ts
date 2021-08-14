@@ -158,6 +158,16 @@ export const GlobalStyles = createGlobalStyle`
     height: 18px;
   }
 
+  #pie {
+    path {
+      stroke: ${({ theme }: any) => theme.background} !important;;
+  }
+  text {
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    margin-bottom: 8px;
+  }
+  }
   .download {
     background: ${({ theme }: any) => theme.background} !important;
     display: flex;
@@ -439,6 +449,16 @@ export const GlobalStyles = createGlobalStyle`
     }
     #labelOverlay {
       left: 29%;
+    }
+  }
+  @media only screen and (max-width: 1200px) {
+    #labelOverlay {
+      left: 28%;
+    }
+  }
+  @media only screen and (max-width: 1100px) {
+    #labelOverlay {
+      left: 26%;
     }
   }
   @media only screen and (max-height: 828px) { 
