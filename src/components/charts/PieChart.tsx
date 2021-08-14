@@ -31,7 +31,7 @@ export const PieChart: React.FC<Props> = ({
     backgroundColor: "transparent",
     tooltip: { trigger: "selection" },
     enableInteractivity: true,
-    pieHole: 1,
+    pieHole: 0.9,
   });
   const chartRef: any = useRef(null);
 
@@ -63,7 +63,7 @@ export const PieChart: React.FC<Props> = ({
   }, [theme, themeMode, dims]);
 
   return (
-    <>
+    <div style={{ width: "100%", height: "100%", position: "relative" }}>
       {totalWinners.length > 0 &&
         winnerAddresses.length > 0 &&
         totalWinners.length === winnerAddresses.length && (
@@ -81,6 +81,10 @@ export const PieChart: React.FC<Props> = ({
             }}
           />
         )}
-    </>
+      <div id="labelOverlay">
+        <p className="used-size">100</p>
+        <p className="total-size"> Reward Block</p>
+      </div>
+    </div>
   );
 };

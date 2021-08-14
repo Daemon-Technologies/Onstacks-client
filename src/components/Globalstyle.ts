@@ -22,6 +22,36 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.50s linear;
     height: 100vh;
   }
+
+  #labelOverlay {
+    width: 90px;
+    height: 45px;
+    position: absolute;
+    top: 42%;
+    left: 30%;
+    text-align: center;
+    cursor: default;
+  }
+
+  #labelOverlay p {
+    line-height: 0.3;
+    padding:0;
+    margin: 8px;
+  }
+
+  #labelOverlay p.used-size {
+    line-height: 0.5;
+    font-size: 16px;
+    font-weight: 600;
+    color: ${({ theme }: any) => theme.text};
+  }
+
+  #labelOverlay p.total-size {
+    line-height: 0.5;
+    font-size: 12px;
+    margin-top: 14px;
+    color: ${({ theme }: any) => theme.text};
+  }
   //SIDEBAR
   .pro-sidebar {
     min-width: 100% !important;
@@ -407,6 +437,9 @@ export const GlobalStyles = createGlobalStyle`
       padding: 0px;
       max-height: 55%;
     }
+    #labelOverlay {
+      left: 29%;
+    }
   }
   @media only screen and (max-height: 828px) { 
     @media only screen and (max-height: 700px) { 
@@ -458,12 +491,15 @@ export const GlobalStyles = createGlobalStyle`
     left: 100%;
     height: 100%;
   }
+  #labelOverlay {
+      left: 30.5%;
+  }
   .toggled {
     left: 0 !important;
   }
   #content4, #content3, #content2, #content1 {
     max-height: 600px;
-    height: 100%;
+    min-height: 275px;
   }
   .info-card div .sub-title {
     font-size: 16px;
@@ -505,6 +541,11 @@ export const GlobalStyles = createGlobalStyle`
     width: 100% !important;
     height: 100% !important;
   }
+  @media only screen and (max-width: 768px) {
+    #labelOverlay {
+      left: 43%;
+    }
+  }
   @media only screen and (max-width: 550px) {
   :root {
     overflow-y: auto;
@@ -526,6 +567,9 @@ export const GlobalStyles = createGlobalStyle`
     }
     #nav {
     padding: 0;
+  }
+  #labelOverlay {
+      left: 37%;
   }
   #content1, #content2, #content3, #content4, .info-card {
     width: 98%;
@@ -559,7 +603,6 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }: any) => theme.body} !important;
     top: 0;
   }
-
   }
   
   `;

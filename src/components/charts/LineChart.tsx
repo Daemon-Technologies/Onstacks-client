@@ -22,25 +22,26 @@ export const LineChart: React.FC<Props> = ({
   const [data, setData] = useState<any[][]>([]);
   const [options, setOptions] = useState({
     backgroundColor: "transparent",
-    isStacked: "percent",
     legend: {
       position: "top",
     },
     colors: colorPalette,
-    hAxis: {
+    interpolateNulls: true,
+    vAxis: {
       textStyle: { color: themeMode.text },
-      viewWindow: {
-        min: 0,
-        max: 10,
-      },
+      interpolateNulls: true,
+      gridlines: { color: "none", minSpacing: 20 },
     },
-    vAxis: { textStyle: { color: themeMode.text } },
   });
 
   useEffect(() => {
     const values: any = [
       areaSeries.map((series: any, index) => {
-        return series.name;
+        return (
+          series.name.substring(0, 4) +
+          ".." +
+          series.name.substring(series.name.length - 4, series.name.length - 1)
+        );
       }),
     ];
     values[0].unshift("Miners");
@@ -64,17 +65,22 @@ export const LineChart: React.FC<Props> = ({
           scrollArrows: {
             inactiveColor: themeMode.text,
             activeColor: themeMode.text,
-            pagingTextStyle: { color: theme.text },
+            pagingTextStyle: { color: themeMode.text },
           },
         },
         hAxis: {
-          textStyle: { color: themeMode.text },
-          viewWindow: {
-            min: 0,
-            max: 50,
+          textStyle: { color: themeMode.greyText },
+          minValue: 0,
+          gridlines: {
+            color: "#f3f3f3",
+            count: 5,
           },
         },
-        vAxis: { textStyle: { color: themeMode.text } },
+        vAxis: {
+          textStyle: { color: themeMode.greyText },
+          interpolateNulls: true,
+          gridlines: { color: "none", minSpacing: 20 },
+        },
       }));
     }
   }, [dims.height, dims.width, theme, themeMode]);
@@ -91,17 +97,22 @@ export const LineChart: React.FC<Props> = ({
           scrollArrows: {
             inactiveColor: themeMode.text,
             activeColor: themeMode.text,
-            pagingTextStyle: { color: theme.text },
+            pagingTextStyle: { color: themeMode.text },
           },
         },
         hAxis: {
-          textStyle: { color: themeMode.text },
-          viewWindow: {
-            min: 0,
-            max: 10,
+          textStyle: { color: themeMode.greyText },
+          minValue: 0,
+          gridlines: {
+            color: "#f3f3f3",
+            count: 5,
           },
         },
-        vAxis: { textStyle: { color: themeMode.text } },
+        vAxis: {
+          textStyle: { color: themeMode.greyText },
+          interpolateNulls: true,
+          gridlines: { color: "none", minSpacing: 20 },
+        },
       }));
     }
   }, [dims, theme.text, themeMode.text]);
