@@ -115,7 +115,7 @@ export const LineChart: React.FC<Props> = ({
         },
       }));
     }
-  }, [dims, theme.text, themeMode.text]);
+  }, [dims, theme.text, themeMode.text, themeMode.greyText]);
 
   return (
     <>
