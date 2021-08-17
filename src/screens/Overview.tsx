@@ -10,7 +10,6 @@ import {
   SatsCommittedProps,
   TokenPriceProps,
 } from "../hooks/useOverview";
-import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
   theme: any;
@@ -37,18 +36,30 @@ export const Overview: React.FC<Props> = ({
   winnerAddresses,
   totalWinners,
 }) => {
-  const dims = useWindowDimensions();
-
   useEffect(() => {}, [totalWinners]);
   return (
     <div className="container">
       <div id="main">
         <p className="screen-title">Overview</p>
         <InfoCard overviewData={overviewData} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <p>*Based on the last 100 blocks.</p>
+          <p className="data">
+            <span>#{overviewData.stx_block_height}</span> STX Blockheight
+            <span>#{overviewData.btc_block_height}</span> BTC Blockheight
+          </p>
+        </div>
       </div>
       <div id="content1">
         <p className="title">Total sats committed in current block</p>
-        {dims.height > 800 && (
+        {/* {dims.height > 800 && (
           <>
             <p className="sub-title">
               {satsCommitted.block_number.length > 0 &&
@@ -58,7 +69,7 @@ export const Overview: React.FC<Props> = ({
               Sats
             </p>
           </>
-        )}
+        )} */}
         <div className="seprator">
           {satsCommitted.block_number.length > 0 && (
             <AreaChart satsCommitted={satsCommitted} theme={theme} />

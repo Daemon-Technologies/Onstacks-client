@@ -22,12 +22,16 @@ export const GlobalStyles = createGlobalStyle`
     height: 100vh;
   }
 
+  text {
+    fill: ${({ theme }: any) => theme.text};
+  }
+
   #labelOverlay {
     width: 90px;
     height: 45px;
     position: absolute;
     top: 42%;
-    left: 30%;
+    left: 31%;
     text-align: center;
     cursor: default;
   }
@@ -58,7 +62,10 @@ export const GlobalStyles = createGlobalStyle`
     /* background: linear-gradient(#6616fc, #f394d3); */
     background: ${({ theme }: any) => theme.background} !important;
     justify-content: space-between;
+    position: fixed;
+    width: 100%;
     align-items: center;
+    height: 60px;
     padding: 14px 32px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     /* height: 80px; */
@@ -83,7 +90,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }: any) => theme.text} !important;;
     display: grid;
     grid-template-columns: repeat(4, auto);
-    grid-gap: 50px;
+    grid-gap: 24px;
     font-size: 14px;
     font-weight: 600;
     list-style-type: none;
@@ -235,6 +242,12 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.50s linear;
   }
 
+  .google-visualization-tooltip {
+    path {
+      fill: ${({ theme }: any) => theme.body} !important;
+    }
+  }
+
   .logo {
     width: 200px;
     height: 36px;
@@ -270,6 +283,7 @@ export const GlobalStyles = createGlobalStyle`
     padding-bottom: 0px;
   }
 
+
   .menu-content {
     padding: 0 16px;
     display: flex !important;
@@ -278,9 +292,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: column;
     -webkit-justify-content: space-between !important;
     justify-content: space-between !important;
-    span {
-      color: ${({ theme }: any) => theme.primaryColor};
-    }
+
     p {
       font-size: 14px;
       font-weight: 600;
@@ -366,10 +378,10 @@ export const GlobalStyles = createGlobalStyle`
   }
   .container {
     display: grid;
-    height: 100vh;
     grid-template-columns: repeat( 12, 1fr );
-    grid-template-rows: repeat( 10, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
     grid-template-areas:
+        "main main main main main main main main main main main main"
         "main main main main main main main main main main main main"
         "main main main main main main main main main main main main"
         "content1 content1 content1 content1 content1 content1 content2 content2 content2 content2 content2 content2"
@@ -381,7 +393,7 @@ export const GlobalStyles = createGlobalStyle`
         "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
     grid-gap: 16px;
     width: 100%;
-    padding: 32px 140px 32px 140px;
+    padding: 92px 32px 32px 32px;
   }
 
   .not-found {
@@ -417,9 +429,13 @@ export const GlobalStyles = createGlobalStyle`
   #main {
     grid-area: main;
     .data {
-      font-size: 13px;
+      font-size: 14px;
+      margin: 14px 0;
       color: ${({ theme }: any) => theme.greyText} !important;
       text-align: right;
+      span {
+        color: ${({ theme }: any) => theme.primaryColor};
+      }
     }
   }
 
@@ -501,7 +517,6 @@ export const GlobalStyles = createGlobalStyle`
       theme.background === "#FFFFFF"
         ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
         : "0px"};
-    max-height: 300px;
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -524,7 +539,6 @@ export const GlobalStyles = createGlobalStyle`
       theme.background === "#FFFFFF"
         ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
         : "0px"};
-    max-height: 300px;
     p {
       font-size: 14px;
       color: ${({ theme }: any) => theme.greyText} !important;
@@ -537,7 +551,7 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 28px;
     font-weight: 600;
     line-height: 36px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .info-card {
@@ -545,6 +559,7 @@ export const GlobalStyles = createGlobalStyle`
       theme.background === "#FFFFFF"
         ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
         : "0px"};
+    height: 110px;
     border-radius: 4px;
     display: flex;
     background: ${({ theme }: any) => theme.background} !important;
@@ -552,7 +567,7 @@ export const GlobalStyles = createGlobalStyle`
     align-items: flex-start;
     justify-content: space-between;
     div {
-      padding: 16px;
+      padding: 31px 16px;
       .title {
         font-weight: 500;
         font-size: 14px;
@@ -613,12 +628,12 @@ export const GlobalStyles = createGlobalStyle`
       max-height: 55%;
     }
     #labelOverlay {
-      left: 29%;
+      left: 30%;
     }
   }
   @media only screen and (max-width: 1200px) {
     #labelOverlay {
-      left: 28%;
+      left: 30%;
     }
   }
   @media only screen and (max-width: 1100px) {
@@ -628,9 +643,6 @@ export const GlobalStyles = createGlobalStyle`
   }
   @media only screen and (max-height: 828px) { 
     @media only screen and (max-height: 700px) { 
-      .info-card div{
-        padding: 8px !important;
-      }
       #nav {
         padding: 0 14px;
         height: auto;
@@ -639,16 +651,9 @@ export const GlobalStyles = createGlobalStyle`
     .pro-item-content {
       font-size: 14px;
     }
-    .info-card div{
-      padding: 16px;
-    }
     .menu-content {
       padding: 0px;
       max-height: 55%;
-    }
-    #content1, #content2, #content3, #content4 {
-      padding: 16px;
-      max-height: 275px;
     }
     .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
       padding: 8px;
@@ -706,9 +711,8 @@ export const GlobalStyles = createGlobalStyle`
     "content4";
     grid-gap: 16px;
     width: 100%;
-    padding: 32px;
-    padding-top: 0;
   }
+  
   .info-card div {
     padding: 16px
   }
@@ -756,6 +760,12 @@ export const GlobalStyles = createGlobalStyle`
   #labelOverlay {
       left: 36%;
   }
+  .info-card {
+    height: auto;
+  }
+  #main {
+    margin-top: 34px;
+  }
   #content1, #content2, #content3, #content4, .info-card {
     width: 98%;
   }
@@ -777,7 +787,7 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: space-between;
     div {
       width: 100%;
-      border-bottom: 1px solid  #EBEAED;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);;
     }
   }
   #content4 {
@@ -789,5 +799,10 @@ export const GlobalStyles = createGlobalStyle`
     top: 0;
   }
   }
-  
+  #content1, #content2 {
+    height: 240px !important;
+  }
+  #content3, #content4 {
+    height: 340px !important;
+  }
   `;

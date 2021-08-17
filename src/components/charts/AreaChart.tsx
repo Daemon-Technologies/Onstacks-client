@@ -16,47 +16,47 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   const [options, setOptions] = useState({
     backgroundColor: "transparent",
     colors: ["#FFCE74"],
-    chartArea: { top: 10, width: "90%", height: "55%" },
+    chartArea: { top: 30, width: "90%", height: "230px" },
     legend: "none",
     vAxis: {
       format: "short",
       textStyle: { color: themeMode.text },
       gridlines: { color: "none", minSpacing: 20 },
     },
+    hAxis: {
+      textStyle: { color: themeMode.text },
+    },
   });
 
-  useEffect(() => {
-    if (dims.height > 800) {
-      setOptions((o) => ({
-        ...o,
-        hAxis: {
-          textStyle: { color: themeMode.greyText },
-        },
-        chartArea: { top: 10, width: "90%", right: 10, height: "55%" },
-        vAxis: {
-          format: "short",
-          gridlines: { color: "none", minSpacing: 20 },
-          textStyle: { color: themeMode.greyText },
-        },
-      }));
-    }
-  }, [dims.height, dims.width, theme, themeMode]);
+  // useEffect(() => {
+  //   if (dims.height > 800) {
+  //     setOptions((o) => ({
+  //       ...o,
+  //       hAxis: {
+  //         textStyle: { color: themeMode.greyText },
+  //       },
+  //       chartArea: { top: 10, width: "90%", right: 10, height: "55%" },
+  //       vAxis: {
+  //         format: "short",
+  //         gridlines: { color: "none", minSpacing: 20 },
+  //         textStyle: { color: themeMode.greyText },
+  //       },
+  //     }));
+  //   }
+  // }, [dims.height, dims.width, theme, themeMode]);
 
   useEffect(() => {
-    if (dims.height < 800) {
-      setOptions((o) => ({
-        ...o,
-        hAxis: {
-          textStyle: { color: themeMode.greyText },
-        },
-        chartArea: { top: 10, width: "90%", right: 10, height: "50%" },
-        vAxis: {
-          format: "short",
-          gridlines: { color: "none", minSpacing: 20 },
-          textStyle: { color: themeMode.greyText },
-        },
-      }));
-    }
+    setOptions((o) => ({
+      ...o,
+      hAxis: {
+        textStyle: { color: themeMode.greyText },
+      },
+      vAxis: {
+        format: "short",
+        gridlines: { color: "none", minSpacing: 20 },
+        textStyle: { color: themeMode.greyText },
+      },
+    }));
   }, [dims.height, dims.width, theme, themeMode]);
 
   useEffect(() => {
@@ -70,14 +70,14 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
     );
   }, [satsCommitted]);
 
-  useEffect(() => {
-    if (dims.width > 500 && dims.height > 1050) {
-      setOptions((o) => ({
-        ...o,
-        chartArea: { top: 10, width: "90%", right: 10, height: "85%" },
-      }));
-    }
-  }, [dims]);
+  // useEffect(() => {
+  //   if (dims.width > 500 && dims.height > 1050) {
+  //     setOptions((o) => ({
+  //       ...o,
+  //       chartArea: { top: 10, width: "90%", right: 10, height: "85%" },
+  //     }));
+  //   }
+  // }, [dims]);
 
   return (
     <Chart

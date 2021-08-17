@@ -28,9 +28,16 @@ export const PieChart: React.FC<Props> = ({
   const dims = useWindowDimensions();
   const [options, setOptions] = useState({
     colors: colorPalette,
-    legend: { position: "right", textStyle: { color: themeMode.text } },
+    legend: {
+      position: "right",
+      textStyle: { color: themeMode.text },
+      scrollArrows: {
+        inactiveColor: themeMode.text,
+        activeColor: themeMode.text,
+      },
+    },
     backgroundColor: "transparent",
-    // tooltip: { trigger: "selection" },
+
     pieSliceText: "none",
     enableInteractivity: true,
     pieHole: 0.9,
@@ -57,6 +64,10 @@ export const PieChart: React.FC<Props> = ({
       legend: {
         position: dims.width > 800 ? "right" : "bottom",
         textStyle: { color: themeMode.text },
+        scrollArrows: {
+          inactiveColor: themeMode.text,
+          activeColor: themeMode.text,
+        },
       },
     }));
     // setTimeout(() => {
