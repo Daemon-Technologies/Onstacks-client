@@ -57,7 +57,7 @@ export const Overview: React.FC<Props> = ({
               href="https://blockstack.github.io/stacks-blockchain-api/"
               rel="noopener noreferrer"
             >
-              <span>#{overviewData.stx_block_height}</span> STX Blockheight
+              <span>#{overviewData.stx_block_height} </span> STX Blockheight
             </a>
             <a
               style={{ marginLeft: 16 }}

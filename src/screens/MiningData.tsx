@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Sidebar } from "../components/Sidebar";
 import { OverviewProps, TokenPriceProps } from "../hooks/useOverview";
 import { useHistory } from "react-router-dom";
 
@@ -28,14 +27,6 @@ export const MiningData: React.FC<Props> = ({
   };
   return (
     <div className="container">
-      <Sidebar
-        tokens={tokens}
-        overviewData={overviewData}
-        theme={theme}
-        active={1}
-        themeToggler={themeToggler}
-      />
-      {/* {toggle && <Header theme={theme} />} */}
       <div
         style={{
           position: "absolute",

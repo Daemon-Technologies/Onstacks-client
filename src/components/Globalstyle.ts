@@ -222,12 +222,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 }
 
-  .pro-sidebar {
-    min-width: 100% !important;
-    width: 100% !important;
-    height: 92vh;
-   
-  }
+
   a {
     color: ${({ theme }: any) => theme.text};
     text-decoration: none;
@@ -238,11 +233,6 @@ export const GlobalStyles = createGlobalStyle`
       margin: 24px 10px;
       height: 1px;
     }
-  .pro-sidebar > .pro-sidebar-inner {
-    background: ${({ theme }: any) => theme.body} !important;
-    color: ${({ theme }: any) => theme.text};
-    transition: all 0.50s linear;
-  }
 
   .google-visualization-tooltip {
     path {
@@ -264,49 +254,7 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.text};
     }
   }
-  .pro-sidebar .pro-menu .pro-menu-item.active {
-    border-radius: 4px;
-    background: ${({ theme }: any) => theme.hoverColor} !important;
-    .pro-item-content {
-      color: ${({ theme }: any) => theme.primaryColor} !important;
-    }
-    /* padding: 12px; */
-  }
-
-  .pro-inner-item {
-    padding: 8px 16px;
-  }
-  .pro-item-content {
-    font-weight: 600;
-  }
-
-  .pro-sidebar .pro-menu {
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
-
-  .menu-content {
-    padding: 0 16px;
-    display: flex !important;
-    max-height: 60%;
-    height: 100%;
-    flex-direction: column;
-    -webkit-justify-content: space-between !important;
-    justify-content: space-between !important;
-
-    p {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 14px;
-      color: ${({ theme }: any) => theme.greyText} !important;    
-    }
-    .download > p {
-      margin-left: 12px !important;
-      margin-bottom: 0px;
-      color: ${({ theme }: any) => theme.text} !important;
-    }
-  }
+å
 
   .crypto {
     flex-direction: row;
@@ -367,17 +315,6 @@ export const GlobalStyles = createGlobalStyle`
     margin: 16px 0px;
   }
 
-  .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout .pro-sidebar-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 10px;
-    border-bottom: 0px;
-    margin-bottom: 32px;
-  }
-  .pro-sidebar-inner {
-    padding: 0px 12px;
-  }
   .container {
     display: grid;
     grid-template-columns: repeat( 12, 1fr );
@@ -457,11 +394,6 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  #sidebar {
-    grid-area: sidebar;
-    border-radius: var(--main-radius);
-    display: none;
-  }
 
   #content1 {
     grid-area: content1;
@@ -619,19 +551,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   @media only screen and (max-width: 1580px) { 
-    .pro-item-content {
-      font-size: 14px;
-    }
+
     .logo {
       width: 150px
     }
-    .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
-      padding: 8px;
-    }
-    .menu-content {
-      padding: 0px;
-      max-height: 55%;
-    }
+   
     #labelOverlay {
       left: 30%;
     }
@@ -653,19 +577,6 @@ export const GlobalStyles = createGlobalStyle`
         height: auto;
       }
     }
-    .pro-item-content {
-      font-size: 14px;
-    }
-    .menu-content {
-      padding: 0px;
-      max-height: 55%;
-    }
-    .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
-      padding: 8px;
-    }
-    .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout {
-      overflow-y: hidden;
-    }
     .crypto {
       margin: 8px 0px;
     }
@@ -681,11 +592,7 @@ export const GlobalStyles = createGlobalStyle`
   .mobile-header {
     margin: 8px;
   }
-  .pro-sidebar.md {
-    position: fixed;
-    left: 100%;
-    height: 100%;
-  }
+ 
   #labelOverlay {
       left: 30.5%;
   }
@@ -783,9 +690,6 @@ export const GlobalStyles = createGlobalStyle`
     height: 300px;
   }
 
-  .pro-sidebar.sm {
-    left: 100%;
-  }
   .info-card {
     flex-direction: column;
     align-items: flex-start;
@@ -798,11 +702,7 @@ export const GlobalStyles = createGlobalStyle`
   #content4 {
     max-height: 600px;
   }
-  #sidebar {
-    height: 100%;
-    background: ${({ theme }: any) => theme.body} !important;
-    top: 0;
-  }
+
   }
   #content1, #content2 {
     height: 240px !important;
