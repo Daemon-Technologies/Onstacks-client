@@ -36,6 +36,13 @@ export const GlobalStyles = createGlobalStyle`
     cursor: default;
   }
 
+  li {
+    a {
+      font-size: 14px;
+    font-weight: 600;
+    }
+  }
+
   #labelOverlay p {
     line-height: 0.3;
     padding:0;
@@ -227,6 +234,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }: any) => theme.text};
     text-decoration: none;
     display: flex;
+    align-items: center;
   }
   .hr {
       background:  ${({ theme }: any) => theme.border} !important;
@@ -441,7 +449,7 @@ export const GlobalStyles = createGlobalStyle`
 
   #content3 {
     grid-area: content3;
-    padding: 16px;
+    padding: 24px;
     border-radius: var(--main-radius);
     background: ${({ theme }: any) => theme.background} !important;
     border: 1px solid ${({ theme }: any) => theme.border};
@@ -463,12 +471,13 @@ export const GlobalStyles = createGlobalStyle`
     grid-area: content4;
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
-    border: 1px solid ${({ theme }: any) => theme.border};s
-    p {
+    border: 1px solid ${({ theme }: any) => theme.border};
+    .title {
       font-size: 14px;
-      color: ${({ theme }: any) => theme.greyText} !important;
       font-weight: 500;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.greyText} !important;
     }
   } 
 
@@ -513,6 +522,7 @@ export const GlobalStyles = createGlobalStyle`
       padding-left: 0;
       font-size: 14px;
       font-weight: 600;
+      width: 25%;
       line-height: 20px;
     }
     th {
@@ -636,9 +646,16 @@ export const GlobalStyles = createGlobalStyle`
   :root {
     overflow-y: auto;
   }
+  .data {
+    font-size: 13px !important;
+    text-align: center !important;
+  }
   th {
       font-size: 12px;
-    }
+  }
+  .based {
+    display: none;
+  }
   .container {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ;

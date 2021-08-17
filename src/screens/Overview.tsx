@@ -50,7 +50,7 @@ export const Overview: React.FC<Props> = ({
             justifyContent: "space-between",
           }}
         >
-          <p>*Based on the last 100 blocks.</p>
+          <p className="based">*Based on the last 100 blocks.</p>
           <div className="data">
             <a
               target="_blank"
@@ -122,7 +122,7 @@ export const Overview: React.FC<Props> = ({
           )}
       </div>
       <div id="content4">
-        <p>Recent blocks</p>
+        <p className="title">Recent blocks</p>
         {blocks.length > 0 && <RecentBlocks blocks={blocks} />}
       </div>
     </div>
