@@ -54,7 +54,10 @@ export const Overview: React.FC<Props> = ({
           <div className="data">
             <a
               target="_blank"
-              href="https://blockstack.github.io/stacks-blockchain-api/"
+              href={
+                "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +
+                overviewData.stx_block_height
+              }
               rel="noopener noreferrer"
             >
               <span>#{overviewData.stx_block_height} </span> STX Blockheight
@@ -62,7 +65,9 @@ export const Overview: React.FC<Props> = ({
             <a
               style={{ marginLeft: 16 }}
               target="_blank"
-              href="https://btc.com/btc/adapter?type=api-doc"
+              href={
+                "https://btc.com/btc/block/" + overviewData.btc_block_height
+              }
               rel="noopener noreferrer"
             >
               <span>#{overviewData.btc_block_height}</span>

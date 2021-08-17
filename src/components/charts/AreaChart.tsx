@@ -28,23 +28,6 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
     },
   });
 
-  // useEffect(() => {
-  //   if (dims.height > 800) {
-  //     setOptions((o) => ({
-  //       ...o,
-  //       hAxis: {
-  //         textStyle: { color: themeMode.greyText },
-  //       },
-  //       chartArea: { top: 10, width: "90%", right: 10, height: "55%" },
-  //       vAxis: {
-  //         format: "short",
-  //         gridlines: { color: "none", minSpacing: 20 },
-  //         textStyle: { color: themeMode.greyText },
-  //       },
-  //     }));
-  //   }
-  // }, [dims.height, dims.width, theme, themeMode]);
-
   useEffect(() => {
     setOptions((o) => ({
       ...o,
@@ -60,10 +43,13 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   }, [dims.height, dims.width, theme, themeMode]);
 
   useEffect(() => {
+    console.log(satsCommitted);
     if (satsCommitted && satsCommitted.block_number.length > 0) {
       let values: any = satsCommitted;
-      values.block_number.unshift("Block Number");
-      values.total_sats_committed.unshift("Sats");
+      if (values.block_number[0] !== "Block Number") {
+        values.block_number.unshift("Block Number");
+        values.total_sats_committed.unshift("Sats");
+      }
       setData(
         values.block_number.map((v: any, i: number) => {
           return [values.block_number[i], values.total_sats_committed[i]];

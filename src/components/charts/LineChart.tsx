@@ -59,12 +59,6 @@ export const LineChart: React.FC<Props> = ({
     areaBlocks.forEach((e, index) => {
       values[index + 1] = [parseInt(e)];
       areaSeries.forEach((x: any, i) => {
-        console.log(
-          e,
-          x.winner_blocks.indexOf(e) > -1,
-          x.winner_blocks,
-          x.data[index]
-        );
         values[index + 1][i + 1] =
           x.winner_blocks.indexOf(e) > -1
             ? parseInt(x.data[index] ? x.data[index] : 0)

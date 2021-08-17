@@ -405,10 +405,7 @@ export const GlobalStyles = createGlobalStyle`
     }
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
-    box-shadow: ${({ theme }: any) =>
-      theme.background === "#FFFFFF"
-        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
-        : "0px"};
+    border: 1px solid ${({ theme }: any) => theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -433,10 +430,7 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }: any) => theme.background} !important;
     grid-area: content2;
     border-radius: var(--main-radius);
-    box-shadow: ${({ theme }: any) =>
-      theme.background === "#FFFFFF"
-        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
-        : "0px"};
+    border: 1px solid ${({ theme }: any) => theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -450,10 +444,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 16px;
     border-radius: var(--main-radius);
     background: ${({ theme }: any) => theme.background} !important;
-    box-shadow: ${({ theme }: any) =>
-      theme.background === "#FFFFFF"
-        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
-        : "0px"};
+    border: 1px solid ${({ theme }: any) => theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -472,10 +463,7 @@ export const GlobalStyles = createGlobalStyle`
     grid-area: content4;
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
-    box-shadow: ${({ theme }: any) =>
-      theme.background === "#FFFFFF"
-        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
-        : "0px"};
+    border: 1px solid ${({ theme }: any) => theme.border};s
     p {
       font-size: 14px;
       color: ${({ theme }: any) => theme.greyText} !important;
@@ -492,10 +480,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .info-card {
-    box-shadow: ${({ theme }: any) =>
-      theme.background === "#FFFFFF"
-        ? "0 1px 1px 0 rgb(66 66 66 / 8%), 0 1px 3px 1px rgb(66 66 66 / 16%)"
-        : "0px"};
+    border: 1px solid ${({ theme }: any) => theme.border};
     height: 110px;
     border-radius: 4px;
     display: flex;
