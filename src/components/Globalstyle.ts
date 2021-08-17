@@ -168,8 +168,9 @@ export const GlobalStyles = createGlobalStyle`
     /* height: 350px; */
     position: absolute;
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);;
-    top: 35px;
+    top: 60px;
     left: -100%;
+    height: 800px;
     opacity: 0;
     transition: all 0.5s ease;
     flex-direction: column;
@@ -230,6 +231,7 @@ export const GlobalStyles = createGlobalStyle`
   a {
     color: ${({ theme }: any) => theme.text};
     text-decoration: none;
+    display: flex;
   }
   .hr {
       background:  ${({ theme }: any) => theme.border} !important;
@@ -393,7 +395,9 @@ export const GlobalStyles = createGlobalStyle`
         "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
     grid-gap: 16px;
     width: 100%;
+    max-width: 1800px;
     padding: 92px 32px 32px 32px;
+    margin: auto;
   }
 
   .not-found {
@@ -431,6 +435,7 @@ export const GlobalStyles = createGlobalStyle`
     .data {
       font-size: 14px;
       margin: 14px 0;
+      display: flex;
       color: ${({ theme }: any) => theme.greyText} !important;
       text-align: right;
       span {

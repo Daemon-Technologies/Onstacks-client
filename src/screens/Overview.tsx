@@ -51,10 +51,24 @@ export const Overview: React.FC<Props> = ({
           }}
         >
           <p>*Based on the last 100 blocks.</p>
-          <p className="data">
-            <span>#{overviewData.stx_block_height}</span> STX Blockheight
-            <span>#{overviewData.btc_block_height}</span> BTC Blockheight
-          </p>
+          <div className="data">
+            <a
+              target="_blank"
+              href="https://blockstack.github.io/stacks-blockchain-api/"
+              rel="noopener noreferrer"
+            >
+              <span>#{overviewData.stx_block_height}</span> STX Blockheight
+            </a>
+            <a
+              style={{ marginLeft: 16 }}
+              target="_blank"
+              href="https://btc.com/btc/adapter?type=api-doc"
+              rel="noopener noreferrer"
+            >
+              <span>#{overviewData.btc_block_height}</span>
+              BTC Blockheight
+            </a>
+          </div>
         </div>
       </div>
       <div id="content1">

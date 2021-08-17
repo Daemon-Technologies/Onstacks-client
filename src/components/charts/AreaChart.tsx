@@ -60,14 +60,16 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   }, [dims.height, dims.width, theme, themeMode]);
 
   useEffect(() => {
-    let values: any = satsCommitted;
-    values.block_number.unshift("Block Number");
-    values.total_sats_committed.unshift("Sats");
-    setData(
-      values.block_number.map((v: any, i: number) => {
-        return [values.block_number[i], values.total_sats_committed[i]];
-      })
-    );
+    if (satsCommitted && satsCommitted.block_number.length > 0) {
+      let values: any = satsCommitted;
+      values.block_number.unshift("Block Number");
+      values.total_sats_committed.unshift("Sats");
+      setData(
+        values.block_number.map((v: any, i: number) => {
+          return [values.block_number[i], values.total_sats_committed[i]];
+        })
+      );
+    }
   }, [satsCommitted]);
 
   // useEffect(() => {

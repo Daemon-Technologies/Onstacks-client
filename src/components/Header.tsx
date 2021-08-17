@@ -80,12 +80,24 @@ export const Header: React.FC<{
           {click && (
             <>
               <li className="option" onClick={closeMobileMenu}>
-                <img alt="bitcoin" src={Bitcoin} /> $
-                {Number.parseFloat(tokens.BTC).toFixed(2)}
+                <a
+                  target="_blank"
+                  href="https://www.okcoin.com/prices/bitcoin-btc-price-chart"
+                  rel="noopener noreferrer"
+                >
+                  <img alt="bitcoin" src={Bitcoin} /> $
+                  {Number.parseFloat(tokens.BTC).toFixed(2)}
+                </a>
               </li>
               <li className="option" onClick={closeMobileMenu}>
-                <img alt="stacks" src={Stacks} /> $
-                {Number.parseFloat(tokens.STX).toFixed(2)}
+                <a
+                  target="_blank"
+                  href="https://www.okcoin.com/prices/stacks-stx-price-chart"
+                  rel="noopener noreferrer"
+                >
+                  <img alt="stacks" src={Stacks} /> $
+                  {Number.parseFloat(tokens.STX).toFixed(2)}
+                </a>
               </li>
               <li className="option" onClick={closeMobileMenu}>
                 {theme === "dark" ? (
@@ -113,14 +125,24 @@ export const Header: React.FC<{
       <div className="placeholder"></div>
       <ul className="crypto">
         <li className="aligning" onClick={closeMobileMenu}>
-          <div>
+          <a
+            target="_blank"
+            href="https://www.okcoin.com/prices/bitcoin-btc-price-chart"
+            rel="noopener noreferrer"
+          >
             <img alt="bitcoin" src={Bitcoin} /> $
             {Number.parseFloat(tokens.BTC).toFixed(2)}
-          </div>
+          </a>
         </li>
         <li className="aligning" onClick={closeMobileMenu}>
-          <img alt="stacks" src={Stacks} /> $
-          {Number.parseFloat(tokens.STX).toFixed(2)}
+          <a
+            target="_blank"
+            href="https://www.okcoin.com/prices/stacks-stx-price-chart"
+            rel="noopener noreferrer"
+          >
+            <img alt="stacks" src={Stacks} /> $
+            {Number.parseFloat(tokens.STX).toFixed(2)}
+          </a>
         </li>
         <li className="option head-colors" onClick={closeMobileMenu}>
           {theme === "dark" ? (
