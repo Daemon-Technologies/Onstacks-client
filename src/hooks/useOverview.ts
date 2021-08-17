@@ -76,7 +76,7 @@ export const useOverview = () => {
   });
 
   const [areaBlocks, setAreaBlocks] = useState<string[]>([]);
-  const [areaSeries, setAreaSeries] = useState<ApexAxisChartSeries>([]);
+  const [areaSeries, setAreaSeries] = useState<any>([]);
 
   const [blocks, setBlocks] = useState<Blocks[]>([]);
 
@@ -85,6 +85,7 @@ export const useOverview = () => {
       setOverviewData(data);
     });
     axios.get(getTokenPrice).then((data: any) => {
+      console.log(data);
       setTokens({
         BTC: data.find((token: any) => token.token_name === "BTC").token_price,
         STX: data.find((token: any) => token.token_name === "STX").token_price,
@@ -100,20 +101,22 @@ export const useOverview = () => {
     });
     axios.get(getTopBurnFeePerBlock).then((data: any) => {
       let currentData: TotalBurnedMinerFees[] = data;
-      let series: ApexAxisChartSeries = [];
+      let series: { name: string; data: any[]; winner_blocks: any[] }[] = [];
       let blocks: any[] = [];
       currentData.forEach((block: any) => {
-        blocks.push(+block.block_number);
+        blocks.push(block.block_number);
         block.miner_list.forEach((element: any) => {
           let index = series.findIndex(
             (e) => e.name === element.leader_key_address
           );
           if (index !== -1) {
             series[index].data.push(element.burn_fee);
+            series[index].winner_blocks.push(block.block_number);
           } else {
             series.push({
               name: element.leader_key_address,
               data: [element.burn_fee],
+              winner_blocks: [block.block_number],
             });
           }
         });

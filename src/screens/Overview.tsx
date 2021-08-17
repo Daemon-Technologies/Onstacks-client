@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Header } from "../components/Header";
 import { InfoCard } from "../components/InfoCard";
 import { AreaChart } from "../components/charts/AreaChart";
 import { LineChart } from "../components/charts/LineChart";
@@ -11,15 +10,13 @@ import {
   SatsCommittedProps,
   TokenPriceProps,
 } from "../hooks/useOverview";
-import { Sidebar } from "../components/Sidebar";
-import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
   theme: any;
   overviewData: OverviewProps;
   satsCommitted: SatsCommittedProps;
   areaBlocks: string[];
-  areaSeries: ApexAxisChartSeries;
+  areaSeries: any[];
   blocks: Blocks[];
   winnerAddresses: string[];
   totalWinners: number[];
@@ -39,26 +36,49 @@ export const Overview: React.FC<Props> = ({
   winnerAddresses,
   totalWinners,
 }) => {
-  const dims = useWindowDimensions();
-
   useEffect(() => {}, [totalWinners]);
   return (
     <div className="container">
-      <Sidebar
-        tokens={tokens}
-        active={0}
-        overviewData={overviewData}
-        theme={theme}
-        themeToggler={themeToggler}
-      />
-      {dims.width >= 1025 && <Header theme={theme} />}
       <div id="main">
         <p className="screen-title">Overview</p>
         <InfoCard overviewData={overviewData} />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <p>*Based on the last 100 blocks.</p>
+          <div className="data">
+            <a
+              target="_blank"
+              href={
+                "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +
+                overviewData.stx_block_height
+              }
+              rel="noopener noreferrer"
+            >
+              <span>#{overviewData.stx_block_height} </span> STX Blockheight
+            </a>
+            <a
+              style={{ marginLeft: 16 }}
+              target="_blank"
+              href={
+                "https://btc.com/btc/block/" + overviewData.btc_block_height
+              }
+              rel="noopener noreferrer"
+            >
+              <span>#{overviewData.btc_block_height}</span>
+              BTC Blockheight
+            </a>
+          </div>
+        </div>
       </div>
       <div id="content1">
         <p className="title">Total sats committed in current block</p>
-        {dims.height > 700 && (
+        {/* {dims.height > 800 && (
           <>
             <p className="sub-title">
               {satsCommitted.block_number.length > 0 &&
@@ -68,7 +88,7 @@ export const Overview: React.FC<Props> = ({
               Sats
             </p>
           </>
-        )}
+        )} */}
         <div className="seprator">
           {satsCommitted.block_number.length > 0 && (
             <AreaChart satsCommitted={satsCommitted} theme={theme} />
@@ -88,6 +108,9 @@ export const Overview: React.FC<Props> = ({
         </div>
       </div>
       <div id="content3">
+        <p className="title">
+          Block reward distribution to miners (last 100 blocks)
+        </p>
         {totalWinners.length > 0 &&
           winnerAddresses.length > 0 &&
           totalWinners.length === winnerAddresses.length && (
