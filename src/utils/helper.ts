@@ -3,11 +3,11 @@ export const randomColorGenerator = () => {
     "#FFA043",
     "#5546ff",
     "#00A5FF",
-    "#20C9AC",
     "#FF4560",
+    "#20C9AC",
     "#FA699D",
-    "#FA6432",
     "#5A6432",
+    "#FA6432",
   ];
   // for (let index = 0; index < 50; index++) {
   //   colorPalette.push(`#${Math.floor(Math.random() * 16777215).toString(16).toUpperCase()}`);

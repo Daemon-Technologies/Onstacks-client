@@ -1,17 +1,147 @@
-import React from "react";
+import React, { useState } from "react";
 // import Notification from "../assets/side-menu/notifications.svg";
 import LogoLight from "../assets/side-menu/stx-dark.svg";
 import LogoDark from "../assets/side-menu/stx-light.svg";
-
-export const Header: React.FC<{ theme: any }> = ({ theme }: any) => {
+import Close from "../assets/side-menu/close.svg";
+import Menu from "../assets/side-menu/menu.svg";
+import Logo from "../assets/side-menu/stx-logo.svg";
+import Bitcoin from "../assets/side-menu/bitcoin.svg";
+import Stacks from "../assets/side-menu/stacks.svg";
+import { TokenPriceProps } from "../hooks/useOverview";
+import { useHistory } from "react-router-dom";
+import { ReactComponent as HighLightedSun } from "../assets/side-menu/sun.svg";
+import { ReactComponent as Moon } from "../assets/side-menu/cloud-dark.svg";
+import { ReactComponent as Sun } from "../assets/side-menu/sun-dark.svg";
+import { ReactComponent as HighLightedMoon } from "../assets/side-menu/cloud-light.svg";
+// import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
+import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
+export const Header: React.FC<{
+  theme: any;
+  tokens: TokenPriceProps;
+  themeToggler: any;
+}> = ({ theme, tokens, themeToggler }: any) => {
+  const [click, setClick] = useState(false);
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+  // const [active, setActive] = useState(0);
+  const { push } = useHistory();
   return (
-    <div id="nav" className={"header"}>
-      <img
-        className="logo"
-        alt="logo"
-        src={theme === "light" ? LogoDark : LogoLight}
-      />
-      {/* <img className="notification" alt="notifications" src={Notification} /> */}
+    <div className="header">
+      <div className="mobile-menu" onClick={handleClick}>
+        <img alt="menu" src={click ? Close : Menu} />
+      </div>
+      <div className="logo-nav">
+        <div className="logo-container">
+          <img
+            className="logo mobile-logo"
+            alt="logo"
+            src={theme === "light" ? LogoDark : LogoLight}
+          />
+          <img className="logo web-logo" alt="logo" src={Logo} />
+        </div>
+        <ul className={click ? "nav-options active" : "nav-options"}>
+          <li
+            className="option active"
+            onClick={() => {
+              // setActive(0);
+              closeMobileMenu();
+              push("/");
+            }}
+          >
+            <p>Overview</p>
+          </li>
+          <li
+            className="option"
+            onClick={() => {
+              // setActive(1);
+              push("/mining-data");
+            }}
+          >
+            <p>Mining Data</p>
+          </li>
+          <li className="option" onClick={closeMobileMenu}>
+            <a
+              target="_blank"
+              href="https://explorer.stacks.co/?chain=mainnet"
+              rel="noopener noreferrer"
+            >
+              Network Activity
+            </a>
+          </li>
+          <li className="option" onClick={closeMobileMenu}>
+            <a
+              target="_blank"
+              href="https://docs.stacks.co/understand-stacks/mining"
+              rel="noopener noreferrer"
+            >
+              Documentation
+            </a>
+          </li>
+          {click && (
+            <>
+              <li className="option" onClick={closeMobileMenu}>
+                <img alt="bitcoin" src={Bitcoin} /> $
+                {Number.parseFloat(tokens.BTC).toFixed(2)}
+              </li>
+              <li className="option" onClick={closeMobileMenu}>
+                <img alt="stacks" src={Stacks} /> $
+                {Number.parseFloat(tokens.STX).toFixed(2)}
+              </li>
+              <li className="option" onClick={closeMobileMenu}>
+                {theme === "dark" ? (
+                  <Sun style={{ cursor: "pointer" }} onClick={themeToggler} />
+                ) : (
+                  <HighLightedSun
+                    style={{ cursor: "pointer" }}
+                    onClick={themeToggler}
+                  />
+                )}
+                <Slash className={"slash"} />{" "}
+                {theme === "dark" ? (
+                  <HighLightedMoon
+                    style={{ cursor: "pointer" }}
+                    onClick={themeToggler}
+                  />
+                ) : (
+                  <Moon style={{ cursor: "pointer" }} onClick={themeToggler} />
+                )}
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
+      <div className="placeholder"></div>
+      <ul className="crypto">
+        <li className="aligning" onClick={closeMobileMenu}>
+          <div>
+            <img alt="bitcoin" src={Bitcoin} /> $
+            {Number.parseFloat(tokens.BTC).toFixed(2)}
+          </div>
+        </li>
+        <li className="aligning" onClick={closeMobileMenu}>
+          <img alt="stacks" src={Stacks} /> $
+          {Number.parseFloat(tokens.STX).toFixed(2)}
+        </li>
+        <li className="option head-colors" onClick={closeMobileMenu}>
+          {theme === "dark" ? (
+            <Sun style={{ cursor: "pointer" }} onClick={themeToggler} />
+          ) : (
+            <HighLightedSun
+              style={{ cursor: "pointer" }}
+              onClick={themeToggler}
+            />
+          )}
+          <Slash className={"slash"} />{" "}
+          {theme === "dark" ? (
+            <HighLightedMoon
+              style={{ cursor: "pointer" }}
+              onClick={themeToggler}
+            />
+          ) : (
+            <Moon style={{ cursor: "pointer" }} onClick={themeToggler} />
+          )}
+        </li>
+      </ul>
     </div>
   );
 };

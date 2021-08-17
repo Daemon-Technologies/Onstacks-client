@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Header } from "../components/Header";
 import { Sidebar } from "../components/Sidebar";
 import { OverviewProps, TokenPriceProps } from "../hooks/useOverview";
 import { useHistory } from "react-router-dom";
@@ -36,7 +35,7 @@ export const MiningData: React.FC<Props> = ({
         active={1}
         themeToggler={themeToggler}
       />
-      {toggle && <Header theme={theme} />}
+      {/* {toggle && <Header theme={theme} />} */}
       <div
         style={{
           position: "absolute",

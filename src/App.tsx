@@ -8,6 +8,7 @@ import { Overview } from "./screens/Overview";
 import { useOverview } from "./hooks/useOverview";
 import { Notfound } from "./screens/Notfound";
 import { MiningData } from "./screens/MiningData";
+import { Header } from "./components/Header";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -30,6 +31,7 @@ const App: React.FC = () => {
       <>
         <GlobalStyles />
         <Router>
+          <Header themeToggler={themeToggler} tokens={tokens} theme={theme} />
           <Switch>
             <Route exact path="/">
               <Overview

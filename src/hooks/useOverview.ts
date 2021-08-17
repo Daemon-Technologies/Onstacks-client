@@ -101,7 +101,7 @@ export const useOverview = () => {
     });
     axios.get(getTopBurnFeePerBlock).then((data: any) => {
       let currentData: TotalBurnedMinerFees[] = data;
-      let series: { name: string; data: any[] }[] = [];
+      let series: { name: string; data: any[]; winner_blocks: any[] }[] = [];
       let blocks: any[] = [];
       currentData.forEach((block: any) => {
         blocks.push(block.block_number);
@@ -111,10 +111,12 @@ export const useOverview = () => {
           );
           if (index !== -1) {
             series[index].data.push(element.burn_fee);
+            series[index].winner_blocks.push(block.block_number);
           } else {
             series.push({
               name: element.leader_key_address,
               data: [element.burn_fee],
+              winner_blocks: [block.block_number],
             });
           }
         });

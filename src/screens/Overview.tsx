@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Header } from "../components/Header";
 import { InfoCard } from "../components/InfoCard";
 import { AreaChart } from "../components/charts/AreaChart";
 import { LineChart } from "../components/charts/LineChart";
@@ -11,7 +10,6 @@ import {
   SatsCommittedProps,
   TokenPriceProps,
 } from "../hooks/useOverview";
-import { Sidebar } from "../components/Sidebar";
 import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
@@ -19,7 +17,7 @@ interface Props {
   overviewData: OverviewProps;
   satsCommitted: SatsCommittedProps;
   areaBlocks: string[];
-  areaSeries: ApexAxisChartSeries;
+  areaSeries: any[];
   blocks: Blocks[];
   winnerAddresses: string[];
   totalWinners: number[];
@@ -44,21 +42,13 @@ export const Overview: React.FC<Props> = ({
   useEffect(() => {}, [totalWinners]);
   return (
     <div className="container">
-      <Sidebar
-        tokens={tokens}
-        active={0}
-        overviewData={overviewData}
-        theme={theme}
-        themeToggler={themeToggler}
-      />
-      {dims.width >= 1025 && <Header theme={theme} />}
       <div id="main">
         <p className="screen-title">Overview</p>
         <InfoCard overviewData={overviewData} />
       </div>
       <div id="content1">
         <p className="title">Total sats committed in current block</p>
-        {dims.height > 700 && (
+        {dims.height > 800 && (
           <>
             <p className="sub-title">
               {satsCommitted.block_number.length > 0 &&

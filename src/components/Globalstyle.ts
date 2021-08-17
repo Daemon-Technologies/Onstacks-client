@@ -5,8 +5,7 @@ export const GlobalStyles = createGlobalStyle`
     --main-radius: 5px;
     --main-padding: 16px;
     overflow-x: hidden;
-    overflow-y: hidden;
-    height: 100%;
+    /* overflow-y: hidden; */
   }
 
   * {
@@ -53,14 +52,177 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }: any) => theme.text};
   }
   //SIDEBAR
+
+  .header {
+    display: flex;
+    /* background: linear-gradient(#6616fc, #f394d3); */
+    background: ${({ theme }: any) => theme.background} !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    /* height: 80px; */
+  }
+  .logo-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo {
+    width: 45px;
+    height: 45px;
+  }
+  .nav-options {
+    background: ${({ theme }: any) => theme.background} !important;
+    padding-left: 25px;
+    color: ${({ theme }: any) => theme.text} !important;;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-gap: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    list-style-type: none;
+    cursor: pointer;
+  }
+  .mobile-option {
+    display: none;
+  }
+
+  .option:hover {
+    color: ${({ theme }: any) => theme.primaryColor} !important;;
+  }
+  .option.active {
+    color: ${({ theme }: any) => theme.primaryColor} !important;;
+  }
+  .crypto {
+    display: flex;
+    padding: 0px 5px;
+    list-style-type: none;
+  }
+  .aligning {
+    padding-right: 30px;
+    align-items: center;
+    display: flex !important;
+    img {
+      margin-right: 5px;
+    }
+  }
+  .mobile-menu {
+    display: none;
+  }
+  .placeholder {
+    display: none;
+  }
+  .head-colors {
+    margin-top: 8px;
+  }
+  #content2 {
+    path {
+      stroke-width: 2px;
+    }
+  }
+  .mobile-logo {
+    display: none;
+  }
+  .web-logo {
+    display: block;
+    width: 32px !important;
+    height: 32px !important;
+  }
+@media (max-width: 768px) {
+  /*Mobile View */
+  .mobile-logo {
+    display: block;
+  }
+  .web-logo {
+    display: none;
+  }
+  .header {
+    padding: 0px 16px;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+  }
+  .placeholder {
+    display: block;
+  }
+  .logo {
+    width: 45px;
+    height: 45px;
+  }
+  .nav-options {
+    display: flex;
+    width: 100%;
+    /* height: 350px; */
+    position: absolute;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);;
+    top: 35px;
+    left: -100%;
+    opacity: 0;
+    transition: all 0.5s ease;
+    flex-direction: column;
+    list-style-type: none;
+    grid-gap: 0px;
+  }
+  #main {
+    margin-top: 24px;
+  }
+  .nav-options.active {
+    background: white;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+    align-content: center;
+    padding-left: 0px;
+  }
+
+  .menu-icon {
+    width: 45px;
+    height: 45px;
+  }
+  .option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vw;
+    padding: 30px 0px;
+    img {
+      margin-right: 10px;
+    }
+  }
+  .sign-up {
+    background: rgb(222, 9, 241);
+    border-radius: 3px;
+    color: white;
+    padding: 20px 0px;
+    width: 80%;
+    align-self: center;
+    border-radius: 3px;
+  }
+
+  .crypto {
+    display: none !important;
+  }
+  .mobile-menu {
+    display: block;
+  }
+}
+
   .pro-sidebar {
     min-width: 100% !important;
     width: 100% !important;
     height: 92vh;
    
   }
-  .pro-sidebar .pro-menu a {
+  a {
     color: ${({ theme }: any) => theme.text};
+    text-decoration: none;
   }
   .hr {
       background:  ${({ theme }: any) => theme.border} !important;
@@ -135,9 +297,7 @@ export const GlobalStyles = createGlobalStyle`
   .crypto {
     flex-direction: row;
     display: flex;
-    margin-top: 24px;
     font-weight: 600;
-    margin-bottom: 16px;
     align-items: center;
     flex-wrap: wrap;
     line-height: 2;
@@ -210,19 +370,18 @@ export const GlobalStyles = createGlobalStyle`
     grid-template-columns: repeat( 12, 1fr );
     grid-template-rows: repeat( 10, 1fr );
     grid-template-areas:
-        "nav nav nav nav nav nav nav nav nav nav nav nav"
-        "sidebar sidebar main main main main main main main main main main"
-        "sidebar sidebar main main main main main main main main main main"
-        "sidebar sidebar content1 content1 content1 content1 content1 content2 content2 content2 content2 content2"
-        "sidebar sidebar content1 content1 content1 content1 content1 content2 content2 content2 content2 content2"
-        "sidebar sidebar content1 content1 content1 content1 content1 content2 content2 content2 content2 content2"
-        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4"
-        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4"
-        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4"
-        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4";
+        "main main main main main main main main main main main main"
+        "main main main main main main main main main main main main"
+        "content1 content1 content1 content1 content1 content1 content2 content2 content2 content2 content2 content2"
+        "content1 content1 content1 content1 content1 content1 content2 content2 content2 content2 content2 content2"
+        "content1 content1 content1 content1 content1 content1 content2 content2 content2 content2 content2 content2"
+        "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4"
+        "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4"
+        "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4"
+        "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
     grid-gap: 16px;
     width: 100%;
-    padding-right: 32px;
+    padding: 32px 140px 32px 140px;
   }
 
   .not-found {
@@ -280,12 +439,17 @@ export const GlobalStyles = createGlobalStyle`
   #sidebar {
     grid-area: sidebar;
     border-radius: var(--main-radius);
+    display: none;
   }
 
   #content1 {
     grid-area: content1;
     padding: 24px;
     width: 100%;
+    path {
+      stroke-width: 3;
+      /* stroke: #FFA043; */
+    }
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
     box-shadow: ${({ theme }: any) =>
@@ -300,7 +464,7 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.greyText} !important;
     }
     .sub-title {
-      font-size: 32px;
+      font-size: 25px;
       font-weight: 600;
       line-height: 40px;
       color: ${({ theme }: any) => theme.text} !important;
@@ -308,6 +472,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   .seprator {
       width: 100%;
+      height: 90%;
     }
   #content2 {
     padding: 24px;
@@ -589,7 +754,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 0;
   }
   #labelOverlay {
-      left: 37%;
+      left: 36%;
   }
   #content1, #content2, #content3, #content4, .info-card {
     width: 98%;
