@@ -76,7 +76,7 @@ export const useOverview = () => {
   });
 
   const [areaBlocks, setAreaBlocks] = useState<string[]>([]);
-  const [areaSeries, setAreaSeries] = useState<ApexAxisChartSeries>([]);
+  const [areaSeries, setAreaSeries] = useState<any>([]);
 
   const [blocks, setBlocks] = useState<Blocks[]>([]);
 
