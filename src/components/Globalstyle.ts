@@ -347,23 +347,17 @@ export const GlobalStyles = createGlobalStyle`
 
   .miningData {
     display: grid;
-    height: 100vh;
     grid-template-columns: repeat( 12, 1fr );
-    grid-template-rows: repeat( 10, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
     grid-template-areas:
-        "nav nav nav nav nav nav nav nav nav nav nav nav"
-        "sidebar sidebar main main main main main main main main main main"
-        "sidebar sidebar main main main main main main main main main main"
-        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
-        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
-        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
-        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
-        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4"
-        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4"
-        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4";
+        "main main main main main main main main main main main main"
+        "content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
     grid-gap: 16px;
     width: 100%;
-    padding-right: 32px;
+    max-width: 1800px;
+    padding: 92px 32px 32px 32px;
+    margin: auto;
   }
 
   .not-found {
@@ -739,10 +733,83 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   }
-  #content1, #content2 {
-    height: 240px !important;
-  }
+  .container {
+    #content1, #content2 {
+      height: 240px !important;
+    }
   #content3, #content4 {
-    height: 340px !important;
+      height: 340px !important;
+    }
+  }
+  .flow-chart {
+    height: 504px !important;
+  }
+  .tabs {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid ${({ theme }: any) => theme.border};
+    div {
+      min-width: 100px;
+      text-align: center;
+      font-weight: 600;
+      line-height: 20px;
+      height: 20px;
+      cursor: pointer;
+      padding-bottom: 30px;
+    }
+    .active {
+      border-bottom: 2px solid #FFA043;
+      transition: width 1s;
+    }
+  }
+  .pagination {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 160, 67, 0.1);
+    padding: 15px 20px;
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      color: ${({ theme }: any) => theme.text};
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0px;
+      text-align: justified;
+      p {
+        color: ${({ theme }: any) => theme.greyText};
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0px;
+        text-align: justified;
+      }
+      select {
+        margin: 0 16px;
+      }
+      button {
+        margin: 0 8px;
+        //styleName: Regular Text / 12px / Medium;
+        font-family: Manrope;
+        font-size: 12px;
+        color: ${({ theme }: any) => theme.text};
+        font-style: normal;
+        font-weight: 600;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        line-height: 18px;
+        letter-spacing: 0px;
+        text-align: left;
+
+      }
+      button[disabled]{
+        color: ${({ theme }: any) => theme.greyText};
+      }
+    }
   }
   `;

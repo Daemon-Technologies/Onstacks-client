@@ -1,5 +1,5 @@
 import React from "react";
-import ReactFlow, { Elements } from "react-flow-renderer";
+import ReactFlow from "react-flow-renderer";
 import { LeftNode } from "./LeftNode";
 import { CustomNode } from "./Node";
 import { RightNode } from "./RightNode";
@@ -146,7 +146,7 @@ const elements: any = [
     type: "smoothstep",
   },
   {
-    id: "e2-3",
+    id: "e2-7",
     source: "input-1",
     target: "2",
     arrowHeadType: "arrow",
@@ -154,7 +154,7 @@ const elements: any = [
     type: "smoothstep",
   },
   {
-    id: "e1-2",
+    id: "e1-1",
     source: "input-2",
     target: "2",
     arrowHeadType: "arrow",
@@ -170,7 +170,7 @@ const elements: any = [
     type: "smoothstep",
   },
   {
-    id: "e1-2",
+    id: "e1-5",
     source: "input-4",
     target: "2",
     arrowHeadType: "arrow",
@@ -178,35 +178,35 @@ const elements: any = [
     type: "smoothstep",
   },
   {
-    id: "e2-3",
+    id: "e2-9",
     source: "2",
     target: "output-0",
     style: { stroke: "#20C9AC", strokeWidth: 4 },
     type: "smoothstep",
   },
   {
-    id: "e1-2",
+    id: "e1-4",
     source: "2",
     target: "output-1",
     style: { stroke: "#FA699D", strokeWidth: 4 },
     type: "smoothstep",
   },
   {
-    id: "e2-3",
+    id: "e2-5",
     source: "2",
     target: "output-2",
     style: { stroke: "#00A5FF", strokeWidth: 4 },
     type: "smoothstep",
   },
   {
-    id: "e1-2",
+    id: "e1-3",
     source: "2",
     target: "output-3",
     style: { stroke: "#FFA043", strokeWidth: 4 },
     type: "smoothstep",
   },
   {
-    id: "e2-3",
+    id: "e2-4",
     source: "2",
     target: "output-4",
     style: { stroke: "#5542F6", strokeWidth: 4 },
@@ -218,6 +218,8 @@ export const FlowChartNodes = () => (
   <div style={{ height: "100%", width: "100%" }}>
     <ReactFlow
       nodeTypes={nodeTypes}
+      maxZoom={1}
+      minZoom={1}
       arrowHeadColor="#5542F6"
       elements={elements}
     />

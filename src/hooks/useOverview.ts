@@ -145,7 +145,7 @@ export const useOverview = () => {
     });
     axios.get(getBlocks).then((data: any) => {
       setBlocks(
-        data.slice(0, 5).map((r: Blocks) => {
+        data.map((r: Blocks) => {
           return {
             block_number: "#" + r.block_number,
             mined_at:
