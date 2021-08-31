@@ -85,7 +85,6 @@ export const useOverview = () => {
       setOverviewData(data);
     });
     axios.get(getTokenPrice).then((data: any) => {
-      console.log(data);
       setTokens({
         BTC: data.find((token: any) => token.token_name === "BTC").token_price,
         STX: data.find((token: any) => token.token_name === "STX").token_price,

@@ -8,4 +8,4 @@ export const getBlockNumber = (block: string) =>
   `getBlockInfoByNumber?block_number=${block}`;
 export const getMinersInfo = `getMinersInfo`;
 export const getTokenPrice = `getTokenPrice`;
-export const getMiningInfo = `getMiningInfo`;
+export const getMiningInfo = `getMiningInfo?latest_blocks=100`;

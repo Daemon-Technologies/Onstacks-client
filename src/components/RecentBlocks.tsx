@@ -52,7 +52,6 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
     setPageSize,
     state: { pageIndex, pageSize },
   } = tableInstance;
-  console.log(tableInstance);
 
   useEffect(() => {
     setPageSize(initialPageSize || 5);

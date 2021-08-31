@@ -2,7 +2,7 @@ import React from "react";
 
 import { Handle, Position } from "react-flow-renderer";
 
-export const RightNode = ({ data, bgColor }: any) => {
+export const RightNode = ({ data }: any) => {
   const styles = {
     circle: {
       background: data.bgColor,
@@ -18,11 +18,17 @@ export const RightNode = ({ data, bgColor }: any) => {
       width: 14,
       height: 14,
     },
-    node: { display: "flex", marginLeft: 16 },
+    node: {
+      display: "flex",
+      marginRight: 16,
+      opacity: data.bgColor === "#EBEAED" ? 0.2 : 1,
+    },
     title: { fontSize: 14, fontWeight: 500 },
     subtitle: { color: "#84818A", fontSize: 12 },
   };
-  return (
+  return data.isTitle ? (
+    <p className="row-flow-p">Total STX Reward per Miner</p>
+  ) : (
     <>
       <Handle
         type="source"
@@ -35,7 +41,9 @@ export const RightNode = ({ data, bgColor }: any) => {
         <div style={styles.circle} />
         <div>
           <p style={styles.title}>{data.title}</p>
-          <p style={styles.subtitle}>{data.subtitle}</p>
+          <p style={styles.subtitle}>
+            {data.subtitle.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </p>
         </div>
       </div>
     </>

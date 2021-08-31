@@ -32,3 +32,18 @@ export const format = (n: number) => {
   base = abbrev.indexOf(suffix) + 1;
   return suffix ? round(n / pow(1000, base), 2) + suffix : "" + n;
 };
+
+export const getBlockHash = async (blockNumber: any) => {
+  try {
+    const block = await fetch(
+      `https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/${blockNumber}`,
+      {
+        method: "GET",
+      }
+    ).then((block) => block.json());
+    window.open(
+      `https://explorer.stacks.co/block/${block.hash}?chain=mainnet`,
+      "_blank"
+    );
+  } catch (error) {}
+};

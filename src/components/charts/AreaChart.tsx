@@ -43,7 +43,6 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   }, [dims.height, dims.width, theme, themeMode]);
 
   useEffect(() => {
-    console.log(satsCommitted);
     if (satsCommitted && satsCommitted.block_number.length > 0) {
       let values: any = satsCommitted;
       if (values.block_number[0] !== "Block Number") {

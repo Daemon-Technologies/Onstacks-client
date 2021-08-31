@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
 import { InfoCard } from "../components/InfoCard";
 import { AreaChart } from "../components/charts/AreaChart";
@@ -10,6 +11,7 @@ import {
   SatsCommittedProps,
   TokenPriceProps,
 } from "../hooks/useOverview";
+import { getBlockHash } from "../utils/helper";
 
 interface Props {
   theme: any;
@@ -52,14 +54,7 @@ export const Overview: React.FC<Props> = ({
         >
           <p className="based">*Based on the last 100 blocks.</p>
           <div className="data">
-            <a
-              target="_blank"
-              href={
-                "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +
-                overviewData.stx_block_height
-              }
-              rel="noopener noreferrer"
-            >
+            <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
               <span>#{overviewData.stx_block_height} </span> STX Blockheight
             </a>
             <a

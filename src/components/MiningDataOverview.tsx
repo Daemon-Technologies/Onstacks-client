@@ -1,4 +1,5 @@
 import React from "react";
+import { MiningInfo } from "../hooks/useMiningData";
 import { Blocks } from "../hooks/useOverview";
 import { FlowChartNodes } from "./charts/FlowChartNodes";
 import { LineChart } from "./charts/LineChart";
@@ -7,13 +8,14 @@ import { RecentBlocks } from "./RecentBlocks";
 export const MiningDataOverview: React.FC<{
   areaBlocks: string[];
   areaSeries: any;
+  miningInfo: MiningInfo;
   blocks: Blocks[];
   theme: any;
-}> = ({ areaBlocks, areaSeries, theme, blocks }) => {
+}> = ({ areaBlocks, areaSeries, theme, blocks, miningInfo }) => {
   return (
     <>
       <div className="flow-chart" id="content1">
-        <FlowChartNodes />
+        <FlowChartNodes miningInfo={miningInfo} />
       </div>
       <div id="content3">
         <p className="title">Top miner burned fees</p>

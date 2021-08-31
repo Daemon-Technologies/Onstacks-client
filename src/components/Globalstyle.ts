@@ -429,7 +429,20 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
+  
+    .row-flow-p {
+      font-family: Manrope;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 22px;
+      letter-spacing: 0px;
+      text-align: left;
 
+    }
+  .react-flow__pane, .react-flow__renderer, .react-flow__selectionpane {
+    height: 100%;
+  }
   #content1 {
     grid-area: content1;
     padding: 24px;
@@ -685,8 +698,13 @@ export const GlobalStyles = createGlobalStyle`
     left: 0 !important;
   }
   #content4, #content3, #content2, #content1 {
-    max-height: 600px;
+    /* max-height: 600px; */
     min-height: 275px;
+  }
+  .miningData {
+    #content1 {
+      height: auto !important;
+    }
   }
   .info-card div .sub-title {
     font-size: 16px;
@@ -744,6 +762,9 @@ export const GlobalStyles = createGlobalStyle`
     height: 100% !important;
   }
   @media only screen and (max-width: 768px) {
+    .miningData {
+      padding: 16px !important;
+    }
     #labelOverlay {
       left: 43%;
     }
@@ -784,7 +805,11 @@ export const GlobalStyles = createGlobalStyle`
     height: auto;
   }
   #main {
-    margin-top: 34px;
+    margin-top: 45px;
+  }
+  .row-content {
+    flex-direction: column;
+    align-items: flex-start;
   }
   #content1, #content2, #content3, #content4, .info-card {
     width: 98%;
@@ -794,8 +819,10 @@ export const GlobalStyles = createGlobalStyle`
     max-height: 400px;
   }
   
-  #content4 {
-    height: 300px;
+  .miningData {
+    #content4 {
+    height: auto;
+  }
   }
 
   .info-card {

@@ -9,6 +9,7 @@ import Bitcoin from "../assets/side-menu/Bitcoin-Oval.svg";
 import Stacks from "../assets/side-menu/Stacks-Oval.svg";
 
 import { BubbleChart } from "../components/charts/BubbleChart";
+import { getBlockHash } from "../utils/helper";
 
 interface Props {
   theme: any;
@@ -30,13 +31,14 @@ export const MiningData: React.FC<Props> = ({
   themeToggler,
 }) => {
   const [toggle, setToggle] = useState(false);
-  const [tabIndex, setTabIndex] = useState(2);
+  const [tabIndex, setTabIndex] = useState(0);
   const [bubbles, setBubbles] = useState<any[]>([]);
 
   const {
     blocks: minersBlocks,
     getBlockByNumber,
     currentBlock,
+    miningInfo,
   } = useMiningData();
   useEffect(() => {
     const { innerWidth: width } = window;
@@ -59,7 +61,7 @@ export const MiningData: React.FC<Props> = ({
 
   useEffect(() => {
     if (blocks.length > 0) {
-      getBlockByNumber(blocks[blocks.length - 1].block_number.toString());
+      getBlockByNumber(blocks[0].block_number.toString());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocks]);
@@ -92,6 +94,7 @@ export const MiningData: React.FC<Props> = ({
       {tabIndex === 0 && (
         <MiningDataOverview
           areaBlocks={areaBlocks}
+          miningInfo={miningInfo}
           areaSeries={areaSeries}
           blocks={blocks}
           theme={theme}
@@ -170,7 +173,12 @@ export const MiningData: React.FC<Props> = ({
               }}
             >
               <p className="title">Block information</p>
-              <p className="sub-title">View on explorer</p>
+              <p
+                className="button-view"
+                onClick={() => getBlockHash(overviewData.stx_block_height)}
+              >
+                View on explorer
+              </p>
             </div>
             <p className="sub-title">{currentBlock?.blockNumber}</p>
 
@@ -193,13 +201,27 @@ export const MiningData: React.FC<Props> = ({
             <div>
               <div className={"row-content"}>
                 <p>Winner Address</p>
-                <p className={"a-tag"}>
-                  {currentBlock?.block_info.winning_address}
-                </p>
+                <p
+                  className={"a-tag"}
+                >{`${currentBlock?.block_info.winning_address.substring(
+                  0,
+                  8
+                )} ... ${currentBlock?.block_info.winning_address.substring(
+                  currentBlock?.block_info.winning_address.length - 10,
+                  currentBlock?.block_info.winning_address.length - 1
+                )}`}</p>
               </div>
               <div className={"row-content"}>
                 <p>Tx ID</p>
-                <p className={"a-tag"}>{currentBlock?.block_info.tx_id}</p>
+                <p
+                  className={"a-tag"}
+                >{`${currentBlock?.block_info.tx_id.substring(
+                  0,
+                  8
+                )} ... ${currentBlock?.block_info.tx_id.substring(
+                  currentBlock?.block_info.tx_id.length - 10,
+                  currentBlock?.block_info.tx_id.length - 1
+                )}`}</p>
               </div>
               <div className={"row-content"}>
                 <p>Block height</p>

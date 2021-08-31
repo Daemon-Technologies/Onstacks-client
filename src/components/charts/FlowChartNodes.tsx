@@ -1,227 +1,132 @@
-import React from "react";
-import ReactFlow from "react-flow-renderer";
-import { LeftNode } from "./LeftNode";
-import { CustomNode } from "./Node";
-import { RightNode } from "./RightNode";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
+import { useState } from "react";
+import ReactFlow, { PanOnScrollMode } from "react-flow-renderer";
+import { MiningInfo } from "../../hooks/useMiningData";
+import { randomColorGenerator } from "../../utils/helper";
+import { nodeTypes, edgeTypes, customElements } from "./NodeUtils";
 
-const nodeTypes = {
-  selectorNode: CustomNode,
-  leftNode: LeftNode,
-  rightNode: RightNode,
+export const FlowChartNodes: React.FC<{
+  miningInfo: MiningInfo;
+}> = ({ miningInfo }) => {
+  const [selectedNodeId, setSelectedNodeId] = useState("");
+  const [selectedColor, setselectedColor] = useState("");
+  const [elements, setElements] = useState([]);
+  const colorPalette = randomColorGenerator();
+
+  const onElementClick = (event: any, element: any) => {
+    if (element.data) {
+      if (selectedNodeId !== element.data.stx_address) {
+        setSelectedNodeId(element.data.stx_address);
+        setselectedColor(colorPalette[element.data.index]);
+      } else {
+        setSelectedNodeId("");
+        setselectedColor("");
+      }
+    }
+  };
+
+  useEffect(() => {
+    let miners: any = [];
+    if (miningInfo.total_sats_spent) {
+      miningInfo.miners_info.slice(0, 5).forEach((miner, index) => {
+        miners.push(
+          {
+            id: `input-${miner.stx_address}`,
+            type: "leftNode", // input node
+            data: {
+              stx_address: miner.stx_address,
+              index,
+              title:
+                miner.stx_address.substring(0, 12) +
+                "..." +
+                miner.stx_address.substring(
+                  miner.stx_address.length - 12,
+                  miner.stx_address.length - 1
+                ),
+              subtitle: miner.total_sats_spent,
+              bgColor:
+                selectedNodeId === "" || selectedNodeId === miner.stx_address
+                  ? colorPalette[index]
+                  : "#EBEAED",
+            },
+            sourcePosition: "right",
+            targetPosition: "left",
+            style: { border: 0 },
+            position: { x: 18, y: 70 + index * 70 },
+          },
+          {
+            id: `e-in-${miner.stx_address}`,
+            source: `input-${miner.stx_address}`,
+            target: "2",
+            arrowHeadType: "arrow",
+            style: {
+              stroke: selectedNodeId === "" ? colorPalette[index] : "#EBEAED",
+              strokeWidth: 4,
+              borderRadius: 20,
+            },
+            type: "smoothstep",
+          },
+          {
+            id: `e-out-${miner.stx_address}`,
+            source: `2`,
+            target: `output-${miner.stx_address}`,
+            arrowHeadType: "arrow",
+            style: {
+              stroke: selectedNodeId === "" ? colorPalette[index] : "#EBEAED",
+              strokeWidth: 4,
+              borderRadius: 20,
+            },
+            type: "smoothstep",
+          },
+          {
+            id: `output-${miner.stx_address}`,
+            type: "rightNode", // output node
+            sourcePosition: "right",
+            targetPosition: "left",
+            data: {
+              index,
+              stx_address: miner.stx_address,
+              title:
+                miner.stx_address.substring(0, 12) +
+                "..." +
+                miner.stx_address.substring(
+                  miner.stx_address.length - 12,
+                  miner.stx_address.length - 1
+                ),
+              subtitle: miner.total_stx_reward,
+              bgColor:
+                selectedNodeId === "" || selectedNodeId === miner.stx_address
+                  ? colorPalette[index]
+                  : "#EBEAED",
+            },
+            position: { x: 1302, y: 70 + index * 70 },
+          }
+        );
+      });
+      setElements(
+        miners.concat(customElements(miningInfo, selectedNodeId, selectedColor))
+      );
+    }
+  }, [miningInfo, selectedNodeId]);
+  return (
+    <div style={{ height: "100%", width: "100%" }}>
+      <p className="title">STX Mining Asset Flow - Last 100 Blocks</p>
+      {/* <div className={'row-flow'}><p>Total Sats Spent per Miner</p> <p>Total Sats Spent per Miner</p> </div> */}
+      <ReactFlow
+        nodeTypes={nodeTypes}
+        nodesDraggable={false}
+        edgeTypes={edgeTypes}
+        maxZoom={1}
+        minZoom={1}
+        style={{ height: "90%" }}
+        // panOnScroll={false}
+        onElementClick={onElementClick}
+        // paneMoveable={false}
+        panOnScrollMode={PanOnScrollMode.Horizontal}
+        arrowHeadColor="transparent"
+        elements={elements}
+      />
+    </div>
+  );
 };
-
-const elements: any = [
-  {
-    id: "input-0",
-    type: "leftNode", // input node
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#20C9AC",
-    },
-    sourcePosition: "right",
-    targetPosition: "left",
-    style: { border: 0 },
-    position: { x: 18, y: 10 },
-  },
-  {
-    id: "input-1",
-    type: "leftNode", // input node
-    sourcePosition: "right",
-    targetPosition: "left",
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#FA699D",
-    },
-    position: { x: 19, y: 70 },
-  },
-  {
-    id: "input-2",
-    type: "leftNode", // SPZ0RAC1EF...AF4ECT5A7DD
-    sourcePosition: "right",
-    targetPosition: "left",
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#00A5FF",
-    },
-    position: { x: 20, y: 130 },
-  },
-  {
-    id: "input-3",
-    type: "leftNode", // SPZ0RAC1EF...AF4ECT5A7DD
-    sourcePosition: "right",
-    targetPosition: "left",
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#FFA043",
-    },
-    position: { x: 19, y: 190 },
-  },
-  {
-    id: "input-4",
-    type: "leftNode", // SPZ0RAC1EF...AF4ECT5A7DD
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#5542F6",
-    },
-    sourcePosition: "right",
-    targetPosition: "left",
-
-    position: { x: 18, y: 250 },
-  },
-  // default node
-  {
-    id: "2",
-    // you can also pass a React component as a label
-    type: "selectorNode",
-    position: { x: 550, y: 90 },
-  },
-  {
-    id: "output-0",
-    type: "rightNode", // output node
-    sourcePosition: "right",
-    targetPosition: "left",
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#20C9AC",
-    },
-    position: { x: 902, y: 10 },
-  },
-  {
-    id: "output-1",
-    type: "rightNode", // output node
-    targetPosition: "left",
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#FA699D",
-    },
-    position: { x: 901, y: 70 },
-  },
-  {
-    id: "output-2",
-    type: "rightNode", // output node
-    targetPosition: "left",
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#00A5FF",
-    },
-    position: { x: 900, y: 130 },
-  },
-  {
-    id: "output-3",
-    type: "rightNode", // output node
-    targetPosition: "left",
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#FFA043",
-    },
-    position: { x: 901, y: 190 },
-  },
-  {
-    id: "output-4",
-    type: "rightNode", // output node
-    data: {
-      title: "SPZ0RAC1EF...AF4ECT5A7DD",
-      subtitle: "2,178,314 sats",
-      bgColor: "#5542F6",
-    },
-    targetPosition: "left",
-    position: { x: 902, y: 250 },
-  },
-  // animated edge
-  {
-    id: "e1-2",
-    source: "input-0",
-    target: "2",
-    arrowHeadType: "arrow",
-    style: { stroke: "#20C9AC", strokeWidth: 4, borderRadius: 20 },
-    type: "smoothstep",
-  },
-  {
-    id: "e2-7",
-    source: "input-1",
-    target: "2",
-    arrowHeadType: "arrow",
-    style: { stroke: "#FA699D", strokeWidth: 4 },
-    type: "smoothstep",
-  },
-  {
-    id: "e1-1",
-    source: "input-2",
-    target: "2",
-    arrowHeadType: "arrow",
-    style: { stroke: "#00A5FF", strokeWidth: 4 },
-    type: "smoothstep",
-  },
-  {
-    id: "e2-3",
-    source: "input-3",
-    target: "2",
-    arrowHeadType: "arrow",
-    style: { stroke: "#FFA043", strokeWidth: 4 },
-    type: "smoothstep",
-  },
-  {
-    id: "e1-5",
-    source: "input-4",
-    target: "2",
-    arrowHeadType: "arrow",
-    style: { stroke: "#5542F6", strokeWidth: 4 },
-    type: "smoothstep",
-  },
-  {
-    id: "e2-9",
-    source: "2",
-    target: "output-0",
-    style: { stroke: "#20C9AC", strokeWidth: 4 },
-    type: "smoothstep",
-  },
-  {
-    id: "e1-4",
-    source: "2",
-    target: "output-1",
-    style: { stroke: "#FA699D", strokeWidth: 4 },
-    type: "smoothstep",
-  },
-  {
-    id: "e2-5",
-    source: "2",
-    target: "output-2",
-    style: { stroke: "#00A5FF", strokeWidth: 4 },
-    type: "smoothstep",
-  },
-  {
-    id: "e1-3",
-    source: "2",
-    target: "output-3",
-    style: { stroke: "#FFA043", strokeWidth: 4 },
-    type: "smoothstep",
-  },
-  {
-    id: "e2-4",
-    source: "2",
-    target: "output-4",
-    style: { stroke: "#5542F6", strokeWidth: 4 },
-    type: "smoothstep",
-  },
-];
-
-export const FlowChartNodes = () => (
-  <div style={{ height: "100%", width: "100%" }}>
-    <ReactFlow
-      nodeTypes={nodeTypes}
-      maxZoom={1}
-      minZoom={1}
-      arrowHeadColor="#5542F6"
-      elements={elements}
-    />
-  </div>
-);

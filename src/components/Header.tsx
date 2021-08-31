@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import Notification from "../assets/side-menu/notifications.svg";
 import LogoLight from "../assets/side-menu/stx-dark.svg";
 import LogoDark from "../assets/side-menu/stx-light.svg";
@@ -23,8 +23,16 @@ export const Header: React.FC<{
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-  // const [active, setActive] = useState(0);
-  const { push } = useHistory();
+  const [active, setActive] = useState(0);
+  const { push, location } = useHistory();
+
+  useEffect(() => {
+    if (location.pathname === "/mining-data") {
+      setActive(1);
+    } else {
+      setActive(0);
+    }
+  }, [location.pathname]);
   return (
     <div className="header">
       <div className="mobile-menu" onClick={handleClick}>
@@ -41,9 +49,9 @@ export const Header: React.FC<{
         </div>
         <ul className={click ? "nav-options active" : "nav-options"}>
           <li
-            className="option active"
+            className={`option ${active === 0 ? "active" : ""}`}
             onClick={() => {
-              // setActive(0);
+              setActive(0);
               closeMobileMenu();
               push("/");
             }}
@@ -51,9 +59,9 @@ export const Header: React.FC<{
             <p>Overview</p>
           </li>
           <li
-            className="option"
+            className={`option ${active === 1 ? "active" : ""}`}
             onClick={() => {
-              // setActive(1);
+              setActive(1);
               push("/mining-data");
             }}
           >
