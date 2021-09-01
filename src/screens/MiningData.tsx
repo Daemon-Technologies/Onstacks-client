@@ -4,12 +4,11 @@ import { MiningDataHeader } from "../components/MiningDataHeader";
 import { MiningDataOverview } from "../components/MiningDataOverview";
 import { useMiningData } from "../hooks/useMiningData";
 import { Miners } from "../components/Miners";
-import { Tooltip } from "../components/Tooltip";
-import Bitcoin from "../assets/side-menu/Bitcoin-Oval.svg";
-import Stacks from "../assets/side-menu/Stacks-Oval.svg";
 
 import { BubbleChart } from "../components/charts/BubbleChart";
-import { getBlockHash } from "../utils/helper";
+import { Tabs } from "../components/Tabs";
+import { BlockAnalyzer } from "../components/BlockAnalyzer";
+import { BlockInformation } from "../components/BlockInformation";
 
 interface Props {
   theme: any;
@@ -70,26 +69,7 @@ export const MiningData: React.FC<Props> = ({
     <div className="miningData">
       <div id="main">
         <MiningDataHeader overviewData={overviewData} />
-        <div className={"tabs"}>
-          <div
-            onClick={() => setTabIndex(0)}
-            className={tabIndex === 0 ? "active" : ""}
-          >
-            Overview
-          </div>
-          <div
-            onClick={() => setTabIndex(1)}
-            className={tabIndex === 1 ? "active" : ""}
-          >
-            Miners
-          </div>
-          <div
-            onClick={() => setTabIndex(2)}
-            className={tabIndex === 2 ? "active" : ""}
-          >
-            Blocks
-          </div>
-        </div>
+        <Tabs setTabIndex={setTabIndex} tabIndex={tabIndex} />
       </div>
       {tabIndex === 0 && (
         <MiningDataOverview
@@ -112,23 +92,10 @@ export const MiningData: React.FC<Props> = ({
         <>
           <div id={"content1"}>
             <p>Block analyzer</p>
-            {blocks.length > 0 && (
-              <div className={"block-analyzer"}>
-                {blocks.map((block) => {
-                  return (
-                    <Tooltip message={block.block_number} position={"top"}>
-                      <div
-                        onClick={() => {
-                          getBlockByNumber(block.block_number.toString());
-                        }}
-                        data-tip={block.block_number}
-                        className={"block"}
-                      ></div>
-                    </Tooltip>
-                  );
-                })}
-              </div>
-            )}
+            <BlockAnalyzer
+              blocks={blocks}
+              getBlockByNumber={getBlockByNumber}
+            />
           </div>
           {currentBlock && (
             <div
@@ -164,85 +131,10 @@ export const MiningData: React.FC<Props> = ({
               <BubbleChart bubbles={bubbles} theme={theme} />
             </div>
           )}
-          <div id={"content4"}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <p className="title">Block information</p>
-              <p
-                className="button-view"
-                onClick={() => getBlockHash(overviewData.stx_block_height)}
-              >
-                View on explorer
-              </p>
-            </div>
-            <p className="sub-title">{currentBlock?.blockNumber}</p>
-
-            <div className={"lines"}>
-              <div>
-                <img src={Stacks} alt={"Stacks"} />
-                <p>STX Confirmation</p>
-              </div>
-              <div>
-                <img src={Bitcoin} alt={"Bitcoin"} />
-                <p>Bitcoin Confirmation</p>
-              </div>
-              <div>
-                <img src={Stacks} alt={"Stacks"} />
-                <p>STX Confirmation</p>
-              </div>
-              <hr className={"hr"} />
-            </div>
-            <hr />
-            <div>
-              <div className={"row-content"}>
-                <p>Winner Address</p>
-                <p
-                  className={"a-tag"}
-                >{`${currentBlock?.block_info.winning_address.substring(
-                  0,
-                  8
-                )} ... ${currentBlock?.block_info.winning_address.substring(
-                  currentBlock?.block_info.winning_address.length - 10,
-                  currentBlock?.block_info.winning_address.length - 1
-                )}`}</p>
-              </div>
-              <div className={"row-content"}>
-                <p>Tx ID</p>
-                <p
-                  className={"a-tag"}
-                >{`${currentBlock?.block_info.tx_id.substring(
-                  0,
-                  8
-                )} ... ${currentBlock?.block_info.tx_id.substring(
-                  currentBlock?.block_info.tx_id.length - 10,
-                  currentBlock?.block_info.tx_id.length - 1
-                )}`}</p>
-              </div>
-              <div className={"row-content"}>
-                <p>Block height</p>
-                <p className={"a-tag"}>
-                  {currentBlock?.block_info.block_height}
-                </p>
-              </div>
-              <div className={"row-content"}>
-                <p>Stacks Awarded</p>
-                <p>{currentBlock?.block_info.stacks_awarded}</p>
-              </div>
-              <div className={"row-content"}>
-                <p>Winner Miner Burned Fees</p>
-                <p>{currentBlock?.block_info.winning_miner_burn_fee}</p>
-              </div>
-              <div className={"row-content"}>
-                <p>Rate of Return</p>
-                <p>{currentBlock?.block_info.return_rate}</p>
-              </div>
-            </div>
-          </div>
+          <BlockInformation
+            currentBlock={currentBlock}
+            overviewData={overviewData}
+          />
         </>
       )}
     </div>

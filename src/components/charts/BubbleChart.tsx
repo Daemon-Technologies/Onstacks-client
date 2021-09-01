@@ -22,7 +22,7 @@ export const BubbleChart: React.FC<Props> = ({ theme, bubbles }) => {
         colors: colorPalette,
         vAxis: {
           baseline: "none",
-          ticks: [0, 0.22],
+          ticks: [0, 0.25],
           gridlines: { color: "transparent" },
           textPosition: "none",
         },

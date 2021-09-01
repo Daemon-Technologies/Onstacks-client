@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { usePagination, useTable } from "react-table";
 import { MinerInfo } from "../hooks/useMiningData";
+import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
   blocks: MinerInfo[];
@@ -8,6 +9,8 @@ interface Props {
 }
 export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
   const data = useMemo(() => blocks, [blocks]);
+  const dims = useWindowDimensions();
+
   const columns: any = useMemo(
     () => [
       {
@@ -103,14 +106,16 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
               </option>
             ))}
           </select>
-          <p>items per page</p>
+          {dims.width > 550 && <p>items per page</p>}
         </div>
-        <span>
-          Page{" "}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{" "}
-        </span>
+        {dims.width > 550 && (
+          <span>
+            Page{" "}
+            <strong>
+              {pageIndex + 1} of {pageOptions.length}
+            </strong>{" "}
+          </span>
+        )}
         <div>
           <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
             {"First"}

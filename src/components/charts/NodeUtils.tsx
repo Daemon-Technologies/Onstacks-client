@@ -17,13 +17,14 @@ export const edgeTypes = {
 export const customElements: any = (
   miningInfo: MiningInfo,
   selectedNodeId: string,
-  color: string
+  color: string,
+  width: number
 ) => {
   const custom: any = [
     {
       id: "2",
       type: "selectorNode",
-      position: { x: 800, y: 180 },
+      position: { x: width < 1100 ? width - 400 : 700, y: 180 },
     },
 
     {
@@ -32,9 +33,7 @@ export const customElements: any = (
       data: {
         isTitle: true,
       },
-      // sourcePosition: "right",
-      // targetPosition: "left",
-      position: { x: 1300, y: 20 },
+      position: { x: width, y: 20 },
     },
     {
       id: `1`,
@@ -62,7 +61,7 @@ export const customElements: any = (
         marginTop: 20,
         div: {
           marginLeft: 100,
-          marginTop: 10,
+          marginTop: 16,
         },
       },
       arrowHeadType: "arrowclosed",
@@ -84,6 +83,7 @@ export const customElements: any = (
         marginTop: 20,
         div: {
           marginRight: 10,
+          marginTop: 16,
           backgroundColor: "transparent",
         },
       },

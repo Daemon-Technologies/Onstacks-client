@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import ReactFlow, { PanOnScrollMode } from "react-flow-renderer";
 import { MiningInfo } from "../../hooks/useMiningData";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 import { randomColorGenerator } from "../../utils/helper";
 import { nodeTypes, edgeTypes, customElements } from "./NodeUtils";
 
@@ -10,8 +11,10 @@ export const FlowChartNodes: React.FC<{
   miningInfo: MiningInfo;
 }> = ({ miningInfo }) => {
   const [selectedNodeId, setSelectedNodeId] = useState("");
+  const dims = useWindowDimensions();
   const [selectedColor, setselectedColor] = useState("");
   const [elements, setElements] = useState([]);
+  const [width, setWidth] = useState(1300);
   const colorPalette = randomColorGenerator();
 
   const onElementClick = (event: any, element: any) => {
@@ -100,15 +103,27 @@ export const FlowChartNodes: React.FC<{
                   ? colorPalette[index]
                   : "#EBEAED",
             },
-            position: { x: 1302, y: 70 + index * 70 },
+            position: { x: width, y: 70 + index * 70 },
           }
         );
       });
       setElements(
-        miners.concat(customElements(miningInfo, selectedNodeId, selectedColor))
+        miners.concat(
+          customElements(miningInfo, selectedNodeId, selectedColor, width)
+        )
       );
     }
   }, [miningInfo, selectedNodeId]);
+
+  useEffect(() => {
+    if (dims.width > 1500) {
+      setWidth(1300);
+    } else if (dims.width > 1200) {
+      setWidth(1000);
+    } else {
+      setWidth(950);
+    }
+  }, [dims]);
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <p className="title">STX Mining Asset Flow - Last 100 Blocks</p>
@@ -120,9 +135,9 @@ export const FlowChartNodes: React.FC<{
         maxZoom={1}
         minZoom={1}
         style={{ height: "90%" }}
-        // panOnScroll={false}
+        panOnScroll={dims.width < 1300}
         onElementClick={onElementClick}
-        // paneMoveable={false}
+        paneMoveable={dims.width < 1300}
         panOnScrollMode={PanOnScrollMode.Horizontal}
         arrowHeadColor="transparent"
         elements={elements}

@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { OverviewProps } from "../hooks/useOverview";
+import { getBlockHash } from "../utils/helper";
 import { InfoCard } from "./InfoCard";
 
 export const MiningDataHeader: React.FC<{ overviewData: OverviewProps }> = ({
@@ -20,14 +22,7 @@ export const MiningDataHeader: React.FC<{ overviewData: OverviewProps }> = ({
       >
         <p className="based">*Based on the last 100 blocks.</p>
         <div className="data">
-          <a
-            target="_blank"
-            href={
-              "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +
-              overviewData.stx_block_height
-            }
-            rel="noopener noreferrer"
-          >
+          <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
             <span>#{overviewData.stx_block_height} </span> STX Blockheight
           </a>
           <a

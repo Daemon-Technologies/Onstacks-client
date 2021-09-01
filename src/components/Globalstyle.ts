@@ -76,6 +76,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 14px 32px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     /* height: 80px; */
+    z-index: 200;
   }
   .logo-nav {
     display: flex;
@@ -584,8 +585,8 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: space-between;
     p {
       color: ${({ theme }: any) => theme.greyText} !important;    
-      font-weight: 600;
-      font-size: 12px;
+      font-weight: 500;
+      font-size: 14px;
     }
     .a-tag {
       font-weight: 700;
@@ -663,6 +664,14 @@ export const GlobalStyles = createGlobalStyle`
     #labelOverlay {
       left: 26%;
     }
+    table {
+    td {
+      font-size: 12px;
+      font-weight: 600;
+      width: 20%;
+      line-height: 10px;
+    }
+  }
   }
   @media only screen and (max-height: 828px) { 
    
@@ -705,6 +714,10 @@ export const GlobalStyles = createGlobalStyle`
     #content1 {
       height: auto !important;
     }
+  }
+  .flow-chart {
+    height: auto !important;
+    min-height: 500px !important;
   }
   .info-card div .sub-title {
     font-size: 16px;
@@ -782,6 +795,19 @@ export const GlobalStyles = createGlobalStyle`
   }
   .based {
     display: none;
+  }
+  table {
+    td {
+      font-size: 9px;
+      font-weight: 600;
+      width: 20%;
+      line-height: 10px;
+    }
+  }
+  .small-table {
+    td {
+      font-size: 12px !important;
+    }
   }
   .container {
     grid-template-columns: 1fr;
@@ -948,10 +974,12 @@ export const GlobalStyles = createGlobalStyle`
       flex-direction: row-reverse;
       justify-content: flex-end;
       margin-top: 16px;
+      flex-wrap: wrap;
       .block {
         width: 24px;
         border-radius: 4px;
         height: 24px;
+        cursor: pointer;
         margin-right: 4px;
         background-color: #20C9AC;
       }
@@ -1005,5 +1033,11 @@ export const GlobalStyles = createGlobalStyle`
         color: ${({ theme }: any) => theme.greyText};
       }
     }
+  }
+  .button-view {
+    background-color: #FFA043;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
   }
   `;

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { usePagination, useTable } from "react-table";
 import { Blocks } from "../hooks/useOverview";
+import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
   blocks: Blocks[];
@@ -8,6 +9,7 @@ interface Props {
 }
 export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
   const data = useMemo(() => blocks, [blocks]);
+  const dims = useWindowDimensions();
   const columns: any = useMemo(
     () => [
       {
@@ -59,7 +61,7 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
   }, [initialPageSize]);
   return (
     <>
-      <table {...getTableProps()}>
+      <table className={"small-table"} {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup: any) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -99,14 +101,16 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
               </option>
             ))}
           </select>
-          <p>items per page</p>
+          {dims.width > 550 && <p>items per page</p>}
         </div>
-        <span>
-          Page{" "}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{" "}
-        </span>
+        {dims.width > 550 && (
+          <span>
+            Page{" "}
+            <strong>
+              {pageIndex + 1} of {pageOptions.length}
+            </strong>{" "}
+          </span>
+        )}
         <div>
           <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
             {"First"}
