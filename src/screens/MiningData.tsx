@@ -33,7 +33,7 @@ export const MiningData: React.FC<Props> = ({
   themeToggler,
 }) => {
   const [toggle, setToggle] = useState(false);
-  const [tabIndex, setTabIndex] = useState(2);
+  const [tabIndex, setTabIndex] = useState(0);
   const [bubbles, setBubbles] = useState<any[]>([]);
   const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
   const {
