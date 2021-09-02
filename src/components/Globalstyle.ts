@@ -852,14 +852,14 @@ export const GlobalStyles = createGlobalStyle`
     align-items: flex-start;
   }
   #content1, #content2, #content3, #content4, .info-card {
-    width: 90%;
+    width: 98%;
   }
   #content3 {
     height: 400px;
     max-height: 400px;
   }
   #content4 {
-    width: 90% !important;
+    width: 98% !important;
   }
   .miningData {
     #content1, #content2, #content3, #content4, .info-card {
@@ -1063,4 +1063,10 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 600;
     cursor: pointer;
   }
+  @media only screen and (max-width: 400px) {
+    #content1, #content2, #content3, #content4, .info-card {
+    width: 91% !important;
+  }
+  }
+ 
   `;
