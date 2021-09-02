@@ -240,7 +240,7 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
   }
   .hr {
-      background:  ${({ theme }: any) => theme.border} !important;
+      background:  red;
       margin: 24px 10px;
       height: 1px;
     }
@@ -397,7 +397,9 @@ export const GlobalStyles = createGlobalStyle`
     grid-area: main;
     .data {
       font-size: 14px;
+      cursor: pointer;
       margin: 14px 0;
+      font-weight: 600;
       display: flex;
       color: ${({ theme }: any) => theme.greyText} !important;
       text-align: right;
@@ -577,13 +579,52 @@ export const GlobalStyles = createGlobalStyle`
   }
   .hr {
     border:none;
-    border-top: 1pt dashed ${({ theme }: any) => theme.text};
+    border-top: 1pt dashed ${({ theme }: any) => theme.border};
     color:#fff;
     background-color:#fff;
     height:1px;
     width:100%;
     top: -5px;
     position: absolute;
+  }
+  .block-number {
+    font-family: Manrope;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0px;
+    text-align: left;
+    span {
+      color: ${({ theme }: any) => theme.greyText};
+      font-size: 20px;
+    }
+  }
+  .block-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 16px 0;
+    width: 100%;
+    grid-area: content1;
+    p {
+      margin-right: 20px;
+    }
+    div {
+      width: 30px;
+      border-radius: 4px;
+      cursor: pointer;
+      height: 30px;
+      background-color: rgba(255, 160, 67, 0.25);
+      margin-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 20px;
+        /* height: 10px; */
+      }
+    }
   }
   .row-content {
     display: flex;
@@ -1060,7 +1101,10 @@ export const GlobalStyles = createGlobalStyle`
     padding: 8px 16px;
     border-radius: 4px;
     color: white  ;
+    justify-content: center;
+    align-items: center;
     font-weight: 600;
+    display: flex;
     cursor: pointer;
   }
   @media only screen and (max-width: 400px) {

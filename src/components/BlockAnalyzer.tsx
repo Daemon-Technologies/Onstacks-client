@@ -1,6 +1,5 @@
 import React from "react";
 import { Blocks } from "../hooks/useOverview";
-import { Tooltip } from "./Tooltip";
 
 interface Props {
   getBlockByNumber: (block: string) => void;
@@ -17,15 +16,13 @@ export const BlockAnalyzer: React.FC<Props> = ({
         <div className={"block-analyzer"}>
           {blocks.map((block) => {
             return (
-              <Tooltip message={block.block_number} position={"top"}>
-                <div
-                  onClick={() => {
-                    getBlockByNumber(block.block_number.toString());
-                  }}
-                  data-tip={block.block_number}
-                  className={"block"}
-                ></div>
-              </Tooltip>
+              <div
+                onClick={() => {
+                  getBlockByNumber(block.block_number.toString());
+                }}
+                data-tip={block.block_number}
+                className={"block"}
+              ></div>
             );
           })}
         </div>

@@ -55,8 +55,8 @@ export const Overview: React.FC<Props> = ({
           <p className="based">*Based on the last 100 blocks.</p>
           <div className="data">
             <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
-              <span>#{overviewData.stx_block_height}&nbsp; </span> STX
-              Blockheight
+              STX Blockheight:&nbsp;{" "}
+              <span>#{overviewData.stx_block_height} </span>
             </a>
             <a
               style={{ marginLeft: 16 }}
@@ -66,8 +66,8 @@ export const Overview: React.FC<Props> = ({
               }
               rel="noopener noreferrer"
             >
-              <span>#{overviewData.btc_block_height}&nbsp;</span>
-              BTC Blockheight
+              BTC Blockheight: &nbsp;
+              <span>#{overviewData.btc_block_height}</span>
             </a>
           </div>
         </div>

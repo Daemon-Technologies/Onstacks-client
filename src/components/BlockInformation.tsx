@@ -1,7 +1,12 @@
 import React from "react";
 import { OverviewProps } from "../hooks/useOverview";
-import Bitcoin from "../assets/side-menu/Bitcoin-Oval.svg";
-import Stacks from "../assets/side-menu/Stacks-Oval.svg";
+import BitcoinVerified from "../assets/side-menu/bitcoin-verified.svg";
+import BitcoinPending from "../assets/side-menu/bitcoin-pending.svg";
+import STXVerified from "../assets/side-menu/stx-verified.svg";
+import STXPending from "../assets/side-menu/stx-pending.svg";
+import Search from "../assets/side-menu/search.svg";
+import Reward from "../assets/side-menu/reward-verified.svg";
+import RewardPending from "../assets/side-menu/reward.svg";
 import { getBlockHash } from "../utils/helper";
 import { CurrentBlock } from "../hooks/useMiningData";
 
@@ -25,12 +30,13 @@ export const BlockInformation: React.FC<Props> = ({
           }}
         >
           <p className="title">Block information</p>
-          <p
+          <div
             className="button-view"
             onClick={() => getBlockHash(overviewData.stx_block_height)}
           >
+            <img src={Search} alt={"search"} />
             View on explorer
-          </p>
+          </div>
         </div>
         <p className="sub-title" style={{ fontSize: 32 }}>
           {currentBlock?.blockNumber}
@@ -38,15 +44,36 @@ export const BlockInformation: React.FC<Props> = ({
 
         <div className={"lines"}>
           <div>
-            <img src={Stacks} alt={"Stacks"} />
+            <img
+              src={
+                currentBlock?.block_info.is_stx_pending
+                  ? STXPending
+                  : STXVerified
+              }
+              alt={"Stacks"}
+            />
             <p>STX Confirmation</p>
           </div>
           <div>
-            <img src={Bitcoin} alt={"Bitcoin"} />
+            <img
+              src={
+                currentBlock?.block_info.is_btc_pending
+                  ? BitcoinPending
+                  : BitcoinVerified
+              }
+              alt={"Bitcoin"}
+            />
             <p>Bitcoin Confirmation</p>
           </div>
           <div>
-            <img src={Stacks} alt={"Stacks"} />
+            <img
+              src={
+                currentBlock?.block_info.is_reward_pending
+                  ? RewardPending
+                  : Reward
+              }
+              alt={"Stacks"}
+            />
             <p>STX Confirmation</p>
           </div>
           <hr className={"hr"} />

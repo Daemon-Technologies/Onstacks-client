@@ -23,7 +23,8 @@ export const MiningDataHeader: React.FC<{ overviewData: OverviewProps }> = ({
         <p className="based">*Based on the last 100 blocks.</p>
         <div className="data">
           <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
-            <span>#{overviewData.stx_block_height}&nbsp; </span> STX Blockheight
+            STX Blockheight:&nbsp;{" "}
+            <span>#{overviewData.stx_block_height} </span>
           </a>
           <a
             style={{ marginLeft: 16 }}
@@ -31,8 +32,7 @@ export const MiningDataHeader: React.FC<{ overviewData: OverviewProps }> = ({
             href={"https://btc.com/btc/block/" + overviewData.btc_block_height}
             rel="noopener noreferrer"
           >
-            <span>#{overviewData.btc_block_height}&nbsp;</span>
-            BTC Blockheight
+            BTC Blockheight: &nbsp;<span>#{overviewData.btc_block_height}</span>
           </a>
         </div>
       </div>
