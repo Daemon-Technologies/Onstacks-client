@@ -30,7 +30,7 @@ export const MiningDataOverview: React.FC<{
         </div>
       </div>
       <div id="content4">
-        <p>Recent blocks</p>
+        <p className={"title-table"}>Recent blocks</p>
         {blocks.length > 0 && <RecentBlocks blocks={blocks} />}
       </div>
     </>

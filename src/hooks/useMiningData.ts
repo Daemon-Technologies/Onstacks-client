@@ -64,18 +64,24 @@ export const useMiningData = () => {
           return {
             stx_address:
               window.innerWidth > 600
-                ? `#${r.stx_address}`
-                : `#${r.stx_address.substring(
+                ? `${r.stx_address.substring(
+                    0,
+                    12
+                  )} ... ${r.stx_address.substring(
+                    r.stx_address.length - 12,
+                    r.stx_address.length - 1
+                  )}`
+                : `${r.stx_address.substring(
                     0,
                     4
                   )} ... ${r.stx_address.substring(
                     r.stx_address.length - 4,
                     r.stx_address.length - 1
                   )}`,
-            total_burnfee: r.total_burnfee || 0,
-            total_block_reward: r.total_block_reward || 0,
-            total_participation: r.total_participation || 0,
-            total_stx_reward: r.total_stx_reward || 0,
+            total_burnfee: numberWithCommas(r.total_burnfee) || 0,
+            total_block_reward: numberWithCommas(r.total_block_reward) || 0,
+            total_participation: numberWithCommas(r.total_participation) || 0,
+            total_stx_reward: numberWithCommas(r.total_stx_reward) || 0,
           };
         })
       );
@@ -84,7 +90,13 @@ export const useMiningData = () => {
       setMiningInfo(data);
     });
   }, []);
-
+  const numberWithCommas = (x: number) => {
+    if (x)
+      return x
+        .toFixed(1)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const getBlockByNumber = (blockNumber: string) => {
     axios.get(getBlockNumber(blockNumber.substring(1))).then((data: any) => {
       setCurrentBlock({ ...data, blockNumber });

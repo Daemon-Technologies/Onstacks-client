@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   :root {
-    --main-radius: 5px;
+    --main-radius: 0px;
     --main-padding: 16px;
     overflow-x: hidden;
     /* overflow-y: hidden; */
@@ -185,8 +185,10 @@ export const GlobalStyles = createGlobalStyle`
     list-style-type: none;
     grid-gap: 0px;
   }
-  #main {
-    margin-top: 24px;
+  .miningData {
+    #main {
+    margin-top: 45px;
+  }
   }
   .nav-options.active {
     background: white;
@@ -469,6 +471,13 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.text} !important;
     }
   }
+  .title-table {
+    font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.greyText} !important;
+  }
   .seprator {
       width: 100%;
       height: 90%;
@@ -572,8 +581,7 @@ export const GlobalStyles = createGlobalStyle`
     color:#fff;
     background-color:#fff;
     height:1px;
-    width:80%;
-    left: 10%;
+    width:100%;
     top: -5px;
     position: absolute;
   }
@@ -583,6 +591,10 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    .black {
+      color: ${({ theme }: any) => theme.text} !important;    
+
+    }
     p {
       color: ${({ theme }: any) => theme.greyText} !important;    
       font-weight: 500;
@@ -720,8 +732,9 @@ export const GlobalStyles = createGlobalStyle`
     min-height: 500px !important;
   }
   .info-card div .sub-title {
-    font-size: 16px;
+    font-size: 13px;
   }
+ 
   :root {
     overflow-y: auto;
   }
@@ -758,7 +771,7 @@ export const GlobalStyles = createGlobalStyle`
   }
  
   .info-card div {
-    padding: 16px
+    padding: 10px
   }
   #content4 {
     padding: 16px !important;
@@ -790,6 +803,7 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 13px !important;
     text-align: center !important;
   }
+  
   th {
       font-size: 12px;
   }
@@ -838,17 +852,24 @@ export const GlobalStyles = createGlobalStyle`
     align-items: flex-start;
   }
   #content1, #content2, #content3, #content4, .info-card {
-    width: 98%;
+    width: 90%;
   }
   #content3 {
     height: 400px;
     max-height: 400px;
   }
-  
+  #content4 {
+    width: 90% !important;
+  }
   .miningData {
+    #content1, #content2, #content3, #content4, .info-card {
+    width: 100%;
+  }
     #content4 {
     height: auto;
+    width: 100% !important
   }
+  
   }
 
   .info-card {
@@ -1038,6 +1059,8 @@ export const GlobalStyles = createGlobalStyle`
     background-color: #FFA043;
     padding: 8px 16px;
     border-radius: 4px;
+    color: white  ;
+    font-weight: 600;
     cursor: pointer;
   }
   `;

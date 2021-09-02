@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import Chart from "react-google-charts";
 import { randomColorGenerator } from "../../utils/helper";
 
@@ -10,7 +11,24 @@ interface Props {
 
 export const BubbleChart: React.FC<Props> = ({ theme, bubbles }) => {
   const colorPalette = randomColorGenerator();
+  const [min, setMin] = useState(10);
+  const [max, setMax] = useState(0);
 
+  useEffect(() => {
+    let minimum = 10;
+    let maximum = 0;
+    bubbles.forEach((bubble) => {
+      if (bubble[2] > maximum) {
+        maximum = bubble[2];
+      }
+      if (bubble[2] < minimum) {
+        minimum = bubble[2];
+      }
+    });
+    setMax(maximum);
+    setMin(minimum);
+    console.log(minimum, maximum);
+  }, [bubbles]);
   return (
     <Chart
       width={"100%"}
@@ -22,7 +40,7 @@ export const BubbleChart: React.FC<Props> = ({ theme, bubbles }) => {
         colors: colorPalette,
         vAxis: {
           baseline: "none",
-          ticks: [0, 0.25],
+          ticks: [min - 0.05, max + 0.1],
           gridlines: { color: "transparent" },
           textPosition: "none",
         },

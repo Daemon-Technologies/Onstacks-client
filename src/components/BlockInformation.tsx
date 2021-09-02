@@ -32,7 +32,9 @@ export const BlockInformation: React.FC<Props> = ({
             View on explorer
           </p>
         </div>
-        <p className="sub-title">{currentBlock?.blockNumber}</p>
+        <p className="sub-title" style={{ fontSize: 32 }}>
+          {currentBlock?.blockNumber}
+        </p>
 
         <div className={"lines"}>
           <div>
@@ -79,15 +81,17 @@ export const BlockInformation: React.FC<Props> = ({
           </div>
           <div className={"row-content"}>
             <p>Stacks Awarded</p>
-            <p>{currentBlock?.block_info.stacks_awarded}</p>
+            <p className={"black"}>{currentBlock?.block_info.stacks_awarded}</p>
           </div>
           <div className={"row-content"}>
             <p>Winner Miner Burned Fees</p>
-            <p>{currentBlock?.block_info.winning_miner_burn_fee}</p>
+            <p className={"black"}>
+              {currentBlock?.block_info.winning_miner_burn_fee}
+            </p>
           </div>
           <div className={"row-content"}>
             <p>Rate of Return</p>
-            <p>{currentBlock?.block_info.return_rate}</p>
+            <p className={"black"}>{currentBlock?.block_info.return_rate}</p>
           </div>
         </div>
       </div>

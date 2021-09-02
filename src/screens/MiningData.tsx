@@ -82,7 +82,7 @@ export const MiningData: React.FC<Props> = ({
       )}
       {tabIndex === 1 && (
         <div id={"content1"}>
-          <p>Recent blocks</p>
+          <p className={"title-table"}>Recent active miners</p>
           {blocks.length > 0 && (
             <Miners initialPageSize={10} blocks={minersBlocks} />
           )}
@@ -111,7 +111,7 @@ export const MiningData: React.FC<Props> = ({
                 }}
               >
                 <p className="title">Total miners competed in block</p>
-                <p className="sub-title">
+                <p className="sub-title" style={{ fontSize: 16 }}>
                   {currentBlock.total_burn_fee
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
@@ -125,7 +125,9 @@ export const MiningData: React.FC<Props> = ({
                   alignItems: "center",
                 }}
               >
-                <p className="sub-title">{currentBlock.miners_count} Miners</p>
+                <p className="sub-title" style={{ fontSize: 32 }}>
+                  {currentBlock.miners_count} Miners
+                </p>
                 <p className="title">Total fees burn</p>
               </div>
               <BubbleChart bubbles={bubbles} theme={theme} />
