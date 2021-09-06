@@ -14,7 +14,7 @@ export const FlowChartNodes: React.FC<{
   const dims = useWindowDimensions();
   const [selectedColor, setselectedColor] = useState("");
   const [elements, setElements] = useState([]);
-  const [width, setWidth] = useState(1300);
+  const [width, setWidth] = useState(900);
   const colorPalette = randomColorGenerator();
 
   const onElementClick = (event: any, element: any) => {
@@ -116,12 +116,8 @@ export const FlowChartNodes: React.FC<{
   }, [miningInfo, selectedNodeId]);
 
   useEffect(() => {
-    if (dims.width > 1500) {
-      setWidth(1300);
-    } else if (dims.width > 1200) {
-      setWidth(1000);
-    } else {
-      setWidth(950);
+    if (dims.width > 1200) {
+      setWidth(900);
     }
   }, [dims]);
   return (
@@ -134,7 +130,7 @@ export const FlowChartNodes: React.FC<{
         edgeTypes={edgeTypes}
         maxZoom={1}
         minZoom={1}
-        style={{ height: "90%" }}
+        style={{ height: "90%", width: "100%" }}
         panOnScroll={dims.width < 1300}
         onElementClick={onElementClick}
         paneMoveable={dims.width < 1300}

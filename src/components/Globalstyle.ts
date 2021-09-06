@@ -343,7 +343,7 @@ export const GlobalStyles = createGlobalStyle`
         "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
     grid-gap: 16px;
     width: 100%;
-    max-width: 1800px;
+    max-width: 1280px;
     padding: 92px 32px 32px 32px;
     margin: auto;
   }
@@ -358,7 +358,7 @@ export const GlobalStyles = createGlobalStyle`
         "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
     grid-gap: 16px;
     width: 100%;
-    max-width: 1800px;
+    max-width: 1280px;
     padding: 92px 32px 32px 32px;
     margin: auto;
   }
@@ -408,6 +408,11 @@ export const GlobalStyles = createGlobalStyle`
       }
     }
   }
+  .based {
+    display: block;
+    color: ${({ theme }: any) => theme.greyText} !important;
+
+  }
   .arrow {
     border: solid;
     border-width: 0px 5px 5px 0;
@@ -447,6 +452,10 @@ export const GlobalStyles = createGlobalStyle`
     }
   .react-flow__pane, .react-flow__renderer, .react-flow__selectionpane {
     height: 100%;
+    position: relative;
+
+  }
+  .react-flow {
   }
   #content1 {
     grid-area: content1;
@@ -597,7 +606,9 @@ export const GlobalStyles = createGlobalStyle`
     text-align: left;
     span {
       color: ${({ theme }: any) => theme.greyText};
-      font-size: 20px;
+      font-size: 16px;
+      font-weight: 500;
+      font-family: Manrope;
     }
   }
   .block-content {
@@ -611,17 +622,17 @@ export const GlobalStyles = createGlobalStyle`
       margin-right: 20px;
     }
     div {
-      width: 30px;
+      width: 25px;
       border-radius: 4px;
       cursor: pointer;
-      height: 30px;
+      height: 25px;
       background-color: rgba(255, 160, 67, 0.25);
       margin-right: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       img {
-        width: 20px;
+        width: 12px;
         /* height: 10px; */
       }
     }
@@ -675,11 +686,13 @@ export const GlobalStyles = createGlobalStyle`
       padding-left: 0;
       font-size: 14px;
       font-weight: 600;
+      white-space: nowrap;
       width: 25%;
       line-height: 20px;
     }
     th {
       padding: 4px;
+      font-weight: 500;
       padding-left: 0;
     }
     width: 100%;
@@ -695,6 +708,11 @@ export const GlobalStyles = createGlobalStyle`
     }
     tbody {
       vertical-align: top;
+    }
+  }
+  #long {
+    td {
+      width: 22%
     }
   }
 
@@ -896,8 +914,8 @@ export const GlobalStyles = createGlobalStyle`
     width: 98%;
   }
   #content3 {
-    height: 400px;
-    max-height: 400px;
+    height: 320px;
+    max-height: 320px;
   }
   #content4 {
     width: 98% !important;
@@ -941,6 +959,7 @@ export const GlobalStyles = createGlobalStyle`
   .tabs {
     display: flex;
     flex-direction: row;
+    margin: 8px 0;
     border-bottom: 1px solid ${({ theme }: any) => theme.border};
     div {
       min-width: 100px;
@@ -1109,7 +1128,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   @media only screen and (max-width: 400px) {
     #content1, #content2, #content3, #content4, .info-card {
-    width: 91% !important;
+    width: 98% !important;
   }
   }
  

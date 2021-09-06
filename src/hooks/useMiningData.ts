@@ -66,9 +66,9 @@ export const useMiningData = () => {
               window.innerWidth > 600
                 ? `${r.stx_address.substring(
                     0,
-                    12
+                    10
                   )} ... ${r.stx_address.substring(
-                    r.stx_address.length - 12,
+                    r.stx_address.length - 10,
                     r.stx_address.length - 1
                   )}`
                 : `${r.stx_address.substring(

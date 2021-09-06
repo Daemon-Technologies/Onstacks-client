@@ -84,7 +84,7 @@ export const MiningData: React.FC<Props> = ({
   return (
     <div className="miningData">
       <div id="main">
-        <MiningDataHeader overviewData={overviewData} />
+        <MiningDataHeader tabIndex={tabIndex} overviewData={overviewData} />
         <Tabs setTabIndex={setTabIndex} tabIndex={tabIndex} />
       </div>
       {tabIndex === 0 && (
@@ -147,7 +147,7 @@ export const MiningData: React.FC<Props> = ({
             <div
               id={"content3"}
               className={"bubble-chart"}
-              style={{ height: "auto" }}
+              style={{ minHeight: "450px" }}
             >
               <div
                 style={{

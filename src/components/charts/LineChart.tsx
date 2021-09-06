@@ -26,12 +26,12 @@ export const LineChart: React.FC<Props> = ({
     legend: {
       position: "top",
     },
-    explorer: {
-      keepInBounds: true,
-      axis: "horizontal",
-      maxZoomIn: 4.0,
-      maxZoomOut: 2.0,
-    },
+    // explorer: {
+    //   keepInBounds: true,
+    //   axis: "horizontal",
+    //   maxZoomIn: 4.0,
+    //   maxZoomOut: 2.0,
+    // },
     colors: colorPalette,
     interpolateNulls: false,
     vAxis: {
@@ -42,6 +42,8 @@ export const LineChart: React.FC<Props> = ({
     },
     hAxis: {
       format: "0",
+      minorGridlines: { color: "transparent" },
+      gridlines: { color: theme === "light" ? "#EBEAED" : "#84818A" },
     },
   });
 
@@ -84,7 +86,11 @@ export const LineChart: React.FC<Props> = ({
         },
         hAxis: {
           textStyle: { color: themeMode.greyText },
-          gridlines: { count: -1, color: "#f3f3f3" },
+          minorGridlines: { color: "transparent" },
+          gridlines: {
+            color: theme === "light" ? "#EBEAED" : "#84818A",
+            count: -1,
+          },
           viewWindow: {
             max: data[data.length - 1][0],
             min: data[1][0],
@@ -99,7 +105,7 @@ export const LineChart: React.FC<Props> = ({
         },
       }));
     }
-  }, [theme.text, themeMode.text, themeMode.greyText, data]);
+  }, [theme.text, themeMode.text, themeMode.greyText, data, theme]);
 
   // useEffect(() => {
   //   if (dims.width > 500 && dims.height > 1050) {

@@ -46,13 +46,13 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
     page,
     canPreviousPage,
     canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
+    // pageOptions,
+    // pageCount,
+    // gotoPage,
     nextPage,
     previousPage,
     setPageSize,
-    state: { pageIndex, pageSize },
+    state: { pageSize },
   } = tableInstance;
 
   useEffect(() => {
@@ -103,30 +103,30 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
           </select>
           {dims.width > 550 && <p>items per page</p>}
         </div>
-        {dims.width > 550 && (
+        {/* {dims.width > 550 && (
           <span>
             Page{" "}
             <strong>
               {pageIndex + 1} of {pageOptions.length}
             </strong>{" "}
           </span>
-        )}
+        )} */}
         <div>
-          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
             {"First"}
-          </button>{" "}
+          </button>{" "} */}
           <button onClick={() => previousPage()} disabled={!canPreviousPage}>
             {"Previous"}
           </button>{" "}
           <button onClick={() => nextPage()} disabled={!canNextPage}>
             {"Next"}
           </button>{" "}
-          <button
+          {/* <button
             onClick={() => gotoPage(pageCount - 1)}
             disabled={!canNextPage}
           >
             {"End"}
-          </button>
+          </button> */}
         </div>
       </div>
     </>

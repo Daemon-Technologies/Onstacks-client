@@ -15,7 +15,7 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   const [data, setData] = useState<any[][]>([]);
   const [options, setOptions] = useState({
     backgroundColor: "transparent",
-    colors: ["#FFCE74"],
+    colors: ["#FFA043"],
     chartArea: { top: 30, width: "90%", height: "230px" },
     legend: "none",
     vAxis: {
@@ -33,6 +33,8 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       ...o,
       hAxis: {
         textStyle: { color: themeMode.greyText },
+        minorGridlines: { color: "transparent" },
+        gridlines: { color: theme === "light" ? "#EBEAED" : "#84818A" },
       },
       vAxis: {
         format: "short",

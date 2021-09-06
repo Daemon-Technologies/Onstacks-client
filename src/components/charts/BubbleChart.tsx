@@ -44,7 +44,11 @@ export const BubbleChart: React.FC<Props> = ({ theme, bubbles }) => {
           gridlines: { color: "transparent" },
           textPosition: "none",
         },
-        hAxis: { baseline: "none", ticks: [] },
+        hAxis: {
+          baseline: "none",
+          ticks: [-1, 0, 1],
+          gridlines: { color: "transparent" },
+        },
         bubble: { textStyle: { fontSize: 0, color: "transparent" } },
         backgroundColor: "transparent",
         chartArea: {
