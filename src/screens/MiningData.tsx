@@ -12,6 +12,7 @@ import right from "../assets/side-menu/right-arrow-active.svg";
 import rightDisabled from "../assets/side-menu/right-arrow-disabled.svg";
 import left from "../assets/side-menu/left-arrow-active.svg";
 import leftDisabled from "../assets/side-menu/left-arrow-disabled.svg";
+import { useParams } from "react-router-dom";
 
 interface Props {
   theme: any;
@@ -32,8 +33,9 @@ export const MiningData: React.FC<Props> = ({
   areaSeries,
   themeToggler,
 }) => {
+  const params: any = useParams();
   const [toggle, setToggle] = useState(false);
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(params?.index ? +params?.index : 0);
   const [bubbles, setBubbles] = useState<any[]>([]);
   const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
   const {
@@ -42,6 +44,7 @@ export const MiningData: React.FC<Props> = ({
     currentBlock,
     miningInfo,
   } = useMiningData();
+
   useEffect(() => {
     const { innerWidth: width } = window;
     setToggle(width >= 1025);
@@ -62,11 +65,18 @@ export const MiningData: React.FC<Props> = ({
   }, [currentBlock]);
 
   useEffect(() => {
-    if (blocks.length > 0) {
-      getBlockByNumber(blocks[0].block_number.toString());
+    if (blocks.length > 0 || params?.block) {
+      getBlockByNumber(params?.block || blocks[0].block_number.toString());
+    }
+    if (params) {
+      setTabIndex(params?.index ? +params?.index : 0);
+      const index = blocks.findIndex((block) =>
+        block.block_number.toString().includes(params.block)
+      );
+      setCurrentBlockIndex(index !== -1 ? index : 0);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [blocks]);
+  }, [blocks, params]);
 
   const nextBlock = () => {
     if (blocks.length - 1 > currentBlockIndex) {

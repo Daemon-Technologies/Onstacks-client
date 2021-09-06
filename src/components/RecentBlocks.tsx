@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from "react";
+import { useHistory } from "react-router-dom";
 import { usePagination, useTable } from "react-table";
 import { Blocks } from "../hooks/useOverview";
 import useWindowDimensions from "../hooks/useWindowDimension";
@@ -54,6 +55,7 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
     setPageSize,
     state: { pageSize },
   } = tableInstance;
+  const { push } = useHistory();
 
   useEffect(() => {
     setPageSize(initialPageSize || 5);
@@ -78,7 +80,17 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell: any) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td
+                      onClick={() => {
+                        push(
+                          "/mining-data/2/" +
+                            cell.row.values.block_number.substring(1, 10)
+                        );
+                      }}
+                      {...cell.getCellProps()}
+                    >
+                      {cell.render("Cell")}
+                    </td>
                   );
                 })}
               </tr>

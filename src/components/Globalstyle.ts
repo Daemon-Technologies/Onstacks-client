@@ -684,6 +684,7 @@ export const GlobalStyles = createGlobalStyle`
       font-weight: 600;
       white-space: nowrap;
       width: 25%;
+      cursor: pointer;
       line-height: 20px;
     }
     th {

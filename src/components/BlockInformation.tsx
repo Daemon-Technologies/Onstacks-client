@@ -74,7 +74,7 @@ export const BlockInformation: React.FC<Props> = ({
               }
               alt={"Stacks"}
             />
-            <p>STX Confirmation</p>
+            <p>Reward Confirmation</p>
           </div>
           <hr className={"hr"} />
         </div>

@@ -58,6 +58,17 @@ const App: React.FC = () => {
                 theme={theme}
               />
             </Route>
+            <Route exact path="/mining-data/:index/:block">
+              <MiningData
+                themeToggler={themeToggler}
+                tokens={tokens}
+                blocks={blocks}
+                areaBlocks={areaBlocks}
+                areaSeries={areaSeries}
+                overviewData={overviewData}
+                theme={theme}
+              />
+            </Route>
             <Route path="*">
               <Notfound />
             </Route>
