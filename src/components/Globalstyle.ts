@@ -452,10 +452,6 @@ export const GlobalStyles = createGlobalStyle`
     }
   .react-flow__pane, .react-flow__renderer, .react-flow__selectionpane {
     height: 100%;
-    position: relative;
-
-  }
-  .react-flow {
   }
   #content1 {
     grid-area: content1;
