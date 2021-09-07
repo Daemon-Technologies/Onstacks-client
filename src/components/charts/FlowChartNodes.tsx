@@ -132,6 +132,7 @@ export const FlowChartNodes: React.FC<{
         minZoom={1}
         style={{ height: "90%", width: "100%" }}
         panOnScroll={dims.width < 1300}
+        preventScrolling={false}
         onElementClick={onElementClick}
         paneMoveable={dims.width < 1300}
         panOnScrollMode={PanOnScrollMode.Horizontal}

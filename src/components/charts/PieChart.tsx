@@ -28,6 +28,7 @@ export const PieChart: React.FC<Props> = ({
   const dims = useWindowDimensions();
   const [options, setOptions] = useState({
     colors: colorPalette,
+    tooltip: { isHtml: true, showColorCode: true },
     legend: {
       position: "right",
       textStyle: { color: themeMode.text },

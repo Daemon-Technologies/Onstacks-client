@@ -51,6 +51,7 @@ export const BubbleChart: React.FC<Props> = ({ theme, bubbles }) => {
         },
         bubble: { textStyle: { fontSize: 0, color: "transparent" } },
         backgroundColor: "transparent",
+        tooltip: { textStyle: { color: "#FF0000" }, showColorCode: true },
         chartArea: {
           left: 20,
           top: 50,

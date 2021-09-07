@@ -23,15 +23,6 @@ export const LineChart: React.FC<Props> = ({
     isStacked: true,
     areaOpacity: 0.9,
     chartArea: { top: 45, width: "93%", right: 10, height: "210px" },
-    legend: {
-      position: "top",
-    },
-    // explorer: {
-    //   keepInBounds: true,
-    //   axis: "horizontal",
-    //   maxZoomIn: 4.0,
-    //   maxZoomOut: 2.0,
-    // },
     colors: colorPalette,
     interpolateNulls: false,
     vAxis: {
@@ -53,7 +44,7 @@ export const LineChart: React.FC<Props> = ({
         return (
           series.name.substring(0, 4) +
           ".." +
-          series.name.substring(series.name.length - 4, series.name.length - 1)
+          series.name.substring(series.name.length - 5, series.name.length - 1)
         );
       }),
     ];
@@ -74,16 +65,6 @@ export const LineChart: React.FC<Props> = ({
     if (data.length > 0) {
       setOptions((o) => ({
         ...o,
-        legend: {
-          maxLines: 2,
-          position: "top",
-          textStyle: { color: themeMode.text },
-          scrollArrows: {
-            inactiveColor: themeMode.text,
-            activeColor: themeMode.text,
-            pagingTextStyle: { color: themeMode.text },
-          },
-        },
         hAxis: {
           textStyle: { color: themeMode.greyText },
           minorGridlines: { color: "transparent" },
@@ -103,7 +84,7 @@ export const LineChart: React.FC<Props> = ({
           interpolateNulls: true,
           gridlines: { count: -1, color: "none", minSpacing: 20 },
         },
-        tooltip: { isHtml: true, trigger: "selection" },
+        tooltip: { isHtml: true },
         focusTarget: "category",
       }));
     }

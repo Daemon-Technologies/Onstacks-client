@@ -247,7 +247,7 @@ export const GlobalStyles = createGlobalStyle`
 
   .google-visualization-tooltip {
     path {
-      fill: ${({ theme }: any) => theme.body} !important;
+      fill: ${({ theme }: any) => theme.background} !important;
     }
   }
 
@@ -681,6 +681,21 @@ export const GlobalStyles = createGlobalStyle`
     height: 1em !important;
     border-radius: 50%;
   }
+  .container {
+    #content3 {
+    .google-visualization-tooltip-square {
+    width: 0.5em !important;
+    height: 65% !important;
+    position: absolute;
+    left: 10px;
+    border-radius: 0.25em;
+    margin-right: 10px;
+  }
+  .google-visualization-tooltip-item {
+    margin: 1em 0 1em 1em;
+  }
+  }
+  }
   .google-visualization-tooltip-item-list .google-visualization-tooltip-item:first-child {
     text-align: center;
     span {
@@ -824,6 +839,7 @@ export const GlobalStyles = createGlobalStyle`
   .flow-chart {
     height: auto !important;
     min-height: 500px !important;
+    overscroll-behavior-y: none;
   }
   .info-card div .sub-title {
     font-size: 13px;
