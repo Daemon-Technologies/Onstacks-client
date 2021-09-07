@@ -103,18 +103,11 @@ export const LineChart: React.FC<Props> = ({
           interpolateNulls: true,
           gridlines: { count: -1, color: "none", minSpacing: 20 },
         },
+        tooltip: { isHtml: true, trigger: "selection" },
+        focusTarget: "category",
       }));
     }
   }, [theme.text, themeMode.text, themeMode.greyText, data, theme]);
-
-  // useEffect(() => {
-  //   if (dims.width > 500 && dims.height > 1050) {
-  //     setOptions((o) => ({
-  //       ...o,
-  //       chartArea: { top: 40, width: "90%", right: 10, height: "65%" },
-  //     }));
-  //   }
-  // }, [dims]);
   return (
     <>
       {areaSeries.length > 0 && areaBlocks.length === 50 && (

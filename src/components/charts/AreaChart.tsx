@@ -41,6 +41,7 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
         gridlines: { color: "none", minSpacing: 20 },
         textStyle: { color: themeMode.greyText },
       },
+      tooltip: { isHtml: true },
     }));
   }, [dims.height, dims.width, theme, themeMode]);
 
@@ -53,7 +54,19 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       }
       setData(
         values.block_number.map((v: any, i: number) => {
-          return [values.block_number[i], values.total_sats_committed[i]];
+          return [
+            values.block_number[i],
+            values.total_sats_committed[i],
+            i === 0
+              ? { role: "tooltip", type: "string", p: { html: true } }
+              : `<div class="tool-tip-chart">
+             <p class="header-text">#${values.block_number[i]}</p>
+             <div style="display: flex; align-items: center">
+                <div style="width: 10px; height: 10px;border-radius: 5px; background-color: ${"#FFA043"}; margin-right: 10px"></div>
+                <p>${values.total_sats_committed[i]}</p>
+             </div>
+          </div>`,
+          ];
         })
       );
     }

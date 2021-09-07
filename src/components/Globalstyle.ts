@@ -31,7 +31,7 @@ export const GlobalStyles = createGlobalStyle`
     height: 45px;
     position: absolute;
     top: 42%;
-    left: 31%;
+    left: 30%;
     text-align: center;
     cursor: default;
   }
@@ -673,6 +673,47 @@ export const GlobalStyles = createGlobalStyle`
       margin-bottom: 24px;
     }
   }
+  .google-visualization-tooltip {
+     border:none !important;
+  }
+  .google-visualization-tooltip-square {
+    width: 1em !important;
+    height: 1em !important;
+    border-radius: 50%;
+  }
+  .google-visualization-tooltip-item-list .google-visualization-tooltip-item:first-child {
+    text-align: center;
+    span {
+      color: ${({ theme }: any) => theme.greyText} !important;   
+      font-family: Manrope;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 16px;
+      letter-spacing: 0px;
+      text-align: center;
+    }
+    span:before {
+      content: '#'
+    }
+  }
+  .tool-tip-chart {
+    background: ${({ theme }: any) => theme.background} !important;
+    padding: 12px;
+    min-width: 100px;
+    .header-text {
+      text-align: center;
+      color: ${({ theme }: any) => theme.greyText} !important;    
+      font-family: Manrope;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 16px;
+      margin-bottom: 10px;
+      letter-spacing: 0px;
+      text-align: center;
+    }
+  }
   table {
     td:first-child {
       color: ${({ theme }: any) => theme.primaryColor} !important;    
@@ -719,13 +760,10 @@ export const GlobalStyles = createGlobalStyle`
       width: 150px
     }
    
-    #labelOverlay {
-      left: 30%;
-    }
   }
   @media only screen and (max-width: 1200px) {
     #labelOverlay {
-      left: 30%;
+      left: 29%;
     }
   }
   @media only screen and (max-width: 1100px) {
