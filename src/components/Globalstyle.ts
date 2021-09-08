@@ -915,11 +915,21 @@ export const GlobalStyles = createGlobalStyle`
     #labelOverlay {
       left: 43%;
     }
+    .react-flow {
+       position: absolute ;
+       z-index: 1;
+       overflow-x: auto;
+     }
+     #content1 {
+       overflow-x: hidden;
+       position: relative;
+     }
   }
   @media only screen and (max-width: 550px) {
   :root {
     overflow-y: auto;
   }
+ 
   .data {
     font-size: 13px !important;
     text-align: center !important;
