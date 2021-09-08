@@ -22,7 +22,7 @@ export const LineChart: React.FC<Props> = ({
     backgroundColor: "transparent",
     isStacked: true,
     areaOpacity: 0.9,
-    chartArea: { top: 45, width: "93%", right: 10, height: "210px" },
+    chartArea: { top: 45, width: "93%", right: 10, height: "210px", left: 40 },
     colors: colorPalette,
     interpolateNulls: false,
     vAxis: {

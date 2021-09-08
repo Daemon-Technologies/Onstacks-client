@@ -16,7 +16,7 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   const [options, setOptions] = useState({
     backgroundColor: "transparent",
     colors: ["#FFA043"],
-    chartArea: { top: 30, width: "90%", height: "230px" },
+    chartArea: { top: 30, width: "90%", height: "230px", left: 40 },
     legend: "none",
     vAxis: {
       format: "short",
