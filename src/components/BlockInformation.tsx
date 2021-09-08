@@ -78,12 +78,18 @@ export const BlockInformation: React.FC<Props> = ({
           </div>
           <hr className={"hr"} />
         </div>
-        <hr />
+        <hr className="divider" />
         <div>
           <div className={"row-content"}>
             <p>Winner Address</p>
             <p
               className={"a-tag"}
+              onClick={() =>
+                window.open(
+                  `https://explorer.stacks.co/address/${currentBlock?.block_info.winning_address}`,
+                  "_blank"
+                )
+              }
             >{`${currentBlock?.block_info.winning_address.substring(
               0,
               8
@@ -94,7 +100,15 @@ export const BlockInformation: React.FC<Props> = ({
           </div>
           <div className={"row-content"}>
             <p>Tx ID</p>
-            <p className={"a-tag"}>{`${currentBlock?.block_info.tx_id.substring(
+            <p
+              onClick={() =>
+                window.open(
+                  `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
+                  "_blank"
+                )
+              }
+              className={"a-tag"}
+            >{`${currentBlock?.block_info.tx_id.substring(
               0,
               8
             )} ... ${currentBlock?.block_info.tx_id.substring(
@@ -104,7 +118,17 @@ export const BlockInformation: React.FC<Props> = ({
           </div>
           <div className={"row-content"}>
             <p>Block height</p>
-            <p className={"a-tag"}>{currentBlock?.block_info.block_height}</p>
+            <p
+              onClick={() =>
+                window.open(
+                  `https://www.blockchain.com/btc/block/${currentBlock?.block_info.block_height}`,
+                  "_blank"
+                )
+              }
+              className={"a-tag"}
+            >
+              #{currentBlock?.block_info.block_height}
+            </p>
           </div>
           <div className={"row-content"}>
             <p>Stacks Awarded</p>

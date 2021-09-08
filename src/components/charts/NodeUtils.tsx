@@ -24,7 +24,7 @@ export const customElements: any = (
     {
       id: "2",
       type: "selectorNode",
-      position: { x: width < 1100 ? width - 400 : 700, y: 180 },
+      position: { x: width < 900 ? width - 320 : 540, y: 180 },
     },
 
     {
@@ -33,7 +33,7 @@ export const customElements: any = (
       data: {
         isTitle: true,
       },
-      position: { x: width, y: 20 },
+      position: { x: width - 100, y: 20 },
     },
     {
       id: `1`,

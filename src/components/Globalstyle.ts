@@ -463,7 +463,9 @@ export const GlobalStyles = createGlobalStyle`
     }
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -495,7 +497,9 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }: any) => theme.background} !important;
     grid-area: content2;
     border-radius: var(--main-radius);
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -509,7 +513,9 @@ export const GlobalStyles = createGlobalStyle`
     padding: 24px;
     border-radius: var(--main-radius);
     background: ${({ theme }: any) => theme.background} !important;
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -535,7 +541,9 @@ export const GlobalStyles = createGlobalStyle`
     grid-area: content4;
     background: ${({ theme }: any) => theme.background} !important;
     border-radius: var(--main-radius);
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -559,7 +567,9 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .info-card {
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
     height: 110px;
     border-radius: 4px;
     display: flex;
@@ -651,6 +661,7 @@ export const GlobalStyles = createGlobalStyle`
     .a-tag {
       font-weight: 700;
       font-size: 14px;
+      cursor: pointer;
       color: ${({ theme }: any) => theme.primaryColor} !important;    
     }
   }
@@ -1006,6 +1017,9 @@ export const GlobalStyles = createGlobalStyle`
   }
   .flow-chart {
     height: 504px !important;
+  }
+  .divider {
+    border: 1px solid ${({ theme }: any) => theme.border};
   }
   .tabs {
     display: flex;

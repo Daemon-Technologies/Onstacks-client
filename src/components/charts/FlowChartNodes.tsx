@@ -41,10 +41,10 @@ export const FlowChartNodes: React.FC<{
               stx_address: miner.stx_address,
               index,
               title:
-                miner.stx_address.substring(0, 12) +
+                miner.stx_address.substring(0, 8) +
                 "..." +
                 miner.stx_address.substring(
-                  miner.stx_address.length - 12,
+                  miner.stx_address.length - 8,
                   miner.stx_address.length - 1
                 ),
               subtitle: miner.total_sats_spent,
@@ -91,10 +91,10 @@ export const FlowChartNodes: React.FC<{
               index,
               stx_address: miner.stx_address,
               title:
-                miner.stx_address.substring(0, 12) +
+                miner.stx_address.substring(0, 8) +
                 "..." +
                 miner.stx_address.substring(
-                  miner.stx_address.length - 12,
+                  miner.stx_address.length - 8,
                   miner.stx_address.length - 1
                 ),
               subtitle: miner.total_stx_reward,
@@ -103,7 +103,7 @@ export const FlowChartNodes: React.FC<{
                   ? colorPalette[index]
                   : "#EBEAED",
             },
-            position: { x: width, y: 70 + index * 70 },
+            position: { x: width + 100, y: 70 + index * 70 },
           }
         );
       });
@@ -116,8 +116,10 @@ export const FlowChartNodes: React.FC<{
   }, [miningInfo, selectedNodeId]);
 
   useEffect(() => {
-    if (dims.width > 1200) {
+    if (dims.width > 1299) {
       setWidth(900);
+    } else {
+      setWidth(800);
     }
   }, [dims]);
   return (

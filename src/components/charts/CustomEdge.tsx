@@ -46,7 +46,7 @@ export default function CustomEdge({
         <foreignObject
           width={300}
           height={100}
-          x={edgeCenterX - 150}
+          x={edgeCenterX - 140}
           y={edgeCenterY}
           className="edgebutton-foreignobject"
           requiredExtensions="http://www.w3.org/1999/xhtml"
@@ -56,7 +56,6 @@ export default function CustomEdge({
               style={{
                 fontSize: 14,
                 fontWeight: 500,
-                color: "#84818A",
                 textAlign: "start",
                 marginBottom: 8,
               }}
@@ -67,7 +66,6 @@ export default function CustomEdge({
               style={{
                 fontSize: 16,
                 fontWeight: 600,
-                color: "#2E2C34",
                 textAlign: "start",
               }}
             >

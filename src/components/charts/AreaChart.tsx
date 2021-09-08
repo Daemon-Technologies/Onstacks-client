@@ -41,6 +41,8 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
         gridlines: { color: "none", minSpacing: 20 },
         textStyle: { color: themeMode.greyText },
       },
+      aggregationTarget: "category",
+
       tooltip: { isHtml: true },
     }));
   }, [dims.height, dims.width, theme, themeMode]);
