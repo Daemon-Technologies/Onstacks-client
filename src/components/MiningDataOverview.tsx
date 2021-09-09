@@ -18,7 +18,7 @@ export const MiningDataOverview: React.FC<{
         <FlowChartNodes miningInfo={miningInfo} />
       </div>
       <div id="content3">
-        <p className="title">Top miner burned fees</p>
+        <p className="title">Top Miners - Sats Spent Per Block</p>
         <div className="seprator">
           {areaBlocks.length > 0 && areaSeries.length > 0 && (
             <LineChart

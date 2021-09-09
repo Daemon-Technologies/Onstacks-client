@@ -27,7 +27,7 @@ export const RightNode = ({ data }: any) => {
     subtitle: { color: "#84818A", fontSize: 12 },
   };
   return data.isTitle ? (
-    <p className="row-flow-p">Total STX Reward per Miner</p>
+    <p className="row-flow-p">Total STX Won per Miner - Last 100 Blocks</p>
   ) : (
     <>
       <Handle
@@ -42,7 +42,7 @@ export const RightNode = ({ data }: any) => {
         <div>
           <p style={styles.title}>{data.title}</p>
           <p style={styles.subtitle}>
-            {data.subtitle.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            {data.subtitle.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} STX
           </p>
         </div>
       </div>

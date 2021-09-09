@@ -28,7 +28,7 @@ export const MiningDataHeader: React.FC<{
         )}
         <div className="data">
           <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
-            STX Blockheight:&nbsp;{" "}
+            STX Block Height:&nbsp;{" "}
             <span>#{overviewData.stx_block_height} </span>
           </a>
           <a
@@ -37,7 +37,7 @@ export const MiningDataHeader: React.FC<{
             href={"https://btc.com/btc/block/" + overviewData.btc_block_height}
             rel="noopener noreferrer"
           >
-            BTC Blockheight: &nbsp;
+            BTC Block Height: &nbsp;
             <span>#{overviewData.btc_block_height}</span>
           </a>
         </div>

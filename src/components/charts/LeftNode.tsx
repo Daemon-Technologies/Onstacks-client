@@ -27,7 +27,7 @@ export const LeftNode = ({ data }: any) => {
     subtitle: { color: "#84818A", fontSize: 12 },
   };
   return data.isTitle ? (
-    <p className="row-flow-p">Total Sats Spent per Miner</p>
+    <p className="row-flow-p">Sats Spent per Miner - Last 100 Blocks</p>
   ) : (
     <>
       <div style={styles.node}>
@@ -35,7 +35,8 @@ export const LeftNode = ({ data }: any) => {
         <div>
           <p style={styles.title}>{data.title}</p>
           <p style={styles.subtitle}>
-            {data.subtitle.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            {data.subtitle.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+            Sats
           </p>
         </div>
       </div>

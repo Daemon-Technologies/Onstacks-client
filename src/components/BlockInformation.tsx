@@ -43,7 +43,7 @@ export const BlockInformation: React.FC<Props> = ({
         </p>
 
         <div className={"lines"}>
-          <div>
+          <div onClick={() => getBlockHash(overviewData.stx_block_height)}>
             <img
               src={
                 currentBlock?.block_info.is_stx_pending
@@ -54,7 +54,14 @@ export const BlockInformation: React.FC<Props> = ({
             />
             <p>STX Confirmation</p>
           </div>
-          <div>
+          <div
+            onClick={() =>
+              window.open(
+                `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
+                "_blank"
+              )
+            }
+          >
             <img
               src={
                 currentBlock?.block_info.is_btc_pending

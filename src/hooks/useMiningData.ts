@@ -93,7 +93,7 @@ export const useMiningData = () => {
   const numberWithCommas = (x: number) => {
     if (x)
       return x
-        .toFixed(1)
+        .toFixed(0)
         .toString()
         .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };

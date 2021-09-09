@@ -22,7 +22,7 @@ export const LineChart: React.FC<Props> = ({
     backgroundColor: "transparent",
     isStacked: true,
     areaOpacity: 0.9,
-    chartArea: { top: 45, width: "93%", right: 10, height: "210px", left: 40 },
+    chartArea: { top: 45, width: "100%", right: 10, height: "210px", left: 40 },
     colors: colorPalette,
     interpolateNulls: false,
     vAxis: {
@@ -80,6 +80,7 @@ export const LineChart: React.FC<Props> = ({
         },
         vAxis: {
           textStyle: { color: themeMode.greyText },
+          textPosition: "none",
           format: "short",
           interpolateNulls: true,
           gridlines: { count: -1, color: "none", minSpacing: 20 },

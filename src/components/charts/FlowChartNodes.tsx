@@ -124,7 +124,7 @@ export const FlowChartNodes: React.FC<{
   }, [dims]);
   return (
     <div style={{ height: "100%", width: "100%" }}>
-      <p className="title">STX Mining Asset Flow - Last 100 Blocks</p>
+      <p className="title">Sats Spent per Miner - Last 100 Blocks</p>
       {/* <div className={'row-flow'}><p>Total Sats Spent per Miner</p> <p>Total Sats Spent per Miner</p> </div> */}
       <ReactFlow
         nodeTypes={nodeTypes}

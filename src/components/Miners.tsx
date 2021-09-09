@@ -18,15 +18,15 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
         accessor: "stx_address", // accessor is the "key" in the data
       },
       {
-        Header: "Total Fees",
+        Header: "Total burned Fees",
         accessor: "total_burnfee",
       },
       {
-        Header: "Total Participation",
+        Header: "Total Blocks Participation",
         accessor: "total_participation",
       },
       {
-        Header: "Total Reward",
+        Header: "Total Winning block",
         accessor: "total_block_reward",
       },
       {
@@ -82,6 +82,7 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell: any) => {
+                  console.log(cell);
                   return (
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
