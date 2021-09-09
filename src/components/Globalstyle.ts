@@ -679,6 +679,7 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: space-between;
     div {
       z-index: 10;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
