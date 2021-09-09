@@ -18,15 +18,15 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
         accessor: "block_number", // accessor is the "key" in the data
       },
       {
-        Header: "Mined",
+        Header: "Time Elapsed",
         accessor: "mined_at",
       },
       {
-        Header: "Sats spent",
+        Header: "Total Sats spent",
         accessor: "sats_spent",
       },
       {
-        Header: "Winner Address",
+        Header: "Winning Miner",
         accessor: "winner_address",
       },
     ],
