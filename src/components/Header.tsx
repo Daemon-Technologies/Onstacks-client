@@ -62,6 +62,7 @@ export const Header: React.FC<{
             className={`option ${active === 1 ? "active" : ""}`}
             onClick={() => {
               setActive(1);
+              closeMobileMenu();
               push("/mining-data");
             }}
           >

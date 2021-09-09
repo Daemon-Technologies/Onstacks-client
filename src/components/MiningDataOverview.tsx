@@ -15,7 +15,7 @@ export const MiningDataOverview: React.FC<{
   return (
     <>
       <div className="flow-chart" id="content1">
-        <FlowChartNodes miningInfo={miningInfo} />
+        <FlowChartNodes theme={theme} miningInfo={miningInfo} />
       </div>
       <div id="content3">
         <p className="title">Top Miners - Sats Spent Per Block</p>

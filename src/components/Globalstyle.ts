@@ -457,6 +457,8 @@ export const GlobalStyles = createGlobalStyle`
     grid-area: content1;
     padding: 24px;
     width: 100%;
+    position: relative;
+
     path {
       stroke-width: 3;
       /* stroke: #FFA043; */
@@ -544,6 +546,8 @@ export const GlobalStyles = createGlobalStyle`
     border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
+  position: relative;
+  height: auto;
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -575,7 +579,7 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     background: ${({ theme }: any) => theme.background} !important;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     div {
       padding: 31px 16px;
@@ -741,6 +745,7 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
   table {
+    margin-bottom: 30px;
     td:first-child {
       color: ${({ theme }: any) => theme.primaryColor} !important;    
     }
@@ -838,7 +843,7 @@ export const GlobalStyles = createGlobalStyle`
   .toggled {
     left: 0 !important;
   }
-  #content4, #content3, #content2, #content1 {
+  #content3, #content2, #content1 {
     /* max-height: 600px; */
     min-height: 275px;
   }
@@ -930,8 +935,13 @@ export const GlobalStyles = createGlobalStyle`
     overflow-y: auto;
   }
  
+  .lines div p {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 13px;
+  }
   .data {
-    font-size: 13px !important;
+    font-size: 12px !important;
     text-align: center !important;
   }
   
@@ -1022,7 +1032,7 @@ export const GlobalStyles = createGlobalStyle`
       height: 240px !important;
     }
   #content3, #content4 {
-      height: 340px !important;
+      height: auto !important;
     }
   }
   .flow-chart {
@@ -1148,6 +1158,9 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     background-color: rgba(255, 160, 67, 0.1);
     padding: 15px 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     div {
       display: flex;
       flex-direction: row;

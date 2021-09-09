@@ -5,6 +5,7 @@ import {
   getBlockNumber,
   getMiningInfo,
 } from "../axios/requests";
+import { numFormatter } from "../utils/helper";
 
 export interface MinerInfo {
   stx_address: string;
@@ -68,20 +69,20 @@ export const useMiningData = () => {
                     0,
                     10
                   )} ... ${r.stx_address.substring(
-                    r.stx_address.length - 10,
+                    r.stx_address.length - 11,
                     r.stx_address.length - 1
                   )}`
                 : `${r.stx_address.substring(
                     0,
                     4
                   )} ... ${r.stx_address.substring(
-                    r.stx_address.length - 4,
+                    r.stx_address.length - 5,
                     r.stx_address.length - 1
                   )}`,
-            total_burnfee: numberWithCommas(r.total_burnfee) || 0,
-            total_block_reward: numberWithCommas(r.total_block_reward) || 0,
-            total_participation: numberWithCommas(r.total_participation) || 0,
-            total_stx_reward: numberWithCommas(r.total_stx_reward) || 0,
+            total_burnfee: numFormatter(r.total_burnfee) || 0,
+            total_block_reward: numFormatter(r.total_block_reward) || 0,
+            total_participation: numFormatter(r.total_participation) || 0,
+            total_stx_reward: numFormatter(r.total_stx_reward) || 0,
           };
         })
       );
@@ -90,13 +91,7 @@ export const useMiningData = () => {
       setMiningInfo(data);
     });
   }, []);
-  const numberWithCommas = (x: number) => {
-    if (x)
-      return x
-        .toFixed(0)
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+
   const getBlockByNumber = (blockNumber: string) => {
     axios.get(getBlockNumber(blockNumber.substring(1))).then((data: any) => {
       setCurrentBlock({ ...data, blockNumber });

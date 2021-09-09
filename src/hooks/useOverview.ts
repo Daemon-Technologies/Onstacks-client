@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "../axios/axios";
 import { getOverviewData } from "../axios/requests";
 import differenceInMinutes from "date-fns/differenceInMinutes";
+import { numFormatter } from "../utils/helper";
 
 export interface OverviewProps {
   active_miners: number;
@@ -131,7 +132,7 @@ export const useOverview = () => {
               b.stx_address.substring(0, 6) +
               ".." +
               b.stx_address.substring(
-                b.stx_address.length - 6,
+                b.stx_address.length - 7,
                 b.stx_address.length - 1
               )
             );
@@ -150,12 +151,12 @@ export const useOverview = () => {
             mined_at:
               differenceInMinutes(new Date(), r.mined_at * 1000) +
               (window.innerWidth > 800 ? " Mins" : ""),
-            sats_spent: numberWithCommas(r.sats_spent),
+            sats_spent: numFormatter(+r.sats_spent),
             winner_address:
               r.winner_address.substring(0, window.innerWidth > 600 ? 8 : 4) +
               ".." +
               r.winner_address.substring(
-                r.winner_address.length - 8,
+                r.winner_address.length - (window.innerWidth > 600 ? 8 : 5),
                 r.winner_address.length - 1
               ),
           };
@@ -164,9 +165,9 @@ export const useOverview = () => {
     });
   }, []);
 
-  const numberWithCommas = (x: string) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
+  // const numberWithCommas = (x: string) => {
+  //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // };
   return {
     overviewData,
     tokens,

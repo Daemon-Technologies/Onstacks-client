@@ -18,19 +18,19 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
         accessor: "stx_address", // accessor is the "key" in the data
       },
       {
-        Header: "Total burned Fees",
+        Header: "Total Spent (sats)",
         accessor: "total_burnfee",
       },
       {
-        Header: "Total Blocks Participation",
+        Header: "Total Participation",
         accessor: "total_participation",
       },
       {
-        Header: "Total Winning block",
+        Header: "Total Block Won",
         accessor: "total_block_reward",
       },
       {
-        Header: "Total STX Reward",
+        Header: "Total Reward (STX)",
         accessor: "total_stx_reward",
       },
     ],

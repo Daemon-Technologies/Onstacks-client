@@ -52,7 +52,7 @@ export const customElements: any = (
       type: "custom",
       data: {
         text: miningInfo.total_sats_spent,
-        title: "Total STX Spent",
+        title: "Total Sats Spent",
         subtitle: "sats",
       },
       labelBgStyle: { fill: "#FFCC00", color: "#fff", marginBottom: 10 },
