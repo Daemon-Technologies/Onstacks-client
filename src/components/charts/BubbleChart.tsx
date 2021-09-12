@@ -1,68 +1,60 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Chart from "react-google-charts";
-import { randomColorGenerator } from "../../utils/helper";
+import { ResponsiveCirclePacking } from "@nivo/circle-packing";
+import { CurrentBlock } from "../../hooks/useMiningData";
 
 interface Props {
   theme: any;
-  bubbles: any[];
+  currentBlock: CurrentBlock;
 }
 
-export const BubbleChart: React.FC<Props> = ({ theme, bubbles }) => {
-  const colorPalette = randomColorGenerator();
-  const [min, setMin] = useState(10);
-  const [max, setMax] = useState(0);
+export const BubbleCharts: React.FC<Props> = ({ theme, currentBlock }) => {
+  const [bubble, setBubbles] = useState<any>({});
 
   useEffect(() => {
-    let minimum = 10;
-    let maximum = 0;
-    bubbles.forEach((bubble) => {
-      if (bubble[2] > maximum) {
-        maximum = bubble[2];
-      }
-      if (bubble[2] < minimum) {
-        minimum = bubble[2];
-      }
+    let bub: any[] = [];
+    currentBlock.miners_info.forEach((miner) => {
+      bub.push({
+        name: miner.miner_address,
+        value: miner.burn_fee,
+        prop: miner.win_probability,
+      });
     });
-    setMax(maximum);
-    setMin(minimum);
-    console.log(minimum, maximum);
-  }, [bubbles]);
+    setBubbles({ name: "root", children: bub });
+  }, [currentBlock]);
   return (
-    <Chart
-      width={"100%"}
-      height={"300px"}
-      chartType="BubbleChart"
-      loader={<div>Loading Chart</div>}
-      data={bubbles}
-      options={{
-        colors: colorPalette,
-        vAxis: {
-          baseline: "none",
-          ticks: [min - 0.05, max + 0.1],
-          gridlines: { color: "transparent" },
-          textPosition: "none",
-        },
-        hAxis: {
-          baseline: "none",
-          ticks: [-1, 0, 1],
-          gridlines: { color: "transparent" },
-        },
-        bubble: { textStyle: { fontSize: 0, color: "transparent" } },
-        backgroundColor: "transparent",
-        tooltip: { textStyle: { color: "#FF0000" }, showColorCode: true },
-        chartArea: {
-          left: 20,
-          top: 50,
-          width: "100%",
-          height: "100%",
-        },
-        legend: "none",
-        sizeAxis: { minValue: 20, maxSize: 40 },
-        sortBubblesBySize: true,
+    <ResponsiveCirclePacking
+      data={bubble}
+      // margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+      id="name"
+      colors={{ scheme: "paired" }}
+      colorBy="id"
+      childColor={{ from: "color", modifiers: [["opacity", 1]] }}
+      padding={1}
+      leavesOnly={true}
+      enableLabels={true}
+      label="none"
+      tooltip={(x) => {
+        console.log(x);
+        return (
+          <div className="bubble-tooltip">
+            <div>
+              <div className="circle" style={{ background: x.color }}></div>{" "}
+              <p className="name">{x.data.name}</p>
+            </div>
+            <div>
+              <p>Fee Burned</p> <p>{x.data.value}</p>
+            </div>
+            <div>
+              <p>Win Probabilty</p> <p>{x.data.prop}</p>
+            </div>
+          </div>
+        );
       }}
-      rootProps={{ "data-testid": "2" }}
+      // labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 2.4 ] ] }}
+      borderColor={{ from: "color", modifiers: [["darker", 0.3]] }}
+      animate={true}
     />
   );
 };

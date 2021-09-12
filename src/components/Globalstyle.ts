@@ -363,6 +363,41 @@ export const GlobalStyles = createGlobalStyle`
     margin: auto;
   }
 
+  .bubble-tooltip {
+    background: ${({ theme }: any) => theme.background} !important;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 20px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    align-items: flex-start;
+    div {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .circle {
+      width:  8px;
+      height: 8px;
+      margin-right: 5px;
+      border-radius: 2.5px;
+    }
+    p {
+      //styleName: Regular Text / 12px / Semibold;
+      font-family: Manrope;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 18px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+    .name {
+      color: ${({ theme }: any) => theme.greyText} !important;
+    }
+  }
+
   .not-found {
     display: flex;
     flex: 1;
@@ -936,6 +971,9 @@ export const GlobalStyles = createGlobalStyle`
     overflow-y: auto;
   }
  
+  .bubble-chart {
+    height: 600px !important;
+  }
   .lines div p {
     margin-top: 24px;
     text-align: center;
