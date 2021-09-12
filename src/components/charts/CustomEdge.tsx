@@ -47,7 +47,7 @@ export default function CustomEdge({
           width={300}
           height={100}
           x={edgeCenterX - 140}
-          y={edgeCenterY + 20}
+          y={edgeCenterY + 10}
           className="edgebutton-foreignobject"
           requiredExtensions="http://www.w3.org/1999/xhtml"
         >

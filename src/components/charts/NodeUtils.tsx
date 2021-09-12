@@ -61,7 +61,6 @@ export const customElements: any = (
         marginTop: 20,
         div: {
           marginLeft: 100,
-          marginTop: 30,
         },
       },
       arrowHeadType: "arrowclosed",
@@ -83,7 +82,6 @@ export const customElements: any = (
         marginTop: 20,
         div: {
           marginRight: 10,
-          marginTop: 30,
           backgroundColor: "transparent",
         },
       },

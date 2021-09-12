@@ -33,10 +33,14 @@ export const FlowChartNodes: React.FC<{
     let miners: any = [];
     if (miningInfo.total_sats_spent) {
       miningInfo.miners_info
-        .slice(0, 5)
         .sort((a, b) => {
           return b.total_sats_spent - a.total_sats_spent;
         })
+        .sort((a, b) => {
+          return b.total_stx_reward - a.total_stx_reward;
+        })
+        .slice(0, 5)
+
         .forEach((miner, index) => {
           miners.push(
             {
@@ -122,7 +126,7 @@ export const FlowChartNodes: React.FC<{
                     ? "#EBEAED"
                     : "#565559",
               },
-              position: { x: width + 100, y: 70 + index * 70 },
+              position: { x: width + 50, y: 70 + index * 70 },
             }
           );
         });
