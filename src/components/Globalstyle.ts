@@ -362,7 +362,12 @@ export const GlobalStyles = createGlobalStyle`
     padding: 92px 32px 32px 32px;
     margin: auto;
   }
-
+  .circle-data {
+      width:  8px;
+      height: 8px;
+      margin-right: 5px;
+      border-radius: 2.5px;
+    }
   .bubble-tooltip {
     background: ${({ theme }: any) => theme.background} !important;
     padding: 16px;
@@ -474,7 +479,17 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  
+  .Winner {
+    //styleName: Regular Text / 12px / Semibold;
+  font-family: Manrope;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: center;
+
+  }
     .row-flow-p {
       font-family: Manrope;
       font-size: 16px;
@@ -544,7 +559,9 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.greyText} !important;
     }
   }
-
+  .mob-address {
+    display: none;
+  }
   #content3 {
     grid-area: content3;
     padding: 24px;
@@ -817,9 +834,11 @@ export const GlobalStyles = createGlobalStyle`
   }
   #long {
     td {
-      width: 22%
+      width: 20%
     }
   }
+
+  
 
   @media only screen and (max-width: 1580px) { 
 
@@ -970,7 +989,15 @@ export const GlobalStyles = createGlobalStyle`
   :root {
     overflow-y: auto;
   }
+  .burn-address {
+    display: none;
+  }
  
+  .mob-address {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .bubble-chart {
     height: 600px !important;
   }

@@ -13,6 +13,7 @@ import rightDisabled from "../assets/side-menu/right-arrow-disabled.svg";
 import left from "../assets/side-menu/left-arrow-active.svg";
 import leftDisabled from "../assets/side-menu/left-arrow-disabled.svg";
 import { useParams } from "react-router-dom";
+import { randomColorGenerator } from "../utils/helper";
 
 interface Props {
   theme: any;
@@ -37,6 +38,9 @@ export const MiningData: React.FC<Props> = ({
   const [toggle, setToggle] = useState(false);
   const [tabIndex, setTabIndex] = useState(params?.index ? +params?.index : 0);
   const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
+  const [winnerAddress, setWinnerAddress] = useState("");
+  const [winnerAddressIndex, setWinnerAddressColor] = useState(0);
+  const colorPalette = randomColorGenerator();
   const {
     blocks: minersBlocks,
     getBlockByNumber,
@@ -49,19 +53,20 @@ export const MiningData: React.FC<Props> = ({
     setToggle(width >= 1025);
   }, [toggle]);
 
-  // useEffect(() => {
-  //   let arr: any = [["id", "index", "Propability", "Address", "Burn Fee"]];
-  //   currentBlock?.miners_info.map((miner, index) => {
-  //     arr.push([
-  //       "",
-  //       index + 1,
-  //       +miner.win_probability,
-  //       miner.miner_address,
-  //       miner.burn_fee,
-  //     ]);
-  //   });
-  //   setBubbles(arr);
-  // }, [currentBlock]);
+  useEffect(() => {
+    const x: any = currentBlock?.miners_info.reduce((prev: any, curr: any) =>
+      prev.burn_fee > curr.burn_fee ? prev : curr
+    );
+    if (x && x.miner_address) {
+      setWinnerAddress(x.miner_address);
+    }
+    const index: any = currentBlock?.miners_info.findIndex(
+      (x) => x.miner_address === winnerAddress
+    );
+    if (index !== -1) {
+      setWinnerAddressColor(index);
+    }
+  }, [currentBlock, winnerAddress]);
 
   useEffect(() => {
     if (blocks.length > 0 || params?.block) {
@@ -166,12 +171,7 @@ export const MiningData: React.FC<Props> = ({
                 }}
               >
                 <p className="title">Total miners competed in block</p>
-                <p className="sub-title" style={{ fontSize: 16 }}>
-                  {currentBlock.total_burn_fee
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-                  sats
-                </p>
+                <p className="title burn-address">Total fees burn</p>
               </div>
               <div
                 style={{
@@ -180,14 +180,60 @@ export const MiningData: React.FC<Props> = ({
                   alignItems: "center",
                 }}
               >
-                <p className="sub-title" style={{ fontSize: 32 }}>
-                  {currentBlock.miners_count} Miners
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <p className="sub-title" style={{ fontSize: 27 }}>
+                    {currentBlock.miners_count} Miners
+                  </p>
+                  {winnerAddress && (
+                    <div
+                      style={{
+                        background: colorPalette[winnerAddressIndex] + "10",
+                        padding: 4,
+                        marginLeft: 10,
+                        borderRadius: 4,
+                        color: colorPalette[winnerAddressIndex],
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div
+                        className="circle-data"
+                        style={{ background: colorPalette[winnerAddressIndex] }}
+                      ></div>
+                      <p
+                        style={{ fontSize: 12, fontWeight: 700 }}
+                      >{`${winnerAddress.substring(
+                        0,
+                        8
+                      )} ... ${winnerAddress.substring(
+                        winnerAddress.length - 9,
+                        winnerAddress.length - 1
+                      )}`}</p>
+                    </div>
+                  )}
+                </div>
+                <p className="sub-title burn-address" style={{ fontSize: 16 }}>
+                  {currentBlock.total_burn_fee
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                  sats
                 </p>
-                <p className="title">Total fees burn</p>
               </div>
               <div style={{ height: "85%", width: "100%" }}>
-                {" "}
-                <BubbleCharts currentBlock={currentBlock} theme={theme} />
+                <BubbleCharts
+                  winnerAddress={winnerAddress}
+                  currentBlock={currentBlock}
+                  theme={theme}
+                />
+              </div>
+              <div className={"mob-address"}>
+                <p className="title">Total fees burn</p>
+                <p className="sub-title" style={{ fontSize: 16 }}>
+                  {currentBlock.total_burn_fee
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
+                  sats
+                </p>
               </div>
             </div>
           )}

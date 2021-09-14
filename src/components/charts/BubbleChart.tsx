@@ -3,14 +3,21 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { ResponsiveCirclePacking } from "@nivo/circle-packing";
 import { CurrentBlock } from "../../hooks/useMiningData";
+import { randomColorGenerator } from "../../utils/helper";
 
 interface Props {
   theme: any;
   currentBlock: CurrentBlock;
+  winnerAddress: string;
 }
 
-export const BubbleCharts: React.FC<Props> = ({ theme, currentBlock }) => {
+export const BubbleCharts: React.FC<Props> = ({
+  theme,
+  currentBlock,
+  winnerAddress,
+}) => {
   const [bubble, setBubbles] = useState<any>({});
+  const colorPalette = randomColorGenerator();
 
   useEffect(() => {
     let bub: any[] = [];
@@ -23,12 +30,13 @@ export const BubbleCharts: React.FC<Props> = ({ theme, currentBlock }) => {
     });
     setBubbles({ name: "root", children: bub });
   }, [currentBlock]);
+
   return (
     <ResponsiveCirclePacking
       data={bubble}
       // margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
       id="name"
-      colors={{ scheme: "paired" }}
+      colors={colorPalette}
       colorBy="id"
       childColor={{ from: "color", modifiers: [["opacity", 1]] }}
       padding={1}
@@ -36,12 +44,32 @@ export const BubbleCharts: React.FC<Props> = ({ theme, currentBlock }) => {
       enableLabels={true}
       label="none"
       tooltip={(x) => {
-        console.log(x);
         return (
           <div className="bubble-tooltip">
             <div>
-              <div className="circle" style={{ background: x.color }}></div>{" "}
-              <p className="name">{x.data.name}</p>
+              <div style={{ display: "flex", justifyContent: "flex-start" }}>
+                <div className="circle" style={{ background: x.color }}></div>
+                <p className="name">{`${x.data.name.substring(
+                  0,
+                  8
+                )} ... ${x.data.name.substring(
+                  x.data.name.length - 9,
+                  x.data.name.length - 1
+                )}`}</p>
+              </div>
+              {winnerAddress === x.data.name && (
+                <div
+                  style={{
+                    background: x.color + "10",
+                    padding: 8,
+                    borderRadius: 4,
+                    width: 80,
+                    color: x.color,
+                  }}
+                >
+                  <p className="Winner">Winner</p>
+                </div>
+              )}
             </div>
             <div>
               <p>Fee Burned</p> <p>{x.data.value}</p>

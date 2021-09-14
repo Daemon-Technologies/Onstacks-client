@@ -21,6 +21,7 @@ export const LeftNode = ({ data }: any) => {
     node: {
       display: "flex",
       marginRight: 16,
+      width: 180,
       opacity: data.bgColor === "#EBEAED" ? 0.2 : 1,
     },
     title: { fontSize: 14, fontWeight: 500 },
