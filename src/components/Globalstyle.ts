@@ -478,7 +478,14 @@ export const GlobalStyles = createGlobalStyle`
       height: 28px;
     }
   }
-
+  .bubble-chart-container { 
+    height: 85%;
+    width: 100%;
+    max-height: 400px;
+   div {
+      max-height: 400px;
+    }
+  }
   .Winner {
     //styleName: Regular Text / 12px / Semibold;
   font-family: Manrope;
@@ -934,6 +941,8 @@ export const GlobalStyles = createGlobalStyle`
     grid-gap: 16px;
     width: 100%;
   }
+
+
 
   .miningData {
     display: grid;

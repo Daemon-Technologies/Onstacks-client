@@ -219,7 +219,7 @@ export const MiningData: React.FC<Props> = ({
                   sats
                 </p>
               </div>
-              <div style={{ height: "85%", width: "100%" }}>
+              <div className={"bubble-chart-container"}>
                 <BubbleCharts
                   winnerAddress={winnerAddress}
                   currentBlock={currentBlock}
