@@ -94,8 +94,7 @@ export const Header: React.FC<{
                   href="https://www.okcoin.com/prices/bitcoin-btc-price-chart"
                   rel="noopener noreferrer"
                 >
-                  <img alt="bitcoin" src={Bitcoin} /> $
-                  {Number.parseFloat(tokens.BTC).toFixed(2)}
+                  <img alt="bitcoin" src={Bitcoin} /> ${tokens.BTC}
                 </a>
               </li>
               <li className="option" onClick={closeMobileMenu}>
@@ -104,8 +103,7 @@ export const Header: React.FC<{
                   href="https://www.okcoin.com/prices/stacks-stx-price-chart"
                   rel="noopener noreferrer"
                 >
-                  <img alt="stacks" src={Stacks} /> $
-                  {Number.parseFloat(tokens.STX).toFixed(2)}
+                  <img alt="stacks" src={Stacks} /> ${tokens.STX}
                 </a>
               </li>
               <li className="option" onClick={closeMobileMenu}>
@@ -139,8 +137,7 @@ export const Header: React.FC<{
             href="https://www.okcoin.com/prices/bitcoin-btc-price-chart"
             rel="noopener noreferrer"
           >
-            <img alt="bitcoin" src={Bitcoin} /> $
-            {Number.parseFloat(tokens.BTC).toFixed(2)}
+            <img alt="bitcoin" src={Bitcoin} /> ${tokens.BTC}
           </a>
         </li>
         <li className="aligning" onClick={closeMobileMenu}>
@@ -149,8 +146,7 @@ export const Header: React.FC<{
             href="https://www.okcoin.com/prices/stacks-stx-price-chart"
             rel="noopener noreferrer"
           >
-            <img alt="stacks" src={Stacks} /> $
-            {Number.parseFloat(tokens.STX).toFixed(2)}
+            <img alt="stacks" src={Stacks} /> ${tokens.STX}
           </a>
         </li>
         <li className="option head-colors" onClick={closeMobileMenu}>

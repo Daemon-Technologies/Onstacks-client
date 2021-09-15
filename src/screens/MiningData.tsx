@@ -180,7 +180,13 @@ export const MiningData: React.FC<Props> = ({
                   alignItems: "center",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
                   <p className="sub-title" style={{ fontSize: 27 }}>
                     {currentBlock.miners_count} Miners
                   </p>
@@ -201,14 +207,8 @@ export const MiningData: React.FC<Props> = ({
                         style={{ background: colorPalette[winnerAddressIndex] }}
                       ></div>
                       <p
-                        style={{ fontSize: 12, fontWeight: 700 }}
-                      >{`${winnerAddress.substring(
-                        0,
-                        8
-                      )} ... ${winnerAddress.substring(
-                        winnerAddress.length - 9,
-                        winnerAddress.length - 1
-                      )}`}</p>
+                        style={{ fontSize: 11, fontWeight: 600 }}
+                      >{`${winnerAddress}`}</p>
                     </div>
                   )}
                 </div>

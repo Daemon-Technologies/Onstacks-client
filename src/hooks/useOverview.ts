@@ -87,8 +87,12 @@ export const useOverview = () => {
     });
     axios.get(getTokenPrice).then((data: any) => {
       setTokens({
-        BTC: data.find((token: any) => token.token_name === "BTC").token_price,
-        STX: data.find((token: any) => token.token_name === "STX").token_price,
+        BTC: numberWithCommas(
+          data.find((token: any) => token.token_name === "BTC").token_price
+        ),
+        STX: numberWithCommas(
+          data.find((token: any) => token.token_name === "STX").token_price
+        ),
       });
     });
     axios.get(getSatsCommittedPerBlock).then((data: any) => {
@@ -129,10 +133,10 @@ export const useOverview = () => {
         data.map((b: any) => {
           if (b.stx_address && b.stx_address.length > 0) {
             return (
-              b.stx_address.substring(0, 6) +
+              b.stx_address.substring(0, 4) +
               ".." +
               b.stx_address.substring(
-                b.stx_address.length - 7,
+                b.stx_address.length - 5,
                 b.stx_address.length - 1
               )
             );
@@ -165,9 +169,6 @@ export const useOverview = () => {
     });
   }, []);
 
-  // const numberWithCommas = (x: string) => {
-  //   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  // };
   return {
     overviewData,
     tokens,
@@ -178,4 +179,8 @@ export const useOverview = () => {
     totalWinners,
     winnersAddresses,
   };
+};
+
+export const numberWithCommas = (x: any) => {
+  return new Intl.NumberFormat("en-US").format(parseFloat(x));
 };

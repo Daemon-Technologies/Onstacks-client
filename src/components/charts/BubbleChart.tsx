@@ -80,8 +80,9 @@ export const BubbleCharts: React.FC<Props> = ({
           </div>
         );
       }}
+      borderWidth={1}
       // labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 2.4 ] ] }}
-      borderColor={{ from: "color", modifiers: [["darker", 0.3]] }}
+      borderColor={{ from: "color", modifiers: [["darker", 1]] }}
       animate={true}
     />
   );

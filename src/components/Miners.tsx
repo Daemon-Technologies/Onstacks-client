@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { usePagination, useTable } from "react-table";
+import { usePagination, useSortBy, useTable } from "react-table";
 import { MinerInfo } from "../hooks/useMiningData";
 import useWindowDimensions from "../hooks/useWindowDimension";
 
@@ -41,6 +41,7 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
       columns,
       data,
     },
+    useSortBy,
     usePagination
   );
   const {
@@ -71,7 +72,9 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
           {headerGroups.map((headerGroup: any) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column: any) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}
+                </th>
               ))}
             </tr>
           ))}

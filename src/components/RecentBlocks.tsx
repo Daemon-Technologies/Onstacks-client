@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
-import { usePagination, useTable } from "react-table";
+import { usePagination, useSortBy, useTable } from "react-table";
 import { Blocks } from "../hooks/useOverview";
 import useWindowDimensions from "../hooks/useWindowDimension";
 
@@ -37,6 +37,7 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
       columns,
       data,
     },
+    useSortBy,
     usePagination
   );
   const {
@@ -68,7 +69,9 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
           {headerGroups.map((headerGroup: any) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column: any) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}
+                </th>
               ))}
             </tr>
           ))}

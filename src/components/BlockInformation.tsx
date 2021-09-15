@@ -1,5 +1,5 @@
 import React from "react";
-import { OverviewProps } from "../hooks/useOverview";
+import { numberWithCommas, OverviewProps } from "../hooks/useOverview";
 import BitcoinVerified from "../assets/side-menu/bitcoin-verified.svg";
 import BitcoinPending from "../assets/side-menu/bitcoin-pending.svg";
 import STXVerified from "../assets/side-menu/stx-verified.svg";
@@ -106,7 +106,7 @@ export const BlockInformation: React.FC<Props> = ({
             )}`}</p>
           </div>
           <div className={"row-content"}>
-            <p>Tx ID</p>
+            <p>BTC Tx ID</p>
             <p
               onClick={() =>
                 window.open(
@@ -124,7 +124,7 @@ export const BlockInformation: React.FC<Props> = ({
             )}`}</p>
           </div>
           <div className={"row-content"}>
-            <p>Block height</p>
+            <p>BTC Block height</p>
             <p
               onClick={() =>
                 window.open(
@@ -139,12 +139,16 @@ export const BlockInformation: React.FC<Props> = ({
           </div>
           <div className={"row-content"}>
             <p>Stacks Awarded</p>
-            <p className={"black"}>{currentBlock?.block_info.stacks_awarded}</p>
+            <p className={"black"}>
+              {numberWithCommas(currentBlock?.block_info.stacks_awarded)}
+            </p>
           </div>
           <div className={"row-content"}>
-            <p>Winner Miner Burned Fees</p>
+            <p>Winning Mining Spend</p>
             <p className={"black"}>
-              {currentBlock?.block_info.winning_miner_burn_fee}
+              {numberWithCommas(
+                currentBlock?.block_info.winning_miner_burn_fee
+              )}
             </p>
           </div>
           <div className={"row-content"}>

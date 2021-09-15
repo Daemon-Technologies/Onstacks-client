@@ -52,7 +52,7 @@ export const Overview: React.FC<Props> = ({
             justifyContent: "space-between",
           }}
         >
-          <p className="based">*Based on the last 100 blocks.</p>
+          <p className="based">*Average of the last 100 blocks.</p>
           <div className="data">
             <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
               STX Block Height:&nbsp;{" "}
