@@ -101,8 +101,8 @@ export const BlockInformation: React.FC<Props> = ({
               0,
               8
             )} ... ${currentBlock?.block_info.winning_address.substring(
-              currentBlock?.block_info.winning_address.length - 9,
-              currentBlock?.block_info.winning_address.length - 1
+              currentBlock?.block_info.winning_address.length - 8,
+              currentBlock?.block_info.winning_address.length
             )}`}</p>
           </div>
           <div className={"row-content"}>
@@ -119,8 +119,8 @@ export const BlockInformation: React.FC<Props> = ({
               0,
               8
             )} ... ${currentBlock?.block_info.tx_id.substring(
-              currentBlock?.block_info.tx_id.length - 9,
-              currentBlock?.block_info.tx_id.length - 1
+              currentBlock?.block_info.tx_id.length - 8,
+              currentBlock?.block_info.tx_id.length
             )}`}</p>
           </div>
           <div className={"row-content"}>

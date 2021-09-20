@@ -362,6 +362,51 @@ export const GlobalStyles = createGlobalStyle`
     padding: 92px 32px 32px 32px;
     margin: auto;
   }
+
+  .blocks-legend {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    div {
+      display: flex;
+      align-items: center;
+      .block {
+        width: 15px;
+        border-radius: 2px;
+        height: 15px;
+        cursor: pointer;
+        margin-right: 4px;
+        background-color: #20C9AC;
+      }
+      p {
+        margin-right: 10px;
+        //styleName: Regular Text / 12px / Medium;
+        font-family: Manrope;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0px;
+        text-align: left;
+        color: ${({ theme }: any) => theme.greyText} !important;
+
+      }
+    }
+  }
+  .addressDetails {
+    display: grid;
+    grid-template-columns: repeat( 12, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
+    grid-template-areas:
+        "main main main main main main main main main main main main"
+        "content1 content1 content1 content1 content1 content1 content2 content2 content2 content2 content2 content2"
+        "content1 content1 content1 content1 content1 content1 content4 content4 content4 content4 content4 content4";
+    grid-gap: 16px;
+    width: 100%;
+    max-width: 1280px;
+    padding: 92px 32px 32px 32px;
+    margin: auto;
+  }
   .circle-data {
       width:  8px;
       height: 8px;
@@ -959,6 +1004,30 @@ export const GlobalStyles = createGlobalStyle`
     padding: 92px 32px 32px 32px;
     margin: auto;
   }
+
+  .addressDetails {
+    display: grid;
+    grid-template-columns: repeat( 12, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
+    grid-template-areas:
+        "main"
+        "content1"
+        "content2"
+        "content4";
+    grid-gap: 16px;
+    width: 100%;
+    max-width: 1800px;
+    padding: 32px;
+    /* padding-top: 30px; */
+    margin: auto;
+    width: 100%;
+    .screen-title {
+      font-size: 13px;
+    }
+    .button-view {
+      display: none 
+    }
+  }
  
   .info-card div {
     padding: 10px
@@ -1217,9 +1286,9 @@ export const GlobalStyles = createGlobalStyle`
       margin-top: 16px;
       flex-wrap: wrap;
       .block {
-        width: 24px;
-        border-radius: 4px;
-        height: 24px;
+        width: 15px;
+        border-radius: 2px;
+        height: 15px;
         cursor: pointer;
         margin-right: 4px;
         background-color: #20C9AC;

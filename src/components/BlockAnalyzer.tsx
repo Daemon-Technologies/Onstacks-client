@@ -18,7 +18,7 @@ export const BlockAnalyzer: React.FC<Props> = ({
             return (
               <div
                 onClick={() => {
-                  getBlockByNumber(block.block_number.toString());
+                  getBlockByNumber(block.block_number.toString().substring(1));
                 }}
                 data-tip={block.block_number}
                 className={"block"}

@@ -40,7 +40,6 @@ export const FlowChartNodes: React.FC<{
           return b.total_stx_reward - a.total_stx_reward;
         })
         .slice(0, 5)
-
         .forEach((miner, index) => {
           miners.push(
             {

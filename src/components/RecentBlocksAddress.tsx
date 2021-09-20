@@ -1,38 +1,35 @@
 import React, { useEffect, useMemo } from "react";
-import { useHistory } from "react-router-dom";
 import { usePagination, useSortBy, useTable } from "react-table";
-import { MinerInfo } from "../hooks/useMiningData";
+import { Blocks } from "../hooks/useOverview";
 import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
-  blocks: MinerInfo[];
+  blocks: Blocks[];
   initialPageSize?: number;
 }
-export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
+export const RecentBlocksAddress: React.FC<Props> = ({
+  blocks,
+  initialPageSize,
+}) => {
   const data = useMemo(() => blocks, [blocks]);
   const dims = useWindowDimensions();
-
   const columns: any = useMemo(
     () => [
       {
-        Header: "Address.",
-        accessor: "stx_address", // accessor is the "key" in the data
+        Header: "Block No.",
+        accessor: "block_number", // accessor is the "key" in the data
       },
       {
-        Header: "Total Spent (sats)",
-        accessor: "total_burnfee",
+        Header: "Time Elapsed",
+        accessor: "mined_at",
       },
       {
-        Header: "Total Participation",
-        accessor: "total_participation",
+        Header: "Total Sats spent",
+        accessor: "sats_spent",
       },
       {
-        Header: "Total Block Won",
-        accessor: "total_block_reward",
-      },
-      {
-        Header: "Total Reward (STX)",
-        accessor: "total_stx_reward",
+        Header: "Block Status",
+        accessor: "block_status",
       },
     ],
     []
@@ -61,7 +58,6 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
     setPageSize,
     state: { pageSize },
   } = tableInstance;
-  const { push } = useHistory();
 
   useEffect(() => {
     setPageSize(initialPageSize || 5);
@@ -69,7 +65,7 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
   }, [initialPageSize]);
   return (
     <>
-      <table id={"long"} {...getTableProps()}>
+      <table className={"small-table"} {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup: any) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -88,17 +84,7 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell: any) => {
                   return (
-                    <td
-                      onClick={() => {
-                        console.log(cell);
-                        if (cell.column.id === "stx_address") {
-                          push("/address/" + cell.row.original.address);
-                        }
-                      }}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render("Cell")}
-                    </td>
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
               </tr>

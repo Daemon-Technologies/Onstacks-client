@@ -9,6 +9,8 @@ import { useOverview } from "./hooks/useOverview";
 import { Notfound } from "./screens/Notfound";
 import { MiningData } from "./screens/MiningData";
 import { Header } from "./components/Header";
+import { AddressDetails } from "./screens/AddressDetails";
+import { useMiningData } from "./hooks/useMiningData";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -22,6 +24,8 @@ const App: React.FC = () => {
     totalWinners,
     winnersAddresses,
   } = useOverview();
+
+  const { getBlockByNumber, currentBlock } = useMiningData();
 
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
@@ -66,6 +70,14 @@ const App: React.FC = () => {
                 areaBlocks={areaBlocks}
                 areaSeries={areaSeries}
                 overviewData={overviewData}
+                theme={theme}
+              />
+            </Route>
+            <Route exact path="/address/:address">
+              <AddressDetails
+                currentBlock={currentBlock}
+                getBlockByNumber={getBlockByNumber}
+                themeToggler={themeToggler}
                 theme={theme}
               />
             </Route>

@@ -48,6 +48,7 @@ export interface Blocks {
   mined_at: number;
   sats_spent: string;
   winner_address: string;
+  block_status?: any;
 }
 
 export const useOverview = () => {
@@ -136,8 +137,8 @@ export const useOverview = () => {
               b.stx_address.substring(0, 4) +
               ".." +
               b.stx_address.substring(
-                b.stx_address.length - 5,
-                b.stx_address.length - 1
+                b.stx_address.length - 4,
+                b.stx_address.length
               )
             );
           } else {
@@ -151,6 +152,7 @@ export const useOverview = () => {
       setBlocks(
         data.map((r: Blocks) => {
           return {
+            address: r.winner_address,
             block_number: "#" + r.block_number,
             mined_at:
               differenceInMinutes(new Date(), r.mined_at * 1000) +
@@ -160,8 +162,8 @@ export const useOverview = () => {
               r.winner_address.substring(0, window.innerWidth > 600 ? 8 : 4) +
               ".." +
               r.winner_address.substring(
-                r.winner_address.length - (window.innerWidth > 600 ? 8 : 5),
-                r.winner_address.length - 1
+                r.winner_address.length - (window.innerWidth > 600 ? 8 : 4),
+                r.winner_address.length
               ),
           };
         })

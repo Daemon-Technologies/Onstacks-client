@@ -54,14 +54,11 @@ export const MiningData: React.FC<Props> = ({
   }, [toggle]);
 
   useEffect(() => {
-    const x: any = currentBlock?.miners_info.reduce((prev: any, curr: any) =>
-      prev.burn_fee > curr.burn_fee ? prev : curr
-    );
-    if (x && x.miner_address) {
-      setWinnerAddress(x.miner_address);
+    if (currentBlock?.block_info.winning_address) {
+      setWinnerAddress(currentBlock?.block_info.winning_address);
     }
     const index: any = currentBlock?.miners_info.findIndex(
-      (x) => x.miner_address === winnerAddress
+      (x) => x.miner_address === currentBlock.block_info.winning_address
     );
     if (index !== -1) {
       setWinnerAddressColor(index);
@@ -70,7 +67,9 @@ export const MiningData: React.FC<Props> = ({
 
   useEffect(() => {
     if (blocks.length > 0 || params?.block) {
-      getBlockByNumber(params?.block || blocks[0].block_number.toString());
+      getBlockByNumber(
+        params?.block || blocks[0].block_number.toString().substr(1)
+      );
     }
     if (params) {
       setTabIndex(params?.index ? +params?.index : 0);
@@ -84,14 +83,18 @@ export const MiningData: React.FC<Props> = ({
 
   const nextBlock = () => {
     if (blocks.length - 1 > currentBlockIndex) {
-      getBlockByNumber(blocks[currentBlockIndex + 1].block_number.toString());
+      getBlockByNumber(
+        blocks[currentBlockIndex + 1].block_number.toString().substr(1)
+      );
       setCurrentBlockIndex(currentBlockIndex + 1);
     }
   };
 
   const prevBlock = () => {
     if (currentBlockIndex !== 0) {
-      getBlockByNumber(blocks[currentBlockIndex - 1].block_number.toString());
+      getBlockByNumber(
+        blocks[currentBlockIndex - 1].block_number.toString().substr(1)
+      );
       setCurrentBlockIndex(currentBlockIndex - 1);
     }
   };

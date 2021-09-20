@@ -54,7 +54,7 @@ export const BubbleCharts: React.FC<Props> = ({
                   8
                 )} ... ${x.data.name.substring(
                   x.data.name.length - 9,
-                  x.data.name.length - 1
+                  x.data.name.length
                 )}`}</p>
               </div>
               {winnerAddress === x.data.name && (

@@ -63,21 +63,22 @@ export const useMiningData = () => {
       setBlocks(
         data.map((r: MinerInfo) => {
           return {
+            address: r.stx_address,
             stx_address:
               window.innerWidth > 600
                 ? `${r.stx_address.substring(
                     0,
                     10
                   )} ... ${r.stx_address.substring(
-                    r.stx_address.length - 11,
-                    r.stx_address.length - 1
+                    r.stx_address.length - 10,
+                    r.stx_address.length
                   )}`
                 : `${r.stx_address.substring(
                     0,
                     4
                   )} ... ${r.stx_address.substring(
-                    r.stx_address.length - 5,
-                    r.stx_address.length - 1
+                    r.stx_address.length - 4,
+                    r.stx_address.length
                   )}`,
             total_burnfee: numFormatter(r.total_burnfee) || 0,
             total_block_reward: numFormatter(r.total_block_reward) || 0,
@@ -93,8 +94,9 @@ export const useMiningData = () => {
   }, []);
 
   const getBlockByNumber = (blockNumber: string) => {
-    axios.get(getBlockNumber(blockNumber.substring(1))).then((data: any) => {
-      setCurrentBlock({ ...data, blockNumber });
+    console.log(blockNumber);
+    axios.get(getBlockNumber(blockNumber)).then((data: any) => {
+      setCurrentBlock({ ...data, blockNumber: blockNumber });
     });
   };
 
