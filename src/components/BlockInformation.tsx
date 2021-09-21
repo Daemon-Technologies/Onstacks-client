@@ -29,7 +29,7 @@ export const BlockInformation: React.FC<Props> = ({
             alignItems: "center",
           }}
         >
-          <p className="title">Block information</p>
+          <p className="title">Participation History</p>
           <div
             className="button-view"
             onClick={() => getBlockHash(overviewData.stx_block_height)}

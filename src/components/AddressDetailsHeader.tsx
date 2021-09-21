@@ -56,8 +56,8 @@ export const AddressDetailsHeader: React.FC<{
       </div>
       <div className={"info-card"}>
         <div className="inner-info-card">
-          <p className="title">Total block won</p>
-          <p className="sub-title">{headerDetails?.total_blocks_won} Block</p>
+          <p className="title">Total blocks won</p>
+          <p className="sub-title">{headerDetails?.total_blocks_won} Blocks</p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total STX earned</p>

@@ -1017,8 +1017,8 @@ export const GlobalStyles = createGlobalStyle`
     grid-gap: 16px;
     width: 100%;
     max-width: 1800px;
-    padding: 32px;
-    /* padding-top: 30px; */
+    padding: 22px;
+    padding-top: 32px;
     margin: auto;
     width: 100%;
     .screen-title {
@@ -1080,7 +1080,7 @@ export const GlobalStyles = createGlobalStyle`
     height: 600px !important;
   }
   .lines div p {
-    margin-top: 24px;
+    margin-top: 12px;
     text-align: center;
     font-size: 13px;
   }

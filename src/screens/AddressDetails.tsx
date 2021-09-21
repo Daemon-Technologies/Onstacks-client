@@ -153,8 +153,8 @@ export const AddressDetails: React.FC<Props> = ({
             style={{
               background:
                 currentBlock?.block_info.winning_address !== address
-                  ? "#FFDFC0" + "10"
-                  : "#20C9AC" + 10,
+                  ? "#FFDFC0" + "60"
+                  : "#20C9AC" + 30,
               padding: 4,
               marginLeft: 10,
               borderRadius: 4,
@@ -300,7 +300,7 @@ export const AddressDetails: React.FC<Props> = ({
         </div>
       </div>
       <div id="content2">
-        <p className="title">Total sats committed in current block</p>
+        <p className="title">Total sats committed per block</p>
         <div className="seprator">
           {satsCommitted.block_number.length > 0 && (
             <AreaChart satsCommitted={satsCommitted} theme={theme} />
