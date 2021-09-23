@@ -36,9 +36,6 @@ export const FlowChartNodes: React.FC<{
         .sort((a, b) => {
           return b.total_sats_spent - a.total_sats_spent;
         })
-        .sort((a, b) => {
-          return b.total_stx_reward - a.total_stx_reward;
-        })
         .slice(0, 5)
         .forEach((miner, index) => {
           miners.push(
