@@ -91,7 +91,12 @@ export const useAddressDetails = () => {
               differenceInMinutes(new Date(), r.mined_at * 1000) +
               (window.innerWidth > 800 ? " Mins" : ""),
             sats_spent: numFormatter(+r.sats_spent),
-            block_status: r.block_status === 2 ? "Won" : "Lost",
+            block_status:
+              r.block_status === 2
+                ? "Won"
+                : r.block_status === 1
+                ? "Lost"
+                : "Inactive",
           };
         })
       );

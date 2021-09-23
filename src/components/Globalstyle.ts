@@ -954,6 +954,12 @@ export const GlobalStyles = createGlobalStyle`
     /* max-height: 600px; */
     min-height: 275px;
   }
+
+  .container {
+    #content1 {
+      min-height: 255px;
+    }
+  }
   .miningData {
     #content1 {
       height: auto !important;
@@ -1070,7 +1076,12 @@ export const GlobalStyles = createGlobalStyle`
   .burn-address {
     display: none;
   }
- 
+  .addressDetails {
+    #content2 {
+      min-height: 255px;
+      height: 255px;
+    }
+  }
   .mob-address {
     display: flex;
     justify-content: space-between;

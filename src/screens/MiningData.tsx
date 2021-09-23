@@ -12,7 +12,7 @@ import right from "../assets/side-menu/right-arrow-active.svg";
 import rightDisabled from "../assets/side-menu/right-arrow-disabled.svg";
 import left from "../assets/side-menu/left-arrow-active.svg";
 import leftDisabled from "../assets/side-menu/left-arrow-disabled.svg";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { randomColorGenerator } from "../utils/helper";
 
 interface Props {
@@ -41,6 +41,7 @@ export const MiningData: React.FC<Props> = ({
   const [winnerAddress, setWinnerAddress] = useState("");
   const [winnerAddressIndex, setWinnerAddressColor] = useState(0);
   const colorPalette = randomColorGenerator();
+  const { push } = useHistory();
   const {
     blocks: minersBlocks,
     getBlockByNumber,
@@ -190,7 +191,10 @@ export const MiningData: React.FC<Props> = ({
                     flexWrap: "wrap",
                   }}
                 >
-                  <p className="sub-title" style={{ fontSize: 27 }}>
+                  <p
+                    className="sub-title"
+                    style={{ fontSize: 27, marginRight: 10 }}
+                  >
                     {currentBlock.miners_count} Miners
                   </p>
                   {winnerAddress && (
@@ -198,12 +202,12 @@ export const MiningData: React.FC<Props> = ({
                       style={{
                         background: colorPalette[winnerAddressIndex] + "10",
                         padding: 4,
-                        marginLeft: 10,
                         borderRadius: 4,
                         color: colorPalette[winnerAddressIndex],
                         display: "flex",
                         alignItems: "center",
                       }}
+                      onClick={() => push("/address/" + winnerAddress)}
                     >
                       <div
                         className="circle-data"

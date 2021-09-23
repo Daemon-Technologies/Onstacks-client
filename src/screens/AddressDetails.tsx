@@ -33,6 +33,7 @@ export const AddressDetails: React.FC<Props> = ({
 }) => {
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
+  const [status, setBlockStatus] = useState(1);
   const [address, setAddress] = useState("");
   const {
     getMinerInfo,
@@ -86,7 +87,7 @@ export const AddressDetails: React.FC<Props> = ({
             alignItems: "center",
           }}
         >
-          <p>Block information</p>
+          <p>Participation History</p>
           <div className="blocks-legend">
             <div>
               <div className={"block"}></div> <p>Block Won</p>
@@ -109,6 +110,7 @@ export const AddressDetails: React.FC<Props> = ({
                   <div
                     onClick={() => {
                       getBlockByNumber(block.block_number.toString());
+                      setBlockStatus(block.block_status);
                     }}
                     data-tip={block.block_number}
                     className={"block"}
@@ -145,42 +147,47 @@ export const AddressDetails: React.FC<Props> = ({
             View on explorer
           </div>
         </div>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <p className="sub-title" style={{ fontSize: 32 }}>
             #{currentBlock?.blockNumber}
           </p>
           <div
             style={{
               background:
-                currentBlock?.block_info.winning_address !== address
+                status === 1
                   ? "#FFDFC0" + "60"
-                  : "#20C9AC" + 30,
+                  : status === 2
+                  ? "#20C9AC" + 30
+                  : "#EBEAED" + 90,
               padding: 4,
               marginLeft: 10,
               borderRadius: 4,
               color:
-                currentBlock?.block_info.winning_address !== address
-                  ? "#FFDFC0"
-                  : "#20C9AC",
+                status === 1 ? "#FFDFC0" : status === 2 ? "#20C9AC" : "black",
               width: 100,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              height: 30,
             }}
           >
             <div
               className="circle-data"
               style={{
                 background:
-                  currentBlock?.block_info.winning_address !== address
+                  status === 1
                     ? "#FFDFC0"
-                    : "#20C9AC",
+                    : status === 2
+                    ? "#20C9AC"
+                    : "#EBEAED",
               }}
             ></div>
             <p style={{ fontSize: 12, fontWeight: 600 }}>{`${
-              currentBlock?.block_info.winning_address !== address
+              status === 1
                 ? "Block Lost"
-                : "Block Won"
+                : status === 2
+                ? "Block Won"
+                : "Inactive"
             }`}</p>
           </div>
         </div>

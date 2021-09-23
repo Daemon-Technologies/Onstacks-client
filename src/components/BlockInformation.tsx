@@ -9,6 +9,7 @@ import Reward from "../assets/side-menu/reward-verified.svg";
 import RewardPending from "../assets/side-menu/reward.svg";
 import { getBlockHash } from "../utils/helper";
 import { CurrentBlock } from "../hooks/useMiningData";
+import { useHistory } from "react-router-dom";
 
 interface Props {
   overviewData: OverviewProps;
@@ -19,6 +20,8 @@ export const BlockInformation: React.FC<Props> = ({
   overviewData,
   currentBlock,
 }) => {
+  const { push } = useHistory();
+
   return (
     <>
       <div id={"content4"}>
@@ -92,10 +95,7 @@ export const BlockInformation: React.FC<Props> = ({
             <p
               className={"a-tag"}
               onClick={() =>
-                window.open(
-                  `https://explorer.stacks.co/address/${currentBlock?.block_info.winning_address}`,
-                  "_blank"
-                )
+                push("/address/" + currentBlock?.block_info.winning_address)
               }
             >{`${currentBlock?.block_info.winning_address.substring(
               0,
