@@ -116,7 +116,9 @@ export const MiningData: React.FC<Props> = ({
       )}
       {tabIndex === 1 && (
         <div id={"content1"}>
-          <p className={"title-table"}>Recent active miners</p>
+          <p className={"title-table"}>
+            Recent active miners ({minersBlocks.length})
+          </p>
           {blocks.length > 0 && (
             <Miners initialPageSize={10} blocks={minersBlocks} />
           )}

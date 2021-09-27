@@ -15,7 +15,7 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
   const columns: any = useMemo(
     () => [
       {
-        Header: "Address.",
+        Header: `Address.`,
         accessor: "stx_address", // accessor is the "key" in the data
       },
       {

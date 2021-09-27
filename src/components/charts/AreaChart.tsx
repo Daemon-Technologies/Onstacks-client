@@ -31,7 +31,7 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   useEffect(() => {
     setOptions((o) => ({
       ...o,
-      chartArea: { top: 40, width: "90%", height: "270px", left: 20 },
+      chartArea: { top: 40, width: "90%", height: "270px", left: 30 },
       hAxis: {
         textStyle: { color: themeMode.greyText },
         minorGridlines: { color: "transparent" },

@@ -11,6 +11,7 @@ import { numberWithCommas } from "../hooks/useOverview";
 import BitcoinVerified from "../assets/side-menu/bitcoin-verified.svg";
 import BitcoinPending from "../assets/side-menu/bitcoin-pending.svg";
 import STXVerified from "../assets/side-menu/stx-verified.svg";
+import NoMiner from "../assets/side-menu/No-miner.svg";
 import STXPending from "../assets/side-menu/stx-pending.svg";
 import Search from "../assets/side-menu/search.svg";
 import Reward from "../assets/side-menu/reward-verified.svg";
@@ -88,19 +89,6 @@ export const AddressDetails: React.FC<Props> = ({
           }}
         >
           <p>Participation History</p>
-          <div className="blocks-legend">
-            <div>
-              <div className={"block"}></div> <p>Block Won</p>
-            </div>
-            <div>
-              <div style={{ background: "#FFDFC0" }} className={"block"}></div>
-              <p>Block Lost</p>
-            </div>
-            <div>
-              <div style={{ background: "#EBEAED" }} className={"block"}></div>
-              <p>Inactive</p>
-            </div>
-          </div>
         </div>
         {currentBlocks.length > 0 && (
           <div className={"block-analyzer"}>
@@ -128,6 +116,19 @@ export const AddressDetails: React.FC<Props> = ({
             })}
           </div>
         )}
+        <div className="blocks-legend">
+          <div>
+            <div className={"block"}></div> <p>Block Won</p>
+          </div>
+          <div>
+            <div style={{ background: "#FFDFC0" }} className={"block"}></div>
+            <p>Block Lost</p>
+          </div>
+          <div>
+            <div style={{ background: "#EBEAED" }} className={"block"}></div>
+            <p>Inactive</p>
+          </div>
+        </div>
         <hr style={{ marginTop: 16, marginBottom: 28 }} className="divider" />
         <div
           style={{
@@ -155,7 +156,7 @@ export const AddressDetails: React.FC<Props> = ({
             style={{
               background:
                 status === 1
-                  ? "#FFDFC0" + "60"
+                  ? "#FFA04310"
                   : status === 2
                   ? "#20C9AC" + 30
                   : "#EBEAED" + 90,
@@ -163,7 +164,7 @@ export const AddressDetails: React.FC<Props> = ({
               marginLeft: 10,
               borderRadius: 4,
               color:
-                status === 1 ? "#FFDFC0" : status === 2 ? "#20C9AC" : "black",
+                status === 1 ? "#FFA043" : status === 2 ? "#20C9AC" : "#84818a",
               width: 100,
               display: "flex",
               justifyContent: "center",
@@ -176,10 +177,10 @@ export const AddressDetails: React.FC<Props> = ({
               style={{
                 background:
                   status === 1
-                    ? "#FFDFC0"
+                    ? "#FFA043"
                     : status === 2
                     ? "#20C9AC"
-                    : "#EBEAED",
+                    : "#84818a",
               }}
             ></div>
             <p style={{ fontSize: 12, fontWeight: 600 }}>{`${
@@ -191,120 +192,133 @@ export const AddressDetails: React.FC<Props> = ({
             }`}</p>
           </div>
         </div>
-        <div className={"lines"}>
-          <div onClick={() => getBlockHash(currentBlock?.blockNumber)}>
-            <img
-              src={
-                currentBlock?.block_info.is_stx_pending
-                  ? STXPending
-                  : STXVerified
-              }
-              alt={"Stacks"}
-            />
-            <p>STX Confirmation</p>
-          </div>
-          <div
-            onClick={() =>
-              window.open(
-                `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
-                "_blank"
-              )
-            }
-          >
-            <img
-              src={
-                currentBlock?.block_info.is_btc_pending
-                  ? BitcoinPending
-                  : BitcoinVerified
-              }
-              alt={"Bitcoin"}
-            />
-            <p>Bitcoin Confirmation</p>
-          </div>
-          <div>
-            <img
-              src={
-                currentBlock?.block_info.is_reward_pending
-                  ? RewardPending
-                  : Reward
-              }
-              alt={"Stacks"}
-            />
-            <p>Reward Confirmation</p>
-          </div>
-          <hr className={"hr"} />
-        </div>
-        <hr className="divider" />
-        <div>
-          <div className={"row-content"}>
-            <p>Winner Address</p>
-            <p
-              className={"a-tag"}
-              onClick={() =>
-                window.open(
-                  `https://explorer.stacks.co/address/${currentBlock?.block_info.winning_address}`,
-                  "_blank"
-                )
-              }
-            >{`${currentBlock?.block_info.winning_address.substring(
-              0,
-              8
-            )} ... ${currentBlock?.block_info.winning_address.substring(
-              currentBlock?.block_info.winning_address.length - 9,
-              currentBlock?.block_info.winning_address.length - 1
-            )}`}</p>
-          </div>
-          <div className={"row-content"}>
-            <p>BTC Tx ID</p>
-            <p
-              onClick={() =>
-                window.open(
-                  `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
-                  "_blank"
-                )
-              }
-              className={"a-tag"}
-            >{`${currentBlock?.block_info.tx_id.substring(
-              0,
-              8
-            )} ... ${currentBlock?.block_info.tx_id.substring(
-              currentBlock?.block_info.tx_id.length - 9,
-              currentBlock?.block_info.tx_id.length - 1
-            )}`}</p>
-          </div>
-          <div className={"row-content"}>
-            <p>BTC Block height</p>
-            <p
-              onClick={() =>
-                window.open(
-                  `https://www.blockchain.com/btc/block/${currentBlock?.block_info.block_height}`,
-                  "_blank"
-                )
-              }
-              className={"a-tag"}
-            >
-              #{currentBlock?.block_info.block_height}
-            </p>
-          </div>
-          <div className={"row-content"}>
-            <p>Stacks Awarded</p>
-            <p className={"black"}>
-              {numberWithCommas(currentBlock?.block_info.stacks_awarded)}
-            </p>
-          </div>
-          <div className={"row-content"}>
-            <p>Winning Mining Spend</p>
-            <p className={"black"}>
-              {numberWithCommas(
-                currentBlock?.block_info.winning_miner_burn_fee
-              )}
-            </p>
-          </div>
-          <div className={"row-content"}>
-            <p>Rate of Return</p>
-            <p className={"black"}>{currentBlock?.block_info.return_rate}</p>
-          </div>
-        </div>
+        <>
+          {status === 0 ? (
+            <div className="no-miner">
+              <img src={NoMiner} alt={"No miner"} />
+              <p>Miner is not active in this block.</p>
+            </div>
+          ) : (
+            <>
+              <div className={"lines"}>
+                <div onClick={() => getBlockHash(currentBlock?.blockNumber)}>
+                  <img
+                    src={
+                      currentBlock?.block_info.is_stx_pending
+                        ? STXPending
+                        : STXVerified
+                    }
+                    alt={"Stacks"}
+                  />
+                  <p>STX Confirmation</p>
+                </div>
+                <div
+                  onClick={() =>
+                    window.open(
+                      `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
+                      "_blank"
+                    )
+                  }
+                >
+                  <img
+                    src={
+                      currentBlock?.block_info.is_btc_pending
+                        ? BitcoinPending
+                        : BitcoinVerified
+                    }
+                    alt={"Bitcoin"}
+                  />
+                  <p>Bitcoin Confirmation</p>
+                </div>
+                <div>
+                  <img
+                    src={
+                      currentBlock?.block_info.is_reward_pending
+                        ? RewardPending
+                        : Reward
+                    }
+                    alt={"Stacks"}
+                  />
+                  <p>Reward Confirmation</p>
+                </div>
+                <hr className={"hr"} />
+              </div>
+              <hr className="divider" />
+              <div>
+                <div className={"row-content"}>
+                  <p>Winner Address</p>
+                  <p
+                    className={"a-tag"}
+                    onClick={() =>
+                      window.open(
+                        `https://explorer.stacks.co/address/${currentBlock?.block_info.winning_address}`,
+                        "_blank"
+                      )
+                    }
+                  >{`${currentBlock?.block_info.winning_address.substring(
+                    0,
+                    8
+                  )} ... ${currentBlock?.block_info.winning_address.substring(
+                    currentBlock?.block_info.winning_address.length - 9,
+                    currentBlock?.block_info.winning_address.length - 1
+                  )}`}</p>
+                </div>
+                <div className={"row-content"}>
+                  <p>BTC Tx ID</p>
+                  <p
+                    onClick={() =>
+                      window.open(
+                        `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
+                        "_blank"
+                      )
+                    }
+                    className={"a-tag"}
+                  >{`${currentBlock?.block_info.tx_id.substring(
+                    0,
+                    8
+                  )} ... ${currentBlock?.block_info.tx_id.substring(
+                    currentBlock?.block_info.tx_id.length - 9,
+                    currentBlock?.block_info.tx_id.length - 1
+                  )}`}</p>
+                </div>
+                <div className={"row-content"}>
+                  <p>BTC Block height</p>
+                  <p
+                    onClick={() =>
+                      window.open(
+                        `https://www.blockchain.com/btc/block/${currentBlock?.block_info.block_height}`,
+                        "_blank"
+                      )
+                    }
+                    className={"a-tag"}
+                  >
+                    #{currentBlock?.block_info.block_height}
+                  </p>
+                </div>
+                <div className={"row-content"}>
+                  <p>Stacks Awarded</p>
+                  <p className={"black"}>
+                    {numberWithCommas(currentBlock?.block_info.stacks_awarded)}
+                  </p>
+                </div>
+                <div className={"row-content"}>
+                  <p>Winning Mining Spend</p>
+                  <p className={"black"}>
+                    {numberWithCommas(
+                      currentBlock?.block_info.winning_miner_burn_fee
+                    )}
+                  </p>
+                </div>
+                <div className={"row-content"}>
+                  <p>Rate of Return</p>
+                  <p className={"black"}>
+                    {currentBlock?.block_info.return_rate}
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
+        </>
       </div>
       <div id="content2">
         <p className="title">Total sats committed per block</p>

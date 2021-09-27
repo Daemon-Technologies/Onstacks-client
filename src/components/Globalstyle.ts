@@ -251,6 +251,27 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
+  .no-miner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 300px;
+    p {
+      font-family: Manrope;
+      color: ${({ theme }: any) => theme.greyText};
+
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0px;
+      text-align: center;
+      margin-top: 14px;
+    }
+  }
+
   .logo {
     width: 200px;
     height: 36px;
@@ -367,6 +388,7 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-top: 8px;
     div {
       display: flex;
       align-items: center;

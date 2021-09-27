@@ -144,7 +144,7 @@ export const BlockInformation: React.FC<Props> = ({
             </p>
           </div>
           <div className={"row-content"}>
-            <p>Winning Mining Spend</p>
+            <p>Sats Spent</p>
             <p className={"black"}>
               {numberWithCommas(
                 currentBlock?.block_info.winning_miner_burn_fee

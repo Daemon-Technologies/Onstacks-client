@@ -6,6 +6,7 @@ import {
   getMiningInfo,
 } from "../axios/requests";
 import { numFormatter } from "../utils/helper";
+import useWindowDimensions from "./useWindowDimension";
 
 export interface MinerInfo {
   stx_address: string;
@@ -57,6 +58,7 @@ export const useMiningData = () => {
     total_sats_spent: 0,
     total_stx_reward: 0,
   });
+  const dims = useWindowDimensions();
 
   useEffect(() => {
     axios.get(getMinersInfo).then((data: any) => {
@@ -80,10 +82,26 @@ export const useMiningData = () => {
                     r.stx_address.length - 4,
                     r.stx_address.length
                   )}`,
-            total_burnfee: numFormatter(r.total_burnfee) || 0,
-            total_block_reward: numFormatter(r.total_block_reward) || 0,
-            total_participation: numFormatter(r.total_participation) || 0,
-            total_stx_reward: numFormatter(r.total_stx_reward) || 0,
+            total_burnfee: r.total_burnfee
+              ? dims.width < 800
+                ? numFormatter(r.total_burnfee)
+                : r.total_burnfee.toFixed(0)
+              : 0,
+            total_block_reward: r.total_block_reward
+              ? dims.width < 800
+                ? numFormatter(r.total_block_reward)
+                : r.total_block_reward.toFixed(0)
+              : 0,
+            total_participation: r.total_participation
+              ? dims.width < 800
+                ? numFormatter(r.total_participation)
+                : r.total_participation.toFixed(0)
+              : 0,
+            total_stx_reward: r.total_stx_reward
+              ? dims.width < 800
+                ? numFormatter(r.total_stx_reward)
+                : r.total_stx_reward.toFixed(0)
+              : 0,
           };
         })
       );
@@ -91,7 +109,7 @@ export const useMiningData = () => {
     axios.get(getMiningInfo).then((data: any) => {
       setMiningInfo(data);
     });
-  }, []);
+  }, [dims]);
 
   const getBlockByNumber = (blockNumber: string) => {
     console.log(blockNumber);
