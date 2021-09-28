@@ -138,7 +138,7 @@ export const AddressDetails: React.FC<Props> = ({
           }}
         >
           <p style={{ fontSize: 16 }} className="sub-title">
-            Block information
+            Miner's block participation details
           </p>
           <div
             className="button-view"
@@ -245,24 +245,26 @@ export const AddressDetails: React.FC<Props> = ({
               </div>
               <hr className="divider" />
               <div>
-                <div className={"row-content"}>
-                  <p>Winner Address</p>
-                  <p
-                    className={"a-tag"}
-                    onClick={() =>
-                      window.open(
-                        `https://explorer.stacks.co/address/${currentBlock?.block_info.winning_address}`,
-                        "_blank"
-                      )
-                    }
-                  >{`${currentBlock?.block_info.winning_address.substring(
-                    0,
-                    8
-                  )} ... ${currentBlock?.block_info.winning_address.substring(
-                    currentBlock?.block_info.winning_address.length - 9,
-                    currentBlock?.block_info.winning_address.length - 1
-                  )}`}</p>
-                </div>
+                {status === 2 && (
+                  <div className={"row-content"}>
+                    <p>Winner Address</p>
+                    <p
+                      className={"a-tag"}
+                      onClick={() =>
+                        window.open(
+                          `https://explorer.stacks.co/address/${currentBlock?.block_info.winning_address}`,
+                          "_blank"
+                        )
+                      }
+                    >{`${currentBlock?.block_info.winning_address.substring(
+                      0,
+                      8
+                    )} ... ${currentBlock?.block_info.winning_address.substring(
+                      currentBlock?.block_info.winning_address.length - 9,
+                      currentBlock?.block_info.winning_address.length - 1
+                    )}`}</p>
+                  </div>
+                )}
                 <div className={"row-content"}>
                   <p>BTC Tx ID</p>
                   <p
@@ -296,13 +298,18 @@ export const AddressDetails: React.FC<Props> = ({
                   </p>
                 </div>
                 <div className={"row-content"}>
-                  <p>Stacks Awarded</p>
+                  <p>Stacks awarded</p>
                   <p className={"black"}>
-                    {numberWithCommas(currentBlock?.block_info.stacks_awarded)}
+                    {status === 2
+                      ? numberWithCommas(
+                          currentBlock?.block_info.stacks_awarded
+                        )
+                      : 0}{" "}
+                    Stacks
                   </p>
                 </div>
                 <div className={"row-content"}>
-                  <p>Winning Mining Spend</p>
+                  <p>Burn fees</p>
                   <p className={"black"}>
                     {numberWithCommas(
                       currentBlock?.block_info.winning_miner_burn_fee
@@ -310,7 +317,7 @@ export const AddressDetails: React.FC<Props> = ({
                   </p>
                 </div>
                 <div className={"row-content"}>
-                  <p>Rate of Return</p>
+                  <p>Rate of return</p>
                   <p className={"black"}>
                     {currentBlock?.block_info.return_rate}
                   </p>

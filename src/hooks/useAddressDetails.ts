@@ -105,7 +105,7 @@ export const useAddressDetails = () => {
 
   const getBlocksForAddress = (stxAddress: string) => {
     axios.get(getBlocksForSpecificAddress(stxAddress)).then((data: any) => {
-      setCurrentBlocks(data);
+      setCurrentBlocks(data.reverse());
     });
   };
   // const getBlockByNumber = (blockNumber: string) => {

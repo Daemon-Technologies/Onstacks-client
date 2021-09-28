@@ -1313,11 +1313,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 }
   .block-analyzer {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
       margin-top: 16px;
-      flex-wrap: wrap;
       .block {
         width: 15px;
         border-radius: 2px;
