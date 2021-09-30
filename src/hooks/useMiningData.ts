@@ -5,7 +5,6 @@ import {
   getBlockNumber,
   getMiningInfo,
 } from "../axios/requests";
-import { numFormatter } from "../utils/helper";
 import useWindowDimensions from "./useWindowDimension";
 
 export interface MinerInfo {
@@ -13,6 +12,7 @@ export interface MinerInfo {
   total_burnfee: number;
   total_block_reward: number;
   total_participation: number;
+  address: string;
   total_blocks: number;
   total_stx_reward: number;
 }
@@ -77,30 +77,22 @@ export const useMiningData = () => {
                   )}`
                 : `${r.stx_address.substring(
                     0,
-                    4
+                    7
                   )} ... ${r.stx_address.substring(
-                    r.stx_address.length - 4,
+                    r.stx_address.length - 7,
                     r.stx_address.length
                   )}`,
             total_burnfee: r.total_burnfee
-              ? dims.width < 800
-                ? numFormatter(r.total_burnfee)
-                : r.total_burnfee.toFixed(0)
+              ? r.total_burnfee.toLocaleString()
               : 0,
             total_block_reward: r.total_block_reward
-              ? dims.width < 800
-                ? numFormatter(r.total_block_reward)
-                : r.total_block_reward.toFixed(0)
+              ? r.total_block_reward.toLocaleString()
               : 0,
             total_participation: r.total_participation
-              ? dims.width < 800
-                ? numFormatter(r.total_participation)
-                : r.total_participation.toFixed(0)
+              ? r.total_participation.toFixed(0)
               : 0,
             total_stx_reward: r.total_stx_reward
-              ? dims.width < 800
-                ? numFormatter(r.total_stx_reward)
-                : r.total_stx_reward.toFixed(0)
+              ? r.total_stx_reward.toLocaleString()
               : 0,
           };
         })

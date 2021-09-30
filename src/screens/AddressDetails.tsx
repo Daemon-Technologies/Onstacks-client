@@ -18,6 +18,7 @@ import Reward from "../assets/side-menu/reward-verified.svg";
 import RewardPending from "../assets/side-menu/reward.svg";
 import { getBlockHash } from "../utils/helper";
 import { CurrentBlock } from "../hooks/useMiningData";
+import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
   theme: any;
@@ -51,6 +52,7 @@ export const AddressDetails: React.FC<Props> = ({
     const { innerWidth: width } = window;
     setToggle(width >= 1025);
   }, [toggle]);
+  const dims = useWindowDimensions();
 
   useEffect(() => {
     if (params?.address) {
@@ -337,9 +339,38 @@ export const AddressDetails: React.FC<Props> = ({
           )}
         </div>
       </div>
-      <div id="content4">
-        <p className="title-table">Recent blocks</p>
-        {blocks.length > 0 && <RecentBlocksAddress blocks={blocks} />}
+      <div id={"content4"} className={dims.width < 700 ? "mobile-table" : "s"}>
+        <p className={"title-table"}>Recent blocks</p>
+        {dims.width < 700 ? (
+          blocks.map((block) => {
+            return (
+              <div className="table-card-container">
+                <div className="table-card">
+                  <p className="table-title">Block No.</p>
+                  <p className="table-subtitle" style={{ color: "#FFA043" }}>
+                    {block.block_number}
+                  </p>
+                </div>
+                <div className="table-card">
+                  <p className="table-title">Time Elapsed</p>
+                  <p className="table-subtitle">{block.mined_at}</p>
+                </div>
+                <div className="table-card">
+                  <p className="table-title">Total Sats spent</p>
+                  <p className="table-subtitle">{block.sats_spent}</p>
+                </div>
+                <div className="table-card">
+                  <p className="table-title"> Block Status</p>
+                  <p className="table-subtitle">{block.block_status}</p>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div>
+            {blocks.length > 0 && <RecentBlocksAddress blocks={blocks} />}
+          </div>
+        )}
       </div>
     </div>
   );

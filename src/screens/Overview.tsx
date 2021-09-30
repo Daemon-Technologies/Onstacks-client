@@ -12,6 +12,8 @@ import {
   TokenPriceProps,
 } from "../hooks/useOverview";
 import { getBlockHash } from "../utils/helper";
+import useWindowDimensions from "../hooks/useWindowDimension";
+import { useHistory } from "react-router-dom";
 
 interface Props {
   theme: any;
@@ -38,7 +40,10 @@ export const Overview: React.FC<Props> = ({
   winnerAddresses,
   totalWinners,
 }) => {
+  const dims = useWindowDimensions();
   useEffect(() => {}, [totalWinners]);
+  const { push } = useHistory();
+
   return (
     <div className="container">
       <div id="main">
@@ -74,17 +79,6 @@ export const Overview: React.FC<Props> = ({
       </div>
       <div id="content1">
         <p className="title">Total sats committed in current block</p>
-        {/* {dims.height > 800 && (
-          <>
-            <p className="sub-title">
-              {satsCommitted.block_number.length > 0 &&
-                satsCommitted.total_sats_committed[
-                  satsCommitted.block_number.length - 1
-                ].toLocaleString()}{" "}
-              Sats
-            </p>
-          </>
-        )} */}
         <div className="seprator">
           {satsCommitted.block_number.length > 0 && (
             <AreaChart satsCommitted={satsCommitted} theme={theme} />
@@ -117,9 +111,39 @@ export const Overview: React.FC<Props> = ({
             />
           )}
       </div>
-      <div id="content4">
-        <p className="title-table">Recent blocks</p>
-        {blocks.length > 0 && <RecentBlocks blocks={blocks} />}
+      <div id={"content4"} className={dims.width < 700 ? "mobile-table" : "s"}>
+        <p className={"title-table"}>Recent blocks</p>
+        {dims.width < 700 ? (
+          blocks.map((block) => {
+            return (
+              <div className="table-card-container">
+                <div className="table-card">
+                  <p className="table-title">Block No.</p>
+                  <p className="table-subtitle" style={{ color: "#FFA043" }}>
+                    {block.block_number}
+                  </p>
+                </div>
+                <div className="table-card">
+                  <p className="table-title">Time Elapsed</p>
+                  <p className="table-subtitle">{block.mined_at}</p>
+                </div>
+                <div className="table-card">
+                  <p className="table-title">Total Sats spent</p>
+                  <p className="table-subtitle">{block.sats_spent}</p>
+                </div>
+                <div
+                  onClick={() => push("/address/" + block.address)}
+                  className="table-card"
+                >
+                  <p className="table-title"> Winner Address</p>
+                  <p className="table-subtitle">{block.winner_address}</p>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div>{blocks.length > 0 && <RecentBlocks blocks={blocks} />}</div>
+        )}
       </div>
     </div>
   );

@@ -587,7 +587,7 @@ export const GlobalStyles = createGlobalStyle`
       stroke-width: 3;
       /* stroke: #FFA043; */
     }
-    background: ${({ theme }: any) => theme.background} !important;
+    background: ${({ theme }: any) => theme.background};
     border-radius: var(--main-radius);
     border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
@@ -663,11 +663,31 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 600;
   }
   
+  table th {
+    color: ${({ theme }: any) => theme.text} !important;
+    //styleName: Regular Text / 14px / Semibold;
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
 
+  }
+  .table-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid ${({ theme }: any) => theme.border};
+    padding: 6px;
+    margin-bottom: 10px;
+    background-color: ${({ theme }: any) => theme.background} !important;
+  }
   #content4 {
     padding: 24px 29px 24px 24px;
     grid-area: content4;
-    background: ${({ theme }: any) => theme.background} !important;
+    background: ${({ theme }: any) => theme.background};
     border-radius: var(--main-radius);
     border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
@@ -1045,7 +1065,7 @@ export const GlobalStyles = createGlobalStyle`
     grid-gap: 16px;
     width: 100%;
     max-width: 1800px;
-    padding: 22px;
+    padding: 16px;
     padding-top: 32px;
     margin: auto;
     width: 100%;
@@ -1061,7 +1081,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 10px
   }
   #content4 {
-    padding: 16px !important;
+    padding: 16px ;
   }
   th {
     font-size: 12px;
@@ -1078,6 +1098,7 @@ export const GlobalStyles = createGlobalStyle`
     .miningData {
       padding: 16px !important;
     }
+
     #labelOverlay {
       left: 43%;
     }
@@ -1094,6 +1115,11 @@ export const GlobalStyles = createGlobalStyle`
   @media only screen and (max-width: 550px) {
   :root {
     overflow-y: auto;
+  }
+  .miningData {
+     .content1 {
+      
+     }
   }
   .burn-address {
     display: none;
@@ -1208,9 +1234,6 @@ export const GlobalStyles = createGlobalStyle`
       width: 100%;
       border-bottom: 1px solid rgba(0, 0, 0, 0.12);;
     }
-  }
-  #content4 {
-    max-height: 600px;
   }
 
   }
@@ -1406,5 +1429,36 @@ export const GlobalStyles = createGlobalStyle`
     width: 98% !important;
   }
   }
- 
+  .mobile-table {
+   background-color: transparent !important;
+   padding: 0px !important;
+   border: 0px !important;
+   .table-title {
+     //styleName: Regular Text / 12px / Semibold;
+    font-family: Manrope;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: ${({ theme }: any) => theme.greyText};
+   }
+   .table-subtitle {
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: right;
+    color: ${({ theme }: any) => theme.text};
+
+   }
+ }
+ .table-card-container { 
+  padding: 16px;
+  background: ${({ theme }: any) => theme.background};
+  margin-bottom: 16px;
+};
   `;

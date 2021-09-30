@@ -47,6 +47,7 @@ export interface Blocks {
   block_number: number;
   mined_at: number;
   sats_spent: string;
+  address: string;
   winner_address: string;
   block_status?: any;
 }
@@ -159,10 +160,10 @@ export const useOverview = () => {
               (window.innerWidth > 800 ? " Mins" : ""),
             sats_spent: numFormatter(+r.sats_spent),
             winner_address:
-              r.winner_address.substring(0, window.innerWidth > 600 ? 8 : 4) +
+              r.winner_address.substring(0, 8) +
               ".." +
               r.winner_address.substring(
-                r.winner_address.length - (window.innerWidth > 600 ? 8 : 4),
+                r.winner_address.length - 8,
                 r.winner_address.length
               ),
           };

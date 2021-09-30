@@ -14,6 +14,7 @@ import left from "../assets/side-menu/left-arrow-active.svg";
 import leftDisabled from "../assets/side-menu/left-arrow-disabled.svg";
 import { useHistory, useParams } from "react-router-dom";
 import { randomColorGenerator } from "../utils/helper";
+import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
   theme: any;
@@ -48,7 +49,7 @@ export const MiningData: React.FC<Props> = ({
     currentBlock,
     miningInfo,
   } = useMiningData();
-
+  const dims = useWindowDimensions();
   useEffect(() => {
     const { innerWidth: width } = window;
     setToggle(width >= 1025);
@@ -115,12 +116,53 @@ export const MiningData: React.FC<Props> = ({
         />
       )}
       {tabIndex === 1 && (
-        <div id={"content1"}>
+        <div
+          id={"content1"}
+          className={dims.width < 700 ? "mobile-table" : "s"}
+        >
           <p className={"title-table"}>
             Recent active miners ({minersBlocks.length})
           </p>
-          {blocks.length > 0 && (
-            <Miners initialPageSize={10} blocks={minersBlocks} />
+          {dims.width < 700 ? (
+            minersBlocks.map((block) => {
+              return (
+                <div className="table-card-container">
+                  <div
+                    className="table-card"
+                    onClick={() => push("/address/" + block.address)}
+                  >
+                    <p className="table-title">Address</p>
+                    <p className="table-subtitle" style={{ color: "#FFA043" }}>
+                      {block.stx_address}
+                    </p>
+                  </div>
+                  <div className="table-card">
+                    <p className="table-title">Total fees burned</p>
+                    <p className="table-subtitle">{block.total_burnfee}</p>
+                  </div>
+                  <div className="table-card">
+                    <p className="table-title">Total block reward</p>
+                    <p className="table-subtitle">{block.total_block_reward}</p>
+                  </div>
+                  <div className="table-card">
+                    <p className="table-title"> Total participation</p>
+                    <p className="table-subtitle">
+                      {block.total_participation}
+                    </p>
+                  </div>
+                  <div className="table-card">
+                    <p className="table-title">Total STX reward</p>
+                    <p className="table-subtitle">{block.total_stx_reward}</p>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div>
+              {blocks.length > 0 && (
+                <Miners initialPageSize={10} blocks={minersBlocks} />
+              )}
+            </div>
           )}
         </div>
       )}
