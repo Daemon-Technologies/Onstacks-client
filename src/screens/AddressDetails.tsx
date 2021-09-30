@@ -149,7 +149,7 @@ export const AddressDetails: React.FC<Props> = ({
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <p className="sub-title" style={{ fontSize: 32 }}>
+          <p className="sub-title" style={{ fontSize: 32, marginBottom: 10 }}>
             #{currentBlock?.blockNumber}
           </p>
           <div
@@ -200,49 +200,51 @@ export const AddressDetails: React.FC<Props> = ({
             </div>
           ) : (
             <>
-              <div className={"lines"}>
-                <div onClick={() => getBlockHash(currentBlock?.blockNumber)}>
-                  <img
-                    src={
-                      currentBlock?.block_info.is_stx_pending
-                        ? STXPending
-                        : STXVerified
+              {status === 2 && (
+                <div className={"lines"}>
+                  <div onClick={() => getBlockHash(currentBlock?.blockNumber)}>
+                    <img
+                      src={
+                        currentBlock?.block_info.is_stx_pending
+                          ? STXPending
+                          : STXVerified
+                      }
+                      alt={"Stacks"}
+                    />
+                    <p>STX Confirmation</p>
+                  </div>
+                  <div
+                    onClick={() =>
+                      window.open(
+                        `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
+                        "_blank"
+                      )
                     }
-                    alt={"Stacks"}
-                  />
-                  <p>STX Confirmation</p>
+                  >
+                    <img
+                      src={
+                        currentBlock?.block_info.is_btc_pending
+                          ? BitcoinPending
+                          : BitcoinVerified
+                      }
+                      alt={"Bitcoin"}
+                    />
+                    <p>Bitcoin Confirmation</p>
+                  </div>
+                  <div>
+                    <img
+                      src={
+                        currentBlock?.block_info.is_reward_pending
+                          ? RewardPending
+                          : Reward
+                      }
+                      alt={"Stacks"}
+                    />
+                    <p>Reward Confirmation</p>
+                  </div>
+                  <hr className={"hr"} />
                 </div>
-                <div
-                  onClick={() =>
-                    window.open(
-                      `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
-                      "_blank"
-                    )
-                  }
-                >
-                  <img
-                    src={
-                      currentBlock?.block_info.is_btc_pending
-                        ? BitcoinPending
-                        : BitcoinVerified
-                    }
-                    alt={"Bitcoin"}
-                  />
-                  <p>Bitcoin Confirmation</p>
-                </div>
-                <div>
-                  <img
-                    src={
-                      currentBlock?.block_info.is_reward_pending
-                        ? RewardPending
-                        : Reward
-                    }
-                    alt={"Stacks"}
-                  />
-                  <p>Reward Confirmation</p>
-                </div>
-                <hr className={"hr"} />
-              </div>
+              )}
               <hr className="divider" />
               <div>
                 {status === 2 && (
@@ -298,14 +300,14 @@ export const AddressDetails: React.FC<Props> = ({
                   </p>
                 </div>
                 <div className={"row-content"}>
-                  <p>Stacks awarded</p>
+                  <p>STX awarded</p>
                   <p className={"black"}>
                     {status === 2
                       ? numberWithCommas(
                           currentBlock?.block_info.stacks_awarded
                         )
                       : 0}{" "}
-                    Stacks
+                    STX
                   </p>
                 </div>
                 <div className={"row-content"}>

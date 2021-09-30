@@ -32,7 +32,7 @@ export const BlockInformation: React.FC<Props> = ({
             alignItems: "center",
           }}
         >
-          <p className="title">Participation History</p>
+          <p className="title">Block information</p>
           <div
             className="button-view"
             onClick={() => getBlockHash(overviewData.stx_block_height)}
@@ -138,7 +138,7 @@ export const BlockInformation: React.FC<Props> = ({
             </p>
           </div>
           <div className={"row-content"}>
-            <p>Stacks Awarded</p>
+            <p>STX Awarded</p>
             <p className={"black"}>
               {numberWithCommas(currentBlock?.block_info.stacks_awarded)}
             </p>

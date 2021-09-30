@@ -1104,6 +1104,16 @@ export const GlobalStyles = createGlobalStyle`
       height: 255px;
     }
   }
+  .button-view {
+    position: absolute;
+    bottom: 14px;
+    width: 90%;
+  }
+  .miningData {
+    #content4 {
+      padding-bottom: 60px !important;
+    }
+  }
   .mob-address {
     display: flex;
     justify-content: space-between;
