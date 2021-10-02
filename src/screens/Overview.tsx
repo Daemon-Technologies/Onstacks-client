@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
 import { InfoCard } from "../components/InfoCard";
@@ -26,6 +27,7 @@ interface Props {
   totalWinners: number[];
   themeToggler: any;
   tokens: TokenPriceProps;
+  failure: boolean;
 }
 
 export const Overview: React.FC<Props> = ({
@@ -36,6 +38,7 @@ export const Overview: React.FC<Props> = ({
   tokens,
   themeToggler,
   areaSeries,
+  failure,
   blocks,
   winnerAddresses,
   totalWinners,
@@ -43,6 +46,12 @@ export const Overview: React.FC<Props> = ({
   const dims = useWindowDimensions();
   useEffect(() => {}, [totalWinners]);
   const { push } = useHistory();
+
+  useEffect(() => {
+    if (failure) {
+      push("/upgrading");
+    }
+  }, [failure]);
 
   return (
     <div className="container">

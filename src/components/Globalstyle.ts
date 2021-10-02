@@ -484,6 +484,21 @@ export const GlobalStyles = createGlobalStyle`
       margin-bottom: 25px;
     }
   }
+  .upgrading {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 24px;
+    height: 100vh;
+    img {
+      width: 300px;
+      /* height: 200px; */ */
+      object-fit: contain;
+      margin-bottom: 25px;
+    }
+  }
   .button {
       background: ${({ theme }: any) => theme.primaryColor} !important;
       padding: 8px 60px;

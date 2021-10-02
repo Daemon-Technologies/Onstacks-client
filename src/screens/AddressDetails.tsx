@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-concat */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { AddressDetailsHeader } from "../components/AddressDetailsHeader";
 import { AreaChart } from "../components/charts/AreaChart";
 import { RecentBlocksAddress } from "../components/RecentBlocksAddress";
@@ -25,12 +25,14 @@ interface Props {
   themeToggler: any;
   getBlockByNumber: (block: string) => void;
   currentBlock: CurrentBlock | undefined;
+  failure: boolean;
 }
 
 export const AddressDetails: React.FC<Props> = ({
   theme,
   themeToggler,
   currentBlock,
+  failure,
   getBlockByNumber,
 }) => {
   const params: any = useParams();
@@ -68,6 +70,7 @@ export const AddressDetails: React.FC<Props> = ({
     setToggle(width >= 1025);
   }, [toggle]);
   const dims = useWindowDimensions();
+  const { push } = useHistory();
 
   useEffect(() => {
     if (params?.address) {
@@ -91,6 +94,12 @@ export const AddressDetails: React.FC<Props> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocks]);
+
+  useEffect(() => {
+    if (failure) {
+      push("/upgrading");
+    }
+  }, [failure]);
 
   return (
     <div className="addressDetails">

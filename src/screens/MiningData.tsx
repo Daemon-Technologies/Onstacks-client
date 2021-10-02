@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Blocks, OverviewProps, TokenPriceProps } from "../hooks/useOverview";
 import { MiningDataHeader } from "../components/MiningDataHeader";
@@ -24,12 +25,14 @@ interface Props {
   areaBlocks: string[];
   areaSeries: any;
   blocks: Blocks[];
+  failure: boolean;
 }
 
 export const MiningData: React.FC<Props> = ({
   theme,
   overviewData,
   tokens,
+  failure,
   areaBlocks,
   blocks,
   areaSeries,
@@ -52,6 +55,12 @@ export const MiningData: React.FC<Props> = ({
   const [timeElapsed, setTimeElapsed] = useState("0");
 
   const dims = useWindowDimensions();
+
+  useEffect(() => {
+    if (failure) {
+      push("/upgrading");
+    }
+  }, [failure]);
 
   useEffect(() => {
     if (currentBlock) {
