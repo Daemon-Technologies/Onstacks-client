@@ -49,7 +49,23 @@ export const MiningData: React.FC<Props> = ({
     currentBlock,
     miningInfo,
   } = useMiningData();
+  const [timeElapsed, setTimeElapsed] = useState("0");
+
   const dims = useWindowDimensions();
+
+  useEffect(() => {
+    if (currentBlock) {
+      const block = blocks.find(
+        (block) =>
+          block.block_number
+            .toString()
+            .substr(1, block.block_number.toString().length) ===
+          currentBlock.blockNumber
+      );
+      setTimeElapsed(block?.mined_at + " ");
+    }
+  }, [currentBlock, blocks]);
+
   useEffect(() => {
     const { innerWidth: width } = window;
     setToggle(width >= 1025);
@@ -289,6 +305,7 @@ export const MiningData: React.FC<Props> = ({
             </div>
           )}
           <BlockInformation
+            timeElapsed={timeElapsed}
             currentBlock={currentBlock}
             overviewData={overviewData}
           />

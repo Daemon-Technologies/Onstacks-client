@@ -14,10 +14,12 @@ import { useHistory } from "react-router-dom";
 interface Props {
   overviewData: OverviewProps;
   currentBlock: CurrentBlock | undefined;
+  timeElapsed: string;
 }
 
 export const BlockInformation: React.FC<Props> = ({
   overviewData,
+  timeElapsed,
   currentBlock,
 }) => {
   const { push } = useHistory();
@@ -78,7 +80,7 @@ export const BlockInformation: React.FC<Props> = ({
           <div>
             <img
               src={
-                currentBlock?.block_info.is_reward_pending
+                !currentBlock?.block_info.is_reward_pending
                   ? RewardPending
                   : Reward
               }
@@ -140,7 +142,7 @@ export const BlockInformation: React.FC<Props> = ({
           <div className={"row-content"}>
             <p>STX Awarded</p>
             <p className={"black"}>
-              {numberWithCommas(currentBlock?.block_info.stacks_awarded)}
+              {numberWithCommas(currentBlock?.block_info.stacks_awarded)} STX
             </p>
           </div>
           <div className={"row-content"}>
@@ -148,12 +150,13 @@ export const BlockInformation: React.FC<Props> = ({
             <p className={"black"}>
               {numberWithCommas(
                 currentBlock?.block_info.winning_miner_burn_fee
-              )}
+              )}{" "}
+              Sats
             </p>
           </div>
           <div className={"row-content"}>
-            <p>Rate of Return</p>
-            <p className={"black"}>{currentBlock?.block_info.return_rate}</p>
+            <p>Time Elapsed</p>
+            <p className={"black"}>{timeElapsed}</p>
           </div>
         </div>
       </div>

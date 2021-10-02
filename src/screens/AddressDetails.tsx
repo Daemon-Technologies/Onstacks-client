@@ -37,6 +37,8 @@ export const AddressDetails: React.FC<Props> = ({
   const [toggle, setToggle] = useState(false);
   const [status, setBlockStatus] = useState(1);
   const [address, setAddress] = useState("");
+  const [timeElapsed, setTimeElapsed] = useState("0");
+
   const {
     getMinerInfo,
     minerInfo,
@@ -47,6 +49,19 @@ export const AddressDetails: React.FC<Props> = ({
     getBlocksForAddress,
     currentBlocks,
   } = useAddressDetails();
+
+  useEffect(() => {
+    if (currentBlock) {
+      const block = blocks.find(
+        (block) =>
+          block.block_number
+            .toString()
+            .substr(1, block.block_number.toString().length) ===
+          currentBlock.blockNumber
+      );
+      setTimeElapsed(block?.mined_at + " ");
+    }
+  }, [currentBlock, blocks]);
 
   useEffect(() => {
     const { innerWidth: width } = window;
@@ -236,7 +251,7 @@ export const AddressDetails: React.FC<Props> = ({
                   <div>
                     <img
                       src={
-                        currentBlock?.block_info.is_reward_pending
+                        !currentBlock?.block_info.is_reward_pending
                           ? RewardPending
                           : Reward
                       }
@@ -317,14 +332,13 @@ export const AddressDetails: React.FC<Props> = ({
                   <p className={"black"}>
                     {numberWithCommas(
                       currentBlock?.block_info.winning_miner_burn_fee
-                    )}
+                    )}{" "}
+                    Sats
                   </p>
                 </div>
                 <div className={"row-content"}>
-                  <p>Rate of return</p>
-                  <p className={"black"}>
-                    {currentBlock?.block_info.return_rate}
-                  </p>
+                  <p>Time Elapsed</p>
+                  <p className={"black"}>{timeElapsed}</p>
                 </div>
               </div>
             </>

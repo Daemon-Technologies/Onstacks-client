@@ -88,8 +88,7 @@ export const useAddressDetails = () => {
           return {
             block_number: "#" + r.block_number,
             mined_at:
-              differenceInMinutes(new Date(), r.mined_at * 1000) +
-              (window.innerWidth > 800 ? " Mins" : ""),
+              differenceInMinutes(new Date(), r.mined_at * 1000) + " Mins",
             sats_spent: numFormatter(+r.sats_spent),
             block_status:
               r.block_status === 2

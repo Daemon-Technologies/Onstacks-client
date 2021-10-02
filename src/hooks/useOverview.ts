@@ -157,7 +157,7 @@ export const useOverview = () => {
             block_number: "#" + r.block_number,
             mined_at:
               differenceInMinutes(new Date(), r.mined_at * 1000) +
-              (window.innerWidth > 800 ? " Mins" : ""),
+              (window.innerWidth > 800 ? " Mins" : "Mins"),
             sats_spent: numFormatter(+r.sats_spent),
             winner_address:
               r.winner_address.substring(0, 8) +
