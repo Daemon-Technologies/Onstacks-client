@@ -1475,5 +1475,8 @@ export const GlobalStyles = createGlobalStyle`
   padding: 16px;
   background: ${({ theme }: any) => theme.background};
   margin-bottom: 16px;
+  border: ${({ theme }: any) =>
+    theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
 };
   `;
