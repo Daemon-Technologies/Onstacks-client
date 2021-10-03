@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from "react";
-import { useHistory } from "react-router-dom";
 import { usePagination, useSortBy, useTable } from "react-table";
 import { Blocks } from "../hooks/useOverview";
 import useWindowDimensions from "../hooks/useWindowDimension";
@@ -8,7 +7,10 @@ interface Props {
   blocks: Blocks[];
   initialPageSize?: number;
 }
-export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
+export const RecentBlocksAddress: React.FC<Props> = ({
+  blocks,
+  initialPageSize,
+}) => {
   const data = useMemo(() => blocks, [blocks]);
   const dims = useWindowDimensions();
   const columns: any = useMemo(
@@ -22,12 +24,12 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
         accessor: "mined_at",
       },
       {
-        Header: "Total Sats spent",
+        Header: "Sats spent",
         accessor: "sats_spent",
       },
       {
-        Header: "Winning Miner",
-        accessor: "winner_address",
+        Header: "Block Status",
+        accessor: "block_status",
       },
     ],
     []
@@ -56,7 +58,6 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
     setPageSize,
     state: { pageSize },
   } = tableInstance;
-  const { push } = useHistory();
 
   useEffect(() => {
     setPageSize(initialPageSize || 5);
@@ -83,21 +84,7 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell: any) => {
                   return (
-                    <td
-                      onClick={() => {
-                        if (cell.column.id === "winner_address") {
-                          push("/address/" + cell.row.original.address);
-                        } else if (cell.column.id === "block_number") {
-                          push(
-                            "/mining-data/2/" +
-                              cell.row.original.block_number.substring(1, 10)
-                          );
-                        }
-                      }}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render("Cell")}
-                    </td>
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
               </tr>

@@ -1,33 +1,38 @@
 import React, { useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { usePagination, useSortBy, useTable } from "react-table";
-import { Blocks } from "../hooks/useOverview";
+import { MinerInfo } from "../hooks/useMiningData";
 import useWindowDimensions from "../hooks/useWindowDimension";
 
 interface Props {
-  blocks: Blocks[];
+  blocks: MinerInfo[];
   initialPageSize?: number;
 }
-export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
+export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
   const data = useMemo(() => blocks, [blocks]);
   const dims = useWindowDimensions();
+
   const columns: any = useMemo(
     () => [
       {
-        Header: "Block No.",
-        accessor: "block_number", // accessor is the "key" in the data
+        Header: `Address.`,
+        accessor: "stx_address", // accessor is the "key" in the data
       },
       {
-        Header: "Time Elapsed",
-        accessor: "mined_at",
+        Header: "Total Spent (sats)",
+        accessor: "total_burnfee",
       },
       {
-        Header: "Total Sats spent",
-        accessor: "sats_spent",
+        Header: "Total Participation",
+        accessor: "total_participation",
       },
       {
-        Header: "Winning Miner",
-        accessor: "winner_address",
+        Header: "Total Block Won",
+        accessor: "total_block_reward",
+      },
+      {
+        Header: "Total Reward (STX)",
+        accessor: "total_stx_reward",
       },
     ],
     []
@@ -64,7 +69,7 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
   }, [initialPageSize]);
   return (
     <>
-      <table className={"small-table"} {...getTableProps()}>
+      <table id={"long"} {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup: any) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -85,13 +90,9 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
                   return (
                     <td
                       onClick={() => {
-                        if (cell.column.id === "winner_address") {
+                        console.log(cell);
+                        if (cell.column.id === "stx_address") {
                           push("/address/" + cell.row.original.address);
-                        } else if (cell.column.id === "block_number") {
-                          push(
-                            "/mining-data/2/" +
-                              cell.row.original.block_number.substring(1, 10)
-                          );
                         }
                       }}
                       {...cell.getCellProps()}

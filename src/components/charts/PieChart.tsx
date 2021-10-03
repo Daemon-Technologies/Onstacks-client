@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useRef } from "react";
+import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Chart } from "react-google-charts";
@@ -28,6 +28,7 @@ export const PieChart: React.FC<Props> = ({
   const dims = useWindowDimensions();
   const [options, setOptions] = useState({
     colors: colorPalette,
+    tooltip: { isHtml: true, showColorCode: true },
     legend: {
       position: "right",
       textStyle: { color: themeMode.text },
@@ -37,12 +38,10 @@ export const PieChart: React.FC<Props> = ({
       },
     },
     backgroundColor: "transparent",
-
     pieSliceText: "none",
     enableInteractivity: true,
     pieHole: 0.9,
   });
-  const chartRef: any = useRef(null);
 
   useEffect(() => {
     if (totalWinners.length > 0 && winnerAddresses.length > 0) {
@@ -90,8 +89,8 @@ export const PieChart: React.FC<Props> = ({
           <Chart
             width={"100%"}
             height={"100%"}
+            style={{ maxHeight: 275 }}
             chartType="PieChart"
-            ref={chartRef}
             loader={<div>Loading Chart</div>}
             data={data}
             options={options}

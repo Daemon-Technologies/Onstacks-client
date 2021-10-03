@@ -2,7 +2,7 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   :root {
-    --main-radius: 5px;
+    --main-radius: 0px;
     --main-padding: 16px;
     overflow-x: hidden;
     /* overflow-y: hidden; */
@@ -31,7 +31,7 @@ export const GlobalStyles = createGlobalStyle`
     height: 45px;
     position: absolute;
     top: 42%;
-    left: 31%;
+    left: 30%;
     text-align: center;
     cursor: default;
   }
@@ -76,6 +76,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 14px 32px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     /* height: 80px; */
+    z-index: 200;
   }
   .logo-nav {
     display: flex;
@@ -184,8 +185,10 @@ export const GlobalStyles = createGlobalStyle`
     list-style-type: none;
     grid-gap: 0px;
   }
-  #main {
-    margin-top: 24px;
+  .miningData {
+    #main {
+    margin-top: 45px;
+  }
   }
   .nav-options.active {
     background: white;
@@ -237,14 +240,35 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
   }
   .hr {
-      background:  ${({ theme }: any) => theme.border} !important;
+      background:  red;
       margin: 24px 10px;
       height: 1px;
     }
 
   .google-visualization-tooltip {
     path {
-      fill: ${({ theme }: any) => theme.body} !important;
+      fill: ${({ theme }: any) => theme.background} !important;
+    }
+  }
+
+  .no-miner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 300px;
+    p {
+      font-family: Manrope;
+      color: ${({ theme }: any) => theme.greyText};
+
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0px;
+      text-align: center;
+      margin-top: 14px;
     }
   }
 
@@ -340,9 +364,110 @@ export const GlobalStyles = createGlobalStyle`
         "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
     grid-gap: 16px;
     width: 100%;
-    max-width: 1800px;
+    max-width: 1280px;
     padding: 92px 32px 32px 32px;
     margin: auto;
+  }
+
+  .miningData {
+    display: grid;
+    grid-template-columns: repeat( 12, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
+    grid-template-areas:
+        "main main main main main main main main main main main main"
+        "content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
+    grid-gap: 16px;
+    width: 100%;
+    max-width: 1280px;
+    padding: 92px 32px 32px 32px;
+    margin: auto;
+  }
+
+  .blocks-legend {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 8px;
+    div {
+      display: flex;
+      align-items: center;
+      .block {
+        width: 15px;
+        border-radius: 2px;
+        height: 15px;
+        cursor: pointer;
+        margin-right: 4px;
+        background-color: #20C9AC;
+      }
+      p {
+        margin-right: 10px;
+        //styleName: Regular Text / 12px / Medium;
+        font-family: Manrope;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0px;
+        text-align: left;
+        color: ${({ theme }: any) => theme.greyText} !important;
+
+      }
+    }
+  }
+  .addressDetails {
+    display: grid;
+    grid-template-columns: repeat( 12, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
+    grid-template-areas:
+        "main main main main main main main main main main main main"
+        "content1 content1 content1 content1 content1 content1 content2 content2 content2 content2 content2 content2"
+        "content1 content1 content1 content1 content1 content1 content4 content4 content4 content4 content4 content4";
+    grid-gap: 16px;
+    width: 100%;
+    max-width: 1280px;
+    padding: 92px 32px 32px 32px;
+    margin: auto;
+  }
+  .circle-data {
+      width:  8px;
+      height: 8px;
+      margin-right: 5px;
+      border-radius: 2.5px;
+    }
+  .bubble-tooltip {
+    background: ${({ theme }: any) => theme.background} !important;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 20px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    align-items: flex-start;
+    div {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .circle {
+      width:  8px;
+      height: 8px;
+      margin-right: 5px;
+      border-radius: 2.5px;
+    }
+    p {
+      //styleName: Regular Text / 12px / Semibold;
+      font-family: Manrope;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 18px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+    .name {
+      color: ${({ theme }: any) => theme.greyText} !important;
+    }
   }
 
   .not-found {
@@ -355,6 +480,21 @@ export const GlobalStyles = createGlobalStyle`
     img {
       width: 200px;
       height: 200px;
+      object-fit: contain;
+      margin-bottom: 25px;
+    }
+  }
+  .upgrading {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 24px;
+    height: 100vh;
+    img {
+      width: 300px;
+      /* height: 200px; */ */
       object-fit: contain;
       margin-bottom: 25px;
     }
@@ -379,7 +519,9 @@ export const GlobalStyles = createGlobalStyle`
     grid-area: main;
     .data {
       font-size: 14px;
+      cursor: pointer;
       margin: 14px 0;
+      font-weight: 600;
       display: flex;
       color: ${({ theme }: any) => theme.greyText} !important;
       text-align: right;
@@ -388,7 +530,24 @@ export const GlobalStyles = createGlobalStyle`
       }
     }
   }
+  .based {
+    display: block;
+    color: ${({ theme }: any) => theme.greyText} !important;
 
+  }
+  .arrow {
+    border: solid;
+    border-width: 0px 5px 5px 0;
+    display: inline-block;
+    padding: 5px;
+    margin-bottom: -19px;
+    margin-left: -16px;
+    }
+    
+    .right {
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
   #nav {
     grid-area: nav;
     display: flex;
@@ -401,19 +560,53 @@ export const GlobalStyles = createGlobalStyle`
       height: 28px;
     }
   }
+  .bubble-chart-container { 
+    height: 85%;
+    width: 100%;
+    max-height: 400px;
+   div {
+      max-height: 400px;
+    }
+  }
+  .Winner {
+    //styleName: Regular Text / 12px / Semibold;
+  font-family: Manrope;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: center;
 
+  }
+    .row-flow-p {
+      font-family: Manrope;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 22px;
+      letter-spacing: 0px;
+      text-align: left;
 
+    }
+  .react-flow__pane, .react-flow__renderer, .react-flow__selectionpane {
+    height: 100%;
+  }
   #content1 {
     grid-area: content1;
     padding: 24px;
     width: 100%;
+    position: relative;
+
     path {
       stroke-width: 3;
       /* stroke: #FFA043; */
     }
-    background: ${({ theme }: any) => theme.background} !important;
+    background: ${({ theme }: any) => theme.background};
     border-radius: var(--main-radius);
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -428,6 +621,13 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.text} !important;
     }
   }
+  .title-table {
+    font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 12px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.greyText} !important;
+  }
   .seprator {
       width: 100%;
       height: 90%;
@@ -438,7 +638,9 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }: any) => theme.background} !important;
     grid-area: content2;
     border-radius: var(--main-radius);
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -446,13 +648,17 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.greyText} !important;
     }
   }
-
+  .mob-address {
+    display: none;
+  }
   #content3 {
     grid-area: content3;
     padding: 24px;
     border-radius: var(--main-radius);
     background: ${({ theme }: any) => theme.background} !important;
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -460,24 +666,61 @@ export const GlobalStyles = createGlobalStyle`
       text-align: left;
       color: ${({ theme }: any) => theme.greyText} !important;
     }
+    .sub-title {
+      font-size: 25px;
+      font-weight: 600;
+      line-height: 40px;
+      color: ${({ theme }: any) => theme.text} !important;
+    }
   }
 
   td {
     font-weight: 600;
   }
+  
+  table th {
+    color: ${({ theme }: any) => theme.text} !important;
+    //styleName: Regular Text / 14px / Semibold;
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: left;
 
+  }
+  .table-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid ${({ theme }: any) => theme.border};
+    padding: 6px;
+    margin-bottom: 10px;
+    background-color: ${({ theme }: any) => theme.background} !important;
+  }
   #content4 {
     padding: 24px 29px 24px 24px;
     grid-area: content4;
-    background: ${({ theme }: any) => theme.background} !important;
+    background: ${({ theme }: any) => theme.background};
     border-radius: var(--main-radius);
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
+  position: relative;
+  height: auto;
     .title {
       font-size: 14px;
       font-weight: 500;
-      margin-bottom: 12px;
+      /* margin-bottom: 12px; */
       text-align: left;
       color: ${({ theme }: any) => theme.greyText} !important;
+    }
+    .sub-title {
+      font-size: 25px;
+      font-weight: 600;
+      line-height: 40px;
+      color: ${({ theme }: any) => theme.text} !important;
     }
   } 
 
@@ -489,13 +732,15 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .info-card {
-    border: 1px solid ${({ theme }: any) => theme.border};
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
     height: 110px;
     border-radius: 4px;
     display: flex;
     background: ${({ theme }: any) => theme.background} !important;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     div {
       padding: 31px 16px;
@@ -512,8 +757,157 @@ export const GlobalStyles = createGlobalStyle`
       }
     }
   }
+  .hr {
+    border:none;
+    border-top: 1pt dashed ${({ theme }: any) => theme.border};
+    color:#fff;
+    background-color:#fff;
+    height:1px;
+    width:100%;
+    top: -5px;
+    position: absolute;
+  }
+  .block-number {
+    font-family: Manrope;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0px;
+    text-align: left;
+    span {
+      color: ${({ theme }: any) => theme.greyText};
+      font-size: 16px;
+      font-weight: 500;
+      font-family: Manrope;
+    }
+  }
+  .block-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 16px 0;
+    width: 100%;
+    grid-area: content1;
+    p {
+      margin-right: 20px;
+    }
+    div {
+      width: 25px;
+      border-radius: 4px;
+      cursor: pointer;
+      height: 25px;
+      background-color: rgba(255, 160, 67, 0.25);
+      margin-right: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 12px;
+        /* height: 10px; */
+      }
+    }
+  }
+  .row-content {
+    display: flex;
+    margin-top: 12px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .black {
+      color: ${({ theme }: any) => theme.text} !important;    
 
+    }
+    p {
+      color: ${({ theme }: any) => theme.greyText} !important;    
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .a-tag {
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      color: ${({ theme }: any) => theme.primaryColor} !important;    
+    }
+  }
+
+  .lines {
+    position: relative;
+    display: flex;
+    margin-top: 18px;
+    margin-bottom: 24px;
+    flex-direction: row;
+    justify-content: space-between;
+    div {
+      z-index: 10;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      p {
+        margin-top: 24px;
+      }
+      margin-bottom: 24px;
+    }
+  }
+  .google-visualization-tooltip {
+     border:none !important;
+  }
+  .google-visualization-tooltip-square {
+    width: 1em !important;
+    height: 1em !important;
+    border-radius: 50%;
+  }
+  .container {
+    #content3 {
+    .google-visualization-tooltip-square {
+    width: 0.5em !important;
+    height: 65% !important;
+    position: absolute;
+    left: 10px;
+    border-radius: 0.25em;
+    margin-right: 10px;
+  }
+  .google-visualization-tooltip-item {
+    margin: 1em 0 1em 1em;
+  }
+  }
+  }
+  .google-visualization-tooltip-item-list .google-visualization-tooltip-item:first-child {
+    text-align: center;
+    span {
+      color: ${({ theme }: any) => theme.greyText} !important;   
+      font-family: Manrope;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 16px;
+      letter-spacing: 0px;
+      text-align: center;
+    }
+    span:before {
+      content: '#'
+    }
+  }
+  .tool-tip-chart {
+    background: ${({ theme }: any) => theme.background} !important;
+    padding: 12px;
+    min-width: 100px;
+    .header-text {
+      text-align: center;
+      color: ${({ theme }: any) => theme.greyText} !important;    
+      font-family: Manrope;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 16px;
+      margin-bottom: 10px;
+      letter-spacing: 0px;
+      text-align: center;
+    }
+  }
   table {
+    margin-bottom: 30px;
     td:first-child {
       color: ${({ theme }: any) => theme.primaryColor} !important;    
     }
@@ -522,11 +916,14 @@ export const GlobalStyles = createGlobalStyle`
       padding-left: 0;
       font-size: 14px;
       font-weight: 600;
+      white-space: nowrap;
       width: 25%;
+      cursor: pointer;
       line-height: 20px;
     }
     th {
       padding: 4px;
+      font-weight: 500;
       padding-left: 0;
     }
     width: 100%;
@@ -544,6 +941,13 @@ export const GlobalStyles = createGlobalStyle`
       vertical-align: top;
     }
   }
+  #long {
+    td {
+      width: 20%
+    }
+  }
+
+  
 
   @media only screen and (max-width: 1580px) { 
 
@@ -551,21 +955,27 @@ export const GlobalStyles = createGlobalStyle`
       width: 150px
     }
    
-    #labelOverlay {
-      left: 30%;
-    }
   }
   @media only screen and (max-width: 1200px) {
     #labelOverlay {
-      left: 30%;
+      left: 29%;
     }
   }
   @media only screen and (max-width: 1100px) {
     #labelOverlay {
       left: 26%;
     }
+    table {
+    td {
+      font-size: 12px;
+      font-weight: 600;
+      width: 20%;
+      line-height: 10px;
+    }
+  }
   }
   @media only screen and (max-height: 828px) { 
+   
     @media only screen and (max-height: 700px) { 
       #nav {
         padding: 0 14px;
@@ -584,6 +994,9 @@ export const GlobalStyles = createGlobalStyle`
   #nav {
     padding: 0px;
   }
+  .block-analyzer {
+      flex-wrap: wrap;
+    }
   .mobile-header {
     margin: 8px;
   }
@@ -594,13 +1007,30 @@ export const GlobalStyles = createGlobalStyle`
   .toggled {
     left: 0 !important;
   }
-  #content4, #content3, #content2, #content1 {
-    max-height: 600px;
+  #content3, #content2, #content1 {
+    /* max-height: 600px; */
     min-height: 275px;
   }
-  .info-card div .sub-title {
-    font-size: 16px;
+
+  .container {
+    #content1 {
+      min-height: 255px;
+    }
   }
+  .miningData {
+    #content1 {
+      height: auto !important;
+    }
+  }
+  .flow-chart {
+    height: auto !important;
+    min-height: 500px !important;
+    overscroll-behavior-y: none;
+  }
+  .info-card div .sub-title {
+    font-size: 13px;
+  }
+ 
   :root {
     overflow-y: auto;
   }
@@ -619,12 +1049,54 @@ export const GlobalStyles = createGlobalStyle`
     grid-gap: 16px;
     width: 100%;
   }
-  
+
+
+
+  .miningData {
+    display: grid;
+    grid-template-columns: repeat( 12, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
+    grid-template-areas:
+        "main main main main main main main main main main main main"
+        "content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "content3 content3 content3 content3 content3 content3 content3 content3 content3 content3 content3 content3"
+        "content4 content4 content4 content4 content4 content4 content4 content4 content4 content4 content4 content4";
+    grid-gap: 16px;
+    width: 100%;
+    max-width: 1800px;
+    padding: 92px 32px 32px 32px;
+    margin: auto;
+  }
+
+  .addressDetails {
+    display: grid;
+    grid-template-columns: repeat( 12, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
+    grid-template-areas:
+        "main"
+        "content1"
+        "content2"
+        "content4";
+    grid-gap: 16px;
+    width: 100%;
+    max-width: 1800px;
+    padding: 16px;
+    padding-top: 32px;
+    margin: auto;
+    width: 100%;
+    .screen-title {
+      font-size: 13px;
+    }
+    .button-view {
+      display: none 
+    }
+  }
+ 
   .info-card div {
-    padding: 16px
+    padding: 10px
   }
   #content4 {
-    padding: 16px !important;
+    padding: 16px ;
   }
   th {
     font-size: 12px;
@@ -638,23 +1110,87 @@ export const GlobalStyles = createGlobalStyle`
     height: 100% !important;
   }
   @media only screen and (max-width: 768px) {
+    .miningData {
+      padding: 16px !important;
+    }
+
     #labelOverlay {
       left: 43%;
     }
+    .react-flow {
+       position: absolute ;
+       z-index: 1;
+       overflow-x: auto;
+     }
+     #content1 {
+       overflow-x: hidden;
+       position: relative;
+     }
   }
   @media only screen and (max-width: 550px) {
   :root {
     overflow-y: auto;
   }
+  .miningData {
+     .content1 {
+      
+     }
+  }
+  .burn-address {
+    display: none;
+  }
+  .addressDetails {
+    #content2 {
+      min-height: 255px;
+      height: 255px;
+    }
+  }
+  .button-view {
+    position: absolute;
+    bottom: 14px;
+    width: 90%;
+  }
+  .miningData {
+    #content4 {
+      padding-bottom: 60px !important;
+    }
+  }
+  .mob-address {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bubble-chart {
+    height: 600px !important;
+  }
+  .lines div p {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 13px;
+  }
   .data {
-    font-size: 13px !important;
+    font-size: 12px !important;
     text-align: center !important;
   }
+  
   th {
       font-size: 12px;
   }
   .based {
     display: none;
+  }
+  table {
+    td {
+      font-size: 9px;
+      font-weight: 600;
+      width: 20%;
+      line-height: 10px;
+    }
+  }
+  .small-table {
+    td {
+      font-size: 12px !important;
+    }
   }
   .container {
     grid-template-columns: 1fr;
@@ -678,18 +1214,31 @@ export const GlobalStyles = createGlobalStyle`
     height: auto;
   }
   #main {
-    margin-top: 34px;
+    margin-top: 45px;
+  }
+  .row-content {
+    flex-direction: column;
+    align-items: flex-start;
   }
   #content1, #content2, #content3, #content4, .info-card {
     width: 98%;
   }
   #content3 {
-    height: 400px;
-    max-height: 400px;
+    height: 320px;
+    max-height: 320px;
+  }
+  #content4 {
+    width: 98% !important;
+  }
+  .miningData {
+    #content1, #content2, #content3, #content4, .info-card {
+    width: 100%;
+  }
+    #content4 {
+    height: auto;
+    width: 100% !important
   }
   
-  #content4 {
-    height: 300px;
   }
 
   .info-card {
@@ -701,15 +1250,233 @@ export const GlobalStyles = createGlobalStyle`
       border-bottom: 1px solid rgba(0, 0, 0, 0.12);;
     }
   }
-  #content4 {
-    max-height: 600px;
-  }
 
   }
-  #content1, #content2 {
-    height: 240px !important;
-  }
+  .container {
+    #content1, #content2 {
+      height: 240px !important;
+    }
   #content3, #content4 {
-    height: 340px !important;
+      height: auto !important;
+    }
   }
+  .flow-chart {
+    height: 504px !important;
+  }
+  .divider {
+    border: 1px solid ${({ theme }: any) => theme.border};
+  }
+  .tabs {
+    display: flex;
+    flex-direction: row;
+    margin: 8px 0;
+    border-bottom: 1px solid ${({ theme }: any) => theme.border};
+    div {
+      min-width: 100px;
+      text-align: center;
+      font-weight: 600;
+      line-height: 20px;
+      height: 20px;
+      cursor: pointer;
+      padding-bottom: 30px;
+    }
+    .active {
+      border-bottom: 2px solid #FFA043;
+      transition: width 1s;
+    }
+  }
+  .tooltip {
+  position: relative;
+}
+
+.tooltip-trigger {
+  display: inline-block;
+  text-decoration: underline;
+}
+
+.tooltip-bubble {
+  min-width: 120px;
+  max-width: 210px;
+  position: absolute;
+  z-index: 10;
+  &::after {
+    content: '';
+    position: absolute;
+  }
+}
+
+.tooltip-top {
+  bottom: 100%;
+  left: 50%;
+  padding-bottom: 9px;
+  transform: translateX(-50%);
+  
+  &::after {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid $tooltip-color;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.tooltip-top {
+  bottom: 100%;
+  left: 50%;
+  padding-bottom: 9px;
+  transform: translateX(-50%);
+  
+  &::after {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-top: 9px solid $tooltip-color;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.tooltip-message {
+  background: rgba(0,0,0,.7);
+  border-radius: 3px;
+  color: #fff;
+  font-size: .75rem;
+  line-height: 1.4;
+  padding: .75em;
+  text-align: center;
+}
+.tooltip-bottom {
+  top: 100%;
+  left: 50%;
+  padding-top: 9px;
+  transform: translateX(-50%);
+  
+  &::after {
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid $tooltip-color;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+  .block-analyzer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+      margin-top: 16px;
+      .block {
+        width: 15px;
+        border-radius: 2px;
+        height: 15px;
+        cursor: pointer;
+        margin-right: 4px;
+        background-color: #20C9AC;
+      }
+    }
+  .pagination {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 160, 67, 0.1);
+    padding: 15px 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      color: ${({ theme }: any) => theme.text};
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0px;
+      text-align: justified;
+      p {
+        color: ${({ theme }: any) => theme.greyText};
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0px;
+        text-align: justified;
+      }
+      select {
+        margin: 0 16px;
+      }
+      button {
+        margin: 0 8px;
+        //styleName: Regular Text / 12px / Medium;
+        font-family: Manrope;
+        font-size: 12px;
+        color: ${({ theme }: any) => theme.text};
+        font-style: normal;
+        font-weight: 600;
+        background: transparent;
+        border: 0;
+        cursor: pointer;
+        line-height: 18px;
+        letter-spacing: 0px;
+        text-align: left;
+
+      }
+      button[disabled]{
+        color: ${({ theme }: any) => theme.greyText};
+      }
+    }
+  }
+  .button-view {
+    background-color: #FFA043;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: white  ;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    display: flex;
+    cursor: pointer;
+  }
+  @media only screen and (max-width: 400px) {
+    #content1, #content2, #content3, #content4, .info-card {
+    width: 98% !important;
+  }
+  }
+  .mobile-table {
+   background-color: transparent !important;
+   padding: 0px !important;
+   border: 0px !important;
+   .table-title {
+     //styleName: Regular Text / 12px / Semibold;
+    font-family: Manrope;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: ${({ theme }: any) => theme.greyText};
+   }
+   .table-subtitle {
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: right;
+    color: ${({ theme }: any) => theme.text};
+
+   }
+ }
+ .table-card-container { 
+  padding: 16px;
+  background: ${({ theme }: any) => theme.background};
+  margin-bottom: 16px;
+  border: ${({ theme }: any) =>
+    theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
+};
   `;

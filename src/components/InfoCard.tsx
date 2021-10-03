@@ -7,26 +7,26 @@ export const InfoCard: React.FC<{ overviewData: OverviewProps }> = ({
   return (
     <div className={"info-card"}>
       <div className="inner-info-card">
-        <p className="title">Total BTC spent (100 blocks)</p>
+        <p className="title">BTC Spent *</p>
         <p className="sub-title">
           {(+overviewData.total_sats_committed / 100000000).toLocaleString()}{" "}
           BTC
         </p>
       </div>
       <div className="inner-info-card">
-        <p className="title">Total BTC spent (All time)</p>
+        <p className="title">BTC Spent All Time</p>
         <p className="sub-title">{overviewData.btc_total} BTC</p>
       </div>
       <div className="inner-info-card">
-        <p className="title">Avg tx fees (100 blocks)</p>
+        <p className="title">Tx Fee Per Block *</p>
         <p className="sub-title">{overviewData.avg_tx_fees_per_block} STX</p>
       </div>
       <div className="inner-info-card">
-        <p className="title">BTC Hashrate</p>
+        <p className="title">Current BTC hashrate</p>
         <p className="sub-title">{overviewData.btc_hash_rate} EH/s</p>
       </div>
       <div className="inner-info-card">
-        <p className="title">Active miner (100 blocks)</p>
+        <p className="title">Active miners *</p>
         <p className="sub-title">{overviewData.active_miners}</p>
       </div>
     </div>

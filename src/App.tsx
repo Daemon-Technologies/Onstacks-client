@@ -9,6 +9,9 @@ import { useOverview } from "./hooks/useOverview";
 import { Notfound } from "./screens/Notfound";
 import { MiningData } from "./screens/MiningData";
 import { Header } from "./components/Header";
+import { AddressDetails } from "./screens/AddressDetails";
+import { Upgrading } from "./screens/Upgrading";
+import { useMiningData } from "./hooks/useMiningData";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -21,11 +24,15 @@ const App: React.FC = () => {
     blocks,
     totalWinners,
     winnersAddresses,
+    failure,
   } = useOverview();
+
+  const { getBlockByNumber, currentBlock } = useMiningData();
 
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   if (!mountedComponent) return <div />;
+
   return (
     <ThemeProvider theme={themeMode}>
       <>
@@ -35,6 +42,7 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path="/">
               <Overview
+                failure={failure}
                 themeToggler={themeToggler}
                 tokens={tokens}
                 totalWinners={totalWinners}
@@ -49,11 +57,39 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/mining-data">
               <MiningData
+                failure={failure}
                 themeToggler={themeToggler}
                 tokens={tokens}
+                blocks={blocks}
+                areaBlocks={areaBlocks}
+                areaSeries={areaSeries}
                 overviewData={overviewData}
                 theme={theme}
               />
+            </Route>
+            <Route exact path="/mining-data/:index/:block">
+              <MiningData
+                failure={failure}
+                themeToggler={themeToggler}
+                tokens={tokens}
+                blocks={blocks}
+                areaBlocks={areaBlocks}
+                areaSeries={areaSeries}
+                overviewData={overviewData}
+                theme={theme}
+              />
+            </Route>
+            <Route exact path="/address/:address">
+              <AddressDetails
+                failure={failure}
+                currentBlock={currentBlock}
+                getBlockByNumber={getBlockByNumber}
+                themeToggler={themeToggler}
+                theme={theme}
+              />
+            </Route>
+            <Route exact path="/upgrading">
+              <Upgrading />
             </Route>
             <Route path="*">
               <Notfound />

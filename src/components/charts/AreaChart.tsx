@@ -15,8 +15,8 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   const [data, setData] = useState<any[][]>([]);
   const [options, setOptions] = useState({
     backgroundColor: "transparent",
-    colors: ["#FFCE74"],
-    chartArea: { top: 30, width: "90%", height: "230px" },
+    colors: ["#FFA043"],
+    chartArea: { top: 30, width: "90%", height: "230px", left: 40 },
     legend: "none",
     vAxis: {
       format: "short",
@@ -31,19 +31,24 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   useEffect(() => {
     setOptions((o) => ({
       ...o,
+      chartArea: { top: 40, width: "90%", height: "270px", left: 30 },
       hAxis: {
         textStyle: { color: themeMode.greyText },
+        minorGridlines: { color: "transparent" },
+        gridlines: { color: theme === "light" ? "#EBEAED" : "#84818A" },
       },
       vAxis: {
         format: "short",
         gridlines: { color: "none", minSpacing: 20 },
         textStyle: { color: themeMode.greyText },
       },
+      aggregationTarget: "category",
+
+      tooltip: { isHtml: true },
     }));
   }, [dims.height, dims.width, theme, themeMode]);
 
   useEffect(() => {
-    console.log(satsCommitted);
     if (satsCommitted && satsCommitted.block_number.length > 0) {
       let values: any = satsCommitted;
       if (values.block_number[0] !== "Block Number") {
@@ -52,7 +57,19 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       }
       setData(
         values.block_number.map((v: any, i: number) => {
-          return [values.block_number[i], values.total_sats_committed[i]];
+          return [
+            values.block_number[i],
+            values.total_sats_committed[i],
+            i === 0
+              ? { role: "tooltip", type: "string", p: { html: true } }
+              : `<div class="tool-tip-chart">
+             <p class="header-text">#${values.block_number[i]}</p>
+             <div style="display: flex; align-items: center">
+                <div style="width: 10px; height: 10px;border-radius: 5px; background-color: ${"#FFA043"}; margin-right: 10px"></div>
+                <p>${values.total_sats_committed[i]}</p>
+             </div>
+          </div>`,
+          ];
         })
       );
     }

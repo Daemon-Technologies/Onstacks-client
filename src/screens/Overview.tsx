@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
 import { InfoCard } from "../components/InfoCard";
 import { AreaChart } from "../components/charts/AreaChart";
@@ -10,6 +12,9 @@ import {
   SatsCommittedProps,
   TokenPriceProps,
 } from "../hooks/useOverview";
+import { getBlockHash } from "../utils/helper";
+import useWindowDimensions from "../hooks/useWindowDimension";
+import { useHistory } from "react-router-dom";
 
 interface Props {
   theme: any;
@@ -22,6 +27,7 @@ interface Props {
   totalWinners: number[];
   themeToggler: any;
   tokens: TokenPriceProps;
+  failure: boolean;
 }
 
 export const Overview: React.FC<Props> = ({
@@ -32,11 +38,21 @@ export const Overview: React.FC<Props> = ({
   tokens,
   themeToggler,
   areaSeries,
+  failure,
   blocks,
   winnerAddresses,
   totalWinners,
 }) => {
+  const dims = useWindowDimensions();
   useEffect(() => {}, [totalWinners]);
+  const { push } = useHistory();
+
+  useEffect(() => {
+    if (failure) {
+      push("/upgrading");
+    }
+  }, [failure]);
+
   return (
     <div className="container">
       <div id="main">
@@ -50,17 +66,11 @@ export const Overview: React.FC<Props> = ({
             justifyContent: "space-between",
           }}
         >
-          <p className="based">*Based on the last 100 blocks.</p>
+          <p className="based">*Average of the last 100 blocks.</p>
           <div className="data">
-            <a
-              target="_blank"
-              href={
-                "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +
-                overviewData.stx_block_height
-              }
-              rel="noopener noreferrer"
-            >
-              <span>#{overviewData.stx_block_height} </span> STX Blockheight
+            <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
+              STX Block Height:&nbsp;{" "}
+              <span>#{overviewData.stx_block_height} </span>
             </a>
             <a
               style={{ marginLeft: 16 }}
@@ -70,25 +80,14 @@ export const Overview: React.FC<Props> = ({
               }
               rel="noopener noreferrer"
             >
+              BTC Block Height: &nbsp;
               <span>#{overviewData.btc_block_height}</span>
-              BTC Blockheight
             </a>
           </div>
         </div>
       </div>
       <div id="content1">
         <p className="title">Total sats committed in current block</p>
-        {/* {dims.height > 800 && (
-          <>
-            <p className="sub-title">
-              {satsCommitted.block_number.length > 0 &&
-                satsCommitted.total_sats_committed[
-                  satsCommitted.block_number.length - 1
-                ].toLocaleString()}{" "}
-              Sats
-            </p>
-          </>
-        )} */}
         <div className="seprator">
           {satsCommitted.block_number.length > 0 && (
             <AreaChart satsCommitted={satsCommitted} theme={theme} />
@@ -96,7 +95,7 @@ export const Overview: React.FC<Props> = ({
         </div>
       </div>
       <div id="content2">
-        <p className="title">Top miner burned fees</p>
+        <p className="title">Top Miners - Sats Spent Per Block</p>
         <div className="seprator">
           {areaBlocks.length > 0 && areaSeries.length > 0 && (
             <LineChart
@@ -121,9 +120,39 @@ export const Overview: React.FC<Props> = ({
             />
           )}
       </div>
-      <div id="content4">
-        <p className="title">Recent blocks</p>
-        {blocks.length > 0 && <RecentBlocks blocks={blocks} />}
+      <div id={"content4"} className={dims.width < 700 ? "mobile-table" : "s"}>
+        <p className={"title-table"}>Recent blocks</p>
+        {dims.width < 700 ? (
+          blocks.map((block) => {
+            return (
+              <div className="table-card-container">
+                <div className="table-card">
+                  <p className="table-title">Block No.</p>
+                  <p className="table-subtitle" style={{ color: "#FFA043" }}>
+                    {block.block_number}
+                  </p>
+                </div>
+                <div className="table-card">
+                  <p className="table-title">Time Elapsed</p>
+                  <p className="table-subtitle">{block.mined_at}</p>
+                </div>
+                <div className="table-card">
+                  <p className="table-title">Total Sats spent</p>
+                  <p className="table-subtitle">{block.sats_spent}</p>
+                </div>
+                <div
+                  onClick={() => push("/address/" + block.address)}
+                  className="table-card"
+                >
+                  <p className="table-title"> Winner Address</p>
+                  <p className="table-subtitle">{block.winner_address}</p>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div>{blocks.length > 0 && <RecentBlocks blocks={blocks} />}</div>
+        )}
       </div>
     </div>
   );
