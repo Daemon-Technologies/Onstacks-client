@@ -114,7 +114,7 @@ export const AddressDetails: React.FC<Props> = ({
             alignItems: "center",
           }}
         >
-          <p>Participation History</p>
+          <p>Participation History (Last 50 Blocks)</p>
         </div>
         {currentBlocks.length > 0 && (
           <div className={"block-analyzer"}>
