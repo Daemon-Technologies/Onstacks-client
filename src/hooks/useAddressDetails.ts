@@ -64,7 +64,6 @@ export const useAddressDetails = () => {
   const [currentBlocks, setCurrentBlocks] = useState<CurrentBlocks[]>([]);
 
   const getMinerInfo = (stxAddress: string) => {
-    console.log(stxAddress);
     axios.get(getBriefMinerInfo(stxAddress)).then((data: any) => {
       setMinerInfo(data);
     });

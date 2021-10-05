@@ -656,6 +656,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 24px;
     border-radius: var(--main-radius);
     background: ${({ theme }: any) => theme.background} !important;
+    max-height: 344px;
     border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};

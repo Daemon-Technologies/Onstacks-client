@@ -90,7 +90,6 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
                   return (
                     <td
                       onClick={() => {
-                        console.log(cell);
                         if (cell.column.id === "stx_address") {
                           push("/address/" + cell.row.original.address);
                         }

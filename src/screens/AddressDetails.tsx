@@ -55,15 +55,20 @@ export const AddressDetails: React.FC<Props> = ({
   useEffect(() => {
     if (currentBlock) {
       const block = blocks.find(
-        (block) =>
-          block.block_number
-            .toString()
-            .substr(1, block.block_number.toString().length) ===
-          currentBlock.blockNumber
+        (block) => block.block_number.toString() === currentBlock.blockNumber
       );
       setTimeElapsed(block?.mined_at + " ");
     }
   }, [currentBlock, blocks]);
+
+  useEffect(() => {
+    const block = currentBlocks.find(
+      (block) => block.block_number.toString() === currentBlock?.blockNumber
+    );
+    if (block) {
+      setBlockStatus(+block?.block_status);
+    }
+  }, [currentBlock]);
 
   useEffect(() => {
     const { innerWidth: width } = window;
@@ -79,7 +84,6 @@ export const AddressDetails: React.FC<Props> = ({
   }, [params]);
 
   useEffect(() => {
-    console.log(address);
     if (address) {
       getMinerInfo(address);
       getAddressSatsCommitted(address);

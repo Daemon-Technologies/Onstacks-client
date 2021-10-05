@@ -104,7 +104,6 @@ export const useMiningData = () => {
   }, [dims]);
 
   const getBlockByNumber = (blockNumber: string) => {
-    console.log(blockNumber);
     axios.get(getBlockNumber(blockNumber)).then((data: any) => {
       setCurrentBlock({ ...data, blockNumber: blockNumber });
     });
