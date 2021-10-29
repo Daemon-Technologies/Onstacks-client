@@ -89,7 +89,7 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
                           push("/address/" + cell.row.original.address);
                         } else if (cell.column.id === "block_number") {
                           push(
-                            "/mining-data/2/" +
+                            "/mining/3/" +
                               cell.row.original.block_number.substring(1, 10)
                           );
                         }

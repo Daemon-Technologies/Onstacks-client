@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 // import Notification from "../assets/side-menu/notifications.svg";
-import LogoLight from "../assets/side-menu/stx-dark.svg";
-import LogoDark from "../assets/side-menu/stx-light.svg";
 import Close from "../assets/side-menu/close.svg";
 import Menu from "../assets/side-menu/menu.svg";
-import Logo from "../assets/side-menu/stx-logo.svg";
+import Logo from "../assets/side-menu/daemon.svg";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
 import Stacks from "../assets/side-menu/stacks.svg";
 import { TokenPriceProps } from "../hooks/useOverview";
@@ -27,7 +25,7 @@ export const Header: React.FC<{
   const { push, location } = useHistory();
 
   useEffect(() => {
-    if (location.pathname === "/mining-data") {
+    if (location.pathname === "/mining") {
       setActive(1);
     } else {
       setActive(0);
@@ -40,11 +38,7 @@ export const Header: React.FC<{
       </div>
       <div className="logo-nav">
         <div className="logo-container">
-          <img
-            className="logo mobile-logo"
-            alt="logo"
-            src={theme === "light" ? LogoDark : LogoLight}
-          />
+          <img className="logo mobile-logo" alt="logo" src={Logo} />
           <img className="logo web-logo" alt="logo" src={Logo} />
         </div>
         <ul className={click ? "nav-options active" : "nav-options"}>
@@ -53,20 +47,20 @@ export const Header: React.FC<{
             onClick={() => {
               setActive(0);
               closeMobileMenu();
-              push("/");
+              push("/explorer");
             }}
           >
-            <p>Overview</p>
+            <p>Explorer</p>
           </li>
           <li
             className={`option ${active === 1 ? "active" : ""}`}
             onClick={() => {
               setActive(1);
               closeMobileMenu();
-              push("/mining-data");
+              push("/mining");
             }}
           >
-            <p>Mining Data</p>
+            <p>Mining</p>
           </li>
           <li className="option" onClick={closeMobileMenu}>
             <a
@@ -74,7 +68,7 @@ export const Header: React.FC<{
               href="https://explorer.stacks.co/?chain=mainnet"
               rel="noopener noreferrer"
             >
-              Network Activity
+              Protocols (Coming soon)
             </a>
           </li>
           <li className="option" onClick={closeMobileMenu}>

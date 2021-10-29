@@ -67,7 +67,7 @@ export const GlobalStyles = createGlobalStyle`
   .header {
     display: flex;
     /* background: linear-gradient(#6616fc, #f394d3); */
-    background: ${({ theme }: any) => theme.background} !important;
+    background: ${({ theme }: any) => theme.stacksColor} !important;
     justify-content: space-between;
     position: fixed;
     width: 100%;
@@ -93,14 +93,14 @@ export const GlobalStyles = createGlobalStyle`
     height: 45px;
   }
   .nav-options {
-    background: ${({ theme }: any) => theme.background} !important;
+    /* background: ${({ theme }: any) => theme.background} !important; */
     padding-left: 25px;
-    color: ${({ theme }: any) => theme.text} !important;;
+    color: white !important;;
     display: grid;
     grid-template-columns: repeat(4, auto);
     grid-gap: 24px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 800;
     list-style-type: none;
     cursor: pointer;
   }
@@ -123,6 +123,9 @@ export const GlobalStyles = createGlobalStyle`
     padding-right: 30px;
     align-items: center;
     display: flex !important;
+    a {
+      color: white;
+    }
     img {
       margin-right: 5px;
     }
@@ -146,8 +149,8 @@ export const GlobalStyles = createGlobalStyle`
   }
   .web-logo {
     display: block;
-    width: 32px !important;
-    height: 32px !important;
+    width: 34px !important;
+    height: 34px !important;
   }
 @media (max-width: 768px) {
   /*Mobile View */
@@ -180,6 +183,7 @@ export const GlobalStyles = createGlobalStyle`
     left: -100%;
     height: 800px;
     opacity: 0;
+
     transition: all 0.5s ease;
     flex-direction: column;
     list-style-type: none;
@@ -232,7 +236,14 @@ export const GlobalStyles = createGlobalStyle`
   }
 }
 
-
+  .option {
+    a {
+      color: white ;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+   }
+  }
   a {
     color: ${({ theme }: any) => theme.text};
     text-decoration: none;
@@ -592,6 +603,7 @@ export const GlobalStyles = createGlobalStyle`
   .react-flow__pane, .react-flow__renderer, .react-flow__selectionpane {
     height: 100%;
   }
+
   #content1 {
     grid-area: content1;
     padding: 24px;
@@ -620,6 +632,36 @@ export const GlobalStyles = createGlobalStyle`
       line-height: 40px;
       color: ${({ theme }: any) => theme.text} !important;
     }
+  }
+  .containerContent {
+    background: transparent  !important;
+    border: 0 solid transparent !important;
+    display: flex;
+    padding: 0px  !important;
+    flex-direction: row;
+  }
+  .containerOne {
+    width: 100%;
+    background: ${({ theme }: any) => theme.background};
+    border-radius: var(--main-radius);
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
+  margin-right: 16px;
+  grid-area: content1;
+    padding: 24px;
+    width: 100%;
+    position: relative;
+
+    path {
+      stroke-width: 3;
+      /* stroke: #FFA043; */
+    }
+    background: ${({ theme }: any) => theme.background};
+    border-radius: var(--main-radius);
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
   }
   .title-table {
     font-size: 14px;

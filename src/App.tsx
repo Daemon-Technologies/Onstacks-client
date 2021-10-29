@@ -1,10 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { useDarkMode } from "./components/useDarkMode.js";
 import { GlobalStyles } from "./components/Globalstyle";
 import { lightTheme, darkTheme } from "./components/Themes";
-import { Overview } from "./screens/Overview";
 import { useOverview } from "./hooks/useOverview";
 import { Notfound } from "./screens/Notfound";
 import { MiningData } from "./screens/MiningData";
@@ -40,38 +44,43 @@ const App: React.FC = () => {
         <Router>
           <Header themeToggler={themeToggler} tokens={tokens} theme={theme} />
           <Switch>
-            <Route exact path="/">
-              <Overview
+            <Route exact path="/explorer">
+              <div
+                style={{
+                  display: "flex",
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "100%",
+                  height: "1000px",
+                }}
+              >
+                Explorer
+              </div>
+            </Route>
+            <Route exact path="/mining">
+              <MiningData
                 failure={failure}
                 themeToggler={themeToggler}
                 tokens={tokens}
-                totalWinners={totalWinners}
-                winnerAddresses={winnersAddresses}
                 blocks={blocks}
                 areaBlocks={areaBlocks}
                 areaSeries={areaSeries}
                 satsCommitted={satsCommitted}
+                totalWinners={totalWinners}
+                winnerAddresses={winnersAddresses}
                 overviewData={overviewData}
                 theme={theme}
               />
             </Route>
-            <Route exact path="/mining-data">
+            <Route exact path="/mining/:index/:block">
               <MiningData
                 failure={failure}
                 themeToggler={themeToggler}
                 tokens={tokens}
-                blocks={blocks}
-                areaBlocks={areaBlocks}
-                areaSeries={areaSeries}
-                overviewData={overviewData}
-                theme={theme}
-              />
-            </Route>
-            <Route exact path="/mining-data/:index/:block">
-              <MiningData
-                failure={failure}
-                themeToggler={themeToggler}
-                tokens={tokens}
+                satsCommitted={satsCommitted}
+                totalWinners={totalWinners}
+                winnerAddresses={winnersAddresses}
                 blocks={blocks}
                 areaBlocks={areaBlocks}
                 areaSeries={areaSeries}
@@ -91,6 +100,13 @@ const App: React.FC = () => {
             <Route exact path="/upgrading">
               <Upgrading />
             </Route>
+            <Route
+              exact
+              path="/"
+              render={() => {
+                return <Redirect to="/explorer" />;
+              }}
+            />
             <Route path="*">
               <Notfound />
             </Route>

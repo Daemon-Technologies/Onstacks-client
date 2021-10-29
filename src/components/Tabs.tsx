@@ -12,17 +12,23 @@ export const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
         onClick={() => setTabIndex(0)}
         className={tabIndex === 0 ? "active" : ""}
       >
-        Mining Overview
+        Overview
       </div>
       <div
         onClick={() => setTabIndex(1)}
         className={tabIndex === 1 ? "active" : ""}
       >
-        Miners
+        Mining data
       </div>
       <div
         onClick={() => setTabIndex(2)}
         className={tabIndex === 2 ? "active" : ""}
+      >
+        Miners
+      </div>
+      <div
+        onClick={() => setTabIndex(3)}
+        className={tabIndex === 3 ? "active" : ""}
       >
         Blocks
       </div>

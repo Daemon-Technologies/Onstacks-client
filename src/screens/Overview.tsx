@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { InfoCard } from "../components/InfoCard";
 import { AreaChart } from "../components/charts/AreaChart";
 import { LineChart } from "../components/charts/LineChart";
 import { RecentBlocks } from "../components/RecentBlocks";
@@ -12,7 +11,6 @@ import {
   SatsCommittedProps,
   TokenPriceProps,
 } from "../hooks/useOverview";
-import { getBlockHash } from "../utils/helper";
 import useWindowDimensions from "../hooks/useWindowDimension";
 import { useHistory } from "react-router-dom";
 
@@ -54,8 +52,8 @@ export const Overview: React.FC<Props> = ({
   }, [failure]);
 
   return (
-    <div className="container">
-      <div id="main">
+    <>
+      {/* <div id="main">
         <p className="screen-title">Overview</p>
         <InfoCard overviewData={overviewData} />
         <div
@@ -85,27 +83,30 @@ export const Overview: React.FC<Props> = ({
             </a>
           </div>
         </div>
-      </div>
-      <div id="content1">
-        <p className="title">Total sats committed in current block</p>
-        <div className="seprator">
-          {satsCommitted.block_number.length > 0 && (
-            <AreaChart satsCommitted={satsCommitted} theme={theme} />
-          )}
+      </div> */}
+      <div id="content1" className={"containerContent"}>
+        <div className="containerOne" style={{ width: "50%" }}>
+          <p className="title">Total sats committed in current block</p>
+          <div className="seprator">
+            {satsCommitted.block_number.length > 0 && (
+              <AreaChart satsCommitted={satsCommitted} theme={theme} />
+            )}
+          </div>
+        </div>
+        <div id="content2" style={{ width: "50%" }}>
+          <p className="title">Top Miners - Sats Spent Per Block</p>
+          <div className="seprator">
+            {areaBlocks.length > 0 && areaSeries.length > 0 && (
+              <LineChart
+                areaBlocks={areaBlocks}
+                areaSeries={areaSeries}
+                theme={theme}
+              />
+            )}
+          </div>
         </div>
       </div>
-      <div id="content2">
-        <p className="title">Top Miners - Sats Spent Per Block</p>
-        <div className="seprator">
-          {areaBlocks.length > 0 && areaSeries.length > 0 && (
-            <LineChart
-              areaBlocks={areaBlocks}
-              areaSeries={areaSeries}
-              theme={theme}
-            />
-          )}
-        </div>
-      </div>
+
       <div id="content3">
         <p className="title">
           Block reward distribution to miners (last 100 blocks)
@@ -154,6 +155,6 @@ export const Overview: React.FC<Props> = ({
           <div>{blocks.length > 0 && <RecentBlocks blocks={blocks} />}</div>
         )}
       </div>
-    </div>
+    </>
   );
 };
