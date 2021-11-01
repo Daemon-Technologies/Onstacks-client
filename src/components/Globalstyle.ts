@@ -109,10 +109,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .option:hover {
-    color: ${({ theme }: any) => theme.primaryColor} !important;;
+    color: ${({ theme }: any) => theme.linkColor} !important;;
   }
   .option.active {
-    color: ${({ theme }: any) => theme.primaryColor} !important;;
+    color: ${({ theme }: any) => theme.linkColor} !important;;
   }
   .crypto {
     display: flex;
@@ -537,7 +537,7 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.greyText} !important;
       text-align: right;
       span {
-        color: ${({ theme }: any) => theme.primaryColor};
+        color: ${({ theme }: any) => theme.linkColor};
       }
     }
   }
@@ -609,6 +609,8 @@ export const GlobalStyles = createGlobalStyle`
     padding: 24px;
     width: 100%;
     position: relative;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+
 
     path {
       stroke-width: 3;
@@ -634,6 +636,7 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
   .containerContent {
+    box-shadow: none !important;
     background: transparent  !important;
     border: 0 solid transparent !important;
     display: flex;
@@ -641,6 +644,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
   }
   .containerOne {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     width: 100%;
     background: ${({ theme }: any) => theme.background};
     border-radius: var(--main-radius);
@@ -680,9 +684,11 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }: any) => theme.background} !important;
     grid-area: content2;
     border-radius: var(--main-radius);
-    border: ${({ theme }: any) =>
-      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+border: ${({ theme }: any) =>
+  theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -702,6 +708,8 @@ export const GlobalStyles = createGlobalStyle`
     border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -751,6 +759,7 @@ export const GlobalStyles = createGlobalStyle`
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
   position: relative;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
   height: auto;
     .title {
       font-size: 14px;
@@ -870,7 +879,7 @@ export const GlobalStyles = createGlobalStyle`
       font-weight: 700;
       font-size: 14px;
       cursor: pointer;
-      color: ${({ theme }: any) => theme.primaryColor} !important;    
+      color: ${({ theme }: any) => theme.linkColor} !important;    
     }
   }
 
@@ -952,7 +961,7 @@ export const GlobalStyles = createGlobalStyle`
   table {
     margin-bottom: 30px;
     td:first-child {
-      color: ${({ theme }: any) => theme.primaryColor} !important;    
+      color: ${({ theme }: any) => theme.linkColor} !important;    
     }
     td {
       padding: 8px;
