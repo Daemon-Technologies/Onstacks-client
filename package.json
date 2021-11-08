@@ -18,6 +18,7 @@
     "@types/react-dom": "^16.9.0",
     "axios": "^0.21.1",
     "date-fns": "^2.23.0",
+    "dayjs": "^1.10.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-flow-renderer": "^9.6.6",

@@ -235,7 +235,149 @@ export const GlobalStyles = createGlobalStyle`
     display: block;
   }
 }
+  .explorer {
+    display: grid;
+    overflow-y: hidden;
+    grid-template-columns: repeat( 12, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
+    grid-template-areas:
+        "main main main main main main main main main main main main"
+        "transactionContainer transactionContainer transactionContainer transactionContainer transactionContainer transactionContainer transactionContainer  transactionContainer transactionContainer transactionContainer transactionContainer transactionContainer";
+        /* "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4"; */
+    grid-gap: 16px;
+    width: 100%;
+    max-width: 1280px;
+    padding: 92px 32px 32px 32px;
+    margin: auto;
+  }
+  #transactionContainer {
+    grid-area: transactionContainer;
+  }
+  .search-bar {
+    width: 100%;
+    border-radius: 10
+px
+;
+    border: 2
+px
+solid #EBEAED;
+    box-sizing: border-box;
+    border-radius: 28px;
+    padding: 16px 11px;
+    margin-bottom: 25px;
+  }
+  .transaction-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: flex-start;
+      flex: 1;
+      width: 100%;
+  }
+  .recent-transactions {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-right: 16px; 
+    flex: 0.58;
+    h3 {
+      //styleName: Regular / Text / 20px / Bold;
+      font-family: Manrope;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: 0px;
+      text-align: left;
 
+    }
+  }
+  .table-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    img {
+      margin-right: 10px;
+    }
+    p {
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.text};
+    }
+  }
+  .table-item {
+    padding: 20px 0;
+    border-top: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .left-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .right-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    .transaction-image {
+      width: 48px;
+      height: 48px;
+      margin-right: 12px;
+    }
+    .title {
+      //styleName: Regular / Text / 14px / Semibold;
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.text};
+    }
+    .subtitle {
+      //styleName: Regular/Text/12px/Regular;
+      font-family: Manrope;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18px;
+      letter-spacing: 0px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.greyText} !important;
+    }
+  }
+  .rt-table {
+    background-color: ${({ theme }: any) => theme.background};
+    height: 55vh;
+    padding: 24px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    overflow-y: scroll;
+  }
+  .ab-table {
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    height: 55vh;
+    padding: 24px;
+    overflow-y: scroll;
+    background-color: ${({ theme }: any) => theme.background};
+  }
+  .anchor-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 0.4;
+  }
   .option {
     a {
       color: white ;

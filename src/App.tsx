@@ -16,6 +16,7 @@ import { Header } from "./components/Header";
 import { AddressDetails } from "./screens/AddressDetails";
 import { Upgrading } from "./screens/Upgrading";
 import { useMiningData } from "./hooks/useMiningData";
+import { Explorer } from "./screens/Explorer";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -45,18 +46,12 @@ const App: React.FC = () => {
           <Header themeToggler={themeToggler} tokens={tokens} theme={theme} />
           <Switch>
             <Route exact path="/explorer">
-              <div
-                style={{
-                  display: "flex",
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "100%",
-                  height: "1000px",
-                }}
-              >
-                Explorer
-              </div>
+              <Explorer
+                failure={failure}
+                overviewData={overviewData}
+                theme={theme}
+                themeToggler={themeToggler}
+              />
             </Route>
             <Route exact path="/mining">
               <MiningData
