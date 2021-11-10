@@ -250,17 +250,27 @@ export const GlobalStyles = createGlobalStyle`
     padding: 92px 32px 32px 32px;
     margin: auto;
   }
+  
+  .tokens-container {
+    padding: 24px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0px 1px 3px rgb(0 0 0 / 12%);
+    background: #FFFFFF;
+    border-radius: var(--main-radius);
+    border: 1px solid #EBEAED;
+    th {
+      width: 85%;
+    }
+  }
   #transactionContainer {
     grid-area: transactionContainer;
   }
   .search-bar {
     width: 100%;
-    border-radius: 10
-px
-;
-    border: 2
-px
-solid #EBEAED;
+    border-radius: 10px;
+    height: 40px;
+    border: 2px solid #EBEAED;
     box-sizing: border-box;
     border-radius: 28px;
     padding: 16px 11px;
@@ -377,6 +387,65 @@ solid #EBEAED;
     flex-direction: column;
     justify-content: flex-start;
     flex: 0.4;
+  }
+  .address-blocks {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 0.4;
+    .address-card {
+      background-color: ${({ theme }: any) => theme.background};
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+      .address-card-header  {
+        margin-bottom: 16px;
+        p {
+          //styleName: Regular / Text / 14px / Semibold;
+          font-family: Manrope;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 20px;
+          letter-spacing: 0px;
+          text-align: left;
+          color: ${({ theme }: any) => theme.greyText};
+        }
+      }
+      .address-card-item  {
+        padding: 12px;
+        border: 1px solid  ${({ theme }: any) => theme.border};
+        margin-bottom: 8px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        img {
+          width:  48px;
+          height:  48px;
+          margin-right: 10px;
+        }
+        .title {
+          font-family: Manrope;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 18px;
+          letter-spacing: 0px;
+          color: ${({ theme }: any) => theme.greyText};
+          text-align: left;
+        }
+        .sub-title {
+          font-family: Manrope;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 20px;
+          letter-spacing: 0px;
+          color: ${({ theme }: any) => theme.text};
+          text-align: left;
+        }
+      }
+    }
   }
   .option {
     a {
@@ -1307,7 +1376,54 @@ border: ${({ theme }: any) =>
     .miningData {
       padding: 16px !important;
     }
-
+    .explorer {
+      .screen-title {
+        font-size: 12px;
+      }
+    }
+    .anchor-block, .address-blocks {
+      flex: 1;
+      width: 100%;
+      margin-top: 32px;
+      .rt-table {
+        padding: 24px 16px;
+      }
+      .table-item  {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        .right-content {
+          align-items: flex-start;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+          margin-top: 16px;
+        }
+      }
+    }
+    .transaction-container {
+      flex-direction: column;
+      .recent-transactions {
+        margin-right: 0px;
+        flex: 1;
+        width: 100%
+      }
+      .rt-table {
+        padding: 24px 16px;
+      }
+      .table-item  {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        .right-content {
+          align-items: flex-start;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+          margin-top: 16px;
+        }
+      }
+    }
     #labelOverlay {
       left: 43%;
     }
@@ -1324,6 +1440,9 @@ border: ${({ theme }: any) =>
   @media only screen and (max-width: 550px) {
   :root {
     overflow-y: auto;
+  }
+  .explorer {
+    padding: 40px 16px 16px 16px;
   }
   .miningData {
      .content1 {
@@ -1365,6 +1484,7 @@ border: ${({ theme }: any) =>
   .data {
     font-size: 12px !important;
     text-align: center !important;
+    display: none !important;
   }
   
   th {

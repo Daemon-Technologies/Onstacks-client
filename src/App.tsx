@@ -17,6 +17,7 @@ import { AddressDetails } from "./screens/AddressDetails";
 import { Upgrading } from "./screens/Upgrading";
 import { useMiningData } from "./hooks/useMiningData";
 import { Explorer } from "./screens/Explorer";
+import { ExplorerAddressDetails } from "./screens/ExplorerAddressDetails";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -53,6 +54,13 @@ const App: React.FC = () => {
                 themeToggler={themeToggler}
               />
             </Route>
+            <Route exact path="/explorer/address/:address">
+              <ExplorerAddressDetails
+                failure={failure}
+                themeToggler={themeToggler}
+                theme={theme}
+              />
+            </Route>
             <Route exact path="/mining">
               <MiningData
                 failure={failure}
@@ -83,7 +91,7 @@ const App: React.FC = () => {
                 theme={theme}
               />
             </Route>
-            <Route exact path="/address/:address">
+            <Route exact path="/mining/address/:address">
               <AddressDetails
                 failure={failure}
                 currentBlock={currentBlock}

@@ -1,38 +1,28 @@
 import React, { useEffect, useMemo } from "react";
-import { useHistory } from "react-router-dom";
 import { usePagination, useSortBy, useTable } from "react-table";
-import { MinerInfo } from "../hooks/useMiningData";
 import useWindowDimensions from "../hooks/useWindowDimension";
 
+interface Tokens {
+  token: string;
+  total_tokens: number;
+}
 interface Props {
-  blocks: MinerInfo[];
+  tokens: Tokens[];
   initialPageSize?: number;
 }
-export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
-  const data = useMemo(() => blocks, [blocks]);
+export const AddressTokens: React.FC<Props> = ({ tokens, initialPageSize }) => {
+  const data = useMemo(() => tokens, [tokens]);
   const dims = useWindowDimensions();
 
   const columns: any = useMemo(
     () => [
       {
-        Header: `Address.`,
-        accessor: "stx_address", // accessor is the "key" in the data
+        Header: `Token Name.`,
+        accessor: "token", // accessor is the "key" in the data
       },
       {
-        Header: "Total Spent (sats)",
-        accessor: "total_burnfee",
-      },
-      {
-        Header: "Total Participation",
-        accessor: "total_participation",
-      },
-      {
-        Header: "Total Block Won",
-        accessor: "total_block_reward",
-      },
-      {
-        Header: "Total Reward (STX)",
-        accessor: "total_stx_reward",
+        Header: "Total token amount",
+        accessor: "total_tokens",
       },
     ],
     []
@@ -61,7 +51,6 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
     setPageSize,
     state: { pageSize },
   } = tableInstance;
-  const { push } = useHistory();
 
   useEffect(() => {
     setPageSize(initialPageSize || 5);
@@ -88,16 +77,7 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell: any) => {
                   return (
-                    <td
-                      onClick={() => {
-                        if (cell.column.id === "stx_address") {
-                          push("/mining/address/" + cell.row.original.address);
-                        }
-                      }}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render("Cell")}
-                    </td>
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
               </tr>

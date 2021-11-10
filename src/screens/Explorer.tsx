@@ -74,7 +74,14 @@ export const Explorer: React.FC<Props> = ({
               <p className="title">{getTxTitle(transaction)}</p>
               <p className="subtitle">
                 {getTxTypeName(transaction.tx_type)} •{" "}
-                {addressArea(transaction)}
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    push("/explorer/address/" + transaction.sender_address)
+                  }
+                >
+                  {addressArea(transaction)}
+                </span>
               </p>
             </div>
           </div>
