@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { OverviewProps } from "../hooks/useOverview";
+import { ExplorerOverview } from "../hooks/useExplorer";
 import { getBlockHash } from "../utils/helper";
-import { InfoCard } from "./InfoCard";
 
 export const ExplorerHeader: React.FC<{
-  overviewData: OverviewProps;
+  overviewData: ExplorerOverview;
   tabIndex?: number;
 }> = ({ overviewData, tabIndex }) => {
   return (
@@ -21,18 +20,17 @@ export const ExplorerHeader: React.FC<{
       >
         <p className="screen-title">Stacks’ Explorer</p>
         <div className="data">
-          <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
-            STX Block Height:&nbsp;{" "}
-            <span>#{overviewData.stx_block_height} </span>
+          <a onClick={() => getBlockHash(overviewData.STX_height)}>
+            STX Block Height:&nbsp; <span>#{overviewData.STX_height} </span>
           </a>
           <a
             style={{ marginLeft: 16 }}
             target="_blank"
-            href={"https://btc.com/btc/block/" + overviewData.btc_block_height}
+            href={"https://btc.com/btc/block/" + overviewData.BTC_height}
             rel="noopener noreferrer"
           >
             BTC Block Height: &nbsp;
-            <span>#{overviewData.btc_block_height}</span>
+            <span>#{overviewData.BTC_height}</span>
           </a>
         </div>
       </div>
@@ -45,7 +43,24 @@ export const ExplorerHeader: React.FC<{
         placeholder="Search for TxHash / Address / Block"
         name="s"
       />
-      <InfoCard overviewData={overviewData} />
+      <div className={"info-card"}>
+        <div className="inner-info-card">
+          <p className="title">Total Transactions (24)</p>
+          <p className="sub-title">{overviewData.total_txs_24hrs}</p>
+        </div>
+        <div className="inner-info-card">
+          <p className="title">Total volume</p>
+          <p className="sub-title">{overviewData.total_volume}</p>
+        </div>
+        <div className="inner-info-card">
+          <p className="title">Total Microblocks (24hr)</p>
+          <p className="sub-title">{overviewData.total_microblocks_24hrs}</p>
+        </div>
+        <div className="inner-info-card">
+          <p className="title">Total Fees</p>
+          <p className="sub-title">{overviewData.total_tx_fees}</p>
+        </div>
+      </div>
     </>
   );
 };

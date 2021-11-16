@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "../axios/axios";
+import { instance as axios } from "../axios/axios";
 import {
   getMinersInfo,
   getBlockNumber,

@@ -14,6 +14,7 @@ import {
   truncateMiddle,
 } from "../utils/utils";
 import Transaction from "../utils/explorer-types";
+import { useCallback } from "react";
 
 interface Props {
   theme: any;
@@ -22,18 +23,12 @@ interface Props {
   failure: boolean;
 }
 
-export const Explorer: React.FC<Props> = ({
-  theme,
-  failure,
-  overviewData,
-  themeToggler,
-}) => {
+export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
   const [tabIndex, setTabIndex] = useState(0);
   const { push } = useHistory();
-  const { getRecentTransactions, recentTransactions } = useExplorer();
+  const { recentTransactions, overviewData, recentBlocks } = useExplorer();
 
   useEffect(() => {
-    getRecentTransactions();
     if (failure) {
       push("/upgrading");
     }
@@ -56,14 +51,17 @@ export const Explorer: React.FC<Props> = ({
     return null;
   };
 
-  const LoadRecentTransactions = () => {
+  const LoadRecentTransactions = useCallback(() => {
     const transactions = recentTransactions.map((transaction) => {
       const isPending = transaction.tx_status === "pending";
       const isConfirmed = transaction.tx_status === "success";
       const isAnchored = !(transaction as any).is_unanchored;
       const didFail = !isPending && !isConfirmed;
       return (
-        <div className="table-item">
+        <div
+          onClick={() => push("/explorer/txId/" + transaction.tx_id)}
+          className="table-item"
+        >
           <div className="left-content">
             <img
               className="transaction-image"
@@ -88,7 +86,6 @@ export const Explorer: React.FC<Props> = ({
           <div className="right-content">
             <p className="title">{getRelativeTimestamp(transaction)}</p>
             <p className="subtitle">
-              {" "}
               {isPending && "Pending"}
               {isConfirmed && !isAnchored && "In microblock"}
               {isConfirmed && isAnchored && "In anchor block"}
@@ -99,7 +96,82 @@ export const Explorer: React.FC<Props> = ({
       );
     });
     return transactions;
-  };
+  }, [recentTransactions]);
+
+  const LoadRecentBlocks = useCallback(
+    (isMicroblocks?: boolean) => {
+      const transactions = recentBlocks.map((transaction) => {
+        const STXBlock = transaction.height;
+        const BTCBlock = transaction.burn_block_height;
+        const BlockHash = transaction.hash;
+        const txs = transaction.txs.length;
+        return (
+          <>
+            <div
+              // onClick={() => push("/explorer/txId/" + transaction.tx_id)}
+              className="table-item"
+              key={transaction.hash}
+            >
+              <div className="left-content">
+                <img
+                  className="transaction-image"
+                  alt="transaction"
+                  src={TransactionImage}
+                />
+                <div>
+                  <p className="title">
+                    <img
+                      className="transaction-image"
+                      alt="transaction"
+                      src={Stacks}
+                    />{" "}
+                    #{STXBlock} →
+                    <img
+                      className="transaction-image"
+                      alt="transaction"
+                      src={Bitcoin}
+                    />
+                    #{BTCBlock}
+                  </p>
+                  <p className="subtitle">{txs} Transactions</p>
+                </div>
+              </div>
+              <div className="right-content">
+                <p className="title">{getRelativeTimestamp(transaction)}</p>
+                <p className="subtitle">{truncateMiddle(BlockHash, 6)}</p>
+              </div>
+            </div>
+            {/* {isMicroblocks && transaction.microblocks_accepted.map((block) => {
+          return (<div
+            className="table-item"
+            key={transaction.hash}
+          >
+            <div className="left-content">
+              <img
+                className="transaction-image"
+                alt="transaction"
+                src={TransactionImage}
+              />
+              <div>
+                <p className="title">
+                 {block.microblock_hash}
+                </p>
+                <p className="subtitle">{block.txs.length} Transactions</p>
+              </div>
+            </div>
+            <div className="right-content">
+              <p className="title">{getRelativeTimestamp(block.)}</p>
+              <p className="subtitle">{truncateMiddle(BlockHash, 6)}</p>
+            </div>
+          </div>)
+        })}  */}
+          </>
+        );
+      });
+      return transactions;
+    },
+    [recentBlocks]
+  );
 
   return (
     <div className="explorer">
@@ -134,7 +206,7 @@ export const Explorer: React.FC<Props> = ({
                 />
                 <p>Stacks</p>
               </div>
-              {recentTransactions.length > 0 && LoadRecentTransactions()}
+              {LoadRecentTransactions()}
             </div>
           </div>
           <div className="anchor-block">
@@ -148,142 +220,7 @@ export const Explorer: React.FC<Props> = ({
                 />
                 <p>Bitcoin</p>
               </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
+              {LoadRecentBlocks(false)}
             </div>
           </div>
         </div>
@@ -301,142 +238,7 @@ export const Explorer: React.FC<Props> = ({
                 />
                 <p>Stacks</p>
               </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
-              <div className="table-item">
-                <div className="left-content">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={TransactionImage}
-                  />
-                  <div>
-                    <p className="title">00 Mins ago</p>
-                    <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                  </div>
-                </div>
-                <div className="right-content">
-                  <p className="title">00 Mins ago</p>
-                  <p className="subtitle">In anchor block • 0x5698...2a02</p>
-                </div>
-              </div>
+              {LoadRecentBlocks(true)}
             </div>
           </div>
         </div>

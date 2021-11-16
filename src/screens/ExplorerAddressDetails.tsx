@@ -33,7 +33,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
   const [address, setAddress] = useState("");
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(2);
   const { getRecentTransactions, recentTransactions } = useExplorer();
 
   const addressArea = (tx: Transaction) => {
@@ -210,51 +210,33 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
       {tabIndex === 1 && (
         <div id="transactionContainer" className="tokens-container">
           <p className={"title-table"}>All Tokens</p>
-          {dims.width < 700 ? (
-            [].map((block: any) => {
-              return (
-                <div className="table-card-container">
-                  <div
-                    className="table-card"
-                    onClick={() => push("/mining/address/" + block.address)}
-                  >
-                    <p className="table-title">Address</p>
-                    <p className="table-subtitle" style={{ color: "#FFA043" }}>
-                      {block.stx_address}
-                    </p>
-                  </div>
-                  <div className="table-card">
-                    <p className="table-title">Total fees burned</p>
-                    <p className="table-subtitle">{block.total_burnfee}</p>
-                  </div>
-                  <div className="table-card">
-                    <p className="table-title">Total block reward</p>
-                    <p className="table-subtitle">{block.total_block_reward}</p>
-                  </div>
-                  <div className="table-card">
-                    <p className="table-title"> Total participation</p>
-                    <p className="table-subtitle">
-                      {block.total_participation}
-                    </p>
-                  </div>
-                  <div className="table-card">
-                    <p className="table-title">Total STX reward</p>
-                    <p className="table-subtitle">{block.total_stx_reward}</p>
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            <div>
-              <AddressTokens
-                initialPageSize={10}
-                tokens={[
-                  { token: "Stacks", total_tokens: 200 },
-                  { token: "Diko", total_tokens: 100 },
-                ]}
-              />
-            </div>
-          )}
+          <div>
+            <AddressTokens
+              initialPageSize={10}
+              tokens={[
+                { token: "Stacks", total_tokens: 200 },
+                { token: "Diko", total_tokens: 100 },
+              ]}
+            />
+          </div>
+        </div>
+      )}
+      {tabIndex === 2 && (
+        <div id="transactionContainer">
+          <div className="collections-header">
+            <input
+              className="search-bar"
+              type="text"
+              id="header-search"
+              placeholder="Search for TxHash / Address / Block"
+              name="s"
+            />
+            <select value="Sort by recent">
+              <option value="Orange">Recent</option>
+              <option value="Radish">Oldest</option>
+              <option value="Cherry">Rarest</option>
+            </select>
+          </div>
         </div>
       )}
     </div>

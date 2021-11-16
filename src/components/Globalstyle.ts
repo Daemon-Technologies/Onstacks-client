@@ -363,6 +363,7 @@ export const GlobalStyles = createGlobalStyle`
       font-style: normal;
       font-weight: 500;
       line-height: 18px;
+      margin-top: 4px;
       letter-spacing: 0px;
       text-align: left;
       color: ${({ theme }: any) => theme.greyText} !important;
@@ -1580,10 +1581,36 @@ border: ${({ theme }: any) =>
   .divider {
     border: 1px solid ${({ theme }: any) => theme.border};
   }
+  .collections-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .search-bar {
+    width: 70%;
+    border-radius: 10px;
+    height: 40px;
+    border: 2px solid #EBEAED;
+    box-sizing: border-box;
+    border-radius: 28px;
+    padding: 16px 11px;
+    margin-bottom: 25px;
+    }
+    select {
+      width: 20%;
+    border-radius: 10px;
+    height: 40px;
+    border: 2px solid #EBEAED;
+    box-sizing: border-box;
+    border-radius: 28px;
+    padding: 0px 11px;
+    margin-bottom: 25px;
+    }
+  }
   .tabs {
     display: flex;
     flex-direction: row;
-    margin: 8px 0;
+    margin: 24px 0;
     border-bottom: 1px solid ${({ theme }: any) => theme.border};
     div {
       min-width: 100px;
@@ -1793,4 +1820,14 @@ border: ${({ theme }: any) =>
     theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
 };
+.left-content .title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.title .transaction-image {
+  width: 19px;
+  height: 19px;
+  margin-right: 3px;
+}
   `;

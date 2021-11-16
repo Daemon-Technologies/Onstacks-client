@@ -6,7 +6,7 @@ import {
   getTopBurnFeePerBlock,
 } from "./../axios/requests";
 import { useEffect, useState } from "react";
-import axios from "../axios/axios";
+import { instance as axios } from "../axios/axios";
 import { getOverviewData } from "../axios/requests";
 import differenceInMinutes from "date-fns/differenceInMinutes";
 import { numFormatter } from "../utils/helper";

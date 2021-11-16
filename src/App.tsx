@@ -18,6 +18,7 @@ import { Upgrading } from "./screens/Upgrading";
 import { useMiningData } from "./hooks/useMiningData";
 import { Explorer } from "./screens/Explorer";
 import { ExplorerAddressDetails } from "./screens/ExplorerAddressDetails";
+import { STXTransferDetails } from "./screens/STXTransferDetails";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -59,6 +60,13 @@ const App: React.FC = () => {
                 failure={failure}
                 themeToggler={themeToggler}
                 theme={theme}
+              />
+            </Route>
+            <Route exact path="/explorer/txId/:txId">
+              <STXTransferDetails
+                failure={failure}
+                theme={theme}
+                themeToggler={themeToggler}
               />
             </Route>
             <Route exact path="/mining">

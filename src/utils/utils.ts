@@ -112,7 +112,7 @@ export const getTxTitle = (transaction: Transaction) => {
 
 export const toRelativeTime = (ts: number): string => dayjs().to(ts);
 
-export const getRelativeTimestamp = (tx: Transaction) => {
+export const getRelativeTimestamp = (tx: any) => {
   const date =
     typeof (tx as any).burn_block_time !== "undefined" &&
     (tx as any).burn_block_time !== -1
