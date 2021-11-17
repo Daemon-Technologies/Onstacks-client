@@ -375,12 +375,14 @@ export const GlobalStyles = createGlobalStyle`
     padding: 24px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     overflow-y: scroll;
+    border: 1px solid ${({ theme }: any) => theme.border};
   }
   .ab-table {
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     height: 55vh;
     padding: 24px;
     overflow-y: scroll;
+    border: 1px solid ${({ theme }: any) => theme.border};
     background-color: ${({ theme }: any) => theme.background};
   }
   .anchor-block {

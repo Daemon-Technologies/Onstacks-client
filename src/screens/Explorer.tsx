@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { ExplorerHeader } from "../components/ExplorerHeader";
 import TransactionImage from "../assets/explorer/transaction.svg";
 import Stacks from "../assets/side-menu/stacks.svg";
+import Block from "../assets/explorer/block.svg";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
 import { useExplorer } from "../hooks/useExplorer";
 import {
@@ -15,6 +16,8 @@ import {
 } from "../utils/utils";
 import Transaction from "../utils/explorer-types";
 import { useCallback } from "react";
+import useInfiniteScroll from "react-infinite-scroll-hook";
+import { Microblock } from "../components/Microblock";
 
 interface Props {
   theme: any;
@@ -26,7 +29,45 @@ interface Props {
 export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
   const [tabIndex, setTabIndex] = useState(0);
   const { push } = useHistory();
-  const { recentTransactions, overviewData, recentBlocks } = useExplorer();
+  const {
+    getRecentTransactions,
+    recentTransactions,
+    overviewData,
+    recentBlocks,
+    isLoading,
+    getMicroBlock,
+    hasError,
+    getAnchoredBlockList,
+  } = useExplorer();
+  const [sentryRef, { rootRef }] = useInfiniteScroll({
+    loading: isLoading,
+    hasNextPage: true,
+    onLoadMore: () => {
+      getRecentTransactions();
+    },
+    disabled: !!hasError,
+    rootMargin: "0px 0px 400px 0px",
+  });
+
+  const [currentBlocks, { rootRef: currentRootBlockRef }] = useInfiniteScroll({
+    loading: isLoading,
+    hasNextPage: true,
+    onLoadMore: () => {
+      getAnchoredBlockList();
+    },
+    disabled: !!hasError,
+    rootMargin: "0px 0px 400px 0px",
+  });
+
+  const [blocksRef, { rootRef: rootBlockRef }] = useInfiniteScroll({
+    loading: isLoading,
+    hasNextPage: true,
+    onLoadMore: () => {
+      getAnchoredBlockList();
+    },
+    disabled: !!hasError,
+    rootMargin: "0px 0px 400px 0px",
+  });
 
   useEffect(() => {
     if (failure) {
@@ -58,41 +99,43 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
       const isAnchored = !(transaction as any).is_unanchored;
       const didFail = !isPending && !isConfirmed;
       return (
-        <div
-          onClick={() => push("/explorer/txId/" + transaction.tx_id)}
-          className="table-item"
-        >
-          <div className="left-content">
-            <img
-              className="transaction-image"
-              alt="transaction"
-              src={TransactionImage}
-            />
-            <div>
-              <p className="title">{getTxTitle(transaction)}</p>
+        <>
+          <div
+            onClick={() => push("/explorer/txId/" + transaction.tx_id)}
+            className="table-item"
+          >
+            <div className="left-content">
+              <img
+                className="transaction-image"
+                alt="transaction"
+                src={TransactionImage}
+              />
+              <div>
+                <p className="title">{getTxTitle(transaction)}</p>
+                <p className="subtitle">
+                  {getTxTypeName(transaction.tx_type)} •{" "}
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() =>
+                      push("/explorer/address/" + transaction.sender_address)
+                    }
+                  >
+                    {addressArea(transaction)}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className="right-content">
+              <p className="title">{getRelativeTimestamp(transaction)}</p>
               <p className="subtitle">
-                {getTxTypeName(transaction.tx_type)} •{" "}
-                <span
-                  style={{ cursor: "pointer" }}
-                  onClick={() =>
-                    push("/explorer/address/" + transaction.sender_address)
-                  }
-                >
-                  {addressArea(transaction)}
-                </span>
+                {isPending && "Pending"}
+                {isConfirmed && !isAnchored && "In microblock"}
+                {isConfirmed && isAnchored && "In anchor block"}
+                {didFail && "Failed"} • {truncateMiddle(transaction.tx_id, 4)}
               </p>
             </div>
           </div>
-          <div className="right-content">
-            <p className="title">{getRelativeTimestamp(transaction)}</p>
-            <p className="subtitle">
-              {isPending && "Pending"}
-              {isConfirmed && !isAnchored && "In microblock"}
-              {isConfirmed && isAnchored && "In anchor block"}
-              {didFail && "Failed"} • {truncateMiddle(transaction.tx_id, 4)}
-            </p>
-          </div>
-        </div>
+        </>
       );
     });
     return transactions;
@@ -116,7 +159,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 <img
                   className="transaction-image"
                   alt="transaction"
-                  src={TransactionImage}
+                  src={Block}
                 />
                 <div>
                   <p className="title">
@@ -141,30 +184,16 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 <p className="subtitle">{truncateMiddle(BlockHash, 6)}</p>
               </div>
             </div>
-            {/* {isMicroblocks && transaction.microblocks_accepted.map((block) => {
-          return (<div
-            className="table-item"
-            key={transaction.hash}
-          >
-            <div className="left-content">
-              <img
-                className="transaction-image"
-                alt="transaction"
-                src={TransactionImage}
-              />
-              <div>
-                <p className="title">
-                 {block.microblock_hash}
-                </p>
-                <p className="subtitle">{block.txs.length} Transactions</p>
-              </div>
-            </div>
-            <div className="right-content">
-              <p className="title">{getRelativeTimestamp(block.)}</p>
-              <p className="subtitle">{truncateMiddle(BlockHash, 6)}</p>
-            </div>
-          </div>)
-        })}  */}
+            {isMicroblocks &&
+              transaction.microblocks_accepted.map((block: any) => {
+                return (
+                  <Microblock
+                    parent_burn_block_time={transaction.burn_block_time}
+                    getMicroBlock={getMicroBlock}
+                    block={block}
+                  />
+                );
+              })}
           </>
         );
       });
@@ -172,7 +201,6 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
     },
     [recentBlocks]
   );
-
   return (
     <div className="explorer">
       <div id="main">
@@ -195,7 +223,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
 
       {tabIndex === 0 && (
         <div id="transactionContainer" className="transaction-container">
-          <div className="recent-transactions">
+          <div className="recent-transactions" ref={rootRef}>
             <h3>Recent Transactions</h3>
             <div className="rt-table">
               <div className="table-header">
@@ -207,9 +235,12 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 <p>Stacks</p>
               </div>
               {LoadRecentTransactions()}
+              <div ref={sentryRef}>
+                <p>LOADING..</p>
+              </div>
             </div>
           </div>
-          <div className="anchor-block">
+          <div ref={rootBlockRef} className="anchor-block">
             <h3>Anchor Block</h3>
             <div className="ab-table">
               <div className="table-header">
@@ -221,12 +252,19 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 <p>Bitcoin</p>
               </div>
               {LoadRecentBlocks(false)}
+              <div ref={blocksRef}>
+                <p>LOADING..</p>
+              </div>
             </div>
           </div>
         </div>
       )}
       {tabIndex === 1 && (
-        <div id="transactionContainer" className="transaction-container">
+        <div
+          id="transactionContainer"
+          className="transaction-container"
+          ref={currentRootBlockRef}
+        >
           <div style={{ flex: 1 }} className="recent-transactions">
             <h3>Recent Transactions</h3>
             <div className="rt-table">
@@ -239,6 +277,9 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 <p>Stacks</p>
               </div>
               {LoadRecentBlocks(true)}
+              <div ref={currentBlocks}>
+                <p>LOADING..</p>
+              </div>
             </div>
           </div>
         </div>

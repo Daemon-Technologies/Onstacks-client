@@ -16,7 +16,6 @@ import {
   truncateMiddle,
 } from "../utils/utils";
 import Transaction from "../utils/explorer-types";
-import useWindowDimensions from "../hooks/useWindowDimension";
 import { AddressTokens } from "../components/AddressTokens";
 
 interface Props {
@@ -96,7 +95,6 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
     setToggle(width >= 1025);
   }, [toggle]);
   const { push } = useHistory();
-  const dims = useWindowDimensions();
 
   useEffect(() => {
     if (params?.address) {

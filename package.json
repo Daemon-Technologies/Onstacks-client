@@ -23,6 +23,7 @@
     "react-dom": "^16.13.1",
     "react-flow-renderer": "^9.6.6",
     "react-google-charts": "3.0.15",
+    "react-infinite-scroll-hook": "^4.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-table": "latest",

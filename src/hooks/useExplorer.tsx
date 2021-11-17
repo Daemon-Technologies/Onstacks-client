@@ -47,20 +47,42 @@ export const useExplorer = () => {
     []
   );
   const [recentBlocks, setRecentBlocks] = useState<ExplorerBlockAnchor[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const getRecentTransactions = () => {
-    explorerInstance
-      .get(explorerGetRecentTxsList(10, recentTransactions.length))
-      .then((data: any) => {
-        setRecentTransactions(data.results);
-      });
+    try {
+      setIsLoading(true);
+      explorerInstance
+        .get(explorerGetRecentTxsList(10, recentTransactions.length))
+        .then((data: any) => {
+          const transactions = recentTransactions.concat(data.results);
+          setRecentTransactions(transactions);
+          setIsLoading(false);
+        });
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setHasError(true);
+    }
   };
 
-  const getAnchoredBlockList = () => {
+  const getAnchoredBlockList = async () => {
     explorerInstance
       .get(explorerGetAnchoredBlockList(10, recentTransactions.length))
-      .then((data: any) => {
-        setRecentBlocks(data.results);
+      .then(async (data: any) => {
+        const transactions = recentBlocks.concat(data.results);
+        // const x = await Promise.all(transactions.map(async (transaction) => {
+        //   return {
+        //     ...transaction,
+        //     microblocks_accepted: transaction.microblocks_accepted.map(async (microblock) => {
+        //       const contents = fetch('https://stacks-api.onstacks.com/extended/v1/microblock/' + microblock)
+        //     .then(response => response.json()).then(((data) => data))
+        //     return contents;
+        //     })
+        //   }
+        //   })).then((i) => i[0].microblocks_accepted[0].then((r) =>  r))
+        setRecentBlocks(transactions);
       });
   };
 
@@ -68,6 +90,14 @@ export const useExplorer = () => {
     explorerInstance.get(explorerGetOverviewData).then((data: any) => {
       setOverviewData(data);
     });
+  };
+
+  const getMicroBlock = (hash: string) => {
+    return fetch(
+      "https://stacks-api.onstacks.com/extended/v1/microblock/" + hash
+    )
+      .then((response) => response.json())
+      .then((data) => data);
   };
 
   useEffect(() => {
@@ -80,6 +110,10 @@ export const useExplorer = () => {
     getRecentTransactions,
     recentTransactions,
     overviewData,
+    hasError,
+    isLoading,
+    getAnchoredBlockList,
     recentBlocks,
+    getMicroBlock,
   };
 };
