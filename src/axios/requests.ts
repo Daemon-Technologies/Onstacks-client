@@ -25,3 +25,23 @@ export const explorerGetRecentTxsList = (limit: number, offset: number) =>
   `getRecentTxsList?limit=${limit}&offset=${offset}`;
 export const explorerGetAnchoredBlockList = (limit: number, offset: number) =>
   `getAnchoredBlockList?limit=${limit}&offset=${offset}`;
+export const getAddressOverview = (address: string) =>
+  `getAddressOverview?address=${address}`;
+export const explorerGetAddressRecentTxsList = (
+  address: string,
+  limit: number,
+  offset: number
+) =>
+  `getAddressLatestTxsList?address=${address}&confirmedlimit=${limit}&confirmedoffset=${offset}`;
+export const getAddressNativeInfo = (address: string) =>
+  `getAddressNativeInfo?address=${address}`;
+export const getAddressTokens = (
+  address: string,
+  limit: number,
+  offset: number
+) => `getAddressTokenList?address=${address}&limit=${limit}&offset=${offset}`;
+export const getAddressNFTList = (
+  address: string,
+  limit: number,
+  offset: number
+) => `getAddressNFTList?address=${address}&limit=${limit}&offset=${offset}`;

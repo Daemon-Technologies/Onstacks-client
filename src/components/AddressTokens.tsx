@@ -1,28 +1,26 @@
 import React, { useEffect, useMemo } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
+import { TokensList } from "../hooks/useExplorerAddressDetail";
 import useWindowDimensions from "../hooks/useWindowDimension";
 
-interface Tokens {
-  token: string;
-  total_tokens: number;
-}
 interface Props {
-  tokens: Tokens[];
+  tokens: TokensList[];
   initialPageSize?: number;
 }
 export const AddressTokens: React.FC<Props> = ({ tokens, initialPageSize }) => {
   const data = useMemo(() => tokens, [tokens]);
   const dims = useWindowDimensions();
+  console.log(tokens);
 
   const columns: any = useMemo(
     () => [
       {
         Header: `Token Name.`,
-        accessor: "token", // accessor is the "key" in the data
+        accessor: "name", // accessor is the "key" in the data
       },
       {
         Header: "Total token amount",
-        accessor: "total_tokens",
+        accessor: "balance",
       },
     ],
     []
@@ -102,30 +100,13 @@ export const AddressTokens: React.FC<Props> = ({ tokens, initialPageSize }) => {
           </select>
           {dims.width > 550 && <p>items per page</p>}
         </div>
-        {/* {dims.width > 550 && (
-          <span>
-            Page{" "}
-            <strong>
-              {pageIndex + 1} of {pageOptions.length}
-            </strong>{" "}
-          </span>
-        )} */}
         <div>
-          {/* <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-            {"First"}
-          </button>{" "} */}
           <button onClick={() => previousPage()} disabled={!canPreviousPage}>
             {"Previous"}
           </button>{" "}
           <button onClick={() => nextPage()} disabled={!canNextPage}>
             {"Next"}
-          </button>{" "}
-          {/* <button
-            onClick={() => gotoPage(pageCount - 1)}
-            disabled={!canNextPage}
-          >
-            {"End"}
-          </button> */}
+          </button>
         </div>
       </div>
     </>

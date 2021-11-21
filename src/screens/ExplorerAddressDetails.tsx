@@ -8,7 +8,6 @@ import Stacks from "../assets/explorer/stacks-block.png";
 import Mining from "../assets/explorer/mining-block.svg";
 import OtherAssets from "../assets/explorer/other-assets.svg";
 import Burn from "../assets/explorer/burn-block.svg";
-import { useExplorer } from "../hooks/useExplorer";
 import {
   getRelativeTimestamp,
   getTxTitle,
@@ -17,6 +16,7 @@ import {
 } from "../utils/utils";
 import Transaction from "../utils/explorer-types";
 import { AddressTokens } from "../components/AddressTokens";
+import { useExplorerAddressDetails } from "../hooks/useExplorerAddressDetail";
 
 interface Props {
   theme: any;
@@ -31,9 +31,17 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
 }) => {
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
-  const [address, setAddress] = useState("");
-  const [tabIndex, setTabIndex] = useState(2);
-  const { getRecentTransactions, recentTransactions } = useExplorer();
+  const [tabIndex, setTabIndex] = useState(0);
+  const {
+    recentTransactions,
+    setAddress,
+    address,
+    overviewData,
+    nativeInfo,
+    getRecentTransactions,
+    isLoading,
+    tokens,
+  } = useExplorerAddressDetails();
 
   const addressArea = (tx: Transaction) => {
     if (tx.tx_type === "token_transfer") {
@@ -98,19 +106,9 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
 
   useEffect(() => {
     if (params?.address) {
-      getRecentTransactions();
       setAddress(params.address);
     }
   }, [params]);
-
-  useEffect(() => {
-    if (address) {
-      // getMinerInfo(address);
-      // getAddressSatsCommitted(address);
-      // getBlocksMiner(address);
-      // getBlocksForAddress(address);
-    }
-  }, [address]);
 
   useEffect(() => {
     if (failure) {
@@ -123,13 +121,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
       <div id="main">
         <ExplorerAddressDetailsHeader
           address={address}
-          headerDetails={{
-            total_fees: 10,
-            total_mining_reward: 100,
-            total_stacking_reward: 100,
-            total_sats_spent: 2,
-            total_stx_earned: 2,
-          }}
+          headerDetails={overviewData}
         />
         <div className={"tabs"}>
           <div
@@ -160,62 +152,101 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                 <p>Transactions</p>
               </div>
               {recentTransactions.length > 0 && LoadRecentTransactions()}
+              {recentTransactions.length > 0 && (
+                <div
+                  style={{
+                    borderTop: "1px solid #84818A",
+                    color: "#84818A",
+                    fontSize: 12,
+                    paddingTop: 15,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    getRecentTransactions();
+                  }}
+                >
+                  <p style={{ textAlign: "center", fontWeight: 600 }}>
+                    {isLoading ? "Loading..." : "Load More"}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
-          <div className="address-blocks">
-            <div className="address-card">
-              <div className="address-card-header">
-                <p>Assets</p>
-              </div>
-              <div className="address-card-item">
-                <img alt="stacks" src={Stacks} />
-                <div>
-                  <p className="title">Total Balance</p>
-                  <p className="sub-title">13,437 STX</p>
+          {nativeInfo?.assets_info && (
+            <div className="address-blocks">
+              <div className="address-card">
+                <div className="address-card-header">
+                  <p>Assets</p>
+                </div>
+                <div className="address-card-item">
+                  <img alt="stacks" src={Stacks} />
+                  <div>
+                    <p className="title">Total Balance</p>
+                    <p className="sub-title">
+                      {nativeInfo.assets_info.balance} STX
+                    </p>
+                  </div>
+                </div>
+                <div className="address-card-item">
+                  <img alt="stacks" src={OtherAssets} />
+                  <div>
+                    <p className="title">Other Assets</p>
+                    <p className="sub-title">
+                      {nativeInfo.assets_info.fungible_tokens.length +
+                        nativeInfo.assets_info.non_fungible_tokens.length}{" "}
+                      tokens
+                    </p>
+                  </div>
                 </div>
               </div>
-              <div className="address-card-item">
-                <img alt="stacks" src={OtherAssets} />
-                <div>
-                  <p className="title">Other Assets</p>
-                  <p className="sub-title">4 tokens</p>
+              <div className="address-card">
+                <div className="address-card-header">
+                  <p>Stacking</p>
+                </div>
+                <div className="address-card-header"></div>
+                <div className="address-card-item">
+                  <img alt="stacks" src={Mining} />
+                  <div>
+                    <p className="title">STX Stacked</p>
+                    <p className="sub-title">
+                      {nativeInfo.stacking_info.percents} STX
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="address-card">
+                <div className="address-card-header">
+                  <p>Mining</p>
+                </div>
+                <div className="address-card-header"></div>
+                <div className="address-card-item">
+                  <img alt="stacks" src={Mining} />
+                  <div>
+                    <p className="title">Mining reward earned</p>
+                    <p className="sub-title">
+                      {nativeInfo.mining_info.miner_rewards} STX
+                    </p>
+                  </div>
+                </div>
+                <div className="address-card-item">
+                  <img alt="stacks" src={Burn} />
+                  <div>
+                    <p className="title">Fees burn</p>
+                    <p className="sub-title">
+                      {nativeInfo.mining_info.total_burnt} Sats
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="address-card">
-              <div className="address-card-header">
-                <p>Mining</p>
-              </div>
-              <div className="address-card-header"></div>
-              <div className="address-card-item">
-                <img alt="stacks" src={Mining} />
-                <div>
-                  <p className="title">Mining reward earned</p>
-                  <p className="sub-title">16,453 STX</p>
-                </div>
-              </div>
-              <div className="address-card-item">
-                <img alt="stacks" src={Burn} />
-                <div>
-                  <p className="title">Fees burn</p>
-                  <p className="sub-title">136,215,453 Sats</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       )}
       {tabIndex === 1 && (
         <div id="transactionContainer" className="tokens-container">
           <p className={"title-table"}>All Tokens</p>
           <div>
-            <AddressTokens
-              initialPageSize={10}
-              tokens={[
-                { token: "Stacks", total_tokens: 200 },
-                { token: "Diko", total_tokens: 100 },
-              ]}
-            />
+            <AddressTokens initialPageSize={10} tokens={tokens} />
           </div>
         </div>
       )}

@@ -2,17 +2,10 @@ import React from "react";
 import { numberWithCommas } from "../hooks/useOverview";
 import { ReactComponent as LeftArrow } from "../assets/side-menu/left-arrow-disabled.svg";
 import { useHistory } from "react-router-dom";
-
-export interface AddressHeaderDetails {
-  total_mining_reward: number;
-  total_stx_earned: number;
-  total_sats_spent: number;
-  total_stacking_reward: number;
-  total_fees: number;
-}
+import { ExplorerOverview } from "../hooks/useExplorerAddressDetail";
 
 export const ExplorerAddressDetailsHeader: React.FC<{
-  headerDetails: AddressHeaderDetails | undefined;
+  headerDetails: ExplorerOverview | undefined;
   address: string;
 }> = ({ headerDetails, address }) => {
   const { goBack } = useHistory();
@@ -46,29 +39,29 @@ export const ExplorerAddressDetailsHeader: React.FC<{
       <div className={"info-card"}>
         <div className="inner-info-card">
           <p className="title">Total received</p>
-          <p className="sub-title">{headerDetails?.total_stx_earned} Blocks</p>
+          <p className="sub-title">{headerDetails?.total_received} Blocks</p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total Spent</p>
           <p className="sub-title">
-            {numberWithCommas(headerDetails?.total_sats_spent.toFixed(2))} STX
+            {numberWithCommas(headerDetails?.total_sent.toFixed(2))} STX
           </p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total mining rewards</p>
           <p className="sub-title">
-            {numberWithCommas(headerDetails?.total_mining_reward)} Sats
+            {numberWithCommas(headerDetails?.total_mining_rewards)} Sats
           </p>
         </div>
-        <div className="inner-info-card">
+        {/* <div className="inner-info-card">
           <p className="title">Total stacking reward</p>
           <p className="sub-title">
             {headerDetails?.total_stacking_reward} EH/s
           </p>
-        </div>
+        </div> */}
         <div className="inner-info-card">
           <p className="title">Rate of return</p>
-          <p className="sub-title">{headerDetails?.total_fees} %</p>
+          <p className="sub-title">{headerDetails?.total_fee} %</p>
         </div>
       </div>
     </>

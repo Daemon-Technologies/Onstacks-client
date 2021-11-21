@@ -16,7 +16,6 @@ import {
 } from "../utils/utils";
 import Transaction from "../utils/explorer-types";
 import { useCallback } from "react";
-import useInfiniteScroll from "react-infinite-scroll-hook";
 import { Microblock } from "../components/Microblock";
 
 interface Props {
@@ -35,39 +34,10 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
     overviewData,
     recentBlocks,
     isLoading,
+    isAnchoredBlockLoading,
     getMicroBlock,
-    hasError,
     getAnchoredBlockList,
   } = useExplorer();
-  const [sentryRef, { rootRef }] = useInfiniteScroll({
-    loading: isLoading,
-    hasNextPage: true,
-    onLoadMore: () => {
-      getRecentTransactions();
-    },
-    disabled: !!hasError,
-    rootMargin: "0px 0px 400px 0px",
-  });
-
-  const [currentBlocks, { rootRef: currentRootBlockRef }] = useInfiniteScroll({
-    loading: isLoading,
-    hasNextPage: true,
-    onLoadMore: () => {
-      getAnchoredBlockList();
-    },
-    disabled: !!hasError,
-    rootMargin: "0px 0px 400px 0px",
-  });
-
-  const [blocksRef, { rootRef: rootBlockRef }] = useInfiniteScroll({
-    loading: isLoading,
-    hasNextPage: true,
-    onLoadMore: () => {
-      getAnchoredBlockList();
-    },
-    disabled: !!hasError,
-    rootMargin: "0px 0px 400px 0px",
-  });
 
   useEffect(() => {
     if (failure) {
@@ -100,10 +70,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
       const didFail = !isPending && !isConfirmed;
       return (
         <>
-          <div
-            onClick={() => push("/explorer/txId/" + transaction.tx_id)}
-            className="table-item"
-          >
+          <div key={transaction.block_hash} className="table-item">
             <div className="left-content">
               <img
                 className="transaction-image"
@@ -111,7 +78,12 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 src={TransactionImage}
               />
               <div>
-                <p className="title">{getTxTitle(transaction)}</p>
+                <p
+                  onClick={() => push("/explorer/txId/" + transaction.tx_id)}
+                  className="title"
+                >
+                  {getTxTitle(transaction)}
+                </p>
                 <p className="subtitle">
                   {getTxTypeName(transaction.tx_type)} •{" "}
                   <span
@@ -125,7 +97,10 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 </p>
               </div>
             </div>
-            <div className="right-content">
+            <div
+              onClick={() => push("/explorer/txId/" + transaction.tx_id)}
+              className="right-content"
+            >
               <p className="title">{getRelativeTimestamp(transaction)}</p>
               <p className="subtitle">
                 {isPending && "Pending"}
@@ -223,7 +198,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
 
       {tabIndex === 0 && (
         <div id="transactionContainer" className="transaction-container">
-          <div className="recent-transactions" ref={rootRef}>
+          <div className="recent-transactions">
             <h3>Recent Transactions</h3>
             <div className="rt-table">
               <div className="table-header">
@@ -235,12 +210,27 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 <p>Stacks</p>
               </div>
               {LoadRecentTransactions()}
-              <div ref={sentryRef}>
-                <p>LOADING..</p>
-              </div>
+              {recentTransactions.length > 0 && (
+                <div
+                  style={{
+                    borderTop: "1px solid #84818A",
+                    color: "#84818A",
+                    fontSize: 12,
+                    paddingTop: 15,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    getRecentTransactions();
+                  }}
+                >
+                  <p style={{ textAlign: "center", fontWeight: 600 }}>
+                    {isLoading ? "Loading..." : "Load More"}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
-          <div ref={rootBlockRef} className="anchor-block">
+          <div className="anchor-block">
             <h3>Anchor Block</h3>
             <div className="ab-table">
               <div className="table-header">
@@ -252,19 +242,30 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 <p>Bitcoin</p>
               </div>
               {LoadRecentBlocks(false)}
-              <div ref={blocksRef}>
-                <p>LOADING..</p>
-              </div>
+              {recentBlocks.length > 0 && (
+                <div
+                  style={{
+                    borderTop: "1px solid #84818A",
+                    color: "#84818A",
+                    fontSize: 12,
+                    paddingTop: 15,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    getAnchoredBlockList();
+                  }}
+                >
+                  <p style={{ textAlign: "center", fontWeight: 600 }}>
+                    {isAnchoredBlockLoading ? "Loading..." : "Load More"}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
       )}
       {tabIndex === 1 && (
-        <div
-          id="transactionContainer"
-          className="transaction-container"
-          ref={currentRootBlockRef}
-        >
+        <div id="transactionContainer" className="transaction-container">
           <div style={{ flex: 1 }} className="recent-transactions">
             <h3>Recent Transactions</h3>
             <div className="rt-table">
@@ -277,9 +278,24 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 <p>Stacks</p>
               </div>
               {LoadRecentBlocks(true)}
-              <div ref={currentBlocks}>
-                <p>LOADING..</p>
-              </div>
+              {recentBlocks.length > 0 && (
+                <div
+                  style={{
+                    borderTop: "1px solid #84818A",
+                    color: "#84818A",
+                    fontSize: 12,
+                    paddingTop: 15,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    getAnchoredBlockList();
+                  }}
+                >
+                  <p style={{ textAlign: "center", fontWeight: 600 }}>
+                    {isAnchoredBlockLoading ? "Loading..." : "Load More"}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

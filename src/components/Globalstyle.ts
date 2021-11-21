@@ -351,6 +351,7 @@ export const GlobalStyles = createGlobalStyle`
       font-size: 14px;
       font-style: normal;
       font-weight: 600;
+      cursor: pointer;
       line-height: 20px;
       letter-spacing: 0px;
       text-align: left;
