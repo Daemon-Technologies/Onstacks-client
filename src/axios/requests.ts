@@ -45,3 +45,5 @@ export const getAddressNFTList = (
   limit: number,
   offset: number
 ) => `getAddressNFTList?address=${address}&limit=${limit}&offset=${offset}`;
+
+export const getTxByTxId = (id: string) => `getTxByTxId?txid=${id}`;

@@ -62,6 +62,72 @@ export const GlobalStyles = createGlobalStyle`
     margin-top: 14px;
     color: ${({ theme }: any) => theme.text};
   }
+
+  .transaction-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0px;
+    border-top: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};    width: 100%;
+    .title {
+      color: ${({ theme }: any) => theme.greyText};
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+    .subtitle {
+      color: ${({ theme }: any) => theme.text};
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: right;
+    }
+  }
+
+  .function-call {
+    border-top: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border}; 
+    .color {
+      color: #5546FF !important;
+      font-weight: 800 !important;
+    }
+    .transaction-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+     width: 100%;
+    .title {
+      color: ${({ theme }: any) => theme.greyText};
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+    .subtitle {
+      color: ${({ theme }: any) => theme.text};
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0px;
+      text-align: right;
+    }
+  }
+  }
   //SIDEBAR
 
   .header {
@@ -377,6 +443,7 @@ export const GlobalStyles = createGlobalStyle`
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
     overflow-y: scroll;
     border: 1px solid ${({ theme }: any) => theme.border};
+    margin-bottom: 16px;
   }
   .ab-table {
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
@@ -384,6 +451,7 @@ export const GlobalStyles = createGlobalStyle`
     padding: 24px;
     overflow-y: scroll;
     border: 1px solid ${({ theme }: any) => theme.border};
+    margin-bottom: 16px;
     background-color: ${({ theme }: any) => theme.background};
   }
   .anchor-block {
@@ -996,6 +1064,19 @@ border: ${({ theme }: any) =>
     font-weight: 600;
     line-height: 36px;
     margin-bottom: 12px;
+  }
+
+  .transaction-card {
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
+    height: 110px;
+    border-radius: 4px;
+    display: flex;
+    background: ${({ theme }: any) => theme.background} !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .info-card {

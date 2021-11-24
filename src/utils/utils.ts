@@ -1,6 +1,7 @@
 import Transaction from "./explorer-types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import pluralize from "pluralize";
 
 dayjs.extend(relativeTime);
 
@@ -29,6 +30,23 @@ export function shortenHex(hex: string, length = 4) {
     hex.length - length
   )}`;
 }
+
+export const addressArea = (tx: Transaction) => {
+  if (tx.tx_type === "token_transfer") {
+    return `${truncateMiddle(tx.sender_address)} to
+        ${truncateMiddle(tx.token_transfer.recipient_address)}`;
+  }
+  if (tx.tx_type === "contract_call") {
+    return `By ${truncateMiddle(tx.sender_address)}`;
+  }
+  if (tx.tx_type === "smart_contract") {
+    return `By ${truncateMiddle(tx.sender_address)}`;
+  }
+  if (tx.tx_type === "coinbase") {
+    return `Mined by ${truncateMiddle(tx.sender_address)}`;
+  }
+  return null;
+};
 
 export const truncateMiddle = (input: string, offset = 5): string => {
   if (!input) return "";
@@ -92,6 +110,86 @@ export const getAssetNameParts = (fullyRealizedName: string) => {
     asset,
   };
 };
+export const getTicker = (name: string) => {
+  if (name.includes("-")) {
+    const parts = name.split("-");
+    if (parts.length >= 3) {
+      return `${parts[0][0]}${parts[1][0]}${parts[2][0]}`;
+    } else {
+      return `${parts[0][0]}${parts[1][0]}${parts[1][1]}`;
+    }
+  } else {
+    if (name.length >= 3) {
+      return `${name[0]}${name[1]}${name[2]}`;
+    }
+    return name;
+  }
+};
+
+export const constructPostConditionAssetId = (asset: any) => {
+  return `${asset.contract_address}.${asset.contract_name}::${asset.asset_name}`;
+};
+
+export const getPrettyCode = (code: any, plural: boolean) => {
+  const singular = "transfer";
+  const modifier = pluralize(singular, plural ? 2 : 1);
+  switch (code) {
+    case "not_sent":
+      return `prevent ${singular}`;
+    case "sent":
+      return modifier;
+    case "sent_equal_to":
+      return `${modifier} exactly`;
+    case "sent_greater_than":
+      return `${modifier} more than`;
+    case "sent_greater_than_or_equal_to":
+      return `${modifier} at least`;
+    case "sent_less_than":
+      return `${modifier} less than`;
+    case "sent_less_than_or_equal_to":
+      return `${modifier} no more than`;
+  }
+};
+
+export const getConditionTicker = (condition: any) => {
+  switch (condition.type) {
+    case "stx":
+      return "STX";
+    case "fungible":
+      return getTicker(condition.asset.asset_name).toUpperCase();
+    default:
+      return "";
+  }
+};
+
+function microStxToStx(microStx: any) {
+  return Number(Number(microStx) / Math.pow(10, 6));
+}
+
+export const getAmount = (condition: any) => {
+  if (condition.type === "stx") {
+    return microStxToStx(condition.amount);
+  }
+
+  if (condition.type === "fungible") {
+    return parseFloat(condition.amount).toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 6,
+    });
+  }
+  return `1 ${condition.asset_value.repr}`;
+};
+
+export const getAddressValue = (condition: any) => {
+  switch (condition.principal.type_id) {
+    case "principal_standard":
+      return condition.principal.address;
+    case "principal_origin":
+      return "self";
+    case "principal_contract":
+      return `${condition.principal.address}.${condition.principal.contract_name}`;
+  }
+};
 
 export const getTxTitle = (transaction: Transaction) => {
   switch (transaction.tx_type) {
@@ -124,4 +222,88 @@ export const getRelativeTimestamp = (tx: any) => {
       : "Pending...";
 
   return date;
+};
+// handle if the print is a hex, convert it to string if so
+function handleContractLogHex(repr: string) {
+  if (repr?.startsWith("0x")) {
+    try {
+      return Buffer.from(repr.replace("0x", ""), "hex").toString("utf8");
+    } catch (e) {
+      return repr;
+    }
+  }
+  return repr;
+}
+
+export const addSepBetweenStrings = (
+  strings: (string | undefined)[],
+  sep = "∙"
+): string => {
+  let str = "";
+  strings
+    .filter((_s) => _s)
+    .forEach((string, index, array) => {
+      if (index < array.length - 1) {
+        str += (string as string) + ` ${sep} `;
+      } else {
+        str += string;
+      }
+    });
+  return str;
+};
+
+export const getAssetAmounts = (event: any) => {
+  switch (event.event_type) {
+    case "fungible_token_asset":
+      return parseFloat((event as any).asset.amount).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 6,
+      });
+    case "non_fungible_token_asset":
+      return parseInt(event.asset.value.repr.replace("u", "")).toLocaleString();
+    case "stx_asset":
+      return event.asset.amount
+        ? `${microToStacks(event.asset.amount)} STX`
+        : undefined;
+  }
+};
+
+export const capitalize = (s: string) => {
+  return s?.charAt(0).toUpperCase() + s?.slice(1);
+};
+
+export const getAssetEventType = (event: any) => {
+  switch (event.event_type) {
+    case "smart_contract_log":
+      return addSepBetweenStrings([
+        `Contract log`,
+        capitalize(event.contract_log.topic),
+      ]);
+    case "stx_lock":
+      return "STX lock";
+    default:
+      return "asset" in event && event.asset && event.asset.asset_event_type
+        ? capitalize(event.asset.asset_event_type)
+        : undefined;
+  }
+};
+
+export const getName = (event: any) => {
+  const assetId =
+    event.event_type === "fungible_token_asset" ||
+    event.event_type === "non_fungible_token_asset"
+      ? event.asset.asset_id
+      : undefined;
+  switch (event.event_type) {
+    case "stx_lock":
+      return `${microToStacks(event.stx_lock_event.locked_amount)} STX`;
+    case "smart_contract_log":
+      return handleContractLogHex(event.contract_log.value.repr);
+    case "stx_asset":
+      return event.asset?.value
+        ? `${microToStacks(event.asset?.value)} STX`
+        : "STX transfer";
+    default:
+      return assetId ? getAssetNameParts(assetId).asset : undefined;
+  }
 };

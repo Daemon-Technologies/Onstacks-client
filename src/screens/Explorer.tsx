@@ -9,12 +9,12 @@ import Block from "../assets/explorer/block.svg";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
 import { useExplorer } from "../hooks/useExplorer";
 import {
+  addressArea,
   getRelativeTimestamp,
   getTxTitle,
   getTxTypeName,
   truncateMiddle,
 } from "../utils/utils";
-import Transaction from "../utils/explorer-types";
 import { useCallback } from "react";
 import { Microblock } from "../components/Microblock";
 
@@ -44,23 +44,6 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
       push("/upgrading");
     }
   }, [failure]);
-
-  const addressArea = (tx: Transaction) => {
-    if (tx.tx_type === "token_transfer") {
-      return `${truncateMiddle(tx.sender_address)} to
-          ${truncateMiddle(tx.token_transfer.recipient_address)}`;
-    }
-    if (tx.tx_type === "contract_call") {
-      return `By ${truncateMiddle(tx.sender_address)}`;
-    }
-    if (tx.tx_type === "smart_contract") {
-      return `By ${truncateMiddle(tx.sender_address)}`;
-    }
-    if (tx.tx_type === "coinbase") {
-      return `Mined by ${truncateMiddle(tx.sender_address)}`;
-    }
-    return null;
-  };
 
   const LoadRecentTransactions = useCallback(() => {
     const transactions = recentTransactions.map((transaction) => {
