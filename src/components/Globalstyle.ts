@@ -1606,6 +1606,32 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
       
      }
   }
+  .transaction-card {
+    flex-direction: column;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: flex-start;
+    height: auto;
+  }
+  .transaction-row {
+    text-align: left;
+    align-items: flex-start;
+    flex-direction: column;
+    overflow-wrap: anywhere;
+  }
+  .function-call .transaction-row {
+    text-align: left;
+    align-items: flex-start;
+    overflow-wrap: anywhere;
+    flex-direction: column;
+  }
+  .function-call .transaction-row .subtitle {
+    text-align: left;
+  }
+  .transaction-row .subtitle {
+    text-align: left;
+  }
   .burn-address {
     display: none;
   }

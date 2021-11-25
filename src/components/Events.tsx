@@ -59,7 +59,6 @@ export const Events: React.FC<{ events: any }> = ({ events }) => {
             : event.event_type === "non_fungible_token_asset"
             ? "Non-fungible token"
             : undefined;
-        console.log(tokenType, assetId, assetAmounts, name);
         return (
           <div className="transaction-row">
             <img

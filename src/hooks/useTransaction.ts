@@ -8,6 +8,15 @@ export const useTransaction = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError] = useState(false);
   const [transaction, setTransaction] = useState<Transaction>();
+  const [block, setBlock] = useState();
+  const getBlock = (block: string) => {
+    return fetch(
+      "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +
+        block
+    )
+      .then((response) => response.json())
+      .then((data) => setBlock(data));
+  };
 
   const getTransaction = (id: string) => {
     setIsLoading(true);
@@ -21,6 +30,8 @@ export const useTransaction = () => {
     hasError,
     isLoading,
     transaction,
+    block,
+    getBlock,
     getTransaction,
   };
 };
