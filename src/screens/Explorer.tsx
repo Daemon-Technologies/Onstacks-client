@@ -3,10 +3,14 @@ import React, { useEffect, useState } from "react";
 import { OverviewProps } from "../hooks/useOverview";
 import { useHistory } from "react-router-dom";
 import { ExplorerHeader } from "../components/ExplorerHeader";
-import TransactionImage from "../assets/explorer/transaction.svg";
 import Stacks from "../assets/side-menu/stacks.svg";
-import Block from "../assets/explorer/block.svg";
+import BlockLight from "../assets/explorer/block-light.svg";
+import BlockDark from "../assets/explorer/block-dark.svg";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
+import StacksTransferLight from "../assets/explorer/stacks-transfer-light.svg";
+import FunctionCallLight from "../assets/explorer/function-call-light.svg";
+import StacksTransferDark from "../assets/explorer/stacks-transfer-dark.svg";
+import FunctionCallDark from "../assets/explorer/function-call-dark.svg";
 import { useExplorer } from "../hooks/useExplorer";
 import {
   addressArea,
@@ -17,6 +21,9 @@ import {
 } from "../utils/utils";
 import { useCallback } from "react";
 import { Microblock } from "../components/Microblock";
+import useInfiniteScroll from "react-infinite-scroll-hook";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
 interface Props {
   theme: any;
@@ -32,18 +39,68 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
     getRecentTransactions,
     recentTransactions,
     overviewData,
+    getRecentPendingTransactions,
     recentBlocks,
     isLoading,
     isAnchoredBlockLoading,
     getMicroBlock,
     getAnchoredBlockList,
   } = useExplorer();
-
+  const transactionsOptions = ["Show confirmed only", "Show pending only"];
+  const [transactionState, setStransactionState] = useState(
+    transactionsOptions[0]
+  );
   useEffect(() => {
     if (failure) {
       push("/upgrading");
     }
   }, [failure]);
+
+  const [sentryRef, { rootRef }] = useInfiniteScroll({
+    loading: isLoading,
+    hasNextPage: true,
+    onLoadMore: () => {
+      if (transactionState === transactionsOptions[0]) {
+        getRecentTransactions();
+      } else {
+        getRecentPendingTransactions();
+      }
+    },
+    disabled: false,
+    rootMargin: "0px 0px 400px 0px",
+  });
+
+  const [currentBlocks, { rootRef: currentRootBlockRef }] = useInfiniteScroll({
+    loading: isLoading,
+    hasNextPage: true,
+    onLoadMore: () => {
+      getAnchoredBlockList();
+    },
+    disabled: false,
+    rootMargin: "0px 0px 400px 0px",
+  });
+
+  const [blocksRef, { rootRef: rootBlockRef }] = useInfiniteScroll({
+    loading: isLoading,
+    hasNextPage: true,
+    onLoadMore: () => {
+      getAnchoredBlockList();
+    },
+    disabled: false,
+    rootMargin: "0px 0px 400px 0px",
+  });
+
+  const _onSelect = (e: any) => {
+    setStransactionState(e.value);
+  };
+
+  useEffect(() => {
+    if (transactionState === transactionsOptions[0]) {
+      getRecentTransactions(0);
+    } else {
+      getRecentPendingTransactions(0);
+    }
+  }, [transactionState]);
 
   const LoadRecentTransactions = useCallback(() => {
     const transactions = recentTransactions.map((transaction) => {
@@ -53,20 +110,29 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
       const didFail = !isPending && !isConfirmed;
       return (
         <>
-          <div key={transaction.block_hash} className="table-item">
+          <div
+            onClick={() => push("/explorer/txId/" + transaction.tx_id)}
+            key={transaction.block_hash}
+            className="table-item"
+          >
             <div className="left-content">
-              <img
-                className="transaction-image"
-                alt="transaction"
-                src={TransactionImage}
-              />
+              {transaction.tx_type === "token_transfer" ? (
+                <img
+                  className="transaction-image"
+                  alt="transaction"
+                  src={
+                    theme === "light" ? StacksTransferLight : StacksTransferDark
+                  }
+                />
+              ) : (
+                <img
+                  className="transaction-image"
+                  alt="transaction"
+                  src={theme === "light" ? FunctionCallLight : FunctionCallDark}
+                />
+              )}
               <div>
-                <p
-                  onClick={() => push("/explorer/txId/" + transaction.tx_id)}
-                  className="title"
-                >
-                  {getTxTitle(transaction)}
-                </p>
+                <p className="title">{getTxTitle(transaction)}</p>
                 <p className="subtitle">
                   {getTxTypeName(transaction.tx_type)} •{" "}
                   <span
@@ -97,7 +163,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
       );
     });
     return transactions;
-  }, [recentTransactions]);
+  }, [recentTransactions, theme]);
 
   const LoadRecentBlocks = useCallback(
     (isMicroblocks?: boolean) => {
@@ -117,7 +183,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 <img
                   className="transaction-image"
                   alt="transaction"
-                  src={Block}
+                  src={theme === "light" ? BlockLight : BlockDark}
                 />
                 <div>
                   <p className="title">
@@ -146,6 +212,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
               transaction.microblocks_accepted.map((block: any) => {
                 return (
                   <Microblock
+                    theme={theme}
                     parent_burn_block_time={transaction.burn_block_time}
                     getMicroBlock={getMicroBlock}
                     block={block}
@@ -157,7 +224,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
       });
       return transactions;
     },
-    [recentBlocks]
+    [recentBlocks, theme]
   );
   return (
     <div className="explorer">
@@ -181,27 +248,33 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
 
       {tabIndex === 0 && (
         <div id="transactionContainer" className="transaction-container">
-          <div className="recent-transactions">
-            <h3>Recent Transactions</h3>
+          <div className="recent-transactions" ref={rootRef}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <h3>Recent Transactions</h3>
+              <Dropdown
+                controlClassName="dropdown-cont"
+                options={transactionsOptions}
+                value={transactionState}
+                onChange={_onSelect}
+                placeholder="Select an option"
+              />
+            </div>
             <div className="rt-table">
               <div className="table-header">
-                <img
-                  className="transaction-image"
-                  alt="transaction"
-                  src={Stacks}
-                />
                 <p>Stacks</p>
               </div>
               {LoadRecentTransactions()}
               {recentTransactions.length > 0 && (
                 <div
-                  style={{
-                    borderTop: "1px solid #84818A",
-                    color: "#84818A",
-                    fontSize: 12,
-                    paddingTop: 15,
-                    cursor: "pointer",
-                  }}
+                  ref={sentryRef}
+                  className="load-more"
                   onClick={() => {
                     getRecentTransactions();
                   }}
@@ -213,27 +286,17 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
               )}
             </div>
           </div>
-          <div className="anchor-block">
+          <div ref={rootBlockRef} className="anchor-block">
             <h3>Anchor Block</h3>
             <div className="ab-table">
               <div className="table-header">
-                <img
-                  className="transaction-image"
-                  alt="transaction"
-                  src={Bitcoin}
-                />
                 <p>Bitcoin</p>
               </div>
               {LoadRecentBlocks(false)}
               {recentBlocks.length > 0 && (
                 <div
-                  style={{
-                    borderTop: "1px solid #84818A",
-                    color: "#84818A",
-                    fontSize: 12,
-                    paddingTop: 15,
-                    cursor: "pointer",
-                  }}
+                  className={"load-more"}
+                  ref={blocksRef}
                   onClick={() => {
                     getAnchoredBlockList();
                   }}
@@ -249,30 +312,24 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
       )}
       {tabIndex === 1 && (
         <div id="transactionContainer" className="transaction-container">
-          <div style={{ flex: 1 }} className="recent-transactions">
-            <h3>Recent Transactions</h3>
+          <div
+            style={{ flex: 1 }}
+            className="recent-transactions"
+            ref={currentRootBlockRef}
+          >
+            <h3>Blocks</h3>
             <div className="rt-table">
               <div className="table-header">
-                <img
-                  className="transaction-image"
-                  alt="transaction"
-                  src={Stacks}
-                />
-                <p>Stacks</p>
+                <p>Blocks</p>
               </div>
               {LoadRecentBlocks(true)}
               {recentBlocks.length > 0 && (
                 <div
-                  style={{
-                    borderTop: "1px solid #84818A",
-                    color: "#84818A",
-                    fontSize: 12,
-                    paddingTop: 15,
-                    cursor: "pointer",
-                  }}
+                  className={"load-more"}
                   onClick={() => {
                     getAnchoredBlockList();
                   }}
+                  ref={currentBlocks}
                 >
                   <p style={{ textAlign: "center", fontWeight: 600 }}>
                     {isAnchoredBlockLoading ? "Loading..." : "Load More"}

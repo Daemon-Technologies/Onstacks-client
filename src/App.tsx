@@ -123,6 +123,9 @@ const App: React.FC = () => {
             </Route>
           </Switch>
         </Router>
+        <div className="footer">
+          Terms of services • Privacy Policy • Daemon Technologies 2021
+        </div>
       </>
     </ThemeProvider>
   );

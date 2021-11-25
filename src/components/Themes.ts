@@ -18,6 +18,6 @@ export const darkTheme = {
   stacksColor: "#161b22",
   greyText: "#84818A",
   border: "#2b2e38",
-  background: "#0d1117",
+  background: "#21262D",
   hoverColor: "rgba(255, 160, 67, 0.1)",
 };

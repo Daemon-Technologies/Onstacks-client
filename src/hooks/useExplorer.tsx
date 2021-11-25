@@ -5,6 +5,7 @@ import { explorerInstance } from "../axios/axios";
 import {
   explorerGetAnchoredBlockList,
   explorerGetOverviewData,
+  getRecentPendingTxsList,
   explorerGetRecentTxsList,
 } from "../axios/requests";
 
@@ -51,14 +52,39 @@ export const useExplorer = () => {
   const [hasError, setHasError] = useState(false);
   const [isAnchoredBlockLoading, setIsAnchoredBlockLoading] = useState(false);
 
-  const getRecentTransactions = () => {
+  const getRecentTransactions = (offs?: number) => {
     setIsLoading(true);
     try {
       explorerInstance
-        .get(explorerGetRecentTxsList(10, recentTransactions.length))
+        .get(explorerGetRecentTxsList(10, offs || recentTransactions.length))
         .then((data: any) => {
-          const transactions = recentTransactions.concat(data.results);
-          setRecentTransactions(transactions);
+          if (offs === 0) {
+            setRecentTransactions(data.results);
+          } else {
+            const transactions = recentTransactions.concat(data.results);
+            setRecentTransactions(transactions);
+          }
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      setHasError(true);
+    }
+  };
+
+  const getRecentPendingTransactions = (offs?: number) => {
+    setIsLoading(true);
+    try {
+      console.log(offs);
+      explorerInstance
+        .get(getRecentPendingTxsList(10, offs || recentTransactions.length))
+        .then((data: any) => {
+          if (offs === 0) {
+            setRecentTransactions(data.results);
+          } else {
+            const transactions = recentTransactions.concat(data.results);
+            setRecentTransactions(transactions);
+          }
           setIsLoading(false);
         });
     } catch (error) {
@@ -98,14 +124,20 @@ export const useExplorer = () => {
     getAnchoredBlockList();
   }, []);
 
+  const emptyState = () => {
+    setRecentTransactions([]);
+  };
+
   return {
     getRecentTransactions,
     recentTransactions,
+    getRecentPendingTransactions,
     overviewData,
     hasError,
     isLoading,
     getAnchoredBlockList,
     recentBlocks,
+    emptyState,
     getMicroBlock,
     isAnchoredBlockLoading,
   };

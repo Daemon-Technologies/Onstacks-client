@@ -108,6 +108,9 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: space-between;
     align-items: center;
      width: 100%;
+     border-top: ${({ theme }: any) =>
+       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};    width: 100%;
     .title {
       color: ${({ theme }: any) => theme.greyText};
       font-family: Manrope;
@@ -140,7 +143,9 @@ export const GlobalStyles = createGlobalStyle`
     align-items: center;
     height: 60px;
     padding: 14px 32px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     /* height: 80px; */
     z-index: 200;
   }
@@ -213,6 +218,30 @@ export const GlobalStyles = createGlobalStyle`
   .mobile-logo {
     display: none;
   }
+  .dropdown-cont {
+    background-color: transparent;
+    border: 0 !important;
+    //styleName: Regular/Text/14px/Regular;
+font-family: Manrope;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px;
+letter-spacing: 0px;
+text-align: right;
+
+  }
+  .footer {
+    display: 'flex'; justify-content: 'center'; align-items: 'center'; width: '100%'; //styleName: Regular/Text/14px/Regular;
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    margin-bottom: 30px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: center;
+}
   .web-logo {
     display: block;
     width: 34px !important;
@@ -238,6 +267,13 @@ export const GlobalStyles = createGlobalStyle`
   .logo {
     width: 45px;
     height: 45px;
+  }
+  .screen-title {
+    font-size: 30px !important;
+  }
+  .dropdown-cont {
+    font-size: 12px;
+    padding: 8px 28px 8px 10px
   }
   .nav-options {
     display: flex;
@@ -336,7 +372,8 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
     border-radius: 10px;
     height: 40px;
-    border: 2px solid #EBEAED;
+    background-color:${({ theme }: any) => theme.background}; 
+    border: 2px solid ${({ theme }: any) => theme.border};
     box-sizing: border-box;
     border-radius: 28px;
     padding: 16px 11px;
@@ -355,7 +392,10 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: column;
     justify-content: flex-start;
     margin-right: 16px; 
-    flex: 0.58;
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 20px 0px #0000000A;
+    flex: 0.60;
     h3 {
       //styleName: Regular / Text / 20px / Bold;
       font-family: Manrope;
@@ -392,6 +432,7 @@ export const GlobalStyles = createGlobalStyle`
     border-top: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};    display: flex;
+        cursor: pointer;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -438,16 +479,27 @@ export const GlobalStyles = createGlobalStyle`
   }
   .rt-table {
     background-color: ${({ theme }: any) => theme.background};
-    height: 55vh;
+    height: 100vh;
     padding: 24px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     overflow-y: scroll;
     border: 1px solid ${({ theme }: any) => theme.border};
     margin-bottom: 16px;
   }
+  .load-more {
+    border-top: 1px solid ${({ theme }: any) => theme.border};
+    color: "#84818A";
+    font-size: 12px;
+    padding-top: 15px;
+    cursor: "pointer";
+  }
   .ab-table {
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
-    height: 55vh;
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+    height: 100vh;
     padding: 24px;
     overflow-y: scroll;
     border: 1px solid ${({ theme }: any) => theme.border};
@@ -459,6 +511,9 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: column;
     justify-content: flex-start;
     flex: 0.4;
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 20px 0px #0000000A;
   }
   .address-blocks {
     display: flex;
@@ -469,7 +524,9 @@ export const GlobalStyles = createGlobalStyle`
       background-color: ${({ theme }: any) => theme.background};
       padding: 24px;
       margin-bottom: 16px;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+      box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
       .address-card-header  {
         margin-bottom: 16px;
         p {
@@ -622,7 +679,9 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
     align-items: center;
     box-sizing: border-box;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     border-radius: 4px;
     padding: 12px 16px;
     margin: 40px 0 16px 0;
@@ -892,7 +951,9 @@ export const GlobalStyles = createGlobalStyle`
     padding: 24px;
     width: 100%;
     position: relative;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
 
 
     path {
@@ -927,7 +988,9 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
   }
   .containerOne {
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     width: 100%;
     background: ${({ theme }: any) => theme.background};
     border-radius: var(--main-radius);
@@ -970,7 +1033,9 @@ export const GlobalStyles = createGlobalStyle`
 border: ${({ theme }: any) =>
   theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
 
     .title {
       font-size: 14px;
@@ -991,7 +1056,9 @@ border: ${({ theme }: any) =>
     border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+      box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
 
     .title {
       font-size: 14px;
@@ -1042,7 +1109,9 @@ border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
   position: relative;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
   height: auto;
     .title {
       font-size: 14px;
@@ -1084,6 +1153,9 @@ border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
     height: 110px;
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 10px 20px 0px #0000000A;
     border-radius: 4px;
     display: flex;
     background: ${({ theme }: any) => theme.background} !important;
@@ -1673,8 +1745,9 @@ border: ${({ theme }: any) =>
     .search-bar {
     width: 70%;
     border-radius: 10px;
+    background-color:${({ theme }: any) => theme.background}; ;
     height: 40px;
-    border: 2px solid #EBEAED;
+    border: 2px solid ${({ theme }: any) => theme.border};
     box-sizing: border-box;
     border-radius: 28px;
     padding: 16px 11px;

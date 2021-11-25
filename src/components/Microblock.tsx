@@ -2,14 +2,16 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import TransactionImage from "../assets/explorer/micro-block.svg";
-import { toRelativeTime } from "../utils/utils";
+import { toRelativeTime, truncateMiddle } from "../utils/utils";
+import BlockLight from "../assets/explorer/microblock-light.svg";
+import BlockDark from "../assets/explorer/microblock-dark.svg";
 
 export const Microblock: React.FC<{
   getMicroBlock: any;
   block: any;
+  theme: any;
   parent_burn_block_time: number;
-}> = ({ getMicroBlock, block, parent_burn_block_time }) => {
+}> = ({ theme, getMicroBlock, block, parent_burn_block_time }) => {
   const [currentBlock, setCurrentBlock] = useState<any>();
   useEffect(() => {
     getItem();
@@ -26,10 +28,12 @@ export const Microblock: React.FC<{
             <img
               className="transaction-image"
               alt="transaction"
-              src={TransactionImage}
+              src={theme === "light" ? BlockLight : BlockDark}
             />
             <div>
-              <p className="title">{currentBlock.microblock_hash}</p>
+              <p className="title">
+                {truncateMiddle(currentBlock.microblock_hash, 10)}
+              </p>
               <p className="subtitle">{currentBlock.txs.length} Transactions</p>
             </div>
           </div>

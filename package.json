@@ -22,6 +22,7 @@
     "pluralize": "^8.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-dropdown": "^1.9.2",
     "react-flow-renderer": "^9.6.6",
     "react-google-charts": "3.0.15",
     "react-infinite-scroll-hook": "^4.0.1",

@@ -45,11 +45,11 @@ export const ExplorerHeader: React.FC<{
       />
       <div className={"info-card"}>
         <div className="inner-info-card">
-          <p className="title">Total Transactions (24)</p>
+          <p className="title">Total Transactions (24hr)</p>
           <p className="sub-title">{overviewData.total_txs_24hrs}</p>
         </div>
         <div className="inner-info-card">
-          <p className="title">Total volume</p>
+          <p className="title">Total volume (24hr)</p>
           <p className="sub-title">{overviewData.total_volume}</p>
         </div>
         <div className="inner-info-card">
@@ -57,7 +57,7 @@ export const ExplorerHeader: React.FC<{
           <p className="sub-title">{overviewData.total_microblocks_24hrs}</p>
         </div>
         <div className="inner-info-card">
-          <p className="title">Total Fees</p>
+          <p className="title">Total Fees (24hr)</p>
           <p className="sub-title">{overviewData.total_tx_fees}</p>
         </div>
       </div>

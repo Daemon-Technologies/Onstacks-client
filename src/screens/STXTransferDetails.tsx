@@ -64,10 +64,10 @@ export const STXTransferDetails: React.FC<Props> = ({
   console.log(transaction);
   return (
     <div className="explorer">
-      {transaction && (
+      {transaction && (transaction as any).contract_call && (
         <>
           <div id="main">
-            <div className={"transaction-card"}>
+            <div style={{ padding: 32 }} className={"transaction-card"}>
               <div
                 style={{ padding: 8, borderTop: 0 }}
                 // onClick={() => push("/explorer/txId/" + transaction.tx_id)}
@@ -119,7 +119,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                         alt="transaction"
                         src={Bitcoin}
                       />
-                      #{"{BTCBlock}"}
+                      #
+                      {
+                        (transaction as any).block_anchor_info
+                          .bitcoin_block_height
+                      }
                     </p>
                   </div>
                 </div>
@@ -197,17 +201,19 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <p className="subtitle">{transaction?.block_hash}</p>
                 </div>
               </div>
-              <div style={{ height: "auto" }} className="rt-table">
-                <div className="table-header">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={Stacks}
-                  />
-                  <p>Events</p>
+              {transaction.events.length > 0 && (
+                <div style={{ height: "auto" }} className="rt-table">
+                  <div className="table-header">
+                    <img
+                      className="transaction-image"
+                      alt="transaction"
+                      src={Stacks}
+                    />
+                    <p>Events</p>
+                  </div>
+                  <Events events={transaction.events} />
                 </div>
-                <Events events={transaction.events} />
-              </div>
+              )}
               <div style={{ height: "auto" }} className="rt-table">
                 <div className="table-header">
                   <img
@@ -257,41 +263,108 @@ export const STXTransferDetails: React.FC<Props> = ({
                     }
                   )}
               </div>
-              <div style={{ height: "auto" }} className="rt-table">
-                <div className="table-header">
-                  <img
-                    className="transaction-image"
-                    alt="transaction"
-                    src={Stacks}
-                  />
-                  <p>Post conditions</p>
+              {transaction.post_conditions.length > 0 && (
+                <div style={{ height: "auto" }} className="rt-table">
+                  <div className="table-header">
+                    <img
+                      className="transaction-image"
+                      alt="transaction"
+                      src={Stacks}
+                    />
+                    <p>Post conditions</p>
+                  </div>
+                  {transaction.post_conditions.map((condition) => {
+                    return (
+                      <div>
+                        <p className="subtitle">
+                          {truncateMiddle(getAddressValue(condition), 8)}
+                        </p>
+                        <p className="title">
+                          {capitalize(
+                            getPrettyCode(condition.condition_code, true)
+                          )}{" "}
+                          {getAmount(condition)} {getConditionTicker(condition)}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
-                {transaction.post_conditions.map((condition) => {
-                  return (
-                    <div>
-                      <p className="subtitle">
-                        {truncateMiddle(getAddressValue(condition), 8)}
-                      </p>
-                      <p className="title">
-                        {capitalize(
-                          getPrettyCode(condition.condition_code, true)
-                        )}{" "}
-                        {getAmount(condition)} {getConditionTicker(condition)}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
+              )}
             </div>
             <div className="anchor-block">
-              <div className="ab-table">
+              <div style={{ height: "auto" }} className="ab-table">
                 <div className="table-header">
                   <img
                     className="transaction-image"
                     alt="transaction"
                     src={Stacks}
                   />
-                  <p>Stacks</p>
+                  <p>Contract Detail</p>
+                </div>
+                <div style={{ borderTop: 0 }} className="transaction-row">
+                  <p className="subtitle">
+                    {
+                      (transaction as any).contract_call.contract_id.split(
+                        "."
+                      )[1]
+                    }
+                  </p>
+                  <p className="title">
+                    {truncateMiddle(transaction.block_hash, 10)}
+                  </p>
+                </div>
+                <div className="transaction-row">
+                  <p className="title">Function</p>
+                  <p className="subtitle">{0}</p>
+                </div>
+                <div className="transaction-row">
+                  <p className="title">Variables</p>
+                  <p className="subtitle">0</p>
+                </div>
+                <div className="transaction-row">
+                  <p className="title">Map</p>
+                  <p className="subtitle">0</p>
+                </div>
+                <div className="transaction-row">
+                  <p className="title">Token</p>
+                  <p className="subtitle">0</p>
+                </div>
+              </div>
+              <div style={{ height: "auto" }} className="ab-table">
+                <div className="table-header">
+                  <img
+                    className="transaction-image"
+                    alt="transaction"
+                    src={Stacks}
+                  />
+                  <p className="title">Bitcoin anchor</p>
+                </div>
+                <div className="transaction-row">
+                  <p className="title">Bitcoin Block Height</p>
+                  <p className="subtitle">
+                    {
+                      (transaction as any).block_anchor_info
+                        .bitcoin_block_height
+                    }
+                  </p>
+                </div>
+                <div className="transaction-row">
+                  <p className="title">Bitcoin Block Hash</p>
+                  <p className="subtitle">
+                    {truncateMiddle(
+                      (transaction as any).block_anchor_info.bitcoin_block_hash,
+                      10
+                    )}
+                  </p>
+                </div>
+                <div className="transaction-row">
+                  <p className="title">Anchor transaction id</p>
+                  <p className="subtitle">
+                    {truncateMiddle(
+                      (transaction as any).block_anchor_info.bitcoin_tx_hash,
+                      10
+                    )}
+                  </p>
                 </div>
               </div>
             </div>

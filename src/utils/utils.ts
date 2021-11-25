@@ -196,7 +196,7 @@ export const getTxTitle = (transaction: Transaction) => {
     case "smart_contract":
       return getContractName(transaction?.smart_contract?.contract_id);
     case "contract_call":
-      return `${getFunctionName(transaction)} ➔ ${getContractName(
+      return `${getFunctionName(transaction)} ← ${getContractName(
         transaction.contract_call.contract_id
       )}`;
     case "token_transfer":
