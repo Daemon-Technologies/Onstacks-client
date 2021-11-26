@@ -8,7 +8,7 @@ export const useTransaction = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError] = useState(false);
   const [transaction, setTransaction] = useState<Transaction>();
-  const [block, setBlock] = useState();
+  const [block, setBlock] = useState<any>();
   const getBlock = (block: string) => {
     return fetch(
       "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +

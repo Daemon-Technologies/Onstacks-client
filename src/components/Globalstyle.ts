@@ -352,6 +352,21 @@ text-align: right;
     padding: 92px 32px 32px 32px;
     margin: auto;
   }
+  .rtt-table {
+    height: auto !important;
+  }
+  .abb-table {
+    height: auto !important;
+  }
+  .block-details {
+    width: 100%;
+    max-width: 1280px;
+    padding: 92px 32px 32px 32px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
   
   .tokens-container {
     padding: 24px;
