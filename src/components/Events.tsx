@@ -1,7 +1,6 @@
 import React from "react";
 import {
   getAssetAmounts,
-  getAssetEventType,
   getAssetNameParts,
   getName,
   getTicker,
@@ -43,7 +42,7 @@ export const Events: React.FC<{ events: any }> = ({ events }) => {
     <>
       {events.map((event: any) => {
         const name = getName(event);
-        const assetEventType = getAssetEventType(event);
+        // const assetEventType = getAssetEventType(event);
         const assetAmounts = getAssetAmounts(event);
         const participants = getParticipants(event);
 
