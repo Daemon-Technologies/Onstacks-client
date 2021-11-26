@@ -98,7 +98,7 @@ export const BlockInformation: React.FC<Props> = ({
               className={"a-tag"}
               onClick={() =>
                 push(
-                  "/mining/address/" + currentBlock?.block_info.winning_address
+                  "/miner/address/" + currentBlock?.block_info.winning_address
                 )
               }
             >{`${currentBlock?.block_info.winning_address.substring(

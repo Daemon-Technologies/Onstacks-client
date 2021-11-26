@@ -1156,6 +1156,7 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     box-shadow: 0px 0px 1px 0px #0000000A;
     box-shadow: 0px 2px 6px 0px #0000000A;
     box-shadow: 0px 10px 20px 0px #0000000A;
+    padding: 16px;
     border-radius: 4px;
     display: flex;
     background: ${({ theme }: any) => theme.background} !important;

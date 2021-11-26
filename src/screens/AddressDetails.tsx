@@ -51,7 +51,6 @@ export const AddressDetails: React.FC<Props> = ({
     getBlocksForAddress,
     currentBlocks,
   } = useAddressDetails();
-
   useEffect(() => {
     if (currentBlock) {
       const block = blocks.find(

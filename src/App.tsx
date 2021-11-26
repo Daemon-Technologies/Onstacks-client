@@ -99,7 +99,7 @@ const App: React.FC = () => {
                 theme={theme}
               />
             </Route>
-            <Route exact path="/mining/address/:address">
+            <Route exact path="/miner/address/:address">
               <AddressDetails
                 failure={failure}
                 currentBlock={currentBlock}

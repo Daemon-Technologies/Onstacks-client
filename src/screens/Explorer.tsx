@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { OverviewProps } from "../hooks/useOverview";
+import { numberWithCommas, OverviewProps } from "../hooks/useOverview";
 import { useHistory } from "react-router-dom";
 import { ExplorerHeader } from "../components/ExplorerHeader";
 import Stacks from "../assets/side-menu/stacks.svg";
@@ -168,8 +168,8 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
   const LoadRecentBlocks = useCallback(
     (isMicroblocks?: boolean) => {
       const transactions = recentBlocks.map((transaction) => {
-        const STXBlock = transaction.height;
-        const BTCBlock = transaction.burn_block_height;
+        const STXBlock = numberWithCommas(transaction.height);
+        const BTCBlock = numberWithCommas(transaction.burn_block_height);
         const BlockHash = transaction.hash;
         const txs = transaction.txs.length;
         return (

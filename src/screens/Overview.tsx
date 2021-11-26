@@ -142,7 +142,7 @@ export const Overview: React.FC<Props> = ({
                   <p className="table-subtitle">{block.sats_spent}</p>
                 </div>
                 <div
-                  onClick={() => push("/mining/address/" + block.address)}
+                  onClick={() => push("/miner/address/" + block.address)}
                   className="table-card"
                 >
                   <p className="table-title"> Winner Address</p>

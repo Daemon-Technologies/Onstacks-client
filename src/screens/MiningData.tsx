@@ -182,7 +182,7 @@ export const MiningData: React.FC<Props> = ({
                 <div className="table-card-container">
                   <div
                     className="table-card"
-                    onClick={() => push("/mining/address/" + block.address)}
+                    onClick={() => push("/miner/address/" + block.address)}
                   >
                     <p className="table-title">Address</p>
                     <p className="table-subtitle" style={{ color: "#FFA043" }}>
@@ -304,7 +304,7 @@ export const MiningData: React.FC<Props> = ({
                         display: "flex",
                         alignItems: "center",
                       }}
-                      onClick={() => push("/mining/address/" + winnerAddress)}
+                      onClick={() => push("/miner/address/" + winnerAddress)}
                     >
                       <div
                         className="circle-data"

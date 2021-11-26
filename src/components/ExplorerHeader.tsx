@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { ExplorerOverview } from "../hooks/useExplorer";
+import { numberWithCommas } from "../hooks/useOverview";
 import { getBlockHash } from "../utils/helper";
 
 export const ExplorerHeader: React.FC<{
@@ -21,7 +22,8 @@ export const ExplorerHeader: React.FC<{
         <p className="screen-title">Stacks’ Explorer</p>
         <div className="data">
           <a onClick={() => getBlockHash(overviewData.STX_height)}>
-            STX Block Height:&nbsp; <span>#{overviewData.STX_height} </span>
+            STX Block Height:&nbsp;{" "}
+            <span>#{numberWithCommas(overviewData.STX_height)} </span>
           </a>
           <a
             style={{ marginLeft: 16 }}
@@ -30,7 +32,7 @@ export const ExplorerHeader: React.FC<{
             rel="noopener noreferrer"
           >
             BTC Block Height: &nbsp;
-            <span>#{overviewData.BTC_height}</span>
+            <span>#{numberWithCommas(overviewData.BTC_height)}</span>
           </a>
         </div>
       </div>
@@ -46,19 +48,27 @@ export const ExplorerHeader: React.FC<{
       <div className={"info-card"}>
         <div className="inner-info-card">
           <p className="title">Total Transactions (24hr)</p>
-          <p className="sub-title">{overviewData.total_txs_24hrs}</p>
+          <p className="sub-title">
+            {numberWithCommas(overviewData.total_txs_24hrs)}
+          </p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total volume (24hr)</p>
-          <p className="sub-title">{overviewData.total_volume}</p>
+          <p className="sub-title">
+            {numberWithCommas(overviewData.total_volume)}
+          </p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total Microblocks (24hr)</p>
-          <p className="sub-title">{overviewData.total_microblocks_24hrs}</p>
+          <p className="sub-title">
+            {numberWithCommas(overviewData.total_microblocks_24hrs)}
+          </p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total Fees (24hr)</p>
-          <p className="sub-title">{overviewData.total_tx_fees}</p>
+          <p className="sub-title">
+            {numberWithCommas(overviewData.total_tx_fees)}
+          </p>
         </div>
       </div>
     </>
