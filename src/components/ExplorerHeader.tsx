@@ -1,16 +1,78 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { ExplorerOverview } from "../hooks/useExplorer";
 import { numberWithCommas } from "../hooks/useOverview";
 import { getBlockHash } from "../utils/helper";
+import { SearchResult, SearchResultType } from "../utils/search-types";
 
 export const ExplorerHeader: React.FC<{
   overviewData: ExplorerOverview;
   tabIndex?: number;
 }> = ({ overviewData, tabIndex }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setLoading] = useState(false);
+  const [searchData, setSearchData] = useState<SearchResult>();
+  const { push } = useHistory();
+
+  useEffect(() => {
+    if (searchTerm !== "") {
+      setLoading(true);
+    }
+    const delayDebounceFn = setTimeout(() => {
+      _search();
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
+
+  const _search = async () => {
+    const res = await fetch(
+      `https://stacks-node-api.mainnet.stacks.co/extended/v1/search/${searchTerm}`
+    );
+    const data = await res.json();
+    // this is a workaround for the API not returning data for valid stx addresses
+    if (
+      data &&
+      data?.found === false &&
+      data?.result?.entity_type === "standard_address"
+    ) {
+      setSearchData({
+        found: true,
+        result: {
+          entity_id: searchTerm,
+          entity_type: "standard_address",
+        },
+      });
+    }
+    setSearchData(data);
+  };
+
+  const onClick = () => {
+    if (searchData?.found)
+      switch (searchData.result.entity_type) {
+        case SearchResultType.StandardAddress:
+          push("/explorer/address/" + searchData.result.entity_id);
+          return;
+        case SearchResultType.TxId:
+          push("/explorer/txid/" + searchData.result.entity_id);
+          return;
+        case SearchResultType.MempoolTxId:
+          push("/explorer/txid/" + searchData.result.entity_id);
+          return;
+        case SearchResultType.ContractAddress:
+          push("/explorer/txid/" + searchData.result.entity_id);
+          return;
+        default:
+          push("/explorer/block/" + searchData.result.entity_id);
+          return;
+      }
+  };
+
   return (
     <>
-      {" "}
       <div
         style={{
           display: "flex",
@@ -39,12 +101,24 @@ export const ExplorerHeader: React.FC<{
       <input
         // value={" "}
         className="search-bar"
-        // onInput={e => setSearchQuery(e.target.value)}
+        onChange={(e) => setSearchTerm(e.target.value)}
         type="text"
         id="header-search"
         placeholder="Search for TxHash / Address / Block"
         name="s"
       />
+      {isLoading && <div>Loading..</div>}
+      {searchData && (
+        <div>
+          {searchData.found && (
+            <div>
+              <p onClick={onClick}>{searchData.result.entity_id}</p>
+              <p>{searchData.result.entity_type}</p>
+            </div>
+          )}
+        </div>
+      )}
+
       <div className={"info-card"}>
         <div className="inner-info-card">
           <p className="title">Total Transactions (24hr)</p>

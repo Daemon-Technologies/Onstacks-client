@@ -5,7 +5,6 @@ import { explorerInstance } from "../axios/axios";
 import {
   explorerGetAnchoredBlockList,
   explorerGetOverviewData,
-  getRecentPendingTxsList,
   explorerGetRecentTxsList,
 } from "../axios/requests";
 
@@ -75,12 +74,15 @@ export const useExplorer = () => {
   const getRecentPendingTransactions = (offs?: number) => {
     setIsLoading(true);
     try {
-      console.log(offs);
-      explorerInstance
-        .get(getRecentPendingTxsList(10, offs || recentTransactions.length))
-        .then((data: any) => {
+      fetch(
+        `https://stacks-node-api.mainnet.stacks.co/extended/v1/tx?limit=${10}&offset=${
+          offs || recentTransactions.length
+        }`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setRecentTransactions(data.results);
           if (offs === 0) {
-            setRecentTransactions(data.results);
           } else {
             const transactions = recentTransactions.concat(data.results);
             setRecentTransactions(transactions);
@@ -112,7 +114,7 @@ export const useExplorer = () => {
 
   const getMicroBlock = (hash: string) => {
     return fetch(
-      "https://stacks-api.onstacks.com/extended/v1/microblock/" + hash
+      "https://stacks-node-api.mainnet.stacks.co/extended/v1/microblock/" + hash
     )
       .then((response) => response.json())
       .then((data) => data);

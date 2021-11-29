@@ -2,6 +2,7 @@ export const lightTheme = {
   body: "#f8f7fc",
   text: "#423F4B",
   greyText: "#84818A",
+  headerColor: "#fff",
   stacksColor: "#190F3E",
   linkColor: "#FF7042",
   primaryColor: "#FFA043",
@@ -12,6 +13,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   body: "#0d1117",
+  headerColor: "#EBEAED",
   text: "#EBEAED",
   primaryColor: "#FFA043",
   linkColor: "#FF7042",

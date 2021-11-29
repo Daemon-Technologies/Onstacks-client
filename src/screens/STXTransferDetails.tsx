@@ -248,14 +248,14 @@ export const STXTransferDetails: React.FC<Props> = ({
                             style={{ borderTop: 0 }}
                             className="transaction-row"
                           >
-                            <p className="title">Arguments</p>
+                            <p className="title">→ Arguments</p>
                             <p className="subtitle color">{arg.name}</p>
                           </div>
                           <div
                             style={{ borderTop: 0 }}
                             className="transaction-row"
                           >
-                            <p className="title">hashbytes</p>
+                            <p className="title">→ hashbytes</p>
                             <p className="subtitle">
                               {truncateMiddle(arg?.hex, 10)}
                             </p>
@@ -264,7 +264,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                             style={{ borderTop: 0 }}
                             className="transaction-row"
                           >
-                            <p className="title">version</p>
+                            <p className="title">→ version</p>
                             <p className="subtitle">
                               {truncateMiddle(arg?.repr, 10)}
                             </p>
@@ -428,7 +428,8 @@ export const STXTransferDetails: React.FC<Props> = ({
                         alt="transaction"
                         src={Stacks}
                       />
-                      #{transaction.block_height} →
+                      #{transaction.block_height ? transaction.block_height : 0}{" "}
+                      →
                       <img
                         className="transaction-image"
                         alt="transaction"

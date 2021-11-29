@@ -144,8 +144,8 @@ export const GlobalStyles = createGlobalStyle`
     height: 60px;
     padding: 14px 32px;
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     /* height: 80px; */
     z-index: 200;
   }
@@ -296,15 +296,7 @@ text-align: right;
     margin-top: 45px;
   }
   }
-  .nav-options.active {
-    background: white;
-    left: 0;
-    opacity: 1;
-    transition: all 0.5s ease;
-    z-index: 1;
-    align-content: center;
-    padding-left: 0px;
-  }
+
 
   .menu-icon {
     width: 45px;
@@ -337,6 +329,7 @@ text-align: right;
     display: block;
   }
 }
+
   .explorer {
     display: grid;
     overflow-y: hidden;
@@ -409,7 +402,7 @@ text-align: right;
     margin-right: 16px; 
     box-shadow: 0px 0px 1px 0px #0000000A;
     box-shadow: 0px 2px 6px 0px #0000000A;
-    box-shadow: 0px 1px 20px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
     flex: 0.60;
     h3 {
       //styleName: Regular / Text / 20px / Bold;
@@ -422,6 +415,19 @@ text-align: right;
       text-align: left;
 
     }
+  }
+  .Dropdown-menu {
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
+    border-radius: 10px;
+  }
+  .Dropdown-option {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .Dropdown-option.is-selected {
+    background-color: rgba(85, 70, 254, 0.2);
   }
   .table-header {
     display: flex;
@@ -442,8 +448,12 @@ text-align: right;
       color: ${({ theme }: any) => theme.text};
     }
   }
+  .table-item:hover {
+    background-color: #eeedff;
+    border-left: 3px solid #5546FF;
+  }
   .table-item {
-    padding: 20px 0;
+    padding: 20px 10px;
     border-top: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};    display: flex;
@@ -498,10 +508,9 @@ text-align: right;
     padding: 24px;
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
     box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-    box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     overflow-y: scroll;
     border: 1px solid ${({ theme }: any) => theme.border};
-    margin-bottom: 16px;
   }
   .load-more {
     border-top: 1px solid ${({ theme }: any) => theme.border};
@@ -513,7 +522,7 @@ text-align: right;
   .ab-table {
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     height: 100vh;
     padding: 24px;
     overflow-y: scroll;
@@ -528,7 +537,7 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     flex: 0.4;
     box-shadow: 0px 0px 1px 0px #0000000A;
     box-shadow: 0px 2px 6px 0px #0000000A;
-    box-shadow: 0px 1px 20px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
   }
   .address-blocks {
     display: flex;
@@ -541,7 +550,7 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
       margin-bottom: 16px;
       box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 7x hsla(0, 0%, 0%, 0.04);
       .address-card-header  {
         margin-bottom: 16px;
         p {
@@ -593,10 +602,13 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
   }
   .option {
     a {
-      color: white ;
+      color: ${({ theme }: any) => theme.headerColor} !important;
       text-decoration: none;
       display: flex;
       align-items: center;
+   }
+   p {
+    color: ${({ theme }: any) => theme.headerColor} !important;
    }
   }
   a {
@@ -696,7 +708,7 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     box-sizing: border-box;
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     border-radius: 4px;
     padding: 12px 16px;
     margin: 40px 0 16px 0;
@@ -862,7 +874,7 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     height: 100vh;
     img {
       width: 300px;
-      /* height: 200px; */ */
+      /* height: 200px; */
       object-fit: contain;
       margin-bottom: 25px;
     }
@@ -968,7 +980,7 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     position: relative;
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 7x 10px 20px 0px hsla(0, 0%, 0%, 0.04);
 
 
     path {
@@ -1005,7 +1017,7 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
   .containerOne {
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     width: 100%;
     background: ${({ theme }: any) => theme.background};
     border-radius: var(--main-radius);
@@ -1050,7 +1062,7 @@ border: ${({ theme }: any) =>
   theme.border};
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 7x 10px 20px 0px hsla(0, 0%, 0%, 0.04);
 
     .title {
       font-size: 14px;
@@ -1073,7 +1085,7 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
   theme.border};
       box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 7x 10px 20px 0px hsla(0, 0%, 0%, 0.04);
 
     .title {
       font-size: 14px;
@@ -1126,7 +1138,7 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
   position: relative;
   box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
-box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
   height: auto;
     .title {
       font-size: 14px;
@@ -1155,6 +1167,9 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
     height: 110px;
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
     border-radius: 4px;
     display: flex;
     background: ${({ theme }: any) => theme.background} !important;
@@ -1549,6 +1564,16 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     .miningData {
       padding: 16px !important;
     }
+    #content1 {
+      flex-direction: column;
+      .containerOne {
+      width: 100% !important;
+      margin-bottom: 16px;
+    }
+    #content2 {
+      width: 100% !important;
+    }
+    }
     .explorer {
       .screen-title {
         font-size: 12px;
@@ -1627,6 +1652,9 @@ box-shadow: 0px 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     -webkit-align-items: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A; 
     align-items: flex-start;
     height: auto;
   }

@@ -20,6 +20,7 @@ import { Explorer } from "./screens/Explorer";
 import { ExplorerAddressDetails } from "./screens/ExplorerAddressDetails";
 import { STXTransferDetails } from "./screens/STXTransferDetails";
 import { Blockdetails } from "./screens/Blockdetails";
+import { Protocol } from "./screens/Protocol";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -55,6 +56,9 @@ const App: React.FC = () => {
                 theme={theme}
                 themeToggler={themeToggler}
               />
+            </Route>
+            <Route exact path="/explorer/protocol">
+              <Protocol />
             </Route>
             <Route exact path="/explorer/address/:address">
               <ExplorerAddressDetails

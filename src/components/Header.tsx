@@ -63,13 +63,15 @@ export const Header: React.FC<{
             <p>Mining</p>
           </li>
           <li className="option" onClick={closeMobileMenu}>
-            <a
-              target="_blank"
-              href="https://explorer.stacks.co/?chain=mainnet"
-              rel="noopener noreferrer"
+            <p
+              onClick={() => {
+                setActive(1);
+                closeMobileMenu();
+                push("/protocol");
+              }}
             >
               Protocols (Coming soon)
-            </a>
+            </p>
           </li>
           <li className="option" onClick={closeMobileMenu}>
             <a
