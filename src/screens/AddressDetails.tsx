@@ -58,7 +58,6 @@ export const AddressDetails: React.FC<Props> = ({
           block.block_number.toString() ===
           "#" + currentBlock.blockNumber.toString()
       );
-      console.log(currentBlock, block);
       setTimeElapsed(block?.mined_at + " ");
     }
   }, [currentBlock, blocks]);

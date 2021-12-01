@@ -1,13 +1,20 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 /* eslint-disable no-useless-concat */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useTransaction } from "../hooks/useTransaction";
-import { toRelativeTime, truncateMiddle } from "../utils/utils";
-import BlockLight from "../assets/explorer/microblock-light.svg";
-import BlockDark from "../assets/explorer/microblock-dark.svg";
-
+import {
+  addressArea,
+  getRelativeTimestamp,
+  getTxTitle,
+  getTxTypeName,
+  truncateMiddle,
+} from "../utils/utils";
+import StacksTransferLight from "../assets/explorer/stacks-transfer-light.svg";
+import FunctionCallLight from "../assets/explorer/function-call-light.svg";
+import StacksTransferDark from "../assets/explorer/stacks-transfer-dark.svg";
+import FunctionCallDark from "../assets/explorer/function-call-dark.svg";
 interface Props {
   theme: any;
   themeToggler: any;
@@ -21,7 +28,8 @@ export const Blockdetails: React.FC<Props> = ({
 }) => {
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
-  const { block, getBlock } = useTransaction();
+  const { block, getBlock, blockTransaction, getBlockTransactions } =
+    useTransaction();
 
   useEffect(() => {
     const { innerWidth: width } = window;
@@ -31,17 +39,85 @@ export const Blockdetails: React.FC<Props> = ({
 
   useEffect(() => {
     if (params?.block) {
-      console.log(params);
       getBlock(params?.block);
     }
   }, [params]);
-  console.log(block);
+
+  useEffect(() => {
+    if (block) {
+      getBlockTransactions(block.hash);
+    }
+  }, [block]);
+
   useEffect(() => {
     if (failure) {
       push("/upgrading");
     }
   }, [failure]);
 
+  const LoadRecentTransactions = useCallback(() => {
+    const transactions = blockTransaction.map((transaction: any) => {
+      const isPending = transaction.tx_status === "pending";
+      const isConfirmed = transaction.tx_status === "success";
+      const isAnchored = !(transaction as any).is_unanchored;
+      const didFail = !isPending && !isConfirmed;
+      return (
+        <>
+          <div
+            onClick={() => push("/explorer/txid/" + transaction.tx_id)}
+            key={transaction.block_hash}
+            className="table-item"
+          >
+            <div className="left-content">
+              {transaction.tx_type === "token_transfer" ? (
+                <img
+                  className="transaction-image"
+                  alt="transaction"
+                  src={
+                    theme === "light" ? StacksTransferLight : StacksTransferDark
+                  }
+                />
+              ) : (
+                <img
+                  className="transaction-image"
+                  alt="transaction"
+                  src={theme === "light" ? FunctionCallLight : FunctionCallDark}
+                />
+              )}
+              <div>
+                <p className="title">{getTxTitle(transaction)}</p>
+                <p className="subtitle">
+                  {getTxTypeName(transaction.tx_type)} •{" "}
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() =>
+                      push("/explorer/address/" + transaction.sender_address)
+                    }
+                  >
+                    {addressArea(transaction)}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div
+              onClick={() => push("/explorer/txId/" + transaction.tx_id)}
+              className="right-content"
+            >
+              <p className="title">{getRelativeTimestamp(transaction)}</p>
+              <p className="subtitle">
+                {isPending && "Pending"}
+                {isConfirmed && !isAnchored && "In microblock"}
+                {isConfirmed && isAnchored && "In anchor block"}
+                {didFail && "Failed"} • {truncateMiddle(transaction.tx_id, 4)}
+              </p>
+            </div>
+          </div>
+        </>
+      );
+    });
+    return transactions;
+  }, [blockTransaction, theme]);
+  console.log(block);
   return (
     <div className="block-details">
       {block && (
@@ -99,26 +175,7 @@ export const Blockdetails: React.FC<Props> = ({
                 <div className="table-header">
                   <p>Transaction in block ({block.txs.length})</p>
                 </div>
-                {block.txs.map((tx: any) => (
-                  <div className="table-item">
-                    <div className="left-content">
-                      <img
-                        className="transaction-image"
-                        alt="transaction"
-                        src={theme === "light" ? BlockLight : BlockDark}
-                      />
-                      <div>
-                        <p className="title">{truncateMiddle(tx, 10)}</p>
-                      </div>
-                    </div>
-                    <div className="right-content">
-                      <p className="title">
-                        {toRelativeTime(block.burn_block_time * 1000)}
-                      </p>
-                      {/* <p className="subtitle">{truncateMiddle(block, 6)}</p> */}
-                    </div>
-                  </div>
-                ))}
+                {blockTransaction.length > 0 && LoadRecentTransactions()}
               </div>
             </div>
           </div>

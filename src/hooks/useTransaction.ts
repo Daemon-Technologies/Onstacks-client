@@ -9,6 +9,10 @@ export const useTransaction = () => {
   const [hasError] = useState(false);
   const [transaction, setTransaction] = useState<Transaction>();
   const [block, setBlock] = useState<any>();
+
+  const [microBlock, setMicroBlock] = useState<any>();
+  const [blockTransaction, setBlockTransaction] = useState<any>([]);
+
   const getBlock = (block: string) => {
     return fetch(
       "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +
@@ -16,6 +20,22 @@ export const useTransaction = () => {
     )
       .then((response) => response.json())
       .then((data) => setBlock(data));
+  };
+
+  const getMicroblocks = (hash: string) => {
+    return fetch(
+      "https://stacks-node-api.mainnet.stacks.co/extended/v1/microblock/" + hash
+    )
+      .then((response) => response.json())
+      .then((data) => setMicroBlock(data));
+  };
+
+  const getBlockTransactions = (block: string) => {
+    return fetch(
+      "https://stacks-node-api.mainnet.stacks.co/extended/v1/tx/block/" + block
+    )
+      .then((response) => response.json())
+      .then((data) => setBlockTransaction(data.results));
   };
 
   const getTransaction = (id: string) => {
@@ -30,7 +50,11 @@ export const useTransaction = () => {
     hasError,
     isLoading,
     transaction,
+    getBlockTransactions,
     block,
+    blockTransaction,
+    getMicroblocks,
+    microBlock,
     getBlock,
     getTransaction,
   };

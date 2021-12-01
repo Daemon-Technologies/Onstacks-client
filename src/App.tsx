@@ -21,6 +21,7 @@ import { ExplorerAddressDetails } from "./screens/ExplorerAddressDetails";
 import { STXTransferDetails } from "./screens/STXTransferDetails";
 import { Blockdetails } from "./screens/Blockdetails";
 import { Protocol } from "./screens/Protocol";
+import { MicroblockDetails } from "./screens/MicroblockDetails";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -76,6 +77,14 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/explorer/block/:block">
               <Blockdetails
+                failure={failure}
+                theme={theme}
+                themeToggler={themeToggler}
+              />
+            </Route>
+
+            <Route exact path="/explorer/microblock/:microblock">
+              <MicroblockDetails
                 failure={failure}
                 theme={theme}
                 themeToggler={themeToggler}

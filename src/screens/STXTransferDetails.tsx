@@ -51,7 +51,7 @@ export const STXTransferDetails: React.FC<Props> = ({
       setTxId(params.txId);
     }
   }, [params]);
-
+  console.log(transaction);
   useEffect(() => {
     if (txId) {
       getTransaction(txId);

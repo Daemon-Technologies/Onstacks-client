@@ -47,7 +47,10 @@ export const ExplorerHeader: React.FC<{
         },
       });
     }
-    setSearchData(data);
+    console.log(data);
+    if (!data.message && data.found) {
+      setSearchData(data);
+    }
   };
 
   const onClick = () => {
@@ -107,18 +110,24 @@ export const ExplorerHeader: React.FC<{
         placeholder="Search for TxHash / Address / Block"
         name="s"
       />
-      {isLoading && <div>Loading..</div>}
-      {searchData && (
-        <div>
-          {searchData.found && (
+      {(isLoading || searchData) && (
+        <div className="search-item">
+          <div className="results-header">
+            <p>Search results</p>
+          </div>
+          {isLoading && <div>Loading..</div>}
+          {searchData && (
             <div>
-              <p onClick={onClick}>{searchData.result.entity_id}</p>
-              <p>{searchData.result.entity_type}</p>
+              {searchData.found && (
+                <div className="item">
+                  <p onClick={onClick}>{searchData.result.entity_id}</p>
+                  <p>{searchData.result.entity_type}</p>
+                </div>
+              )}
             </div>
           )}
         </div>
       )}
-
       <div className={"info-card"}>
         <div className="inner-info-card">
           <p className="title">Total Transactions (24hr)</p>

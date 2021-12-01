@@ -2,11 +2,7 @@
 import { useEffect, useState } from "react";
 import Transaction from "../utils/explorer-types";
 import { explorerInstance } from "../axios/axios";
-import {
-  explorerGetAnchoredBlockList,
-  explorerGetOverviewData,
-  explorerGetRecentTxsList,
-} from "../axios/requests";
+import { explorerGetOverviewData } from "../axios/requests";
 
 export interface ExplorerOverview {
   total_txs_24hrs: number;
@@ -54,26 +50,6 @@ export const useExplorer = () => {
   const getRecentTransactions = (offs?: number) => {
     setIsLoading(true);
     try {
-      explorerInstance
-        .get(explorerGetRecentTxsList(10, offs || recentTransactions.length))
-        .then((data: any) => {
-          if (offs === 0) {
-            setRecentTransactions(data.results);
-          } else {
-            const transactions = recentTransactions.concat(data.results);
-            setRecentTransactions(transactions);
-          }
-          setIsLoading(false);
-        });
-    } catch (error) {
-      setIsLoading(false);
-      setHasError(true);
-    }
-  };
-
-  const getRecentPendingTransactions = (offs?: number) => {
-    setIsLoading(true);
-    try {
       fetch(
         `https://stacks-node-api.mainnet.stacks.co/extended/v1/tx?limit=${10}&offset=${
           offs || recentTransactions.length
@@ -95,13 +71,45 @@ export const useExplorer = () => {
     }
   };
 
+  const getRecentPendingTransactions = (offs?: number) => {
+    setIsLoading(true);
+    try {
+      fetch(
+        `https://stacks-node-api.mainnet.stacks.co/extended/v1/tx/mempool?unanchored=true&limit=${10}&offset=${
+          offs || recentTransactions.length
+        }`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (offs === 0) {
+            setRecentTransactions(data.results);
+          } else {
+            const transactions = recentTransactions.concat(data.results);
+            setRecentTransactions(transactions);
+          }
+          setIsLoading(false);
+        });
+    } catch (error) {
+      setIsLoading(false);
+      setHasError(true);
+    }
+  };
+
   const getAnchoredBlockList = async () => {
     setIsAnchoredBlockLoading(true);
-    explorerInstance
-      .get(explorerGetAnchoredBlockList(10, recentTransactions.length))
-      .then(async (data: any) => {
-        const transactions = recentBlocks.concat(data.results);
-        setRecentBlocks(transactions);
+    fetch(
+      `https://stacks-node-api.mainnet.stacks.co/extended/v1/block?&limit=${10}&offset=${
+        recentBlocks.length
+      }`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (recentBlocks.length === 0) {
+          setRecentBlocks(data.results);
+        } else {
+          const transactions = recentBlocks.concat(data.results);
+          setRecentBlocks(transactions);
+        }
         setIsAnchoredBlockLoading(false);
       });
   };
