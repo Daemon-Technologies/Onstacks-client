@@ -38,8 +38,14 @@ export const ExplorerAddressDetailsHeader: React.FC<{
       </div>
       <div className={"info-card"}>
         <div className="inner-info-card">
+          <p className="title">Total mining rewards</p>
+          <p className="sub-title">
+            {numberWithCommas(headerDetails?.total_balance)} STX
+          </p>
+        </div>
+        <div className="inner-info-card">
           <p className="title">Total received</p>
-          <p className="sub-title">{headerDetails?.total_received} Blocks</p>
+          <p className="sub-title">{headerDetails?.total_received} STX</p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total Spent</p>

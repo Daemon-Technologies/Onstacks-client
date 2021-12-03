@@ -27,7 +27,7 @@ export const Header: React.FC<{
   useEffect(() => {
     if (location.pathname === "/mining") {
       setActive(1);
-    } else {
+    } else if (location.pathname === "/explorer") {
       setActive(0);
     }
   }, [location.pathname]);

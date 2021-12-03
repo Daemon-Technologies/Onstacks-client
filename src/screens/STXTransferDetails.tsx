@@ -284,21 +284,24 @@ export const STXTransferDetails: React.FC<Props> = ({
                     />
                     <p>Post conditions</p>
                   </div>
-                  {transaction.post_conditions.map((condition) => {
-                    return (
-                      <div>
-                        <p className="subtitle">
-                          {truncateMiddle(getAddressValue(condition), 8)}
-                        </p>
-                        <p className="title">
-                          {capitalize(
-                            getPrettyCode(condition.condition_code, true)
-                          )}{" "}
-                          {getAmount(condition)} {getConditionTicker(condition)}
-                        </p>
-                      </div>
-                    );
-                  })}
+                  <div className="transaction-row">
+                    {transaction.post_conditions.map((condition) => {
+                      return (
+                        <div>
+                          <p style={{ textAlign: "left" }} className="subtitle">
+                            {truncateMiddle(getAddressValue(condition), 8)}
+                          </p>
+                          <p className="title">
+                            {capitalize(
+                              getPrettyCode(condition.condition_code, true)
+                            )}{" "}
+                            {getAmount(condition)}{" "}
+                            {getConditionTicker(condition)}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
@@ -561,21 +564,24 @@ export const STXTransferDetails: React.FC<Props> = ({
                     />
                     <p>Post conditions</p>
                   </div>
-                  {transaction.post_conditions.map((condition) => {
-                    return (
-                      <div>
-                        <p className="subtitle">
-                          {truncateMiddle(getAddressValue(condition), 8)}
-                        </p>
-                        <p className="title">
-                          {capitalize(
-                            getPrettyCode(condition.condition_code, true)
-                          )}{" "}
-                          {getAmount(condition)} {getConditionTicker(condition)}
-                        </p>
-                      </div>
-                    );
-                  })}
+                  <div className="transaction-row">
+                    {transaction.post_conditions.map((condition) => {
+                      return (
+                        <div>
+                          <p style={{ textAlign: "left" }} className="subtitle">
+                            {truncateMiddle(getAddressValue(condition), 8)}
+                          </p>
+                          <p className="title">
+                            {capitalize(
+                              getPrettyCode(condition.condition_code, true)
+                            )}{" "}
+                            {getAmount(condition)}{" "}
+                            {getConditionTicker(condition)}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>

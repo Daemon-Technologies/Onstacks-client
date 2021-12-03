@@ -68,7 +68,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 0px;
+    padding: 16px;
     border-top: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};    width: 100%;
@@ -380,6 +380,7 @@ text-align: right;
     width: 100%;
     border-radius: 10px;
     height: 40px;
+    color: ${({ theme }: any) => theme.text} !important;
     background-color:${({ theme }: any) => theme.background}; 
     border: 2px solid ${({ theme }: any) => theme.border};
     box-sizing: border-box;
@@ -421,19 +422,28 @@ text-align: right;
     box-shadow: 0px 2px 6px 0px #0000000A;
     box-shadow: 0px 1px 7px 0px #0000000A;
     border-radius: 10px;
+    background-color:${({ theme }: any) => theme.background}; 
   }
   .Dropdown-option {
     font-size: 12px;
     font-weight: 600;
+    color: ${({ theme }: any) => theme.greyText};
+  }
+  .dropdown-cont {
+    color: ${({ theme }: any) => theme.greyText};
+
   }
   .Dropdown-option.is-selected {
-    background-color: rgba(85, 70, 254, 0.2);
+    background-color: ${({ theme }: any) => theme.primaryHoverColor}; 
+    color: ${({ theme }: any) => theme.text};
   }
   .table-header {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 10px;
+    margin-left: 24px;
+    margin-top: 24px;
     img {
       margin-right: 10px;
     }
@@ -448,12 +458,34 @@ text-align: right;
       color: ${({ theme }: any) => theme.text};
     }
   }
+  .transaction-title-p {
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0px;
+    margin-right: 3px;
+    color: ${({ theme }: any) => theme.text};
+    text-align: left;
+  }
+  .transaction-title-span {
+    font-family: Manrope;
+    font-size: 12px;
+    color: ${({ theme }: any) => theme.greyText};
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
   .table-item:hover {
-    background-color: #eeedff;
+    background-color:  ${({ theme }: any) => theme.primaryHoverColor};
     border-left: 3px solid #5546FF;
   }
   .table-item {
-    padding: 20px 10px;
+    padding: 20px;
     border-top: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};    display: flex;
@@ -505,11 +537,12 @@ text-align: right;
   .rt-table {
     background-color: ${({ theme }: any) => theme.background};
     height: 100vh;
-    padding: 24px;
+    margin-top: 16px;
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
     box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
     box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     overflow-y: scroll;
+    padding-bottom: 16px;
     border: 1px solid ${({ theme }: any) => theme.border};
   }
   .load-more {
@@ -520,12 +553,13 @@ text-align: right;
     cursor: "pointer";
   }
   .ab-table {
+    margin-top: 16px;
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     height: 100vh;
-    padding: 24px;
     overflow-y: scroll;
+    padding-bottom: 16px;
     border: 1px solid ${({ theme }: any) => theme.border};
     margin-bottom: 16px;
     background-color: ${({ theme }: any) => theme.background};
@@ -553,6 +587,13 @@ box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
 box-shadow: 0px 10px 20px 7x hsla(0, 0%, 0%, 0.04);
       .address-card-header  {
         margin-bottom: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        img {
+          cursor: pointer;
+        }
         p {
           //styleName: Regular / Text / 14px / Semibold;
           font-family: Manrope;
@@ -601,14 +642,12 @@ box-shadow: 0px 10px 20px 7x hsla(0, 0%, 0%, 0.04);
     }
   }
   .option {
+    color: ${({ theme }: any) => theme.headerColor} !important;
     a {
       color: ${({ theme }: any) => theme.headerColor} !important;
       text-decoration: none;
       display: flex;
       align-items: center;
-   }
-   p {
-    color: ${({ theme }: any) => theme.headerColor} !important;
    }
   }
   a {
@@ -879,6 +918,10 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
       margin-bottom: 25px;
     }
   }
+  input:-internal-autofill-selected {
+    background-color: ${({ theme }: any) => theme.background} !important;
+    color: red !important;
+  }
   .search-item {
     background-color: ${({ theme }: any) => theme.background} !important;
     margin-bottom: 25px;
@@ -892,7 +935,8 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
       font-size: 14px;
       border-bottom: 1px solid  ${({ theme }: any) => theme.border} !important;;
       color:  ${({ theme }: any) => theme.greyText} !important;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
     }
     .item {
       display: flex;
@@ -902,6 +946,12 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
       justify-content: space-between;
       align-items: center;
     }
+  }
+  .option:hover {
+    color: ${({ theme }: any) => theme.linkColor} !important;;
+  }
+  .option.active {
+    color: ${({ theme }: any) => theme.linkColor} !important;;
   }
   .button {
       background: ${({ theme }: any) => theme.primaryColor} !important;

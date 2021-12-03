@@ -9,6 +9,7 @@ export const lightTheme = {
   border: "#EBEAED",
   background: "#FFFFFF",
   hoverColor: "rgba(255, 160, 67, 0.1)",
+  primaryHoverColor: "#eeedff",
 };
 
 export const darkTheme = {
@@ -22,4 +23,5 @@ export const darkTheme = {
   border: "#2b2e38",
   background: "#21262D",
   hoverColor: "rgba(255, 160, 67, 0.1)",
+  primaryHoverColor: "#1c1f38",
 };

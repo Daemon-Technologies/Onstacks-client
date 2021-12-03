@@ -57,8 +57,8 @@ export const useExplorer = () => {
       )
         .then((response) => response.json())
         .then((data) => {
-          setRecentTransactions(data.results);
           if (offs === 0) {
+            setRecentTransactions(data.results);
           } else {
             const transactions = recentTransactions.concat(data.results);
             setRecentTransactions(transactions);

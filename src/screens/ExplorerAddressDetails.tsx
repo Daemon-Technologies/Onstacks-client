@@ -3,20 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { ExplorerAddressDetailsHeader } from "../components/ExplorerAddressDetailsHeader";
-import TransactionImage from "../assets/explorer/transaction.svg";
 import Stacks from "../assets/explorer/stacks-block.png";
 import Mining from "../assets/explorer/mining-block.svg";
+import MiningInfo from "../assets/explorer/mining-info.svg";
 import OtherAssets from "../assets/explorer/other-assets.svg";
 import Burn from "../assets/explorer/burn-block.svg";
-import {
-  getRelativeTimestamp,
-  getTxTitle,
-  getTxTypeName,
-  truncateMiddle,
-} from "../utils/utils";
-import Transaction from "../utils/explorer-types";
 import { AddressTokens } from "../components/AddressTokens";
 import { useExplorerAddressDetails } from "../hooks/useExplorerAddressDetail";
+import { LoadTransactions } from "../components/LoadTransactions";
 
 interface Props {
   theme: any;
@@ -42,61 +36,6 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
     isLoading,
     tokens,
   } = useExplorerAddressDetails();
-
-  const addressArea = (tx: Transaction) => {
-    if (tx.tx_type === "token_transfer") {
-      return `${truncateMiddle(tx.sender_address)} to
-          ${truncateMiddle(tx.token_transfer.recipient_address)}`;
-    }
-    if (tx.tx_type === "contract_call") {
-      return `By ${truncateMiddle(tx.sender_address)}`;
-    }
-    if (tx.tx_type === "smart_contract") {
-      return `By ${truncateMiddle(tx.sender_address)}`;
-    }
-    if (tx.tx_type === "coinbase") {
-      return `Mined by ${truncateMiddle(tx.sender_address)}`;
-    }
-    return null;
-  };
-
-  const LoadRecentTransactions = () => {
-    const transactions = recentTransactions.map((transaction) => {
-      const isPending = transaction.tx_status === "pending";
-      const isConfirmed = transaction.tx_status === "success";
-      const isAnchored = !(transaction as any).is_unanchored;
-      const didFail = !isPending && !isConfirmed;
-      return (
-        <div className="table-item">
-          <div className="left-content">
-            <img
-              className="transaction-image"
-              alt="transaction"
-              src={TransactionImage}
-            />
-            <div>
-              <p className="title">{getTxTitle(transaction)}</p>
-              <p className="subtitle">
-                {getTxTypeName(transaction.tx_type)} •{" "}
-                {addressArea(transaction)}
-              </p>
-            </div>
-          </div>
-          <div className="right-content">
-            <p className="title">{getRelativeTimestamp(transaction)}</p>
-            <p className="subtitle">
-              {" "}
-              {isPending && "Pending"}
-              {isConfirmed && !isAnchored && "In microblock"}
-              {isConfirmed && isAnchored && "In anchor block"}
-              {didFail && "Failed"} • {truncateMiddle(transaction.tx_id, 4)}
-            </p>
-          </div>
-        </div>
-      );
-    });
-    return transactions;
-  };
 
   useEffect(() => {
     const { innerWidth: width } = window;
@@ -147,11 +86,14 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
       {tabIndex === 0 && (
         <div id="transactionContainer" className="transaction-container">
           <div className="recent-transactions">
-            <div className="rt-table">
+            <div style={{ marginTop: 0 }} className="rt-table">
               <div className="table-header">
                 <p>Transactions</p>
               </div>
-              {recentTransactions.length > 0 && LoadRecentTransactions()}
+              <LoadTransactions
+                recentTransactions={recentTransactions}
+                theme={theme}
+              />
               {recentTransactions.length > 0 && (
                 <div
                   style={{
@@ -217,6 +159,11 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
               <div className="address-card">
                 <div className="address-card-header">
                   <p>Mining</p>
+                  <img
+                    onClick={() => push("/miner/address/" + address)}
+                    alt="stacks"
+                    src={MiningInfo}
+                  />
                 </div>
                 <div className="address-card-header"></div>
                 <div className="address-card-item">

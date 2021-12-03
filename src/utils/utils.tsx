@@ -2,6 +2,7 @@ import Transaction from "./explorer-types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import pluralize from "pluralize";
+import React from "react";
 
 dayjs.extend(relativeTime);
 
@@ -196,9 +197,14 @@ export const getTxTitle = (transaction: Transaction) => {
     case "smart_contract":
       return getContractName(transaction?.smart_contract?.contract_id);
     case "contract_call":
-      return `${getFunctionName(transaction)} ← ${getContractName(
-        transaction.contract_call.contract_id
-      )}`;
+      return (
+        <>
+          <p className="transaction-title-p">{getFunctionName(transaction)}</p>{" "}
+          <span className="transaction-title-span">
+            ←{getContractName(transaction.contract_call.contract_id)}
+          </span>
+        </>
+      );
     case "token_transfer":
       return `${microToStacks(transaction.token_transfer.amount)} STX`;
     case "coinbase":
