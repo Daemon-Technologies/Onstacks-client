@@ -56,6 +56,37 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }: any) => theme.text};
   }
 
+  .image-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .card-img {
+    width: 200px;
+    height: 300px;
+    margin-right: 5px;
+    margin-bottom: 16px;
+    background-color: ${({ theme }: any) => theme.background};
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
+    p {
+      margin: 16px;
+      color: ${({ theme }: any) => theme.text};
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+  .nft-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-bottom: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border}; 
+  }
+
   #labelOverlay p.total-size {
     line-height: 0.5;
     font-size: 12px;
@@ -94,6 +125,10 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
+  .YAKVp {
+    width: 68%;
+    position: absolute;
+  }
   .function-call {
     border-top: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
@@ -1500,8 +1535,9 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
   }
   }
   @media only screen and (max-height: 828px) { 
-   
+    
     @media only screen and (max-height: 700px) { 
+      
       #nav {
         padding: 0 14px;
         height: auto;
@@ -1713,6 +1749,12 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
   :root {
     overflow-y: auto;
   }
+  .YAKVp {
+    max-width: 375px;
+    padding: 0px !important;
+    width: 375px;
+    }
+
   .explorer {
     padding: 40px 16px 16px 16px;
   }

@@ -82,9 +82,9 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
 
   useEffect(() => {
     if (transactionState === transactionsOptions[0]) {
-      getRecentTransactions(0);
+      getRecentTransactions(1);
     } else {
-      getRecentPendingTransactions(0);
+      getRecentPendingTransactions(1);
     }
   }, [transactionState]);
 

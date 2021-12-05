@@ -14,6 +14,7 @@ import {
   microToStacks,
   truncateMiddle,
 } from "../utils/utils";
+import { CopyBlock, dracula } from "react-code-blocks";
 import Arrow from "../assets/explorer/arrow.svg";
 import Stacks from "../assets/side-menu/stacks.svg";
 import Bottom from "../assets/explorer/Bottom.svg";
@@ -38,7 +39,14 @@ export const STXTransferDetails: React.FC<Props> = ({
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
   const [txId, setTxId] = useState("");
-  const { getTransaction, transaction } = useTransaction();
+  const {
+    getTransaction,
+    transaction,
+    getContractDetails,
+    contractDetails,
+    contractCode,
+    getContractCode,
+  } = useTransaction();
   useEffect(() => {
     const { innerWidth: width } = window;
     setToggle(width >= 1025);
@@ -51,7 +59,6 @@ export const STXTransferDetails: React.FC<Props> = ({
       setTxId(params.txId);
     }
   }, [params]);
-  console.log(transaction);
   useEffect(() => {
     if (txId) {
       getTransaction(txId);
@@ -60,6 +67,16 @@ export const STXTransferDetails: React.FC<Props> = ({
       // getBlocksForAddress(address);
     }
   }, [txId]);
+
+  useEffect(() => {
+    if (
+      transaction?.tx_type === "contract_call" ||
+      transaction?.tx_type === "smart_contract"
+    ) {
+      getContractDetails(transaction);
+      getContractCode(transaction);
+    }
+  }, [transaction]);
 
   useEffect(() => {
     if (failure) {
@@ -131,10 +148,10 @@ export const STXTransferDetails: React.FC<Props> = ({
                         src={Bitcoin}
                       />
                       #
-                      {
-                        (transaction as any).block_anchor_info
-                          .bitcoin_block_height
-                      }
+                      {(transaction as any).block_anchor_info
+                        ? (transaction as any).block_anchor_info
+                            .bitcoin_block_height
+                        : "Pending.."}
                     </p>
                   </div>
                 </div>
@@ -220,7 +237,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <p className="subtitle">{transaction?.block_hash}</p>
                 </div>
               </div>
-              {transaction.events.length > 0 && (
+              {transaction.events && transaction.events.length > 0 && (
                 <div style={{ height: "auto" }} className="rt-table">
                   <div className="table-header">
                     <p>Events</p>
@@ -228,6 +245,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <Events events={transaction.events} />
                 </div>
               )}
+
               <div style={{ height: "auto" }} className="rt-table">
                 <div className="table-header">
                   <p>Function Call</p>
@@ -322,57 +340,82 @@ export const STXTransferDetails: React.FC<Props> = ({
                     {truncateMiddle(transaction.block_hash, 10)}
                   </p>
                 </div>
-                <div className="transaction-row">
-                  <p className="title">Function</p>
-                  <p className="subtitle">{0}</p>
-                </div>
-                <div className="transaction-row">
-                  <p className="title">Variables</p>
-                  <p className="subtitle">0</p>
-                </div>
-                <div className="transaction-row">
-                  <p className="title">Map</p>
-                  <p className="subtitle">0</p>
-                </div>
-                <div className="transaction-row">
-                  <p className="title">Token</p>
-                  <p className="subtitle">0</p>
-                </div>
+                {contractDetails && (
+                  <>
+                    <div className="transaction-row">
+                      <p className="title">Function</p>
+                      <p className="subtitle">
+                        {contractDetails.functions.length}
+                      </p>
+                    </div>
+                    <div className="transaction-row">
+                      <p className="title">Variables</p>
+                      <p className="subtitle">
+                        {contractDetails.variables.length}
+                      </p>
+                    </div>
+                    <div className="transaction-row">
+                      <p className="title">Map</p>
+                      <p className="subtitle">{contractDetails.maps.length}</p>
+                    </div>
+                    <div className="transaction-row">
+                      <p className="title">Token</p>
+                      <p className="subtitle">
+                        {contractDetails.fungible_tokens.length}
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
-              <div style={{ height: "auto" }} className="ab-table">
-                <div className="table-header">
-                  <p className="title">Bitcoin anchor</p>
+              {transaction.tx_status === "success" && (
+                <div style={{ height: "auto" }} className="ab-table">
+                  <div className="table-header">
+                    <p className="title">Bitcoin anchor</p>
+                  </div>
+                  <div className="transaction-row">
+                    <p className="title">Bitcoin Block Height</p>
+                    <p className="subtitle">
+                      {(transaction as any).block_anchor_info
+                        ? (transaction as any).block_anchor_info
+                            .bitcoin_block_height
+                        : "Pending.."}
+                    </p>
+                  </div>
+                  <div className="transaction-row">
+                    <p className="title">Bitcoin Block Hash</p>
+                    <p className="subtitle">
+                      {truncateMiddle(
+                        (transaction as any).block_anchor_info
+                          .bitcoin_block_hash,
+                        10
+                      )}
+                    </p>
+                  </div>
+                  <div className="transaction-row">
+                    <p className="title">Anchor transaction id</p>
+                    <p className="subtitle">
+                      {truncateMiddle(
+                        (transaction as any).block_anchor_info.bitcoin_tx_hash,
+                        10
+                      )}
+                    </p>
+                  </div>
                 </div>
-                <div className="transaction-row">
-                  <p className="title">Bitcoin Block Height</p>
-                  <p className="subtitle">
-                    {
-                      (transaction as any).block_anchor_info
-                        .bitcoin_block_height
-                    }
-                  </p>
-                </div>
-                <div className="transaction-row">
-                  <p className="title">Bitcoin Block Hash</p>
-                  <p className="subtitle">
-                    {truncateMiddle(
-                      (transaction as any).block_anchor_info.bitcoin_block_hash,
-                      10
-                    )}
-                  </p>
-                </div>
-                <div className="transaction-row">
-                  <p className="title">Anchor transaction id</p>
-                  <p className="subtitle">
-                    {truncateMiddle(
-                      (transaction as any).block_anchor_info.bitcoin_tx_hash,
-                      10
-                    )}
-                  </p>
-                </div>
-              </div>
+              )}
             </div>
           </div>
+          {contractCode && contractCode.source && dims.width > 1000 && (
+            <div style={{ width: "100%" }}>
+              <CopyBlock
+                language={"clojure"}
+                text={contractCode.source}
+                showLineNumbers={true}
+                theme={dracula}
+                wrapLines={true}
+                codeBlock
+              />
+            </div>
+          )}
         </>
       )}
       {transaction && (transaction as any).token_transfer && (
@@ -424,27 +467,32 @@ export const STXTransferDetails: React.FC<Props> = ({
                     alt="transaction"
                     src={theme === "light" ? BlockLight : BlockDark}
                   />
-                  <div>
-                    <p className="title">
-                      <img
-                        className="transaction-image"
-                        alt="transaction"
-                        src={Stacks}
-                      />
-                      #{transaction.block_height ? transaction.block_height : 0}{" "}
-                      →
-                      <img
-                        className="transaction-image"
-                        alt="transaction"
-                        src={Bitcoin}
-                      />
-                      #
-                      {
-                        (transaction as any).block_anchor_info
-                          .bitcoin_block_height
-                      }
-                    </p>
-                  </div>
+                  {
+                    <div>
+                      <p className="title">
+                        <img
+                          className="transaction-image"
+                          alt="transaction"
+                          src={Stacks}
+                        />
+                        #
+                        {transaction.block_height
+                          ? transaction.block_height
+                          : 0}{" "}
+                        →
+                        <img
+                          className="transaction-image"
+                          alt="transaction"
+                          src={Bitcoin}
+                        />
+                        #
+                        {(transaction as any).block_anchor_info
+                          ? (transaction as any).block_anchor_info
+                              .bitcoin_block_height
+                          : "Pending.."}
+                      </p>
+                    </div>
+                  }
                 </div>
               </div>
               <img
@@ -546,7 +594,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <p className="subtitle">{transaction?.block_hash}</p>
                 </div>
               </div>
-              {transaction.events.length > 0 && (
+              {transaction.events && transaction.events.length > 0 && (
                 <div style={{ height: "auto" }} className="rt-table">
                   <div className="table-header">
                     <p>Events</p>
@@ -585,40 +633,43 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
               )}
             </div>
-            <div className="anchor-block">
-              <div style={{ height: "auto" }} className="ab-table">
-                <div className="table-header">
-                  <p className="title">Bitcoin anchor</p>
-                </div>
-                <div className="transaction-row">
-                  <p className="title">Bitcoin Block Height</p>
-                  <p className="subtitle">
-                    {
-                      (transaction as any).block_anchor_info
-                        .bitcoin_block_height
-                    }
-                  </p>
-                </div>
-                <div className="transaction-row">
-                  <p className="title">Bitcoin Block Hash</p>
-                  <p className="subtitle">
-                    {truncateMiddle(
-                      (transaction as any).block_anchor_info.bitcoin_block_hash,
-                      10
-                    )}
-                  </p>
-                </div>
-                <div className="transaction-row">
-                  <p className="title">Anchor transaction id</p>
-                  <p className="subtitle">
-                    {truncateMiddle(
-                      (transaction as any).block_anchor_info.bitcoin_tx_hash,
-                      10
-                    )}
-                  </p>
+            {transaction.tx_status === "success" && (
+              <div className="anchor-block">
+                <div style={{ height: "auto" }} className="ab-table">
+                  <div className="table-header">
+                    <p className="title">Bitcoin anchor</p>
+                  </div>
+                  <div className="transaction-row">
+                    <p className="title">Bitcoin Block Height</p>
+                    <p className="subtitle">
+                      {(transaction as any).block_anchor_info
+                        ? (transaction as any).block_anchor_info
+                            .bitcoin_block_height
+                        : "Pending.."}
+                    </p>
+                  </div>
+                  <div className="transaction-row">
+                    <p className="title">Bitcoin Block Hash</p>
+                    <p className="subtitle">
+                      {truncateMiddle(
+                        (transaction as any).block_anchor_info
+                          .bitcoin_block_hash,
+                        10
+                      )}
+                    </p>
+                  </div>
+                  <div className="transaction-row">
+                    <p className="title">Anchor transaction id</p>
+                    <p className="subtitle">
+                      {truncateMiddle(
+                        (transaction as any).block_anchor_info.bitcoin_tx_hash,
+                        10
+                      )}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </>
       )}

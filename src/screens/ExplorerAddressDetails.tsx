@@ -11,6 +11,7 @@ import Burn from "../assets/explorer/burn-block.svg";
 import { AddressTokens } from "../components/AddressTokens";
 import { useExplorerAddressDetails } from "../hooks/useExplorerAddressDetail";
 import { LoadTransactions } from "../components/LoadTransactions";
+import Logo from "../assets/side-menu/no-search-results.svg";
 
 interface Props {
   theme: any;
@@ -26,6 +27,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
+  const [count, setCount] = useState(1);
   const {
     recentTransactions,
     setAddress,
@@ -190,16 +192,28 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
         </div>
       )}
       {tabIndex === 1 && (
-        <div id="transactionContainer" className="tokens-container">
-          <p className={"title-table"}>All Tokens</p>
-          <div>
-            <AddressTokens initialPageSize={10} tokens={tokens} />
-          </div>
-        </div>
+        <>
+          {tokens.length > 0 ? (
+            <div id="transactionContainer" className="tokens-container">
+              <p className={"title-table"}>All Tokens</p>
+              <div>
+                <AddressTokens initialPageSize={10} tokens={tokens.sort()} />
+              </div>
+            </div>
+          ) : (
+            <div
+              id="transactionContainer"
+              style={{ width: "100%", paddingLeft: "30%" }}
+            >
+              {" "}
+              <img src={Logo} alt="404" />
+            </div>
+          )}
+        </>
       )}
       {tabIndex === 2 && (
-        <div id="transactionContainer">
-          <div className="collections-header">
+        <div id="transactionContainer" className="image-container">
+          {/* <div className="collections-header">
             <input
               className="search-bar"
               type="text"
@@ -213,6 +227,94 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
               <option value="Cherry">Rarest</option>
             </select>
           </div>
+           */}
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://ipfs.io/ipfs/QmYCnfeseno5cLpC75rmy6LQhsNYQCJabiuwqNUXMaA3Fo/${count}.png`}
+            />
+            <p>Bitcoin monkeys #{count}</p>
+          </div>
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://stacksart.s3.amazonaws.com/frontier/${count}.png`}
+            />
+            <p>Frontier #{count}</p>
+          </div>
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://stacksart.s3.amazonaws.com/stacks-mandala/${count}.png`}
+            />
+            <p>Mandala #{count}</p>
+          </div>
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://ipfs.io/ipfs/QmdCtFNfFu8RnewyUNayiDuAUQAN6jarYE18c3NTKNhSYF/${count}.png`}
+            />
+            <p>Bubo #{count}</p>
+          </div>
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://stacksart.s3.amazonaws.com/funky-donuts/${count}.png`}
+            />
+            <p>Funky Donuts #{count}</p>
+          </div>
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://www.stackspunks.com/assets/punks/punk${count}.png`}
+            />
+            <p>Stacks Punks #{count}</p>
+          </div>
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://ipfs.io/ipfs/QmWJRkeiRVuosfhuGxfrNwY2peUvbAQ7oT36Jh6wpfxChN/${count}.jpg`}
+            />
+            <p>Bitcoin Bulls #{count}</p>
+          </div>
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://stacksart.s3.amazonaws.com/blocks/${count}.png`}
+            />
+            <p>Blocks #{count}</p>
+          </div>
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://ipfs.io/ipfs/QmWmuf4tJsHDsLhPwumtpqUsLUnDJPgKcLRiikQNNcM7qy/${count}.png`}
+            />
+            <p>Stacks Owls #{count}</p>
+          </div>
+          <div className="card-img">
+            <img
+              className="nft-image"
+              alt={count.toString()}
+              src={`https://stacksart.s3.amazonaws.com/stx-jokers/${count}.png`}
+            />
+            <p>Jokers #{count}</p>
+          </div>
+
+          {/* <img className="nft-image" alt={count.toString()} src={`https://ipfs.io/ipfs/QmRWzC2FEB4u1jEkVpc18XwxnVCxks7ZwLuhFHjfn2FeAU/${count}.jpg`} /> */}
+
+          {/* <img className="nft-image" alt={count.toString()} src={`https://stacksart.mypinata.cloud/ipfs/QmSrGnpifLtNuF8rf5txC2XVodALB4RezLALKrKEcEXZKt/${count}.jpg`} /> */}
+
+          <p onClick={() => setCount(count - 1)}>Previous</p>
+          <p onClick={() => setCount(count + 1)}>Next</p>
         </div>
       )}
     </div>

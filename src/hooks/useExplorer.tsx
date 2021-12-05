@@ -52,12 +52,12 @@ export const useExplorer = () => {
     try {
       fetch(
         `https://stacks-node-api.mainnet.stacks.co/extended/v1/tx?limit=${10}&offset=${
-          offs || recentTransactions.length
+          offs === 1 ? 0 : recentTransactions.length
         }`
       )
         .then((response) => response.json())
         .then((data) => {
-          if (offs === 0) {
+          if (offs === 1) {
             setRecentTransactions(data.results);
           } else {
             const transactions = recentTransactions.concat(data.results);
@@ -76,12 +76,12 @@ export const useExplorer = () => {
     try {
       fetch(
         `https://stacks-node-api.mainnet.stacks.co/extended/v1/tx/mempool?unanchored=true&limit=${10}&offset=${
-          offs || recentTransactions.length
+          offs === 1 ? 0 : recentTransactions.length
         }`
       )
         .then((response) => response.json())
         .then((data) => {
-          if (offs === 0) {
+          if (offs === 1) {
             setRecentTransactions(data.results);
           } else {
             const transactions = recentTransactions.concat(data.results);

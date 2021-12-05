@@ -121,7 +121,14 @@ export const useExplorerAddressDetails = () => {
 
   const getAddressTokensList = () => {
     explorerInstance.get(getAddressTokens(address, 10, 0)).then((data: any) => {
-      setTokens(data.results);
+      setTokens(
+        data.results.map((item: any) => {
+          return {
+            name: item.name.substr(1),
+            balance: item.balance.toLocaleString(),
+          };
+        })
+      );
     });
   };
 
@@ -130,7 +137,6 @@ export const useExplorerAddressDetails = () => {
       .get(getAddressNFTList(address, 10, nfts.length))
       .then((data: any) => {
         setNfts(data.results);
-        console.log(data);
       });
   };
 
