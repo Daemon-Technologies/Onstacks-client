@@ -8,6 +8,7 @@ import {
   getAddressNativeInfo,
   getAddressTokens,
   getAddressNFTList,
+  explorerGetOverviewData,
 } from "../axios/requests";
 
 export interface ExplorerOverview {
@@ -33,7 +34,7 @@ export interface AddressNativeInfo {
     }[];
   };
   stacking_info: {
-    stacked_amount: number;
+    stacking_amount: number;
     burnchain_lock_at: number;
     burnchain_unlock_at: number;
     percents: number;
@@ -80,6 +81,7 @@ export const useExplorerAddressDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [hasNextPage, sethasNextPage] = useState(true);
+  const [blockHeight, setBlockHeight] = useState(0);
 
   const getRecentTransactions = () => {
     setIsLoading(true);
@@ -108,6 +110,9 @@ export const useExplorerAddressDetails = () => {
   };
 
   const getOverviewData = () => {
+    explorerInstance.get(explorerGetOverviewData).then((data: any) => {
+      setBlockHeight(data.BTC_height);
+    });
     explorerInstance.get(getAddressOverview(address)).then((data: any) => {
       setOverviewData(data);
     });
@@ -159,6 +164,7 @@ export const useExplorerAddressDetails = () => {
     isLoading,
     setAddress,
     hasNextPage,
+    blockHeight,
     address,
     tokens,
   };

@@ -12,6 +12,7 @@ import { AddressTokens } from "../components/AddressTokens";
 import { useExplorerAddressDetails } from "../hooks/useExplorerAddressDetail";
 import { LoadTransactions } from "../components/LoadTransactions";
 import Logo from "../assets/side-menu/no-search-results.svg";
+import ProgressBar from "../components/Progressbar";
 
 interface Props {
   theme: any;
@@ -36,6 +37,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
     nativeInfo,
     getRecentTransactions,
     isLoading,
+    blockHeight,
     tokens,
   } = useExplorerAddressDetails();
 
@@ -56,7 +58,6 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
       push("/upgrading");
     }
   }, [failure]);
-
   return (
     <div className="explorer">
       <div id="main">
@@ -127,7 +128,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                   <div>
                     <p className="title">Total Balance</p>
                     <p className="sub-title">
-                      {nativeInfo.assets_info.balance} STX
+                      {nativeInfo.assets_info.balance.toLocaleString()} STX
                     </p>
                   </div>
                 </div>
@@ -151,12 +152,59 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                 <div className="address-card-item">
                   <img alt="stacks" src={Mining} />
                   <div>
-                    <p className="title">STX Stacked</p>
+                    <p className="title">STX Stacked(locked)</p>
                     <p className="sub-title">
-                      {nativeInfo.stacking_info.percents} STX
+                      {nativeInfo.stacking_info.stacking_amount.toLocaleString()}{" "}
+                      STX
                     </p>
                   </div>
                 </div>
+                {blockHeight && nativeInfo.stacking_info && (
+                  <ProgressBar
+                    theme={theme}
+                    completed={
+                      nativeInfo.stacking_info.stacking_amount
+                        ? (
+                            ((nativeInfo.stacking_info.burnchain_unlock_at -
+                              +blockHeight) *
+                              100) /
+                            nativeInfo.stacking_info.burnchain_lock_at
+                          ).toFixed(1)
+                        : 0
+                    }
+                  />
+                )}
+                {nativeInfo.stacking_info.stacking_amount !== 0 && (
+                  <div
+                    style={{
+                      marginTop: 5,
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      display: "flex",
+                    }}
+                  >
+                    <p className="sub-title">
+                      #{nativeInfo.stacking_info.burnchain_lock_at}
+                    </p>
+                    <p className="sub-title">
+                      ~
+                      {nativeInfo.stacking_info.burnchain_unlock_at -
+                        +blockHeight}{" "}
+                      (
+                      {(
+                        ((nativeInfo.stacking_info.burnchain_unlock_at -
+                          +blockHeight) *
+                          100) /
+                        nativeInfo.stacking_info.burnchain_lock_at
+                      ).toFixed(1)}
+                      %) remaining
+                    </p>
+                    <p className="sub-title">
+                      #{nativeInfo.stacking_info.burnchain_unlock_at}
+                    </p>
+                  </div>
+                )}
               </div>
               <div className="address-card">
                 <div className="address-card-header">

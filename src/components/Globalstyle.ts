@@ -61,7 +61,12 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
     flex-wrap: wrap;
   }
-
+  .fillerStyles {
+    height: '100%';
+    background-color: ${({ theme }: any) => theme.primaryHoverColor};
+      border-radius: 'inherit';
+      text-align: 'right'
+  }
   .card-img {
     width: 200px;
     height: 300px;
