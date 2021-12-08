@@ -33,6 +33,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
     recentTransactions,
     setAddress,
     address,
+    nfts,
     overviewData,
     nativeInfo,
     getRecentTransactions,
@@ -58,6 +59,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
       push("/upgrading");
     }
   }, [failure]);
+
   return (
     <div className="explorer">
       <div id="main">
@@ -132,7 +134,11 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                     </p>
                   </div>
                 </div>
-                <div className="address-card-item">
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setTabIndex(1)}
+                  className="address-card-item"
+                >
                   <img alt="stacks" src={OtherAssets} />
                   <div>
                     <p className="title">Other Assets</p>
@@ -251,10 +257,16 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
           ) : (
             <div
               id="transactionContainer"
-              style={{ width: "100%", paddingLeft: "30%" }}
+              style={{
+                flexDirection: "column",
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
+              }}
             >
-              {" "}
               <img src={Logo} alt="404" />
+              <p>Wallet doesnt contain any tokens</p>
             </div>
           )}
         </>
@@ -276,7 +288,21 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
             </select>
           </div>
            */}
-          <div className="card-img">
+          {nfts.map((nft) => {
+            return (
+              <div className="card-img">
+                <img
+                  className="nft-image"
+                  alt={nft.id.toString()}
+                  src={nft.url}
+                />
+                <p>
+                  {nft.assetName} #{nft.id}
+                </p>
+              </div>
+            );
+          })}
+          {/* <div className="card-img">
             <img
               className="nft-image"
               alt={count.toString()}
@@ -355,14 +381,14 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
               src={`https://stacksart.s3.amazonaws.com/stx-jokers/${count}.png`}
             />
             <p>Jokers #{count}</p>
-          </div>
+          </div> */}
 
           {/* <img className="nft-image" alt={count.toString()} src={`https://ipfs.io/ipfs/QmRWzC2FEB4u1jEkVpc18XwxnVCxks7ZwLuhFHjfn2FeAU/${count}.jpg`} /> */}
 
           {/* <img className="nft-image" alt={count.toString()} src={`https://stacksart.mypinata.cloud/ipfs/QmSrGnpifLtNuF8rf5txC2XVodALB4RezLALKrKEcEXZKt/${count}.jpg`} /> */}
 
-          <p onClick={() => setCount(count - 1)}>Previous</p>
-          <p onClick={() => setCount(count + 1)}>Next</p>
+          {/* <p onClick={() => setCount(count - 1)}>Previous</p>
+          <p onClick={() => setCount(count + 1)}>Next</p> */}
         </div>
       )}
     </div>

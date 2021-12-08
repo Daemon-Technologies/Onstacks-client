@@ -63,7 +63,7 @@ export const TransactionHeaderDetails: React.FC<{
               <div
                 style={{ padding: 8, borderTop: 0 }}
                 // onClick={() => push("/explorer/txId/" + transaction.tx_id)}
-                className="table-item"
+                className="table-item tr-card"
               >
                 <div className="left-content">
                   <img
@@ -97,7 +97,7 @@ export const TransactionHeaderDetails: React.FC<{
               <div
                 style={{ padding: 8, borderTop: 0 }}
                 // onClick={() => push("/explorer/txId/" + transaction.tx_id)}
-                className="table-item"
+                className="table-item tr-card"
               >
                 <div style={{ width: 258 }} className="left-content">
                   <img
@@ -135,7 +135,10 @@ export const TransactionHeaderDetails: React.FC<{
                 src={dims.width > 700 ? Arrow : Bottom}
                 alt={"arrow"}
               />
-              <div style={{ padding: 8, borderTop: 0 }} className="table-item">
+              <div
+                style={{ padding: 8, borderTop: 0 }}
+                className="table-item tr-card"
+              >
                 <div className="left-content">
                   <img
                     className="transaction-image"

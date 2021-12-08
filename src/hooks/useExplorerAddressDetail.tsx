@@ -7,9 +7,9 @@ import {
   getAddressOverview,
   getAddressNativeInfo,
   getAddressTokens,
-  getAddressNFTList,
   explorerGetOverviewData,
 } from "../axios/requests";
+import { AccountsApi, Configuration } from "@stacks/blockchain-api-client";
 
 export interface ExplorerOverview {
   total_sent: number;
@@ -19,6 +19,100 @@ export interface ExplorerOverview {
   total_balance: number;
 }
 
+export const STACK_API_URL = "https://stacks-node-api.mainnet.stacks.co";
+export const config = new Configuration({ basePath: STACK_API_URL });
+export const accountsApi = new AccountsApi(config);
+
+export const NFTS: {
+  asset_identifier: string;
+  img: string;
+  assetName: string;
+  assetType: string;
+}[] = [
+  {
+    assetName: "Bitcoin monkey",
+    asset_identifier:
+      "SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys::bitcoin-monkeys",
+    img: "https://ipfs.io/ipfs/QmYCnfeseno5cLpC75rmy6LQhsNYQCJabiuwqNUXMaA3Fo/",
+    assetType: ".png",
+  },
+  {
+    assetName: "Bubo",
+    asset_identifier: "SP3N81TKV43PN24NPHNNM8BBNQJ51Q31HE9G0GC46.bubo::bubo",
+    img: "https://ipfs.io/ipfs/QmdCtFNfFu8RnewyUNayiDuAUQAN6jarYE18c3NTKNhSYF/",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SP1T4Y4WK9DGZ2EDWSNHRE5HRRBPVG7S46JAHW552.panda-nft::Panda",
+    img: "https://ipfs.io/ipfs/Qmd73GqEbLEjNMCQZXhJg1i919ZRUJNyRuxDbLAPG9uG14/",
+    assetName: "Panda",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-pops::stacks-pops",
+    img: "https://ipfs.io/ipfs/Qmd73GqEbLEjNMCQZXhJg1i919ZRUJNyRuxDbLAPG9uG14/",
+    assetName: "Stacks Pops",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-punks-v3::stacks-punks",
+    img: "https://www.stackspunks.com/assets/punks/punk",
+    assetName: "Stacks Punks",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SP32AEEF6WW5Y0NMJ1S8SBSZDAY8R5J32NBZFPKKZ.free-punks-v0::free-punks",
+    img: "https://www.stackspunks.com/assets/punks/punk",
+    assetName: "Free Punks",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SP1T4Y4WK9DGZ2EDWSNHRE5HRRBPVG7S46JAHW552.panda-nft::Panda",
+    img: "https://ipfs.io/ipfs/Qmd73GqEbLEjNMCQZXhJg1i919ZRUJNyRuxDbLAPG9uG14/",
+    assetName: "Panda",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SP1T4Y4WK9DGZ2EDWSNHRE5HRRBPVG7S46JAHW552.panda-nft::Panda",
+    img: "https://ipfs.io/ipfs/Qmd73GqEbLEjNMCQZXhJg1i919ZRUJNyRuxDbLAPG9uG14/",
+    assetName: "Panda",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.byte-fighters::byte-fighters",
+    img: "https://stacksart.s3.amazonaws.com/byte-fighters/",
+    assetName: "Panda",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stx-youth::stx-youth",
+    img: "https://stacksart.s3.amazonaws.com/stx-youth/Youth",
+    assetName: "Panda",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-giantpandas::stacks-giantpandas",
+    img: "https://ipfs.io/ipfs/QmbfNSJQ1zEzyCnXN2mP4tcS5w6QpWmtW72xg4EpK2g6bR/",
+    assetName: "Panda",
+    assetType: ".png",
+  },
+  {
+    asset_identifier:
+      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.citadels::citadels",
+    img: "https://stacksart.s3.amazonaws.com/citadels/Mansion",
+    assetName: "Citadel",
+    assetType: ".png",
+  },
+];
 export interface AddressNativeInfo {
   assets_info: {
     balance: number;
@@ -52,15 +146,9 @@ export interface TokensList {
 }
 
 export interface AddressNFTs {
-  sender: string;
-  recipient: string;
-  asset_identifier: string;
-  value: {
-    hex: string;
-    repr: string;
-  };
-  tx_id: string;
-  block_height: string;
+  url: string;
+  id: string;
+  assetName: string;
 }
 
 export const useExplorerAddressDetails = () => {
@@ -124,6 +212,25 @@ export const useExplorerAddressDetails = () => {
     });
   };
 
+  const getAddressNFTs = async () => {
+    const data = await accountsApi.getAccountNft({
+      principal: address,
+    });
+    const currentNfts = data.nft_events.map((nft) => {
+      console.log(nft);
+      const asset = NFTS.find(
+        (x) => x.asset_identifier === nft.asset_identifier
+      );
+      return {
+        url: asset?.img + nft.value.repr.substr(1) + ".png",
+        assetName: asset?.assetName || "",
+        id: nft.value.repr.substr(1),
+      };
+    });
+    console.log(currentNfts);
+    setNfts(currentNfts);
+  };
+
   const getAddressTokensList = () => {
     explorerInstance.get(getAddressTokens(address, 10, 0)).then((data: any) => {
       setTokens(
@@ -137,21 +244,13 @@ export const useExplorerAddressDetails = () => {
     });
   };
 
-  const getAddressNFT = () => {
-    explorerInstance
-      .get(getAddressNFTList(address, 10, nfts.length))
-      .then((data: any) => {
-        setNfts(data.results);
-      });
-  };
-
   useEffect(() => {
     if (address) {
       getOverviewData();
       getAddressTokensList();
       getRecentTransactions();
       getNativeInfo();
-      getAddressNFT();
+      getAddressNFTs();
     }
   }, [address]);
 
@@ -164,6 +263,7 @@ export const useExplorerAddressDetails = () => {
     isLoading,
     setAddress,
     hasNextPage,
+    nfts,
     blockHeight,
     address,
     tokens,

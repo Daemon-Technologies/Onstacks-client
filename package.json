@@ -9,6 +9,7 @@
     "@mrblenny/react-flow-chart": "0.0.14",
     "@nivo/circle-packing": "^0.73.0",
     "@nivo/core": "^0.73.0",
+    "@stacks/blockchain-api-client": "^0.71.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",

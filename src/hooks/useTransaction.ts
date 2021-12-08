@@ -3,6 +3,8 @@ import { useState } from "react";
 import Transaction from "../utils/explorer-types";
 import { explorerInstance } from "../axios/axios";
 import { getTxByTxId } from "../axios/requests";
+// import { TransactionsApi } from "@stacks/blockchain-api-client";
+// import { config } from "./useExplorerAddressDetail";
 
 export const useTransaction = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,12 +43,20 @@ export const useTransaction = () => {
 
   const getTransaction = (id: string) => {
     setIsLoading(true);
-    console.log(id);
+    // const tr = new TransactionsApi(config)
+    // tr.getTransactionById({txId: id}).then((transaction: any) => {
+    //   setTransaction(transaction);
+    // })
     explorerInstance.get(getTxByTxId(id)).then((data: any) => {
       setTransaction(data);
       if (!data) {
         explorerInstance.get(getTxByTxId(id)).then((data: any) => {
           setTransaction(data);
+          if (!data) {
+            explorerInstance.get(getTxByTxId(id)).then((data: any) => {
+              setTransaction(data);
+            });
+          }
         });
       }
     });

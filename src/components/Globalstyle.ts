@@ -406,9 +406,9 @@ text-align: right;
     width: 100%;
     position: relative;
     box-shadow: 0px 1px 3px rgb(0 0 0 / 12%);
-    background: #FFFFFF;
+    background-color:${({ theme }: any) => theme.background}; ;
     border-radius: var(--main-radius);
-    border: 1px solid #EBEAED;
+    border: 1px solid ${({ theme }: any) => theme.border};;
     th {
       width: 85%;
     }
@@ -482,8 +482,8 @@ text-align: right;
     flex-direction: row;
     align-items: center;
     margin-bottom: 10px;
-    margin-left: 24px;
-    margin-top: 24px;
+    margin-left: 16px;
+    margin-top: 16px;
     img {
       margin-right: 10px;
     }
@@ -523,6 +523,10 @@ text-align: right;
   .table-item:hover {
     background-color:  ${({ theme }: any) => theme.primaryHoverColor};
     border-left: 3px solid #5546FF;
+  }
+  .tr-card:hover {
+    background-color: transparent;
+    border-left: 0px;
   }
   .table-item {
     padding: 20px;

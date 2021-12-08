@@ -58,7 +58,7 @@ const App: React.FC = () => {
                 themeToggler={themeToggler}
               />
             </Route>
-            <Route exact path="/explorer/protocol">
+            <Route exact path="/protocol">
               <Protocol />
             </Route>
             <Route exact path="/explorer/address/:address">
