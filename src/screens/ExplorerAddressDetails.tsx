@@ -28,7 +28,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
-  const [count, setCount] = useState(1);
+  // const [count, setCount] = useState(1);
   const {
     recentTransactions,
     setAddress,
