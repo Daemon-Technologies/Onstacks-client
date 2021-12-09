@@ -11,7 +11,12 @@ export const Protocol: React.FC = () => {
   return (
     <>
       <div className="not-found">
-        <img style={{ width: 500, height: 400 }} src={Protocols} alt="404" />
+        <img
+          style={{ width: 530, height: "auto", marginBottom: 0 }}
+          src={Protocols}
+          alt="404"
+        />
+        <h1 style={{ marginTop: -30, marginBottom: 10 }}>Coming Soon</h1>
         <p>
           This page is current under developement and will be releasing soon.
         </p>
