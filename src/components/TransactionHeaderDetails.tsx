@@ -59,7 +59,7 @@ export const TransactionHeaderDetails: React.FC<{
       ) : (
         <>
           {!failed ? (
-            <div style={{ padding: 32 }} className={"transaction-card"}>
+            <div style={{ padding: 24 }} className={"transaction-card"}>
               <div
                 style={{ padding: 8, borderTop: 0 }}
                 // onClick={() => push("/explorer/txId/" + transaction.tx_id)}

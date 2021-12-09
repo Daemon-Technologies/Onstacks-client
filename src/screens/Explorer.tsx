@@ -183,9 +183,6 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
           >
             <h3>Blocks</h3>
             <div className="rt-table">
-              <div className="table-header">
-                <p>Blocks</p>
-              </div>
               <LoadBlocks
                 getMicroBlock={getMicroBlock}
                 isMicroblocks={true}

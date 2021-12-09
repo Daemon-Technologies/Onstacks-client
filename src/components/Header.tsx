@@ -41,7 +41,7 @@ export const Header: React.FC<{
           <img className="logo mobile-logo" alt="logo" src={Logo} />
           <img className="logo web-logo" alt="logo" src={Logo} />
         </div>
-        <ul className={click ? "nav-options active" : "nav-options"}>
+        <ul className={click ? "nav-options-active" : "nav-options"}>
           <li
             className={`option ${active === 0 ? "active" : ""}`}
             onClick={() => {
@@ -62,10 +62,13 @@ export const Header: React.FC<{
           >
             <p>Mining</p>
           </li>
-          <li className="option" onClick={closeMobileMenu}>
+          <li
+            className={`option ${active === 2 ? "active" : ""}`}
+            onClick={closeMobileMenu}
+          >
             <p
               onClick={() => {
-                setActive(1);
+                setActive(2);
                 closeMobileMenu();
                 push("/protocol");
               }}

@@ -9,6 +9,8 @@ export interface ExplorerOverview {
   total_blocks_24hrs: number;
   total_microblocks_24hrs: number;
   total_tx_fees: number;
+  avg_txs_per_block: number;
+  pending_txs_number: number;
   STX_height: number;
   BTC_height: number;
   total_volume: number;
@@ -37,6 +39,8 @@ export const useExplorer = () => {
     total_tx_fees: 0,
     STX_height: 0,
     total_volume: 0,
+    avg_txs_per_block: 0,
+    pending_txs_number: 0,
     BTC_height: 0,
   });
   const [recentTransactions, setRecentTransactions] = useState<Transaction[]>(

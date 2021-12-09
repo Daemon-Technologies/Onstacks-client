@@ -36,6 +36,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
     nfts,
     overviewData,
     nativeInfo,
+    hasNextPage,
     getRecentTransactions,
     isLoading,
     blockHeight,
@@ -91,7 +92,10 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
       {tabIndex === 0 && (
         <div id="transactionContainer" className="transaction-container">
           <div className="recent-transactions">
-            <div style={{ marginTop: 0 }} className="rt-table">
+            <div
+              style={{ marginTop: 0, height: "86.8vh" }}
+              className="rt-table"
+            >
               <div className="table-header">
                 <p>Transactions</p>
               </div>
@@ -99,7 +103,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                 recentTransactions={recentTransactions}
                 theme={theme}
               />
-              {recentTransactions.length > 0 && (
+              {hasNextPage && recentTransactions.length > 0 && (
                 <div
                   style={{
                     borderTop: "1px solid #84818A",
@@ -251,7 +255,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
             <div id="transactionContainer" className="tokens-container">
               <p className={"title-table"}>All Tokens</p>
               <div>
-                <AddressTokens initialPageSize={10} tokens={tokens.sort()} />
+                <AddressTokens initialPageSize={10} tokens={tokens} />
               </div>
             </div>
           ) : (

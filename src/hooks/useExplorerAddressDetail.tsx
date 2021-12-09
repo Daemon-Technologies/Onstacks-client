@@ -234,12 +234,16 @@ export const useExplorerAddressDetails = () => {
   const getAddressTokensList = () => {
     explorerInstance.get(getAddressTokens(address, 10, 0)).then((data: any) => {
       setTokens(
-        data.results.map((item: any) => {
-          return {
-            name: item.name.substr(1),
-            balance: item.balance.toLocaleString(),
-          };
-        })
+        data.results
+          .sort((a: any, b: any) => {
+            return b.balance - a.balance;
+          })
+          .map((item: any) => {
+            return {
+              name: item.name.substr(1),
+              balance: item.balance.toLocaleString(),
+            };
+          })
       );
     });
   };

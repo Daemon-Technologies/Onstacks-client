@@ -6,6 +6,7 @@ import { ExplorerOverview } from "../hooks/useExplorer";
 import { numberWithCommas } from "../hooks/useOverview";
 import { getBlockHash } from "../utils/helper";
 import { SearchResult, SearchResultType } from "../utils/search-types";
+import { truncateMiddle } from "../utils/utils";
 
 export const ExplorerHeader: React.FC<{
   overviewData: ExplorerOverview;
@@ -120,8 +121,10 @@ export const ExplorerHeader: React.FC<{
             <div>
               {searchData.found && (
                 <div className="item">
-                  <p onClick={onClick}>{searchData.result.entity_id}</p>
-                  <p>{searchData.result.entity_type}</p>
+                  <p onClick={onClick}>
+                    {truncateMiddle(searchData.result.entity_id, 10)}
+                  </p>
+                  {/* <p>{searchData.result.entity_type}</p> */}
                 </div>
               )}
             </div>
@@ -136,21 +139,21 @@ export const ExplorerHeader: React.FC<{
           </p>
         </div>
         <div className="inner-info-card">
-          <p className="title">Total volume (24hr)</p>
-          <p className="sub-title">
-            {numberWithCommas(overviewData.total_volume)}
-          </p>
-        </div>
-        <div className="inner-info-card">
-          <p className="title">Total Microblocks (24hr)</p>
+          <p className="title">Microblocks (24hr)</p>
           <p className="sub-title">
             {numberWithCommas(overviewData.total_microblocks_24hrs)}
           </p>
         </div>
         <div className="inner-info-card">
-          <p className="title">Total Fees (24hr)</p>
+          <p className="title">Avg Transactions per block)</p>
           <p className="sub-title">
-            {numberWithCommas(overviewData.total_tx_fees)}
+            {numberWithCommas(overviewData.avg_txs_per_block)}
+          </p>
+        </div>
+        <div className="inner-info-card">
+          <p className="title">Pending Transactions (24hr)</p>
+          <p className="sub-title">
+            {numberWithCommas(overviewData.pending_txs_number)}
           </p>
         </div>
       </div>

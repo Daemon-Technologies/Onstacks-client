@@ -325,7 +325,22 @@ text-align: right;
     left: -100%;
     height: 800px;
     opacity: 0;
+    transition: all 0.5s ease;
+    flex-direction: column;
+    list-style-type: none;
+    grid-gap: 0px;
+  }
 
+  .nav-options-active {
+    display: flex;
+    width: 100%;
+    /* height: 350px; */
+    position: absolute;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);;
+    top: 60px;
+    left: 0%;
+    height: 800px;
+    background-color:${({ theme }: any) => theme.background}; 
     transition: all 0.5s ease;
     flex-direction: column;
     list-style-type: none;
@@ -1683,6 +1698,13 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     .miningData {
       padding: 16px !important;
     }
+    .not-found {
+      padding: 35px;
+      text-align: center;
+      img {
+        width: 200px !important;
+      }
+    }
     #content1 {
       flex-direction: column;
       .containerOne {
@@ -1726,7 +1748,7 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
         width: 100%
       }
       .rt-table {
-        padding: 24px 16px;
+        padding: 0px;
       }
       .table-item  {
         flex-direction: column;
