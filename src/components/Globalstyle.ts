@@ -173,6 +173,47 @@ export const GlobalStyles = createGlobalStyle`
   }
   //SIDEBAR
 
+  .terms-container {
+    width: 100%;
+    padding: 100px;
+    .terms {
+
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
+    display: flex;
+    flex-direction: column;
+    padding: 100px 64px;
+    background: ${({ theme }: any) => theme.background} !important;
+    .title {
+      //styleName: Headline 6 / 28px / Semibold;
+      font-family: Manrope;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 36px;
+      letter-spacing: 0px;
+      color: ${({ theme }: any) => theme.text} !important;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .sub-title {
+      font-family: Manrope;
+      font-size: 21px;
+      color: ${({ theme }: any) => theme.text} !important;
+      opacity: 0.8;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 60px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+  }
+  }
+
   .header {
     display: flex;
     /* background: linear-gradient(#6616fc, #f394d3); */
@@ -330,6 +371,7 @@ text-align: right;
     list-style-type: none;
     grid-gap: 0px;
   }
+
 
   .nav-options-active {
     display: flex;
@@ -2157,6 +2199,15 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
   @media only screen and (max-width: 400px) {
     #content1, #content2, #content3, #content4, .info-card {
     width: 98% !important;
+  }
+  .option {
+    color: ${({ theme }: any) => theme.text} !important;
+    a {
+      color: ${({ theme }: any) => theme.text} !important;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+   }
   }
   }
   .mobile-table {

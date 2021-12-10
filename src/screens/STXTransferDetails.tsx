@@ -41,12 +41,20 @@ export const STXTransferDetails: React.FC<Props> = ({
     // isLoading,
     // contractCode,
     getContractCode,
+    fails,
   } = useTransaction();
   useEffect(() => {
     const { innerWidth: width } = window;
     setToggle(width >= 1025);
   }, [toggle]);
   const { push } = useHistory();
+
+  useEffect(() => {
+    console.log(fails);
+    if (fails) {
+      push("/upgrading");
+    }
+  }, [fails]);
 
   const dims = useWindowDimensions();
   useEffect(() => {
@@ -116,7 +124,9 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Fees</p>
-                  <p className="subtitle">{transaction?.fee_rate}</p>
+                  <p className="subtitle">
+                    {microToStacks(transaction?.fee_rate)}
+                  </p>
                 </div>
                 <div className="transaction-row">
                   <p className="title">Nonce</p>
@@ -291,20 +301,20 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <div className="transaction-row">
                     <p className="title">Bitcoin Block Hash</p>
                     <p className="subtitle">
-                      {truncateMiddle(
+                      {/* {truncateMiddle(
                         (transaction as any).block_anchor_info
                           .bitcoin_block_hash,
                         10
-                      )}
+                      )} */}
                     </p>
                   </div>
                   <div className="transaction-row">
                     <p className="title">Anchor transaction id</p>
                     <p className="subtitle">
-                      {truncateMiddle(
+                      {/* {truncateMiddle(
                         (transaction as any).block_anchor_info.bitcoin_tx_hash,
                         10
-                      )}
+                      )} */}
                     </p>
                   </div>
                 </div>
@@ -379,7 +389,9 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Fees</p>
-                  <p className="subtitle">{transaction?.fee_rate}</p>
+                  <p className="subtitle">
+                    {microToStacks(transaction?.fee_rate)}
+                  </p>
                 </div>
                 <div className="transaction-row">
                   <p className="title">Nonce</p>
@@ -451,20 +463,20 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <div className="transaction-row">
                     <p className="title">Bitcoin Block Hash</p>
                     <p className="subtitle">
-                      {truncateMiddle(
+                      {/* {truncateMiddle(
                         (transaction as any).block_anchor_info
                           .bitcoin_block_hash,
                         10
-                      )}
+                      )} */}
                     </p>
                   </div>
                   <div className="transaction-row">
                     <p className="title">Anchor transaction id</p>
                     <p className="subtitle">
-                      {truncateMiddle(
+                      {/* {truncateMiddle(
                         (transaction as any).block_anchor_info.bitcoin_tx_hash,
                         10
-                      )}
+                      )} */}
                     </p>
                   </div>
                 </div>
@@ -502,7 +514,9 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Fees</p>
-                  <p className="subtitle">{transaction?.fee_rate}</p>
+                  <p className="subtitle">
+                    {microToStacks(transaction?.fee_rate)}
+                  </p>
                 </div>
                 <div className="transaction-row">
                   <p className="title">Nonce</p>
@@ -536,20 +550,20 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <div className="transaction-row">
                     <p className="title">Bitcoin Block Hash</p>
                     <p className="subtitle">
-                      {truncateMiddle(
+                      {/* {truncateMiddle(
                         (transaction as any).block_anchor_info
                           .bitcoin_block_hash,
                         10
-                      )}
+                      )} */}
                     </p>
                   </div>
                   <div className="transaction-row">
                     <p className="title">Anchor transaction id</p>
                     <p className="subtitle">
-                      {truncateMiddle(
+                      {/* {truncateMiddle(
                         (transaction as any).block_anchor_info.bitcoin_tx_hash,
                         10
-                      )}
+                      )} */}
                     </p>
                   </div>
                 </div>

@@ -82,10 +82,10 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
             Tokens
           </div>
           <div
-            onClick={() => setTabIndex(2)}
+            // onClick={() => setTabIndex(2)}
             className={tabIndex === 2 ? "active" : ""}
           >
-            Collections
+            Collectibles (coming soon){" "}
           </div>
         </div>
       </div>
@@ -229,7 +229,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                 <div className="address-card-item">
                   <img alt="stacks" src={Mining} />
                   <div>
-                    <p className="title">Mining reward earned</p>
+                    <p className="title">Mining rewards earned</p>
                     <p className="sub-title">
                       {nativeInfo.mining_info.miner_rewards} STX
                     </p>
@@ -238,7 +238,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                 <div className="address-card-item">
                   <img alt="stacks" src={Burn} />
                   <div>
-                    <p className="title">Fees burn</p>
+                    <p className="title">BTC Spent</p>
                     <p className="sub-title">
                       {nativeInfo.mining_info.total_burnt} Sats
                     </p>

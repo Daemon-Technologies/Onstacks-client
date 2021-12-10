@@ -145,7 +145,7 @@ export const ExplorerHeader: React.FC<{
           </p>
         </div>
         <div className="inner-info-card">
-          <p className="title">Avg Transactions per block)</p>
+          <p className="title">Avg Transactions per block(24h)</p>
           <p className="sub-title">
             {numberWithCommas(overviewData.avg_txs_per_block)}
           </p>

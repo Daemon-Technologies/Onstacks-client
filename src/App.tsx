@@ -21,7 +21,9 @@ import { ExplorerAddressDetails } from "./screens/ExplorerAddressDetails";
 import { STXTransferDetails } from "./screens/STXTransferDetails";
 import { Blockdetails } from "./screens/Blockdetails";
 import { Protocol } from "./screens/Protocol";
+import { Terms } from "./screens/Terms";
 import { MicroblockDetails } from "./screens/MicroblockDetails";
+import { Footer } from "./components/Footer";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -60,6 +62,9 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/protocol">
               <Protocol />
+            </Route>
+            <Route exact path="/terms">
+              <Terms />
             </Route>
             <Route exact path="/explorer/address/:address">
               <ExplorerAddressDetails
@@ -143,10 +148,8 @@ const App: React.FC = () => {
               <Notfound />
             </Route>
           </Switch>
+          <Footer />
         </Router>
-        <div className="footer">
-          Terms of services • Privacy Policy • Daemon Technologies 2021
-        </div>
       </>
     </ThemeProvider>
   );

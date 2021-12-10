@@ -5,6 +5,8 @@ import { explorerInstance } from "../axios/axios";
 import { getTxByTxId } from "../axios/requests";
 // import { TransactionsApi } from "@stacks/blockchain-api-client";
 // import { config } from "./useExplorerAddressDetail";
+// import { TransactionsApi } from "@stacks/blockchain-api-client";
+// import { config } from "./useExplorerAddressDetail";
 
 export const useTransaction = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +17,7 @@ export const useTransaction = () => {
   const [contractCode, setContractCode] = useState<any>();
   const [microBlock, setMicroBlock] = useState<any>();
   const [blockTransaction, setBlockTransaction] = useState<any>([]);
-
+  const [fails, setFails] = useState(false);
   const getBlock = (block: string) => {
     return fetch(
       "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +
@@ -47,20 +49,21 @@ export const useTransaction = () => {
     // tr.getTransactionById({txId: id}).then((transaction: any) => {
     //   setTransaction(transaction);
     // })
-    explorerInstance.get(getTxByTxId(id)).then((data: any) => {
-      setTransaction(data);
-      if (!data) {
-        explorerInstance.get(getTxByTxId(id)).then((data: any) => {
-          setTransaction(data);
-          if (!data) {
-            explorerInstance.get(getTxByTxId(id)).then((data: any) => {
-              setTransaction(data);
-            });
-          }
-        });
-      }
-    });
-    setIsLoading(false);
+    try {
+      explorerInstance.get(getTxByTxId(id)).then((data: any) => {
+        setTransaction(data);
+        if (data !== undefined) {
+          explorerInstance.get(getTxByTxId(id)).then((data: any) => {
+            setTransaction(data);
+          });
+        } else {
+          setFails(true);
+        }
+      });
+      setIsLoading(false);
+    } catch (error) {
+      setFails(true);
+    }
   };
 
   const getContractDetails = (tx: any) => {
@@ -109,5 +112,6 @@ export const useTransaction = () => {
     microBlock,
     getBlock,
     getTransaction,
+    fails,
   };
 };

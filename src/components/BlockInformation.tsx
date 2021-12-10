@@ -37,7 +37,7 @@ export const BlockInformation: React.FC<Props> = ({
           <p className="title">Block information</p>
           <div
             className="button-view"
-            onClick={() => getBlockHash(overviewData.stx_block_height)}
+            onClick={() => push("/explorer/block/" + currentBlock?.blockNumber)}
           >
             <img src={Search} alt={"search"} />
             View on explorer

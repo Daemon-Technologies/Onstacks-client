@@ -173,7 +173,7 @@ export const AddressDetails: React.FC<Props> = ({
           </p>
           <div
             className="button-view"
-            onClick={() => getBlockHash(currentBlock?.blockNumber)}
+            onClick={() => push("/explorer/block/" + currentBlock?.blockNumber)}
           >
             <img src={Search} alt={"search"} />
             View on explorer

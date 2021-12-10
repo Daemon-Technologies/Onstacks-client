@@ -14,7 +14,7 @@ export const AddressDetailsHeader: React.FC<{
   headerDetails: AddressHeaderDetails | undefined;
   address: string;
 }> = ({ headerDetails, address }) => {
-  const { goBack } = useHistory();
+  const { goBack, push } = useHistory();
 
   return (
     <>
@@ -43,12 +43,7 @@ export const AddressDetailsHeader: React.FC<{
         <p className="screen-title">{address}</p>
         <div
           className="button-view"
-          onClick={() =>
-            window.open(
-              `https://explorer.stacks.co/address/${address}`,
-              "_blank"
-            )
-          }
+          onClick={() => push("/explorer/address/" + address)}
         >
           <img src={Search} alt={"search"} />
           View on explorer
