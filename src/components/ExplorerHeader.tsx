@@ -111,7 +111,7 @@ export const ExplorerHeader: React.FC<{
         placeholder="Search for TxHash / Address / Block"
         name="s"
       />
-      {(isLoading || searchData) && (
+      {isLoading || searchData ? (
         <div className="search-item">
           <div className="results-header">
             <p>Search results</p>
@@ -130,6 +130,20 @@ export const ExplorerHeader: React.FC<{
             </div>
           )}
         </div>
+      ) : (
+        <>
+          {searchTerm.length > 0 && (
+            <div className="search-item">
+              <div className="results-header">
+                <p>Search results</p>
+              </div>
+              <div className="item">
+                <p>No data found</p>
+                {/* <p>{searchData.result.entity_type}</p> */}
+              </div>
+            </div>
+          )}
+        </>
       )}
       <div className={"info-card"}>
         <div className="inner-info-card">

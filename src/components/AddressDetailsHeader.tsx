@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { numberWithCommas } from "../hooks/useOverview";
 import { ReactComponent as LeftArrow } from "../assets/side-menu/left-arrow-disabled.svg";
 import Search from "../assets/side-menu/search.svg";
 import { useHistory } from "react-router-dom";
+import useWindowDimensions from "../hooks/useWindowDimension";
+import { truncateMiddle } from "../utils/utils";
 
 export interface AddressHeaderDetails {
   total_blocks_won: number;
@@ -15,7 +17,9 @@ export const AddressDetailsHeader: React.FC<{
   address: string;
 }> = ({ headerDetails, address }) => {
   const { goBack, push } = useHistory();
+  const dims = useWindowDimensions();
 
+  useEffect(() => {}, [dims.width]);
   return (
     <>
       <div
@@ -40,7 +44,9 @@ export const AddressDetailsHeader: React.FC<{
           justifyContent: "space-between",
         }}
       >
-        <p className="screen-title">{address}</p>
+        <p className="screen-title">
+          {dims.width > 700 ? address : truncateMiddle(address, 10)}
+        </p>
         <div
           className="button-view"
           onClick={() => push("/explorer/address/" + address)}
@@ -70,10 +76,10 @@ export const AddressDetailsHeader: React.FC<{
         <p className="title">Mining participation</p>
         <p className="sub-title">{headerDetails?.btc_hash_rate} EH/s</p>
       </div> */}
-        <div className="inner-info-card">
+        {/* <div className="inner-info-card">
           <p className="title">Rate of return</p>
           <p className="sub-title">{headerDetails?.return_rate} %</p>
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -125,7 +125,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                 <div className="transaction-row">
                   <p className="title">Fees</p>
                   <p className="subtitle">
-                    {microToStacks(transaction?.fee_rate)}
+                    {microToStacks(transaction?.fee_rate)} STX
                   </p>
                 </div>
                 <div className="transaction-row">
@@ -390,7 +390,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                 <div className="transaction-row">
                   <p className="title">Fees</p>
                   <p className="subtitle">
-                    {microToStacks(transaction?.fee_rate)}
+                    {microToStacks(transaction?.fee_rate)} STX
                   </p>
                 </div>
                 <div className="transaction-row">
@@ -515,7 +515,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                 <div className="transaction-row">
                   <p className="title">Fees</p>
                   <p className="subtitle">
-                    {microToStacks(transaction?.fee_rate)}
+                    {microToStacks(transaction?.fee_rate)} STX
                   </p>
                 </div>
                 <div className="transaction-row">

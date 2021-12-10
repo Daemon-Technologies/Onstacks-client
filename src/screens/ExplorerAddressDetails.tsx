@@ -13,6 +13,7 @@ import { useExplorerAddressDetails } from "../hooks/useExplorerAddressDetail";
 import { LoadTransactions } from "../components/LoadTransactions";
 import Logo from "../assets/side-menu/no-search-results.svg";
 import ProgressBar from "../components/Progressbar";
+import { numberWithCommas } from "../hooks/useOverview";
 
 interface Props {
   theme: any;
@@ -231,7 +232,8 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                   <div>
                     <p className="title">Mining rewards earned</p>
                     <p className="sub-title">
-                      {nativeInfo.mining_info.miner_rewards} STX
+                      {numberWithCommas(nativeInfo.mining_info.miner_rewards)}{" "}
+                      STX
                     </p>
                   </div>
                 </div>
