@@ -11,7 +11,7 @@ export const MiningDataHeader: React.FC<{
   return (
     <>
       {" "}
-      <p className="screen-title">Mining Activity</p>
+      <p className="screen-title">Mining Explorer</p>
       <InfoCard overviewData={overviewData} />
       <div
         style={{
@@ -24,7 +24,7 @@ export const MiningDataHeader: React.FC<{
         <p className="based">*Average of the last 100 blocks.</p>
         <div className="data">
           <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
-            STX Block Height:&nbsp;{" "}
+            STX block height:&nbsp;{" "}
             <span>#{overviewData.stx_block_height} </span>
           </a>
           <a
@@ -33,7 +33,7 @@ export const MiningDataHeader: React.FC<{
             href={"https://btc.com/btc/block/" + overviewData.btc_block_height}
             rel="noopener noreferrer"
           >
-            BTC Block Height: &nbsp;
+            BTC block height: &nbsp;
             <span>#{overviewData.btc_block_height}</span>
           </a>
         </div>
