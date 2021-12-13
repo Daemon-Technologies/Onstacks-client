@@ -2,6 +2,7 @@ import Transaction from "./explorer-types";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import pluralize from "pluralize";
+// eslint-disable-next-line
 import React from "react";
 
 dayjs.extend(relativeTime);
@@ -123,7 +124,7 @@ export const getTicker = (name: string) => {
     if (name.length >= 3) {
       return `${name[0]}${name[1]}${name[2]}`;
     }
-    return name;
+    return `∙ ${name}`;
   }
 };
 
@@ -198,12 +199,13 @@ export const getTxTitle = (transaction: Transaction) => {
       return getContractName(transaction?.smart_contract?.contract_id);
     case "contract_call":
       return (
-        <>
-          <p className="transaction-title-p">{getFunctionName(transaction)}</p>{" "}
+        <p className="transaction-title-p">
+          {getFunctionName(transaction)}{" "}
           <span className="transaction-title-span">
-            ←{getContractName(transaction.contract_call.contract_id)}
+            {" "}
+            ← {getContractName(transaction.contract_call.contract_id)}
           </span>
-        </>
+        </p>
       );
     case "token_transfer":
       return `${microToStacks(transaction.token_transfer.amount)} STX`;

@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-concat */
 /* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useTransaction } from "../hooks/useTransaction";
@@ -55,6 +56,14 @@ export const STXTransferDetails: React.FC<Props> = ({
       push("/upgrading");
     }
   }, [fails]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (transaction && transaction.tx_id !== params.txId) {
+        getTransaction(txId);
+      }
+    }, 5000);
+  }, []);
 
   const dims = useWindowDimensions();
   useEffect(() => {

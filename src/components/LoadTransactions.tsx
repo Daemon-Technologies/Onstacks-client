@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line
 import React, { useCallback } from "react";
 import {
   addressArea,
@@ -32,7 +33,6 @@ export const LoadTransactions: React.FC<{
         <>
           <div
             onClick={() => push("/explorer/txId/" + transaction.tx_id)}
-            key={transaction.block_hash}
             className="table-item"
           >
             <div className="left-content">
@@ -60,7 +60,7 @@ export const LoadTransactions: React.FC<{
                 />
               )}
               <div>
-                <p className="title">{getTxTitle(transaction)}</p>
+                <div className="title">{getTxTitle(transaction)}</div>
                 <p className="subtitle">
                   {getTxTypeName(transaction.tx_type)} •{" "}
                   <span

@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { ExplorerOverview } from "../hooks/useExplorer";
@@ -48,7 +49,6 @@ export const ExplorerHeader: React.FC<{
         },
       });
     }
-    console.log(data);
     if (!data.message && data.found) {
       setSearchData(data);
     }

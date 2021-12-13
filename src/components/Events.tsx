@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from "react";
 import {
   getAssetAmounts,
@@ -81,7 +82,7 @@ export const Events: React.FC<{ events: any; theme: any }> = ({
                 {name} ∙ {assetAmounts}{" "}
               </p>
               <p className="title">
-                {participants && participants} {tokenType && tokenType} ∙{" "}
+                {participants && participants} {tokenType && tokenType}
                 {assetId &&
                   getTicker(getAssetNameParts(assetId).asset).toUpperCase()}
               </p>

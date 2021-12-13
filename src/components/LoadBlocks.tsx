@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line
 import React, { useCallback } from "react";
 import { getRelativeTimestamp, truncateMiddle } from "../utils/utils";
 import { useHistory } from "react-router-dom";
@@ -18,7 +19,7 @@ export const LoadBlocks: React.FC<{
 
   const LoadRecentBlocks = useCallback(
     (isMicroblocks?: boolean) => {
-      const transactions = recentBlocks.map((transaction) => {
+      const transactions = recentBlocks.map((transaction, index) => {
         const STXBlock = transaction.height;
         const BTCBlock = transaction.burn_block_height;
         const BlockHash = transaction.hash;
@@ -28,7 +29,6 @@ export const LoadBlocks: React.FC<{
             <div
               onClick={() => push("/explorer/block/" + STXBlock)}
               className="table-item"
-              key={transaction.hash}
             >
               <div className="left-content">
                 <img
@@ -75,7 +75,7 @@ export const LoadBlocks: React.FC<{
       });
       return transactions;
     },
-    [recentBlocks, theme]
+    [recentBlocks.length, theme]
   );
 
   return <>{recentBlocks.length > 0 && LoadRecentBlocks(isMicroblocks)}</>;

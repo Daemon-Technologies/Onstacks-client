@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 /* eslint-disable no-useless-concat */
 /* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useTransaction } from "../hooks/useTransaction";
@@ -46,7 +47,6 @@ export const MicroblockDetails: React.FC<Props> = ({
       push("/upgrading");
     }
   }, [failure]);
-  console.log(microBlock);
 
   return (
     <div className="block-details">

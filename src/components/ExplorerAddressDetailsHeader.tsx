@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from "react";
 import { numberWithCommas } from "../hooks/useOverview";
 import { ReactComponent as LeftArrow } from "../assets/side-menu/left-arrow-disabled.svg";

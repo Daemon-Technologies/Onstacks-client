@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from "react";
 import { numberWithCommas, OverviewProps } from "../hooks/useOverview";
 import BitcoinVerified from "../assets/side-menu/bitcoin-verified.svg";

@@ -1,5 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line
 import React, { useEffect } from "react";
 import { AreaChart } from "../components/charts/AreaChart";
 import { LineChart } from "../components/charts/LineChart";

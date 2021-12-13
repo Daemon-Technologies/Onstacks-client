@@ -217,7 +217,6 @@ export const useExplorerAddressDetails = () => {
       principal: address,
     });
     const currentNfts = data.nft_events.map((nft) => {
-      console.log(nft);
       const asset = NFTS.find(
         (x) => x.asset_identifier === nft.asset_identifier
       );
@@ -227,7 +226,6 @@ export const useExplorerAddressDetails = () => {
         id: nft.value.repr.substr(1),
       };
     });
-    console.log(currentNfts);
     setNfts(currentNfts);
   };
 

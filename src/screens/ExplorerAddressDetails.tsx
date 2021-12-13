@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-concat */
 /* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { ExplorerAddressDetailsHeader } from "../components/ExplorerAddressDetailsHeader";

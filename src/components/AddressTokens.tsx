@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useEffect, useMemo } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
 import { TokensList } from "../hooks/useExplorerAddressDetail";
@@ -10,7 +11,6 @@ interface Props {
 export const AddressTokens: React.FC<Props> = ({ tokens, initialPageSize }) => {
   const data = useMemo(() => tokens, [tokens]);
   const dims = useWindowDimensions();
-  console.log(tokens);
 
   const columns: any = useMemo(
     () => [
