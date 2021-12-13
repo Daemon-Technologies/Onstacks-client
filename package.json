@@ -9,6 +9,7 @@
     "@mrblenny/react-flow-chart": "0.0.14",
     "@nivo/circle-packing": "^0.73.0",
     "@nivo/core": "^0.73.0",
+    "@stacks/blockchain-api-client": "^0.71.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -18,17 +19,23 @@
     "@types/react-dom": "^16.9.0",
     "axios": "^0.21.1",
     "date-fns": "^2.23.0",
+    "dayjs": "^1.10.7",
+    "pluralize": "^8.0.0",
     "react": "^16.13.1",
+    "react-code-blocks": "0.0.9-0",
     "react-dom": "^16.13.1",
+    "react-dropdown": "^1.9.2",
     "react-flow-renderer": "^9.6.6",
     "react-google-charts": "3.0.15",
+    "react-infinite-scroll-hook": "^4.0.1",
+    "react-loading-skeleton": "^3.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-table": "latest",
     "react-tooltip": "^4.2.21",
     "source-map-explorer": "^2.5.2",
     "styled-components": "^5.3.0",
-    "typescript": "3.8"
+    "typescript": "4.5.2"
   },
   "devDependencies": {
     "@types/dagre": "^0.7.45",
@@ -59,7 +66,6 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn lint",
       "pre-commit": "pretty-quick --staged"
     }
   },

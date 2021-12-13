@@ -1,6 +1,6 @@
 import differenceInMinutes from "date-fns/differenceInMinutes";
 import { useState } from "react";
-import axios from "../axios/axios";
+import { instance as axios } from "../axios/axios";
 import {
   getAddressBlocksHistory,
   getBriefMinerInfo,

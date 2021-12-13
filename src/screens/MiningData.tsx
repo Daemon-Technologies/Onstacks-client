@@ -1,6 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { Blocks, OverviewProps, TokenPriceProps } from "../hooks/useOverview";
+import {
+  Blocks,
+  OverviewProps,
+  SatsCommittedProps,
+  TokenPriceProps,
+} from "../hooks/useOverview";
 import { MiningDataHeader } from "../components/MiningDataHeader";
 import { MiningDataOverview } from "../components/MiningDataOverview";
 import { useMiningData } from "../hooks/useMiningData";
@@ -16,6 +21,7 @@ import leftDisabled from "../assets/side-menu/left-arrow-disabled.svg";
 import { useHistory, useParams } from "react-router-dom";
 import { randomColorGenerator } from "../utils/helper";
 import useWindowDimensions from "../hooks/useWindowDimension";
+import { Overview } from "./Overview";
 
 interface Props {
   theme: any;
@@ -24,7 +30,10 @@ interface Props {
   tokens: TokenPriceProps;
   areaBlocks: string[];
   areaSeries: any;
+  satsCommitted: SatsCommittedProps;
   blocks: Blocks[];
+  winnerAddresses: string[];
+  totalWinners: number[];
   failure: boolean;
 }
 
@@ -35,6 +44,9 @@ export const MiningData: React.FC<Props> = ({
   failure,
   areaBlocks,
   blocks,
+  satsCommitted,
+  totalWinners,
+  winnerAddresses,
   areaSeries,
   themeToggler,
 }) => {
@@ -131,7 +143,23 @@ export const MiningData: React.FC<Props> = ({
         <MiningDataHeader tabIndex={tabIndex} overviewData={overviewData} />
         <Tabs setTabIndex={setTabIndex} tabIndex={tabIndex} />
       </div>
+
       {tabIndex === 0 && (
+        <Overview
+          failure={failure}
+          themeToggler={themeToggler}
+          tokens={tokens}
+          totalWinners={totalWinners}
+          winnerAddresses={winnerAddresses}
+          blocks={blocks}
+          areaBlocks={areaBlocks}
+          areaSeries={areaSeries}
+          satsCommitted={satsCommitted}
+          overviewData={overviewData}
+          theme={theme}
+        />
+      )}
+      {tabIndex === 1 && (
         <MiningDataOverview
           areaBlocks={areaBlocks}
           miningInfo={miningInfo}
@@ -140,7 +168,7 @@ export const MiningData: React.FC<Props> = ({
           theme={theme}
         />
       )}
-      {tabIndex === 1 && (
+      {tabIndex === 2 && (
         <div
           id={"content1"}
           className={dims.width < 700 ? "mobile-table" : "s"}
@@ -154,7 +182,7 @@ export const MiningData: React.FC<Props> = ({
                 <div className="table-card-container">
                   <div
                     className="table-card"
-                    onClick={() => push("/address/" + block.address)}
+                    onClick={() => push("/miner/address/" + block.address)}
                   >
                     <p className="table-title">Address</p>
                     <p className="table-subtitle" style={{ color: "#FFA043" }}>
@@ -191,7 +219,7 @@ export const MiningData: React.FC<Props> = ({
           )}
         </div>
       )}
-      {tabIndex === 2 && (
+      {tabIndex === 3 && (
         <>
           {blocks.length > 0 && (
             <div className={"block-content"}>
@@ -276,7 +304,7 @@ export const MiningData: React.FC<Props> = ({
                         display: "flex",
                         alignItems: "center",
                       }}
-                      onClick={() => push("/address/" + winnerAddress)}
+                      onClick={() => push("/miner/address/" + winnerAddress)}
                     >
                       <div
                         className="circle-data"

@@ -86,10 +86,10 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
                     <td
                       onClick={() => {
                         if (cell.column.id === "winner_address") {
-                          push("/address/" + cell.row.original.address);
+                          push("/miner/address/" + cell.row.original.address);
                         } else if (cell.column.id === "block_number") {
                           push(
-                            "/mining-data/2/" +
+                            "/mining/3/" +
                               cell.row.original.block_number.substring(1, 10)
                           );
                         }

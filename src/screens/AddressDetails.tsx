@@ -51,7 +51,6 @@ export const AddressDetails: React.FC<Props> = ({
     getBlocksForAddress,
     currentBlocks,
   } = useAddressDetails();
-
   useEffect(() => {
     if (currentBlock) {
       const block = blocks.find(
@@ -59,7 +58,6 @@ export const AddressDetails: React.FC<Props> = ({
           block.block_number.toString() ===
           "#" + currentBlock.blockNumber.toString()
       );
-      console.log(currentBlock, block);
       setTimeElapsed(block?.mined_at + " ");
     }
   }, [currentBlock, blocks]);
@@ -175,7 +173,7 @@ export const AddressDetails: React.FC<Props> = ({
           </p>
           <div
             className="button-view"
-            onClick={() => getBlockHash(currentBlock?.blockNumber)}
+            onClick={() => push("/explorer/block/" + currentBlock?.blockNumber)}
           >
             <img src={Search} alt={"search"} />
             View on explorer

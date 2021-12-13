@@ -56,25 +56,177 @@ export const GlobalStyles = createGlobalStyle`
     color: ${({ theme }: any) => theme.text};
   }
 
+  .image-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .fillerStyles {
+    height: '100%';
+    background-color: ${({ theme }: any) => theme.primaryHoverColor};
+      border-radius: 'inherit';
+      text-align: 'right'
+  }
+  .card-img {
+    width: 200px;
+    height: 300px;
+    margin-right: 5px;
+    margin-bottom: 16px;
+    background-color: ${({ theme }: any) => theme.background};
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
+    p {
+      margin: 16px;
+      color: ${({ theme }: any) => theme.text};
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+  .nft-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-bottom: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border}; 
+  }
+
   #labelOverlay p.total-size {
     line-height: 0.5;
     font-size: 12px;
     margin-top: 14px;
     color: ${({ theme }: any) => theme.text};
   }
+
+  .transaction-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-top: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};    width: 100%;
+    .title {
+      color: ${({ theme }: any) => theme.greyText};
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+    .subtitle {
+      color: ${({ theme }: any) => theme.text};
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: right;
+    }
+  }
+
+  .YAKVp {
+    width: 68%;
+    position: absolute;
+  }
+  .function-call {
+    border-top: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border}; 
+    .color {
+      color: #5546FF !important;
+      font-weight: 800 !important;
+    }
+    .transaction-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+     width: 100%;
+     border-top: ${({ theme }: any) =>
+       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};    width: 100%;
+    .title {
+      color: ${({ theme }: any) => theme.greyText};
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+    .subtitle {
+      color: ${({ theme }: any) => theme.text};
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0px;
+      text-align: right;
+    }
+  }
+  }
   //SIDEBAR
+
+  .terms-container {
+    width: 100%;
+    padding: 100px;
+    .terms {
+
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
+    display: flex;
+    flex-direction: column;
+    padding: 100px 64px;
+    background: ${({ theme }: any) => theme.background} !important;
+    .title {
+      //styleName: Headline 6 / 28px / Semibold;
+      font-family: Manrope;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 36px;
+      letter-spacing: 0px;
+      color: ${({ theme }: any) => theme.text} !important;
+      text-align: left;
+      margin-bottom: 32px;
+    }
+    .sub-title {
+      font-family: Manrope;
+      font-size: 21px;
+      color: ${({ theme }: any) => theme.text} !important;
+      opacity: 0.8;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 60px;
+      letter-spacing: 0px;
+      text-align: left;
+    }
+  }
+  }
 
   .header {
     display: flex;
     /* background: linear-gradient(#6616fc, #f394d3); */
-    background: ${({ theme }: any) => theme.background} !important;
+    background: ${({ theme }: any) => theme.stacksColor} !important;
     justify-content: space-between;
     position: fixed;
     width: 100%;
     align-items: center;
     height: 60px;
     padding: 14px 32px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     /* height: 80px; */
     z-index: 200;
   }
@@ -93,14 +245,14 @@ export const GlobalStyles = createGlobalStyle`
     height: 45px;
   }
   .nav-options {
-    background: ${({ theme }: any) => theme.background} !important;
+    /* background: ${({ theme }: any) => theme.background} !important; */
     padding-left: 25px;
-    color: ${({ theme }: any) => theme.text} !important;;
+    color: white !important;;
     display: grid;
     grid-template-columns: repeat(4, auto);
     grid-gap: 24px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 800;
     list-style-type: none;
     cursor: pointer;
   }
@@ -109,10 +261,10 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .option:hover {
-    color: ${({ theme }: any) => theme.primaryColor} !important;;
+    color: ${({ theme }: any) => theme.linkColor} !important;;
   }
   .option.active {
-    color: ${({ theme }: any) => theme.primaryColor} !important;;
+    color: ${({ theme }: any) => theme.linkColor} !important;;
   }
   .crypto {
     display: flex;
@@ -123,6 +275,9 @@ export const GlobalStyles = createGlobalStyle`
     padding-right: 30px;
     align-items: center;
     display: flex !important;
+    a {
+      color: white;
+    }
     img {
       margin-right: 5px;
     }
@@ -144,10 +299,34 @@ export const GlobalStyles = createGlobalStyle`
   .mobile-logo {
     display: none;
   }
+  .dropdown-cont {
+    background-color: transparent;
+    border: 0 !important;
+    //styleName: Regular/Text/14px/Regular;
+font-family: Manrope;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px;
+letter-spacing: 0px;
+text-align: right;
+
+  }
+  .footer {
+    display: 'flex'; justify-content: 'center'; align-items: 'center'; width: '100%'; //styleName: Regular/Text/14px/Regular;
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    margin-bottom: 30px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: center;
+}
   .web-logo {
     display: block;
-    width: 32px !important;
-    height: 32px !important;
+    width: 34px !important;
+    height: 34px !important;
   }
 @media (max-width: 768px) {
   /*Mobile View */
@@ -170,6 +349,13 @@ export const GlobalStyles = createGlobalStyle`
     width: 45px;
     height: 45px;
   }
+  .screen-title {
+    font-size: 30px !important;
+  }
+  .dropdown-cont {
+    font-size: 12px;
+    padding: 8px 28px 8px 10px
+  }
   .nav-options {
     display: flex;
     width: 100%;
@@ -185,20 +371,29 @@ export const GlobalStyles = createGlobalStyle`
     list-style-type: none;
     grid-gap: 0px;
   }
+
+
+  .nav-options-active {
+    display: flex;
+    width: 100%;
+    /* height: 350px; */
+    position: absolute;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);;
+    top: 60px;
+    left: 0%;
+    height: 800px;
+    background-color:${({ theme }: any) => theme.background}; 
+    transition: all 0.5s ease;
+    flex-direction: column;
+    list-style-type: none;
+    grid-gap: 0px;
+  }
   .miningData {
     #main {
     margin-top: 45px;
   }
   }
-  .nav-options.active {
-    background: white;
-    left: 0;
-    opacity: 1;
-    transition: all 0.5s ease;
-    z-index: 1;
-    align-content: center;
-    padding-left: 0px;
-  }
+
 
   .menu-icon {
     width: 45px;
@@ -232,7 +427,330 @@ export const GlobalStyles = createGlobalStyle`
   }
 }
 
+  .explorer {
+    display: grid;
+    overflow-y: hidden;
+    grid-template-columns: repeat( 12, 1fr );
+    /* grid-template-rows: repeat( 10, 1fr ); */
+    grid-template-areas:
+        "main main main main main main main main main main main main"
+        "transactionContainer transactionContainer transactionContainer transactionContainer transactionContainer transactionContainer transactionContainer  transactionContainer transactionContainer transactionContainer transactionContainer transactionContainer";
+        /* "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4"; */
+    grid-gap: 16px;
+    width: 100%;
+    max-width: 1280px;
+    padding: 92px 32px 32px 32px;
+    margin: auto;
+  }
+  .rtt-table {
+    height: auto !important;
+  }
+  .abb-table {
+    height: auto !important;
+  }
+  .block-details {
+    width: 100%;
+    max-width: 1280px;
+    padding: 92px 32px 32px 32px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .tokens-container {
+    padding: 24px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0px 1px 3px rgb(0 0 0 / 12%);
+    background-color:${({ theme }: any) => theme.background}; ;
+    border-radius: var(--main-radius);
+    border: 1px solid ${({ theme }: any) => theme.border};;
+    th {
+      width: 85%;
+    }
+  }
+  #transactionContainer {
+    grid-area: transactionContainer;
+  }
+  .search-bar {
+    width: 100%;
+    border-radius: 10px;
+    height: 40px;
+    color: ${({ theme }: any) => theme.text} !important;
+    background-color:${({ theme }: any) => theme.background}; 
+    border: 2px solid ${({ theme }: any) => theme.border};
+    box-sizing: border-box;
+    border-radius: 28px;
+    padding: 16px 11px;
+    margin-bottom: 25px;
+  }
+  .transaction-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: flex-start;
+      flex: 1;
+      width: 100%;
+  }
+  .recent-transactions {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-right: 16px; 
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
+    flex: 0.60;
+    h3 {
+      //styleName: Regular / Text / 20px / Bold;
+      font-family: Manrope;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: 0px;
+      text-align: left;
 
+    }
+  }
+  .Dropdown-menu {
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
+    border-radius: 10px;
+    background-color:${({ theme }: any) => theme.background}; 
+  }
+  .Dropdown-option {
+    font-size: 12px;
+    font-weight: 600;
+    color: ${({ theme }: any) => theme.greyText};
+  }
+  .dropdown-cont {
+    color: ${({ theme }: any) => theme.greyText};
+
+  }
+  .Dropdown-option.is-selected {
+    background-color: ${({ theme }: any) => theme.primaryHoverColor}; 
+    color: ${({ theme }: any) => theme.text};
+  }
+  .table-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 16px;
+    margin-top: 16px;
+    img {
+      margin-right: 10px;
+    }
+    p {
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.text};
+    }
+  }
+  .transaction-title-p {
+    font-family: Manrope;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0px;
+    margin-right: 3px;
+    color: ${({ theme }: any) => theme.text};
+    text-align: left;
+  }
+  .transaction-title-span {
+    font-family: Manrope;
+    font-size: 12px;
+    color: ${({ theme }: any) => theme.greyText};
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: left;
+}
+
+  .table-item:hover {
+    background-color:  ${({ theme }: any) => theme.primaryHoverColor};
+    border-left: 3px solid #5546FF;
+  }
+  .tr-card:hover {
+    background-color: transparent;
+    border-left: 0px;
+  }
+  .table-item {
+    padding: 20px;
+    border-top: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};    display: flex;
+        cursor: pointer;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .left-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .right-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    .transaction-image {
+      width: 48px;
+      height: 48px;
+      margin-right: 12px;
+    }
+    .title {
+      //styleName: Regular / Text / 14px / Semibold;
+      font-family: Manrope;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      cursor: pointer;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.text};
+    }
+    .subtitle {
+      //styleName: Regular/Text/12px/Regular;
+      font-family: Manrope;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 18px;
+      margin-top: 4px;
+      letter-spacing: 0px;
+      text-align: left;
+      color: ${({ theme }: any) => theme.greyText} !important;
+    }
+  }
+  .rt-table {
+    background-color: ${({ theme }: any) => theme.background};
+    height: 100vh;
+    margin-top: 16px;
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
+    overflow-y: scroll;
+    padding-bottom: 16px;
+    border: 1px solid ${({ theme }: any) => theme.border};
+  }
+  .load-more {
+    border-top: 1px solid ${({ theme }: any) => theme.border};
+    color: "#84818A";
+    font-size: 12px;
+    padding-top: 15px;
+    cursor: "pointer";
+  }
+  .ab-table {
+    margin-top: 16px;
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
+    height: 100vh;
+    overflow-y: scroll;
+    padding-bottom: 16px;
+    border: 1px solid ${({ theme }: any) => theme.border};
+    margin-bottom: 16px;
+    background-color: ${({ theme }: any) => theme.background};
+  }
+  .anchor-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 0.4;
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
+  }
+  .address-blocks {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 0.4;
+    .address-card {
+      background-color: ${({ theme }: any) => theme.background};
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 20px 7x hsla(0, 0%, 0%, 0.04);
+      .address-card-header  {
+        margin-bottom: 16px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        img {
+          cursor: pointer;
+        }
+        p {
+          //styleName: Regular / Text / 14px / Semibold;
+          font-family: Manrope;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 20px;
+          letter-spacing: 0px;
+          text-align: left;
+          color: ${({ theme }: any) => theme.greyText};
+        }
+      }
+      .address-card-item  {
+        padding: 12px;
+        border: 1px solid  ${({ theme }: any) => theme.border};
+        margin-bottom: 8px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        img {
+          width:  48px;
+          height:  48px;
+          margin-right: 10px;
+        }
+        .title {
+          font-family: Manrope;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 18px;
+          letter-spacing: 0px;
+          color: ${({ theme }: any) => theme.greyText};
+          text-align: left;
+        }
+        .sub-title {
+          font-family: Manrope;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 20px;
+          letter-spacing: 0px;
+          color: ${({ theme }: any) => theme.text};
+          text-align: left;
+        }
+      }
+    }
+  }
+  .option {
+    color: ${({ theme }: any) => theme.headerColor} !important;
+    a {
+      color: ${({ theme }: any) => theme.headerColor} !important;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+   }
+  }
   a {
     color: ${({ theme }: any) => theme.text};
     text-decoration: none;
@@ -328,7 +846,9 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
     align-items: center;
     box-sizing: border-box;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     border-radius: 4px;
     padding: 12px 16px;
     margin: 40px 0 16px 0;
@@ -494,10 +1014,45 @@ export const GlobalStyles = createGlobalStyle`
     height: 100vh;
     img {
       width: 300px;
-      /* height: 200px; */ */
+      /* height: 200px; */
       object-fit: contain;
       margin-bottom: 25px;
     }
+  }
+  input:-internal-autofill-selected {
+    background-color: ${({ theme }: any) => theme.background} !important;
+    color: red !important;
+  }
+  .search-item {
+    background-color: ${({ theme }: any) => theme.background} !important;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+    box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
+    padding: 16px;
+    font-size: 14px;
+    .results-header {
+      font-size: 14px;
+      border-bottom: 1px solid  ${({ theme }: any) => theme.border} !important;;
+      color:  ${({ theme }: any) => theme.greyText} !important;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+    }
+    .item {
+      display: flex;
+      flex-direction: row;
+      font-weight: 800;
+      cursor: pointer;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .option:hover {
+    color: ${({ theme }: any) => theme.linkColor} !important;;
+  }
+  .option.active {
+    color: ${({ theme }: any) => theme.linkColor} !important;;
   }
   .button {
       background: ${({ theme }: any) => theme.primaryColor} !important;
@@ -526,7 +1081,7 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.greyText} !important;
       text-align: right;
       span {
-        color: ${({ theme }: any) => theme.primaryColor};
+        color: ${({ theme }: any) => theme.linkColor};
       }
     }
   }
@@ -592,11 +1147,16 @@ export const GlobalStyles = createGlobalStyle`
   .react-flow__pane, .react-flow__renderer, .react-flow__selectionpane {
     height: 100%;
   }
+
   #content1 {
     grid-area: content1;
     padding: 24px;
     width: 100%;
     position: relative;
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 7x 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+
 
     path {
       stroke-width: 3;
@@ -621,6 +1181,40 @@ export const GlobalStyles = createGlobalStyle`
       color: ${({ theme }: any) => theme.text} !important;
     }
   }
+  .containerContent {
+    box-shadow: none !important;
+    background: transparent  !important;
+    border: 0 solid transparent !important;
+    display: flex;
+    padding: 0px  !important;
+    flex-direction: row;
+  }
+  .containerOne {
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
+    width: 100%;
+    background: ${({ theme }: any) => theme.background};
+    border-radius: var(--main-radius);
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
+  margin-right: 16px;
+  grid-area: content1;
+    padding: 24px;
+    width: 100%;
+    position: relative;
+
+    path {
+      stroke-width: 3;
+      /* stroke: #FFA043; */
+    }
+    background: ${({ theme }: any) => theme.background};
+    border-radius: var(--main-radius);
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
+  }
   .title-table {
     font-size: 14px;
       font-weight: 500;
@@ -638,9 +1232,13 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }: any) => theme.background} !important;
     grid-area: content2;
     border-radius: var(--main-radius);
-    border: ${({ theme }: any) =>
-      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+border: ${({ theme }: any) =>
+  theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
+    box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 7x 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -660,6 +1258,10 @@ export const GlobalStyles = createGlobalStyle`
     border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
+      box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 7x 10px 20px 0px hsla(0, 0%, 0%, 0.04);
+
     .title {
       font-size: 14px;
       font-weight: 500;
@@ -709,6 +1311,9 @@ export const GlobalStyles = createGlobalStyle`
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
   position: relative;
+  box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
+box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
   height: auto;
     .title {
       font-size: 14px;
@@ -732,11 +1337,31 @@ export const GlobalStyles = createGlobalStyle`
     margin-bottom: 12px;
   }
 
+  .transaction-card {
+    border: ${({ theme }: any) =>
+      theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
+  theme.border};
+    height: 110px;
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A;
+    border-radius: 4px;
+    display: flex;
+    background: ${({ theme }: any) => theme.background} !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   .info-card {
     border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
     height: 110px;
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 10px 20px 0px #0000000A;
+    padding: 16px;
     border-radius: 4px;
     display: flex;
     background: ${({ theme }: any) => theme.background} !important;
@@ -828,7 +1453,7 @@ export const GlobalStyles = createGlobalStyle`
       font-weight: 700;
       font-size: 14px;
       cursor: pointer;
-      color: ${({ theme }: any) => theme.primaryColor} !important;    
+      color: ${({ theme }: any) => theme.linkColor} !important;    
     }
   }
 
@@ -910,7 +1535,7 @@ export const GlobalStyles = createGlobalStyle`
   table {
     margin-bottom: 30px;
     td:first-child {
-      color: ${({ theme }: any) => theme.primaryColor} !important;    
+      color: ${({ theme }: any) => theme.linkColor} !important;    
     }
     td {
       padding: 8px;
@@ -976,8 +1601,9 @@ export const GlobalStyles = createGlobalStyle`
   }
   }
   @media only screen and (max-height: 828px) { 
-   
+    
     @media only screen and (max-height: 700px) { 
+      
       #nav {
         padding: 0 14px;
         height: auto;
@@ -1114,7 +1740,75 @@ export const GlobalStyles = createGlobalStyle`
     .miningData {
       padding: 16px !important;
     }
-
+    .not-found {
+      padding: 35px;
+      text-align: center;
+      img {
+        width: 200px !important;
+      }
+    }
+    #content1 {
+      flex-direction: column;
+      .containerOne {
+      width: 100% !important;
+      margin-bottom: 16px;
+    }
+    #content2 {
+      width: 100% !important;
+    }
+    }
+    .explorer {
+      .screen-title {
+        font-size: 12px;
+        overflow-wrap: anywhere;
+      }
+    }
+    .tabs div {
+      padding-bottom: 47px !important;
+    }
+    .anchor-block, .address-blocks {
+      flex: 1;
+      width: 100%;
+      margin-top: 32px;
+      .rt-table {
+        padding: 24px 16px;
+      }
+      .table-item  {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        .right-content {
+          align-items: flex-start;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+          margin-top: 16px;
+        }
+      }
+    }
+    .transaction-container {
+      flex-direction: column;
+      .recent-transactions {
+        margin-right: 0px;
+        flex: 1;
+        width: 100%
+      }
+      .rt-table {
+        padding: 0px;
+      }
+      .table-item  {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        .right-content {
+          align-items: flex-start;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+          margin-top: 16px;
+        }
+      }
+    }
     #labelOverlay {
       left: 43%;
     }
@@ -1132,10 +1826,48 @@ export const GlobalStyles = createGlobalStyle`
   :root {
     overflow-y: auto;
   }
+  .YAKVp {
+    max-width: 375px;
+    padding: 0px !important;
+    width: 375px;
+    }
+
+  .explorer {
+    padding: 40px 16px 16px 16px;
+  }
   .miningData {
      .content1 {
       
      }
+  }
+  .transaction-card {
+    flex-direction: column;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    box-shadow: 0px 0px 1px 0px #0000000A;
+    box-shadow: 0px 2px 6px 0px #0000000A;
+    box-shadow: 0px 1px 7px 0px #0000000A; 
+    align-items: flex-start;
+    height: auto;
+  }
+  .transaction-row {
+    text-align: left;
+    align-items: flex-start;
+    flex-direction: column;
+    overflow-wrap: anywhere;
+  }
+  .function-call .transaction-row {
+    text-align: left;
+    align-items: flex-start;
+    overflow-wrap: anywhere;
+    flex-direction: column;
+  }
+  .function-call .transaction-row .subtitle {
+    text-align: left;
+  }
+  .transaction-row .subtitle {
+    text-align: left;
   }
   .burn-address {
     display: none;
@@ -1172,6 +1904,7 @@ export const GlobalStyles = createGlobalStyle`
   .data {
     font-size: 12px !important;
     text-align: center !important;
+    display: none !important;
   }
   
   th {
@@ -1267,10 +2000,37 @@ export const GlobalStyles = createGlobalStyle`
   .divider {
     border: 1px solid ${({ theme }: any) => theme.border};
   }
+  .collections-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .search-bar {
+    width: 70%;
+    border-radius: 10px;
+    background-color:${({ theme }: any) => theme.background}; ;
+    height: 40px;
+    border: 2px solid ${({ theme }: any) => theme.border};
+    box-sizing: border-box;
+    border-radius: 28px;
+    padding: 16px 11px;
+    margin-bottom: 10px;
+    }
+    select {
+      width: 20%;
+    border-radius: 10px;
+    height: 40px;
+    border: 2px solid #EBEAED;
+    box-sizing: border-box;
+    border-radius: 28px;
+    padding: 0px 11px;
+    margin-bottom: 25px;
+    }
+  }
   .tabs {
     display: flex;
     flex-direction: row;
-    margin: 8px 0;
+    margin: 24px 0;
     border-bottom: 1px solid ${({ theme }: any) => theme.border};
     div {
       min-width: 100px;
@@ -1444,6 +2204,15 @@ export const GlobalStyles = createGlobalStyle`
     #content1, #content2, #content3, #content4, .info-card {
     width: 98% !important;
   }
+  .option {
+    color: ${({ theme }: any) => theme.text} !important;
+    a {
+      color: ${({ theme }: any) => theme.text} !important;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+   }
+  }
   }
   .mobile-table {
    background-color: transparent !important;
@@ -1480,4 +2249,14 @@ export const GlobalStyles = createGlobalStyle`
     theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
 };
+.left-content .title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.title .transaction-image {
+  width: 19px;
+  height: 19px;
+  margin-right: 3px;
+}
   `;

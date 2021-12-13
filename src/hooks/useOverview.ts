@@ -6,7 +6,7 @@ import {
   getTopBurnFeePerBlock,
 } from "./../axios/requests";
 import { useEffect, useState } from "react";
-import axios from "../axios/axios";
+import { instance as axios } from "../axios/axios";
 import { getOverviewData } from "../axios/requests";
 import differenceInMinutes from "date-fns/differenceInMinutes";
 import { numFormatter } from "../utils/helper";
@@ -88,90 +88,103 @@ export const useOverview = () => {
   useEffect(() => {
     try {
       axios.get(getOverviewData).then((data: any) => {
-        setOverviewData(data);
+        if (data) {
+          setOverviewData(data);
+        }
       });
       axios.get(getTokenPrice).then((data: any) => {
-        setTokens({
-          BTC: numberWithCommas(
-            data.find((token: any) => token.token_name === "BTC").token_price
-          ),
-          STX: numberWithCommas(
-            data.find((token: any) => token.token_name === "STX").token_price
-          ),
-        });
+        if (data) {
+          setTokens({
+            BTC: numberWithCommas(
+              data.find((token: any) => token.token_name === "BTC").token_price
+            ),
+            STX: numberWithCommas(
+              data.find((token: any) => token.token_name === "STX").token_price
+            ),
+          });
+        }
       });
       axios.get(getSatsCommittedPerBlock).then((data: any) => {
-        setSatsCommitted({
-          block_number: data.map((item: any) => +item.block_number),
-          total_sats_committed: data.map(
-            (item: any) => +item.total_sats_committed
-          ),
-        });
+        if (data) {
+          setSatsCommitted({
+            block_number: data.map((item: any) => +item.block_number),
+            total_sats_committed: data.map(
+              (item: any) => +item.total_sats_committed
+            ),
+          });
+        }
       });
       axios.get(getTopBurnFeePerBlock).then((data: any) => {
-        let currentData: TotalBurnedMinerFees[] = data;
-        let series: { name: string; data: any[]; winner_blocks: any[] }[] = [];
-        let blocks: any[] = [];
-        currentData.forEach((block: any) => {
-          blocks.push(block.block_number);
-          block.miner_list.forEach((element: any) => {
-            let index = series.findIndex(
-              (e) => e.name === element.leader_key_address
-            );
-            if (index !== -1) {
-              series[index].data.push(element.burn_fee);
-              series[index].winner_blocks.push(block.block_number);
-            } else {
-              series.push({
-                name: element.leader_key_address,
-                data: [element.burn_fee],
-                winner_blocks: [block.block_number],
-              });
-            }
+        if (data) {
+          let currentData: TotalBurnedMinerFees[] = data;
+          let series: { name: string; data: any[]; winner_blocks: any[] }[] =
+            [];
+          let blocks: any[] = [];
+          currentData.forEach((block: any) => {
+            blocks.push(block.block_number);
+            block.miner_list.forEach((element: any) => {
+              let index = series.findIndex(
+                (e) => e.name === element.leader_key_address
+              );
+              if (index !== -1) {
+                series[index].data.push(element.burn_fee);
+                series[index].winner_blocks.push(block.block_number);
+              } else {
+                series.push({
+                  name: element.leader_key_address,
+                  data: [element.burn_fee],
+                  winner_blocks: [block.block_number],
+                });
+              }
+            });
           });
-        });
-        setAreaBlocks(blocks);
-        setAreaSeries(series);
+          setAreaBlocks(blocks);
+          setAreaSeries(series);
+        }
       });
       axios.get(getRewardDistribution).then((data: any) => {
-        setwinnersAddresses(
-          data.map((b: any) => {
-            if (b.stx_address && b.stx_address.length > 0) {
-              return (
-                b.stx_address.substring(0, 4) +
-                ".." +
-                b.stx_address.substring(
-                  b.stx_address.length - 4,
-                  b.stx_address.length
-                )
-              );
-            } else {
-              return "";
-            }
-          })
-        );
-        setTotalWinners(data.map((b: any) => b.actual_win));
+        if (data) {
+          setwinnersAddresses(
+            data.map((b: any) => {
+              if (b.stx_address && b.stx_address.length > 0) {
+                return (
+                  b.stx_address.substring(0, 4) +
+                  ".." +
+                  b.stx_address.substring(
+                    b.stx_address.length - 4,
+                    b.stx_address.length
+                  )
+                );
+              } else {
+                return "";
+              }
+            })
+          );
+          setTotalWinners(data.map((b: any) => b.actual_win));
+        }
       });
       axios.get(getBlocks).then((data: any) => {
-        setBlocks(
-          data.map((r: Blocks) => {
-            return {
-              address: r.winner_address,
-              block_number: "#" + r.block_number,
-              mined_at:
-                differenceInMinutes(new Date(), r.mined_at * 1000) +
-                (window.innerWidth > 800 ? " Mins" : "Mins"),
-              sats_spent: numFormatter(+r.sats_spent),
-              winner_address:
-                r.winner_address.substring(0, 8) +
-                ".." +
-                r.winner_address.substring(
-                  r.winner_address.length - 8,
-                  r.winner_address.length
-                ),
-            };
-          })
-        );
+        if (data) {
+          setBlocks(
+            data.map((r: Blocks) => {
+              return {
+                address: r.winner_address,
+                block_number: "#" + r.block_number,
+                mined_at:
+                  differenceInMinutes(new Date(), r.mined_at * 1000) +
+                  (window.innerWidth > 800 ? " Mins" : "Mins"),
+                sats_spent: numFormatter(+r.sats_spent),
+                winner_address:
+                  r.winner_address.substring(0, 8) +
+                  ".." +
+                  r.winner_address.substring(
+                    r.winner_address.length - 8,
+                    r.winner_address.length
+                  ),
+              };
+            })
+          );
+        }
       });
     } catch (error) {
       setFailure(true);

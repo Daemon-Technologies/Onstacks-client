@@ -1,10 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { useDarkMode } from "./components/useDarkMode.js";
 import { GlobalStyles } from "./components/Globalstyle";
 import { lightTheme, darkTheme } from "./components/Themes";
-import { Overview } from "./screens/Overview";
 import { useOverview } from "./hooks/useOverview";
 import { Notfound } from "./screens/Notfound";
 import { MiningData } from "./screens/MiningData";
@@ -12,6 +16,14 @@ import { Header } from "./components/Header";
 import { AddressDetails } from "./screens/AddressDetails";
 import { Upgrading } from "./screens/Upgrading";
 import { useMiningData } from "./hooks/useMiningData";
+import { Explorer } from "./screens/Explorer";
+import { ExplorerAddressDetails } from "./screens/ExplorerAddressDetails";
+import { STXTransferDetails } from "./screens/STXTransferDetails";
+import { Blockdetails } from "./screens/Blockdetails";
+import { Protocol } from "./screens/Protocol";
+import { Terms } from "./screens/Terms";
+import { MicroblockDetails } from "./screens/MicroblockDetails";
+import { Footer } from "./components/Footer";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -40,46 +52,80 @@ const App: React.FC = () => {
         <Router>
           <Header themeToggler={themeToggler} tokens={tokens} theme={theme} />
           <Switch>
-            <Route exact path="/">
-              <Overview
+            <Route exact path="/explorer">
+              <Explorer
+                failure={failure}
+                overviewData={overviewData}
+                theme={theme}
+                themeToggler={themeToggler}
+              />
+            </Route>
+            <Route exact path="/protocol">
+              <Protocol />
+            </Route>
+            <Route exact path="/terms">
+              <Terms />
+            </Route>
+            <Route exact path="/explorer/address/:address">
+              <ExplorerAddressDetails
+                failure={failure}
+                themeToggler={themeToggler}
+                theme={theme}
+              />
+            </Route>
+            <Route exact path="/explorer/txId/:txId">
+              <STXTransferDetails
+                failure={failure}
+                theme={theme}
+                themeToggler={themeToggler}
+              />
+            </Route>
+            <Route exact path="/explorer/block/:block">
+              <Blockdetails
+                failure={failure}
+                theme={theme}
+                themeToggler={themeToggler}
+              />
+            </Route>
+
+            <Route exact path="/explorer/microblock/:microblock">
+              <MicroblockDetails
+                failure={failure}
+                theme={theme}
+                themeToggler={themeToggler}
+              />
+            </Route>
+            <Route exact path="/mining">
+              <MiningData
                 failure={failure}
                 themeToggler={themeToggler}
                 tokens={tokens}
+                blocks={blocks}
+                areaBlocks={areaBlocks}
+                areaSeries={areaSeries}
+                satsCommitted={satsCommitted}
+                totalWinners={totalWinners}
+                winnerAddresses={winnersAddresses}
+                overviewData={overviewData}
+                theme={theme}
+              />
+            </Route>
+            <Route exact path="/mining/:index/:block">
+              <MiningData
+                failure={failure}
+                themeToggler={themeToggler}
+                tokens={tokens}
+                satsCommitted={satsCommitted}
                 totalWinners={totalWinners}
                 winnerAddresses={winnersAddresses}
                 blocks={blocks}
                 areaBlocks={areaBlocks}
                 areaSeries={areaSeries}
-                satsCommitted={satsCommitted}
                 overviewData={overviewData}
                 theme={theme}
               />
             </Route>
-            <Route exact path="/mining-data">
-              <MiningData
-                failure={failure}
-                themeToggler={themeToggler}
-                tokens={tokens}
-                blocks={blocks}
-                areaBlocks={areaBlocks}
-                areaSeries={areaSeries}
-                overviewData={overviewData}
-                theme={theme}
-              />
-            </Route>
-            <Route exact path="/mining-data/:index/:block">
-              <MiningData
-                failure={failure}
-                themeToggler={themeToggler}
-                tokens={tokens}
-                blocks={blocks}
-                areaBlocks={areaBlocks}
-                areaSeries={areaSeries}
-                overviewData={overviewData}
-                theme={theme}
-              />
-            </Route>
-            <Route exact path="/address/:address">
+            <Route exact path="/miner/address/:address">
               <AddressDetails
                 failure={failure}
                 currentBlock={currentBlock}
@@ -91,10 +137,18 @@ const App: React.FC = () => {
             <Route exact path="/upgrading">
               <Upgrading />
             </Route>
+            <Route
+              exact
+              path="/"
+              render={() => {
+                return <Redirect to="/explorer" />;
+              }}
+            />
             <Route path="*">
               <Notfound />
             </Route>
           </Switch>
+          <Footer />
         </Router>
       </>
     </ThemeProvider>

@@ -37,7 +37,7 @@ export const BlockInformation: React.FC<Props> = ({
           <p className="title">Block information</p>
           <div
             className="button-view"
-            onClick={() => getBlockHash(overviewData.stx_block_height)}
+            onClick={() => push("/explorer/block/" + currentBlock?.blockNumber)}
           >
             <img src={Search} alt={"search"} />
             View on explorer
@@ -97,7 +97,9 @@ export const BlockInformation: React.FC<Props> = ({
             <p
               className={"a-tag"}
               onClick={() =>
-                push("/address/" + currentBlock?.block_info.winning_address)
+                push(
+                  "/miner/address/" + currentBlock?.block_info.winning_address
+                )
               }
             >{`${currentBlock?.block_info.winning_address.substring(
               0,

@@ -7,13 +7,19 @@ const handleError = (error: AxiosError) => {
   throw error;
 };
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: "https://api.stxmining.club/api/v2/",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-instance.interceptors.response.use(handleSuccess, handleError);
+export const explorerInstance = axios.create({
+  baseURL: "https://explorer-api.onstacks.com/api/explorer/",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
-export default instance;
+explorerInstance.interceptors.response.use(handleSuccess, handleError);
+instance.interceptors.response.use(handleSuccess, handleError);

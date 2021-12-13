@@ -11,7 +11,7 @@ export const Upgrading: React.FC = () => {
   return (
     <>
       <div className="upgrading">
-        <img src={Logo} alt="404" />
+        <img style={{ width: "auto", height: "auto" }} src={Logo} alt="404" />
         <p>We are currently upgrading this site. Please check back later</p>
         <div onClick={navigateToHome} className="button">
           <p>Refresh</p>
