@@ -19,6 +19,15 @@ export const Protocol: React.FC = () => {
         <h1 style={{ marginTop: -30, marginBottom: 10 }}>Coming Soon</h1>
         <p>
           This page is current under developement and will be releasing soon.
+          Launching your own dapp and looking to access on chain data?{" "}
+          <span
+            style={{ cursor: "pointer", textDecoration: "underline" }}
+            onClick={() => {
+              window.open(`https://forms.gle/EPKzaWekfSc4pp956`, "_blank");
+            }}
+          >
+            Register interest.
+          </span>
         </p>
         <div onClick={navigateToHome} className="button">
           <p>Home</p>

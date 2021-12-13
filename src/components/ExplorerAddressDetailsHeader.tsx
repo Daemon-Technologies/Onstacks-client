@@ -3,13 +3,15 @@ import { numberWithCommas } from "../hooks/useOverview";
 import { ReactComponent as LeftArrow } from "../assets/side-menu/left-arrow-disabled.svg";
 import { useHistory } from "react-router-dom";
 import { ExplorerOverview } from "../hooks/useExplorerAddressDetail";
+import useWindowDimensions from "../hooks/useWindowDimension";
+import { truncateMiddle } from "../utils/utils";
 
 export const ExplorerAddressDetailsHeader: React.FC<{
   headerDetails: ExplorerOverview | undefined;
   address: string;
 }> = ({ headerDetails, address }) => {
   const { goBack } = useHistory();
-
+  const dims = useWindowDimensions();
   return (
     <>
       <div
@@ -34,7 +36,9 @@ export const ExplorerAddressDetailsHeader: React.FC<{
           justifyContent: "space-between",
         }}
       >
-        <p className="screen-title">{address}</p>
+        <p className="screen-title">
+          {dims.width > 700 ? address : truncateMiddle(address, 8)}
+        </p>
       </div>
       <div className={"info-card"}>
         <div className="inner-info-card">
@@ -67,7 +71,7 @@ export const ExplorerAddressDetailsHeader: React.FC<{
         </div> */}
         <div className="inner-info-card">
           <p className="title">Total fees</p>
-          <p className="sub-title">{headerDetails?.total_fee} %</p>
+          <p className="sub-title">{headerDetails?.total_fee} STX</p>
         </div>
       </div>
     </>
