@@ -133,7 +133,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                 <div className="address-card-item">
                   <img alt="stacks" src={Stacks} />
                   <div>
-                    <p className="title">Total Balance</p>
+                    <p className="title">Total balance</p>
                     <p className="sub-title">
                       {nativeInfo.assets_info.balance.toLocaleString()} STX
                     </p>
@@ -146,7 +146,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                 >
                   <img alt="stacks" src={OtherAssets} />
                   <div>
-                    <p className="title">Other Assets</p>
+                    <p className="title">Other assets</p>
                     <p className="sub-title">
                       {nativeInfo.assets_info.fungible_tokens.length +
                         nativeInfo.assets_info.non_fungible_tokens.length}{" "}
@@ -163,7 +163,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                 <div className="address-card-item">
                   <img alt="stacks" src={Mining} />
                   <div>
-                    <p className="title">STX Stacked(locked)</p>
+                    <p className="title">STX stacked(locked)</p>
                     <p className="sub-title">
                       {nativeInfo.stacking_info.stacking_amount.toLocaleString()}{" "}
                       STX
@@ -240,7 +240,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                 <div className="address-card-item">
                   <img alt="stacks" src={Burn} />
                   <div>
-                    <p className="title">BTC Spent</p>
+                    <p className="title">BTC spent</p>
                     <p className="sub-title">
                       {nativeInfo.mining_info.total_burnt} Sats
                     </p>
@@ -255,7 +255,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
         <>
           {tokens.length > 0 ? (
             <div id="transactionContainer" className="tokens-container">
-              <p className={"title-table"}>All Tokens</p>
+              <p className={"title-table"}>All tokens</p>
               <div>
                 <AddressTokens initialPageSize={10} tokens={tokens} />
               </div>

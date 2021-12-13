@@ -147,7 +147,7 @@ export const ExplorerHeader: React.FC<{
       )}
       <div className={"info-card"}>
         <div className="inner-info-card">
-          <p className="title">Total Transactions (24hr)</p>
+          <p className="title">Total transactions (24hr)</p>
           <p className="sub-title">
             {numberWithCommas(overviewData.total_txs_24hrs)}
           </p>
@@ -159,13 +159,13 @@ export const ExplorerHeader: React.FC<{
           </p>
         </div>
         <div className="inner-info-card">
-          <p className="title">Avg Transactions per block(24h)</p>
+          <p className="title">Avg transactions per block(24h)</p>
           <p className="sub-title">
             {numberWithCommas(overviewData.avg_txs_per_block)}
           </p>
         </div>
         <div className="inner-info-card">
-          <p className="title">Pending Transactions (24hr)</p>
+          <p className="title">Pending transactions (24hr)</p>
           <p className="sub-title">
             {numberWithCommas(overviewData.pending_txs_number)}
           </p>

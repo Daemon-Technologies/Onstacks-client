@@ -509,7 +509,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                   }}
                   className="transaction-row"
                 >
-                  <p className="title">Sender Address</p>
+                  <p className="title">Sender address</p>
                   <p className="subtitle">{transaction?.sender_address}</p>
                 </div>
                 <div className="transaction-row">
@@ -523,7 +523,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <p className="subtitle">{transaction?.nonce}</p>
                 </div>
                 <div className="transaction-row">
-                  <p className="title">Block Height</p>
+                  <p className="title">Block height</p>
                   <p className="subtitle">{transaction?.block_height}</p>
                 </div>
                 <div className="transaction-row">
@@ -539,7 +539,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                     <p className="title">Bitcoin anchor</p>
                   </div>
                   <div className="transaction-row">
-                    <p className="title">Bitcoin Block Height</p>
+                    <p className="title">Bitcoin block height</p>
                     <p className="subtitle">
                       {(transaction as any).block_anchor_info
                         ? (transaction as any).block_anchor_info
@@ -548,7 +548,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                     </p>
                   </div>
                   <div className="transaction-row">
-                    <p className="title">Bitcoin Block Hash</p>
+                    <p className="title">Bitcoin block hash</p>
                     <p className="subtitle">
                       {/* {truncateMiddle(
                         (transaction as any).block_anchor_info

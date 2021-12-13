@@ -94,7 +94,7 @@ export const Overview: React.FC<Props> = ({
           </div>
         </div>
         <div id="content2" style={{ width: "50%" }}>
-          <p className="title">Top Miners - Sats Spent Per Block</p>
+          <p className="title">Top Miners - Sats spent per block</p>
           <div className="seprator">
             {areaBlocks.length > 0 && areaSeries.length > 0 && (
               <LineChart
@@ -134,7 +134,7 @@ export const Overview: React.FC<Props> = ({
                   </p>
                 </div>
                 <div className="table-card">
-                  <p className="table-title">Time Elapsed</p>
+                  <p className="table-title">Time elapsed</p>
                   <p className="table-subtitle">{block.mined_at}</p>
                 </div>
                 <div className="table-card">
@@ -145,7 +145,7 @@ export const Overview: React.FC<Props> = ({
                   onClick={() => push("/miner/address/" + block.address)}
                   className="table-card"
                 >
-                  <p className="table-title"> Winner Address</p>
+                  <p className="table-title"> Winner address</p>
                   <p className="table-subtitle">{block.winner_address}</p>
                 </div>
               </div>
