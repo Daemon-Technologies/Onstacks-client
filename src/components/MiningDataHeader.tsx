@@ -11,7 +11,7 @@ export const MiningDataHeader: React.FC<{
   return (
     <>
       {" "}
-      <p className="screen-title">Overview</p>
+      <p className="screen-title">Mining Activity</p>
       <InfoCard overviewData={overviewData} />
       <div
         style={{
