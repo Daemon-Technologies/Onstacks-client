@@ -1,16 +1,15 @@
+import { useEffect, useState } from "react";
+import { instance as axios } from "../axios/axios";
+import { getOverviewData } from "../axios/requests";
+import differenceInMinutes from "date-fns/differenceInMinutes";
+import { numFormatter } from "../utils/helper";
 import {
   getBlocks,
   getRewardDistribution,
   getSatsCommittedPerBlock,
   getTokenPrice,
   getTopBurnFeePerBlock,
-} from "./../axios/requests";
-import { useEffect, useState } from "react";
-import { instance as axios } from "../axios/axios";
-import { getOverviewData } from "../axios/requests";
-import differenceInMinutes from "date-fns/differenceInMinutes";
-import { numFormatter } from "../utils/helper";
-
+} from "../axios/requests";
 export interface OverviewProps {
   active_miners: number;
   avg_tx_fees_per_block: number;
@@ -72,8 +71,8 @@ export const useOverview = () => {
 
   const [failure, setFailure] = useState(false);
 
-  const [totalWinners, setTotalWinners] = useState<[]>([]);
-  const [winnersAddresses, setwinnersAddresses] = useState<[]>([]);
+  const [totalWinners, setTotalWinners] = useState<any[]>([]);
+  const [winnersAddresses, setwinnersAddresses] = useState<any[]>([]);
 
   const [satsCommitted, setSatsCommitted] = useState<SatsCommittedProps>({
     block_number: [],
