@@ -6,9 +6,13 @@ import {
   getTicker,
   truncateMiddle,
 } from "../utils/utils";
-import TransactionImage from "../assets/explorer/transaction.svg";
+import EventDark from "../assets/explorer/Event-Dark.svg";
+import EventLight from "../assets/explorer/Event-Light.svg";
 
-export const Events: React.FC<{ events: any }> = ({ events }) => {
+export const Events: React.FC<{ events: any; theme: any }> = ({
+  events,
+  theme,
+}) => {
   const getParticipants = (event: any) => {
     if (
       event.event_type === "stx_asset" ||
@@ -63,7 +67,7 @@ export const Events: React.FC<{ events: any }> = ({ events }) => {
             <img
               className="transaction-image"
               alt="transaction"
-              src={TransactionImage}
+              src={theme === "dark" ? EventDark : EventLight}
             />
             <div
               style={{

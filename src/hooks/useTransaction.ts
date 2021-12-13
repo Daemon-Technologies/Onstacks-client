@@ -51,13 +51,14 @@ export const useTransaction = () => {
     // })
     try {
       explorerInstance.get(getTxByTxId(id)).then((data: any) => {
+        console.log(data);
         setTransaction(data);
         if (data !== undefined) {
           explorerInstance.get(getTxByTxId(id)).then((data: any) => {
-            setTransaction(data);
+            if (data !== undefined) {
+              setTransaction(data);
+            }
           });
-        } else {
-          setFails(true);
         }
       });
       setIsLoading(false);

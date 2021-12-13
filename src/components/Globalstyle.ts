@@ -1760,7 +1760,11 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     .explorer {
       .screen-title {
         font-size: 12px;
+        overflow-wrap: anywhere;
       }
+    }
+    .tabs div {
+      padding-bottom: 47px !important;
     }
     .anchor-block, .address-blocks {
       flex: 1;

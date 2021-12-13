@@ -146,7 +146,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <div className="table-header">
                     <p>Events</p>
                   </div>
-                  <Events events={transaction.events} />
+                  <Events theme={theme} events={transaction.events} />
                 </div>
               )}
 
@@ -301,20 +301,20 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <div className="transaction-row">
                     <p className="title">Bitcoin Block Hash</p>
                     <p className="subtitle">
-                      {/* {truncateMiddle(
+                      {truncateMiddle(
                         (transaction as any).block_anchor_info
                           .bitcoin_block_hash,
                         10
-                      )} */}
+                      )}
                     </p>
                   </div>
                   <div className="transaction-row">
                     <p className="title">Anchor transaction id</p>
                     <p className="subtitle">
-                      {/* {truncateMiddle(
+                      {truncateMiddle(
                         (transaction as any).block_anchor_info.bitcoin_tx_hash,
                         10
-                      )} */}
+                      )}
                     </p>
                   </div>
                 </div>
@@ -411,7 +411,7 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <div className="table-header">
                     <p>Events</p>
                   </div>
-                  <Events events={transaction.events} />
+                  <Events theme={theme} events={transaction.events} />
                 </div>
               )}
               {transaction.post_conditions.length > 0 && (
@@ -463,20 +463,20 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <div className="transaction-row">
                     <p className="title">Bitcoin Block Hash</p>
                     <p className="subtitle">
-                      {/* {truncateMiddle(
+                      {truncateMiddle(
                         (transaction as any).block_anchor_info
                           .bitcoin_block_hash,
                         10
-                      )} */}
+                      )}
                     </p>
                   </div>
                   <div className="transaction-row">
                     <p className="title">Anchor transaction id</p>
                     <p className="subtitle">
-                      {/* {truncateMiddle(
+                      {truncateMiddle(
                         (transaction as any).block_anchor_info.bitcoin_tx_hash,
                         10
-                      )} */}
+                      )}
                     </p>
                   </div>
                 </div>
@@ -550,20 +550,20 @@ export const STXTransferDetails: React.FC<Props> = ({
                   <div className="transaction-row">
                     <p className="title">Bitcoin Block Hash</p>
                     <p className="subtitle">
-                      {/* {truncateMiddle(
+                      {truncateMiddle(
                         (transaction as any).block_anchor_info
                           .bitcoin_block_hash,
                         10
-                      )} */}
+                      )}
                     </p>
                   </div>
                   <div className="transaction-row">
                     <p className="title">Anchor transaction id</p>
                     <p className="subtitle">
-                      {/* {truncateMiddle(
+                      {truncateMiddle(
                         (transaction as any).block_anchor_info.bitcoin_tx_hash,
                         10
-                      )} */}
+                      )}
                     </p>
                   </div>
                 </div>
