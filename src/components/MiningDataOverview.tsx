@@ -22,7 +22,7 @@ export const MiningDataOverview: React.FC<{
         <FlowChartNodes theme={theme} miningInfo={miningInfo} />
       </div>
       <div id="content3">
-        <p className="title">Top Miners - Sats Spent Per Block</p>
+        <p className="title">Top miners - Sats spent per block</p>
         <div className="seprator">
           {areaBlocks.length > 0 && areaSeries.length > 0 && (
             <LineChart
@@ -46,18 +46,18 @@ export const MiningDataOverview: React.FC<{
                   </p>
                 </div>
                 <div className="table-card">
-                  <p className="table-title">Time Elapsed</p>
+                  <p className="table-title">Time elapsed</p>
                   <p className="table-subtitle">{block.mined_at}</p>
                 </div>
                 <div className="table-card">
-                  <p className="table-title">Total Sats spent</p>
+                  <p className="table-title">Total sats spent</p>
                   <p className="table-subtitle">{block.sats_spent}</p>
                 </div>
                 <div
                   className="table-card"
                   onClick={() => push("/address/" + block.address)}
                 >
-                  <p className="table-title"> Winner Miner</p>
+                  <p className="table-title"> Winner miner</p>
                   <p className="table-subtitle">{block.winner_address}</p>
                 </div>
               </div>

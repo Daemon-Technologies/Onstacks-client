@@ -73,7 +73,7 @@ export const MicroblockDetails: React.FC<Props> = ({
                   <p className="subtitle">{microBlock?.block_height}</p>
                 </div>
                 <div className="transaction-row">
-                  <p className="title">Block Hash</p>
+                  <p className="title">Block hash</p>
                   <p className="subtitle">
                     {truncateMiddle(microBlock?.block_hash, 10)}
                   </p>

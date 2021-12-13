@@ -57,7 +57,7 @@ export const BlockInformation: React.FC<Props> = ({
               }
               alt={"Stacks"}
             />
-            <p>STX Confirmation</p>
+            <p>STX confirmation</p>
           </div>
           <div
             onClick={() =>
@@ -75,7 +75,7 @@ export const BlockInformation: React.FC<Props> = ({
               }
               alt={"Bitcoin"}
             />
-            <p>Bitcoin Confirmation</p>
+            <p>Bitcoin confirmation</p>
           </div>
           <div>
             <img
@@ -86,14 +86,14 @@ export const BlockInformation: React.FC<Props> = ({
               }
               alt={"Stacks"}
             />
-            <p>Reward Confirmation</p>
+            <p>Reward confirmation</p>
           </div>
           <hr className={"hr"} />
         </div>
         <hr className="divider" />
         <div>
           <div className={"row-content"}>
-            <p>Winner Address</p>
+            <p>Winner address</p>
             <p
               className={"a-tag"}
               onClick={() =>
@@ -128,7 +128,7 @@ export const BlockInformation: React.FC<Props> = ({
             )}`}</p>
           </div>
           <div className={"row-content"}>
-            <p>BTC Block height</p>
+            <p>BTC block height</p>
             <p
               onClick={() =>
                 window.open(

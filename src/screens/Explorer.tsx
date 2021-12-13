@@ -119,7 +119,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
                 alignItems: "center",
               }}
             >
-              <h3>Recent Transactions</h3>
+              <h3>Recent transactions</h3>
               <Dropdown
                 controlClassName="dropdown-cont"
                 options={transactionsOptions}
@@ -149,7 +149,7 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
             </div>
           </div>
           <div ref={rootBlockRef} className="anchor-block">
-            <h3>Anchor Block</h3>
+            <h3>Anchor block</h3>
             <div className="ab-table">
               <LoadBlocks
                 getMicroBlock={getMicroBlock}
