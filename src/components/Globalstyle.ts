@@ -366,6 +366,27 @@ export const GlobalStyles = createGlobalStyle`
     padding-right: 32px;
   }
 
+  .miningData {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: repeat( 12, 1fr );
+    grid-template-rows: repeat( 10, 1fr );
+    grid-template-areas:
+        "nav nav nav nav nav nav nav nav nav nav nav nav"
+        "sidebar sidebar main main main main main main main main main main"
+        "sidebar sidebar main main main main main main main main main main"
+        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "sidebar sidebar content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4"
+        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4"
+        "sidebar sidebar content3 content3 content3 content3 content3 content4 content4 content4 content4 content4";
+    grid-gap: 16px;
+    width: 100%;
+    padding-right: 32px;
+  }
+
   .not-found {
     display: flex;
     flex: 1;

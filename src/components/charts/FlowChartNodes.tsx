@@ -1,5 +1,6 @@
+// eslint-disable-next-line
 import React from "react";
-import ReactFlow, { Elements } from "react-flow-renderer";
+import ReactFlow from "react-flow-renderer";
 import { LeftNode } from "./LeftNode";
 import { CustomNode } from "./Node";
 import { RightNode } from "./RightNode";

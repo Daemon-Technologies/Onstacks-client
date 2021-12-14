@@ -1,6 +1,5 @@
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
-import { Header } from "../components/Header";
-import { Sidebar } from "../components/Sidebar";
 import { Blocks, OverviewProps, TokenPriceProps } from "../hooks/useOverview";
 import { FlowChartNodes } from "../components/charts/FlowChartNodes";
 import { InfoCard } from "../components/InfoCard";
@@ -13,7 +12,7 @@ interface Props {
   themeToggler: any;
   tokens: TokenPriceProps;
   areaBlocks: string[];
-  areaSeries: ApexAxisChartSeries;
+  areaSeries: any;
   blocks: Blocks[];
 }
 
@@ -34,14 +33,6 @@ export const MiningData: React.FC<Props> = ({
 
   return (
     <div className="miningData">
-      <Sidebar
-        tokens={tokens}
-        active={0}
-        overviewData={overviewData}
-        theme={theme}
-        themeToggler={themeToggler}
-      />
-      {toggle && <Header />}
       <div id="main">
         <p className="screen-title">Overview</p>
         <InfoCard overviewData={overviewData} />
