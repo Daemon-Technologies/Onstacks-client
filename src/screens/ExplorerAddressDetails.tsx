@@ -243,7 +243,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
                   <div>
                     <p className="title">BTC spent</p>
                     <p className="sub-title">
-                      {nativeInfo.mining_info.total_burnt} Sats
+                      {nativeInfo.mining_info.total_burnt} BTC
                     </p>
                   </div>
                 </div>

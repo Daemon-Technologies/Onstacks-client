@@ -165,7 +165,7 @@ export const ExplorerHeader: React.FC<{
           </p>
         </div>
         <div className="inner-info-card">
-          <p className="title">Pending transactions (24hr)</p>
+          <p className="title">Pending transactions</p>
           <p className="sub-title">
             {numberWithCommas(overviewData.pending_txs_number)}
           </p>
