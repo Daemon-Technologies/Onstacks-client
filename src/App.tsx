@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -24,6 +25,7 @@ import { Protocol } from "./screens/Protocol";
 import { Terms } from "./screens/Terms";
 import { MicroblockDetails } from "./screens/MicroblockDetails";
 import { Footer } from "./components/Footer";
+import { ContractDetails } from "./screens/ContractDetails";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -75,6 +77,13 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/explorer/txId/:txId">
               <STXTransferDetails
+                failure={failure}
+                theme={theme}
+                themeToggler={themeToggler}
+              />
+            </Route>
+            <Route exact path="/explorer/contract/:txId">
+              <ContractDetails
                 failure={failure}
                 theme={theme}
                 themeToggler={themeToggler}

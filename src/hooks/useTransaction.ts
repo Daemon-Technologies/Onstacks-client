@@ -17,7 +17,12 @@ export const useTransaction = () => {
   const [contractCode, setContractCode] = useState<any>();
   const [microBlock, setMicroBlock] = useState<any>();
   const [blockTransaction, setBlockTransaction] = useState<any>([]);
+  const [contractTransactions, setContractTransaction] = useState<any>([]);
   const [fails, setFails] = useState(false);
+  const [contractData, setContractData] = useState<any>();
+  const [contractEvents, setContractEvents] = useState<any>([]);
+  const [hasNextPage, sethasNextPage] = useState(true);
+
   const getBlock = (block: string) => {
     return fetch(
       "https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/" +
@@ -45,10 +50,6 @@ export const useTransaction = () => {
 
   const getTransaction = (id: string) => {
     setIsLoading(true);
-    // const tr = new TransactionsApi(config)
-    // tr.getTransactionById({txId: id}).then((transaction: any) => {
-    //   setTransaction(transaction);
-    // })
     try {
       explorerInstance.get(getTxByTxId(id)).then((data: any) => {
         setTransaction(data);
@@ -67,8 +68,8 @@ export const useTransaction = () => {
   };
 
   const getContractDetails = (tx: any) => {
-    const name = tx.contract_call.contract_id.split(".")[1];
-    const address = tx.contract_call.contract_id.split(".")[0];
+    const name = tx.split(".")[1];
+    const address = tx.split(".")[0];
     fetch(
       `https://stacks-node-api.mainnet.stacks.co/v2/contracts/interface/${address}/${name}`
     )
@@ -84,8 +85,8 @@ export const useTransaction = () => {
   };
 
   const getContractCode = (tx: any) => {
-    const name = tx.contract_call.contract_id.split(".")[1];
-    const address = tx.contract_call.contract_id.split(".")[0];
+    const name = tx.split(".")[1];
+    const address = tx.split(".")[0];
     fetch(
       `https://stacks-node-api.mainnet.stacks.co/v2/contracts/source/${address}/${name}`
     )
@@ -97,21 +98,64 @@ export const useTransaction = () => {
       );
   };
 
+  const getContractById = (tx: any) => {
+    fetch(
+      `https://stacks-node-api.mainnet.stacks.co/extended/v1/contract/${tx}`
+    )
+      .then((response) => response.json())
+      .then((data) => setContractData(data));
+  };
+
+  const getContractEvents = (tx: any) => {
+    return fetch(
+      `https://stacks-node-api.mainnet.stacks.co/extended/v1/contract/${tx}/events`
+    )
+      .then((response) => response.json())
+      .then((data) => setContractEvents(data.results));
+  };
+
+  const getContractTransactions = (tx: any) => {
+    setIsLoading(true);
+    try {
+      fetch(
+        `https://stacks-node-api.stacks.co/extended/v1/address/${tx}/transactions?limit=10&offset=${contractTransactions.length}&unanchored=true`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          sethasNextPage(data.results.length < 10);
+          console.log(data.results.length < 10, data.results.length);
+          const transactions = contractTransactions.concat(data.results);
+          setContractTransaction(transactions);
+          setIsLoading(false);
+        });
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
   return {
     hasError,
     getContractDetails,
     isLoading,
     transaction,
+    getContractById,
     getContractCode,
     contractCode,
     contractDetails,
+    getContractTransactions,
     getBlockTransactions,
     block,
     blockTransaction,
+    contractTransactions,
     getMicroblocks,
     microBlock,
     getBlock,
+    getContractEvents,
+    contractEvents,
+    contractData,
     getTransaction,
+    hasNextPage,
     fails,
   };
 };

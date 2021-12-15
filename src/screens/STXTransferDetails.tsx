@@ -18,8 +18,7 @@ import Stacks from "../assets/side-menu/stacks.svg";
 import { Events } from "../components/Events";
 import useWindowDimensions from "../hooks/useWindowDimension";
 import { TransactionHeaderDetails } from "../components/TransactionHeaderDetails";
-// import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-// import "react-loading-skeleton/dist/skeleton.css";
+
 interface Props {
   theme: any;
   themeToggler: any;
@@ -51,7 +50,6 @@ export const STXTransferDetails: React.FC<Props> = ({
   const { push } = useHistory();
 
   useEffect(() => {
-    console.log(fails);
     if (fails) {
       push("/upgrading");
     }
@@ -67,6 +65,10 @@ export const STXTransferDetails: React.FC<Props> = ({
 
   const dims = useWindowDimensions();
   useEffect(() => {
+    if (params?.txId.includes(".")) {
+      console.log("ehhhh", params.txId);
+      push(`/explorer/contract/${params.txId}`);
+    }
     if (params?.txId) {
       setTxId(params.txId);
     }
@@ -119,7 +121,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Transaction ID</p>
-                  <p className="subtitle">{transaction?.tx_id}</p>
+                  <p className="subtitle">
+                    {dims.width > 700
+                      ? transaction?.tx_id
+                      : truncateMiddle(transaction.tx_id, 8)}
+                  </p>
                 </div>
                 <div
                   className="transaction-row"
@@ -129,7 +135,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                   }}
                 >
                   <p className="title">Called by</p>
-                  <p className="subtitle">{transaction?.sender_address}</p>
+                  <p className="subtitle">
+                    {dims.width > 700
+                      ? transaction.sender_address
+                      : truncateMiddle(transaction.sender_address, 8)}
+                  </p>
                 </div>
                 <div className="transaction-row">
                   <p className="title">Fees</p>
@@ -147,7 +157,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Block hash</p>
-                  <p className="subtitle">{transaction?.block_hash}</p>
+                  <p className="subtitle">
+                    {dims.width > 700
+                      ? transaction?.block_hash
+                      : truncateMiddle(transaction?.block_hash, 8)}
+                  </p>
                 </div>
               </div>
               {transaction.events && transaction.events.length > 0 && (
@@ -369,7 +383,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Transaction ID</p>
-                  <p className="subtitle">{transaction?.tx_id}</p>
+                  <p className="subtitle">
+                    {dims.width > 700
+                      ? transaction?.tx_id
+                      : truncateMiddle(transaction.tx_id, 8)}
+                  </p>
                 </div>
                 <div
                   style={{ cursor: "pointer" }}
@@ -379,7 +397,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                   className="transaction-row"
                 >
                   <p className="title">Sender Address</p>
-                  <p className="subtitle">{transaction?.sender_address}</p>
+                  <p className="subtitle">
+                    {dims.width > 700
+                      ? transaction.sender_address
+                      : truncateMiddle(transaction.sender_address, 8)}
+                  </p>
                 </div>
                 <div
                   className="transaction-row"
@@ -393,7 +415,12 @@ export const STXTransferDetails: React.FC<Props> = ({
                 >
                   <p className="title">Recipient</p>
                   <p className="subtitle">
-                    {(transaction as any).token_transfer.recipient_address}
+                    {dims.width > 700
+                      ? (transaction as any).token_transfer.recipient_address
+                      : truncateMiddle(
+                          (transaction as any).token_transfer.recipient_address,
+                          8
+                        )}
                   </p>
                 </div>
                 <div className="transaction-row">
@@ -412,7 +439,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Block hash</p>
-                  <p className="subtitle">{transaction?.block_hash}</p>
+                  <p className="subtitle">
+                    {dims.width > 700
+                      ? transaction?.block_hash
+                      : truncateMiddle(transaction?.block_hash, 8)}
+                  </p>
                 </div>
               </div>
               {transaction.events && transaction.events.length > 0 && (
@@ -509,7 +540,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Transaction ID</p>
-                  <p className="subtitle">{transaction?.tx_id}</p>
+                  <p className="subtitle">
+                    {dims.width > 700
+                      ? transaction?.tx_id
+                      : truncateMiddle(transaction.tx_id, 8)}
+                  </p>
                 </div>
                 <div
                   style={{ cursor: "pointer" }}
@@ -519,7 +554,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                   className="transaction-row"
                 >
                   <p className="title">Sender address</p>
-                  <p className="subtitle">{transaction?.sender_address}</p>
+                  <p className="subtitle">
+                    {dims.width > 700
+                      ? transaction.sender_address
+                      : truncateMiddle(transaction.sender_address, 8)}
+                  </p>
                 </div>
                 <div className="transaction-row">
                   <p className="title">Fees</p>
@@ -537,7 +576,11 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Block hash</p>
-                  <p className="subtitle">{transaction?.block_hash}</p>
+                  <p className="subtitle">
+                    {dims.width > 700
+                      ? transaction?.block_hash
+                      : truncateMiddle(transaction?.block_hash, 8)}
+                  </p>
                 </div>
               </div>
             </div>
