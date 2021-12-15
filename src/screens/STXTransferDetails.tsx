@@ -40,7 +40,7 @@ export const STXTransferDetails: React.FC<Props> = ({
     contractDetails,
     // isLoading,
     // contractCode,
-    getContractCode,
+    // getContractCode,
     fails,
   } = useTransaction();
   useEffect(() => {
@@ -87,8 +87,8 @@ export const STXTransferDetails: React.FC<Props> = ({
       transaction?.tx_type === "contract_call" ||
       transaction?.tx_type === "smart_contract"
     ) {
-      getContractDetails(transaction);
-      getContractCode(transaction);
+      getContractDetails(transaction.tx_id);
+      // getContractCode(transaction.tx_id);
     }
   }, [transaction]);
 
@@ -114,7 +114,17 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Contract</p>
-                  <p className="subtitle">
+                  <p
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      push(
+                        `/explorer/contract/${
+                          (transaction as any).contract_call.contract_id
+                        }`
+                      );
+                    }}
+                    className="subtitle"
+                  >
                     {(transaction as any).tx_type === "contract_call" &&
                       (transaction as any).contract_call.contract_id}
                   </p>
