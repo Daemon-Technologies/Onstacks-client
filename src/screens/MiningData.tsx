@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import {
   Blocks,
@@ -35,6 +36,7 @@ interface Props {
   winnerAddresses: string[];
   totalWinners: number[];
   failure: boolean;
+  logEvent: any;
 }
 
 export const MiningData: React.FC<Props> = ({
@@ -49,6 +51,7 @@ export const MiningData: React.FC<Props> = ({
   winnerAddresses,
   areaSeries,
   themeToggler,
+  logEvent,
 }) => {
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
@@ -73,6 +76,10 @@ export const MiningData: React.FC<Props> = ({
       push("/upgrading");
     }
   }, [failure]);
+
+  useEffect(() => {
+    logEvent("Mining Data");
+  }, []);
 
   useEffect(() => {
     if (currentBlock) {
@@ -146,6 +153,7 @@ export const MiningData: React.FC<Props> = ({
 
       {tabIndex === 0 && (
         <Overview
+          logEvent={logEvent}
           failure={failure}
           themeToggler={themeToggler}
           tokens={tokens}

@@ -17,9 +17,15 @@ interface Props {
   overviewData: OverviewProps;
   themeToggler: any;
   failure: boolean;
+  logEvent: any;
 }
 
-export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
+export const Explorer: React.FC<Props> = ({
+  theme,
+  failure,
+  themeToggler,
+  logEvent,
+}) => {
   const [tabIndex, setTabIndex] = useState(0);
   const { push } = useHistory();
   const {
@@ -42,6 +48,10 @@ export const Explorer: React.FC<Props> = ({ theme, failure, themeToggler }) => {
       push("/upgrading");
     }
   }, [failure]);
+
+  useEffect(() => {
+    logEvent("Explorer");
+  }, []);
 
   const [sentryRef, { rootRef }] = useInfiniteScroll({
     loading: isLoading,

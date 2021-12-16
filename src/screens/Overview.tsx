@@ -27,6 +27,7 @@ interface Props {
   themeToggler: any;
   tokens: TokenPriceProps;
   failure: boolean;
+  logEvent: any;
 }
 
 export const Overview: React.FC<Props> = ({
@@ -39,6 +40,7 @@ export const Overview: React.FC<Props> = ({
   areaSeries,
   failure,
   blocks,
+  logEvent,
   winnerAddresses,
   totalWinners,
 }) => {
@@ -51,6 +53,10 @@ export const Overview: React.FC<Props> = ({
       push("/upgrading");
     }
   }, [failure]);
+
+  useEffect(() => {
+    logEvent("Mining Overview");
+  }, []);
 
   return (
     <>

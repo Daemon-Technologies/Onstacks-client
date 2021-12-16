@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-concat */
 /* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { AddressDetailsHeader } from "../components/AddressDetailsHeader";
@@ -26,6 +27,7 @@ interface Props {
   getBlockByNumber: (block: string) => void;
   currentBlock: CurrentBlock | undefined;
   failure: boolean;
+  logEvent: any;
 }
 
 export const AddressDetails: React.FC<Props> = ({
@@ -33,6 +35,7 @@ export const AddressDetails: React.FC<Props> = ({
   themeToggler,
   currentBlock,
   failure,
+  logEvent,
   getBlockByNumber,
 }) => {
   const params: any = useParams();
@@ -51,6 +54,11 @@ export const AddressDetails: React.FC<Props> = ({
     getBlocksForAddress,
     currentBlocks,
   } = useAddressDetails();
+
+  useEffect(() => {
+    logEvent("Mining Address Details");
+  }, []);
+
   useEffect(() => {
     if (currentBlock) {
       const block = blocks.find(

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 /* eslint-disable no-useless-concat */
 /* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useTransaction } from "../hooks/useTransaction";
@@ -10,12 +11,14 @@ interface Props {
   theme: any;
   themeToggler: any;
   failure: boolean;
+  logEvent: any;
 }
 
 export const Blockdetails: React.FC<Props> = ({
   theme,
   themeToggler,
   failure,
+  logEvent,
 }) => {
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
@@ -33,6 +36,10 @@ export const Blockdetails: React.FC<Props> = ({
       getBlock(params?.block);
     }
   }, [params]);
+
+  useEffect(() => {
+    logEvent("Block Details");
+  }, []);
 
   useEffect(() => {
     if (block) {

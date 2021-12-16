@@ -26,6 +26,7 @@ import { Terms } from "./screens/Terms";
 import { MicroblockDetails } from "./screens/MicroblockDetails";
 import { Footer } from "./components/Footer";
 import { ContractDetails } from "./screens/ContractDetails";
+import useAmplitude from "./hooks/useAmplitude";
 
 const App: React.FC = () => {
   const { theme, themeToggler, mountedComponent } = useDarkMode();
@@ -40,13 +41,14 @@ const App: React.FC = () => {
     winnersAddresses,
     failure,
   } = useOverview();
+  const { logEvent } = useAmplitude();
 
   const { getBlockByNumber, currentBlock } = useMiningData();
 
   const themeMode = theme === "light" ? lightTheme : darkTheme;
 
   if (!mountedComponent) return <div />;
-
+  logEvent("Logged App Event");
   return (
     <ThemeProvider theme={themeMode}>
       <>
@@ -56,6 +58,7 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path="/explorer">
               <Explorer
+                logEvent={logEvent}
                 failure={failure}
                 overviewData={overviewData}
                 theme={theme}
@@ -63,13 +66,14 @@ const App: React.FC = () => {
               />
             </Route>
             <Route exact path="/protocol">
-              <Protocol />
+              <Protocol logEvent={logEvent} />
             </Route>
             <Route exact path="/terms">
               <Terms />
             </Route>
             <Route exact path="/explorer/address/:address">
               <ExplorerAddressDetails
+                logEvent={logEvent}
                 failure={failure}
                 themeToggler={themeToggler}
                 theme={theme}
@@ -77,6 +81,7 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/explorer/txId/:txId">
               <STXTransferDetails
+                logEvent={logEvent}
                 failure={failure}
                 theme={theme}
                 themeToggler={themeToggler}
@@ -84,6 +89,7 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/explorer/contract/:txId">
               <ContractDetails
+                logEvent={logEvent}
                 failure={failure}
                 theme={theme}
                 themeToggler={themeToggler}
@@ -91,6 +97,7 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/explorer/block/:block">
               <Blockdetails
+                logEvent={logEvent}
                 failure={failure}
                 theme={theme}
                 themeToggler={themeToggler}
@@ -99,6 +106,7 @@ const App: React.FC = () => {
 
             <Route exact path="/explorer/microblock/:microblock">
               <MicroblockDetails
+                logEvent={logEvent}
                 failure={failure}
                 theme={theme}
                 themeToggler={themeToggler}
@@ -106,6 +114,7 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/mining">
               <MiningData
+                logEvent={logEvent}
                 failure={failure}
                 themeToggler={themeToggler}
                 tokens={tokens}
@@ -121,6 +130,7 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/mining/:index/:block">
               <MiningData
+                logEvent={logEvent}
                 failure={failure}
                 themeToggler={themeToggler}
                 tokens={tokens}
@@ -136,6 +146,7 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/miner/address/:address">
               <AddressDetails
+                logEvent={logEvent}
                 failure={failure}
                 currentBlock={currentBlock}
                 getBlockByNumber={getBlockByNumber}

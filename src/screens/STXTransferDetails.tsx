@@ -23,12 +23,14 @@ interface Props {
   theme: any;
   themeToggler: any;
   failure: boolean;
+  logEvent: any;
 }
 
 export const STXTransferDetails: React.FC<Props> = ({
   theme,
   themeToggler,
   failure,
+  logEvent,
 }) => {
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
@@ -48,6 +50,10 @@ export const STXTransferDetails: React.FC<Props> = ({
     setToggle(width >= 1025);
   }, [toggle]);
   const { push } = useHistory();
+
+  useEffect(() => {
+    logEvent("Transaction details");
+  }, []);
 
   useEffect(() => {
     if (fails) {

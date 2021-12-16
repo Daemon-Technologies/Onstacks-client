@@ -1,14 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // eslint-disable-next-line
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Protocols from "../assets/explorer/protocols.svg";
 
-export const Protocol: React.FC = () => {
+export const Protocol: React.FC<{ logEvent: any }> = ({ logEvent }) => {
   const { push } = useHistory();
 
   const navigateToHome = () => {
     push("/");
   };
+
+  useEffect(() => {
+    logEvent("Protocol");
+  }, []);
+
   return (
     <>
       <div className="not-found">

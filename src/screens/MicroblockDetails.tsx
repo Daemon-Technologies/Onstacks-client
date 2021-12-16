@@ -13,12 +13,14 @@ interface Props {
   theme: any;
   themeToggler: any;
   failure: boolean;
+  logEvent: any;
 }
 
 export const MicroblockDetails: React.FC<Props> = ({
   theme,
   themeToggler,
   failure,
+  logEvent,
 }) => {
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
@@ -35,6 +37,10 @@ export const MicroblockDetails: React.FC<Props> = ({
       getMicroblocks(params?.microblock);
     }
   }, [params]);
+
+  useEffect(() => {
+    logEvent("Microblock Details");
+  }, []);
 
   // useEffect(() => {
   //   if (block) {
