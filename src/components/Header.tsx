@@ -38,7 +38,13 @@ export const Header: React.FC<{
         <img alt="menu" src={click ? Close : Menu} />
       </div>
       <div className="logo-nav">
-        <div onClick={() => push("/explorer")} className="logo-container">
+        <div
+          onClick={() => {
+            setActive(0);
+            push("/explorer");
+          }}
+          className="logo-container"
+        >
           <img className="logo mobile-logo" alt="logo" src={Logo} />
           <img className="logo web-logo" alt="logo" src={Logo} />
         </div>

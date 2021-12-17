@@ -105,13 +105,19 @@ export const Explorer: React.FC<Props> = ({
         <ExplorerHeader tabIndex={tabIndex} overviewData={overviewData} />
         <div className={"tabs"}>
           <div
-            onClick={() => setTabIndex(0)}
+            onClick={() => {
+              setTabIndex(0);
+              logEvent("Transactions Tab");
+            }}
             className={tabIndex === 0 ? "active" : ""}
           >
             Transactions
           </div>
           <div
-            onClick={() => setTabIndex(1)}
+            onClick={() => {
+              setTabIndex(1);
+              logEvent("Blocks Tab");
+            }}
             className={tabIndex === 1 ? "active" : ""}
           >
             Blocks

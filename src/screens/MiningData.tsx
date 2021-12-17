@@ -148,7 +148,11 @@ export const MiningData: React.FC<Props> = ({
     <div className="miningData">
       <div id="main">
         <MiningDataHeader tabIndex={tabIndex} overviewData={overviewData} />
-        <Tabs setTabIndex={setTabIndex} tabIndex={tabIndex} />
+        <Tabs
+          logEvent={logEvent}
+          setTabIndex={setTabIndex}
+          tabIndex={tabIndex}
+        />
       </div>
 
       {tabIndex === 0 && (
