@@ -93,7 +93,7 @@ export const STXTransferDetails: React.FC<Props> = ({
       transaction?.tx_type === "contract_call" ||
       transaction?.tx_type === "smart_contract"
     ) {
-      getContractDetails(transaction.tx_id);
+      getContractDetails((transaction as any).contract_call.contract_id);
       // getContractCode(transaction.tx_id);
     }
   }, [transaction]);
@@ -281,10 +281,30 @@ export const STXTransferDetails: React.FC<Props> = ({
             </div>
             <div className="anchor-block">
               <div style={{ height: "auto" }} className="ab-table">
-                <div className="table-header">
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    push(
+                      `/explorer/contract/${
+                        (transaction as any).contract_call.contract_id
+                      }`
+                    );
+                  }}
+                  className="table-header"
+                >
                   <p>Contract Detail</p>
                 </div>
-                <div style={{ borderTop: 0 }} className="transaction-row">
+                <div
+                  style={{ cursor: "pointer", borderTop: 0 }}
+                  onClick={() => {
+                    push(
+                      `/explorer/contract/${
+                        (transaction as any).contract_call.contract_id
+                      }`
+                    );
+                  }}
+                  className="transaction-row"
+                >
                   <p className="subtitle">
                     {
                       (transaction as any).contract_call.contract_id.split(

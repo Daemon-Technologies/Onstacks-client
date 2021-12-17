@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 // import Notification from "../assets/side-menu/notifications.svg";
 import Close from "../assets/side-menu/close.svg";
@@ -37,7 +38,7 @@ export const Header: React.FC<{
         <img alt="menu" src={click ? Close : Menu} />
       </div>
       <div className="logo-nav">
-        <div className="logo-container">
+        <div onClick={() => push("/explorer")} className="logo-container">
           <img className="logo mobile-logo" alt="logo" src={Logo} />
           <img className="logo web-logo" alt="logo" src={Logo} />
         </div>

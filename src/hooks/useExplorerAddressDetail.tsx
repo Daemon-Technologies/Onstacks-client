@@ -183,7 +183,7 @@ export const useExplorerAddressDetails = () => {
           )
         )
         .then((data: any) => {
-          sethasNextPage(data.confirmedTxs.length < 10);
+          sethasNextPage(data.confirmedTxs.results.length === 10);
           const transactions = recentTransactions.concat(
             data.confirmedTxs.results
           );

@@ -236,6 +236,7 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: space-evenly;
   }
   .logo-container {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;

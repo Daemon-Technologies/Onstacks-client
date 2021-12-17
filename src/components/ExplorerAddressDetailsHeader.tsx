@@ -50,7 +50,9 @@ export const ExplorerAddressDetailsHeader: React.FC<{
         </div>
         <div className="inner-info-card">
           <p className="title">Total received</p>
-          <p className="sub-title">{headerDetails?.total_received} STX</p>
+          <p className="sub-title">
+            {numberWithCommas(headerDetails?.total_received)} STX
+          </p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total spent</p>
