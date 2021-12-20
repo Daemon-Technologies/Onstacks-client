@@ -14,6 +14,7 @@ export const ExplorerHeader: React.FC<{
   tabIndex?: number;
 }> = ({ overviewData, tabIndex }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [name, setName] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [searchData, setSearchData] = useState<SearchResult>();
   const { push } = useHistory();
@@ -31,6 +32,10 @@ export const ExplorerHeader: React.FC<{
   }, [searchTerm]);
 
   const _search = async () => {
+    const result = await fetch(
+      `https://stacks-node-api.mainnet.stacks.co/v1/names/${searchTerm}`
+    );
+    const resData = await result.json();
     const res = await fetch(
       `https://stacks-node-api.mainnet.stacks.co/extended/v1/search/${searchTerm}`
     );
@@ -49,8 +54,22 @@ export const ExplorerHeader: React.FC<{
         },
       });
     }
-    if (!data.message && data.found) {
+    if (resData.address) {
+      setSearchData({
+        found: true,
+        result: {
+          entity_id: resData.address,
+          entity_type: "standard_address",
+        },
+      });
+      setName(searchTerm);
+    } else if (!data.message && data.found) {
+      const results = await fetch(
+        `https://stacks-node-api.mainnet.stacks.co/v1/addresses/stacks/${searchTerm}`
+      );
+      const res = await results.json();
       setSearchData(data);
+      setName(res.names[0]);
     }
   };
 
@@ -120,11 +139,13 @@ export const ExplorerHeader: React.FC<{
           {searchData && (
             <div>
               {searchData.found && (
-                <div className="item">
-                  <p onClick={onClick}>
-                    {truncateMiddle(searchData.result.entity_id, 10)}
+                <div onClick={onClick} className="item">
+                  <p>{truncateMiddle(searchData.result.entity_id, 10)}</p>
+                  <p style={{ color: "#5546FF" }}>
+                    {searchData.result.entity_type === "standard_address"
+                      ? name
+                      : ""}
                   </p>
-                  {/* <p>{searchData.result.entity_type}</p> */}
                 </div>
               )}
             </div>

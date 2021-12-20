@@ -7,7 +7,10 @@ export const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
     /* overflow-y: hidden; */
   }
-
+  ::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
   * {
     box-sizing: border-box;
     padding: 0;
@@ -131,8 +134,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .YAKVp {
-    width: 68%;
-    position: absolute;
+    width: 69.5%;
+    position: relative;
   }
   .function-call {
     border-top: ${({ theme }: any) =>
