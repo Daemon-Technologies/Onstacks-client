@@ -131,6 +131,11 @@ export const GlobalStyles = createGlobalStyle`
       letter-spacing: 0px;
       text-align: right;
     }
+    .copy {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
   }
 
   .YAKVp {

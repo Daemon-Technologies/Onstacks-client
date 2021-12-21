@@ -18,6 +18,7 @@ import Stacks from "../assets/side-menu/stacks.svg";
 import { Events } from "../components/Events";
 import useWindowDimensions from "../hooks/useWindowDimension";
 import { TransactionHeaderDetails } from "../components/TransactionHeaderDetails";
+import { ReactComponent as Copy } from "../assets/explorer/copy.svg";
 
 interface Props {
   theme: any;
@@ -135,27 +136,44 @@ export const STXTransferDetails: React.FC<Props> = ({
                       (transaction as any).contract_call.contract_id}
                   </p>
                 </div>
-                <div className="transaction-row">
-                  <p className="title">Transaction ID</p>
-                  <p className="subtitle">
-                    {dims.width > 700
-                      ? transaction?.tx_id
-                      : truncateMiddle(transaction.tx_id, 8)}
-                  </p>
-                </div>
                 <div
-                  className="transaction-row"
                   style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    push("/explorer/address/" + transaction.sender_address);
-                  }}
+                  onClick={() =>
+                    navigator.clipboard.writeText(transaction.tx_id)
+                  }
+                  className="transaction-row"
                 >
+                  <p className="title">Transaction ID</p>
+                  <div className={"copy"}>
+                    <p className="subtitle">
+                      {dims.width > 700
+                        ? transaction.tx_id
+                        : truncateMiddle(transaction.tx_id, 8)}
+                    </p>
+                    <Copy />
+                  </div>
+                </div>
+                <div className="transaction-row" style={{ cursor: "pointer" }}>
                   <p className="title">Called by</p>
-                  <p className="subtitle">
-                    {dims.width > 700
-                      ? transaction.sender_address
-                      : truncateMiddle(transaction.sender_address, 8)}
-                  </p>
+                  <div className={"copy"}>
+                    <p
+                      onClick={() => {
+                        push("/explorer/address/" + transaction.sender_address);
+                      }}
+                      className="subtitle"
+                    >
+                      {dims.width > 700
+                        ? transaction.sender_address
+                        : truncateMiddle(transaction.sender_address, 8)}
+                    </p>
+                    <Copy
+                      onClick={() =>
+                        navigator.clipboard.writeText(
+                          transaction.sender_address
+                        )
+                      }
+                    />
+                  </div>
                 </div>
                 <div className="transaction-row">
                   <p className="title">Fees</p>
@@ -173,11 +191,19 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Block hash</p>
-                  <p className="subtitle">
-                    {dims.width > 700
-                      ? transaction?.block_hash
-                      : truncateMiddle(transaction?.block_hash, 8)}
-                  </p>
+                  <div
+                    onClick={() =>
+                      navigator.clipboard.writeText(transaction?.block_hash)
+                    }
+                    className={"copy"}
+                  >
+                    <p className="subtitle">
+                      {dims.width > 700
+                        ? transaction?.block_hash
+                        : truncateMiddle(transaction?.block_hash, 8)}
+                    </p>
+                    <Copy />
+                  </div>
                 </div>
               </div>
               {transaction.events && transaction.events.length > 0 && (
@@ -417,27 +443,44 @@ export const STXTransferDetails: React.FC<Props> = ({
                     STX
                   </p>
                 </div>
-                <div className="transaction-row">
-                  <p className="title">Transaction ID</p>
-                  <p className="subtitle">
-                    {dims.width > 700
-                      ? transaction?.tx_id
-                      : truncateMiddle(transaction.tx_id, 8)}
-                  </p>
-                </div>
                 <div
                   style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    push("/explorer/address/" + transaction.sender_address);
-                  }}
+                  onClick={() =>
+                    navigator.clipboard.writeText(transaction.tx_id)
+                  }
                   className="transaction-row"
                 >
+                  <p className="title">Transaction ID</p>
+                  <div className={"copy"}>
+                    <p className="subtitle">
+                      {dims.width > 700
+                        ? transaction.tx_id
+                        : truncateMiddle(transaction.tx_id, 8)}
+                    </p>
+                    <Copy />
+                  </div>
+                </div>
+                <div style={{ cursor: "pointer" }} className="transaction-row">
                   <p className="title">Sender Address</p>
-                  <p className="subtitle">
-                    {dims.width > 700
-                      ? transaction.sender_address
-                      : truncateMiddle(transaction.sender_address, 8)}
-                  </p>
+                  <div className={"copy"}>
+                    <p
+                      onClick={() => {
+                        push("/explorer/address/" + transaction.sender_address);
+                      }}
+                      className="subtitle"
+                    >
+                      {dims.width > 700
+                        ? transaction.sender_address
+                        : truncateMiddle(transaction.sender_address, 8)}
+                    </p>
+                    <Copy
+                      onClick={() =>
+                        navigator.clipboard.writeText(
+                          transaction.sender_address
+                        )
+                      }
+                    />
+                  </div>
                 </div>
                 <div
                   className="transaction-row"
@@ -475,11 +518,19 @@ export const STXTransferDetails: React.FC<Props> = ({
                 </div>
                 <div className="transaction-row">
                   <p className="title">Block hash</p>
-                  <p className="subtitle">
-                    {dims.width > 700
-                      ? transaction?.block_hash
-                      : truncateMiddle(transaction?.block_hash, 8)}
-                  </p>
+                  <div
+                    onClick={() =>
+                      navigator.clipboard.writeText(transaction?.block_hash)
+                    }
+                    className={"copy"}
+                  >
+                    <p className="subtitle">
+                      {dims.width > 700
+                        ? transaction?.block_hash
+                        : truncateMiddle(transaction?.block_hash, 8)}
+                    </p>
+                    <Copy />
+                  </div>
                 </div>
               </div>
               {transaction.events && transaction.events.length > 0 && (
@@ -574,27 +625,44 @@ export const STXTransferDetails: React.FC<Props> = ({
                 <div className="table-header">
                   <p>Summary</p>
                 </div>
-                <div className="transaction-row">
-                  <p className="title">Transaction ID</p>
-                  <p className="subtitle">
-                    {dims.width > 700
-                      ? transaction?.tx_id
-                      : truncateMiddle(transaction.tx_id, 8)}
-                  </p>
-                </div>
                 <div
                   style={{ cursor: "pointer" }}
-                  onClick={() => {
-                    push("/explorer/address/" + transaction.sender_address);
-                  }}
+                  onClick={() =>
+                    navigator.clipboard.writeText(transaction.tx_id)
+                  }
                   className="transaction-row"
                 >
+                  <p className="title">Transaction ID</p>
+                  <div className={"copy"}>
+                    <p className="subtitle">
+                      {dims.width > 700
+                        ? transaction.tx_id
+                        : truncateMiddle(transaction.tx_id, 8)}
+                    </p>
+                    <Copy />
+                  </div>
+                </div>
+                <div className="transaction-row">
                   <p className="title">Sender address</p>
-                  <p className="subtitle">
-                    {dims.width > 700
-                      ? transaction.sender_address
-                      : truncateMiddle(transaction.sender_address, 8)}
-                  </p>
+                  <div className={"copy"}>
+                    <p
+                      onClick={() => {
+                        push("/explorer/address/" + transaction.sender_address);
+                      }}
+                      className="subtitle"
+                    >
+                      {dims.width > 700
+                        ? transaction.sender_address
+                        : truncateMiddle(transaction.sender_address, 8)}
+                    </p>
+                    <Copy
+                      onClick={() =>
+                        navigator.clipboard.writeText(
+                          transaction.sender_address
+                        )
+                      }
+                    />
+                  </div>
                 </div>
                 <div className="transaction-row">
                   <p className="title">Fees</p>

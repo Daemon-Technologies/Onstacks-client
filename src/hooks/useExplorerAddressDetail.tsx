@@ -170,6 +170,7 @@ export const useExplorerAddressDetails = () => {
   const [hasError, setHasError] = useState(false);
   const [hasNextPage, sethasNextPage] = useState(true);
   const [blockHeight, setBlockHeight] = useState(0);
+  const [username, setUsername] = useState("");
 
   const getRecentTransactions = () => {
     setIsLoading(true);
@@ -197,6 +198,16 @@ export const useExplorerAddressDetails = () => {
     }
   };
 
+  const getName = async () => {
+    const result = await fetch(
+      `https://stacks-node-api.mainnet.stacks.co/v1/addresses/stacks/${address}`
+    );
+    const resData = await result.json();
+    if (resData && resData.names.length > 0) {
+      setUsername(resData.names[0]);
+    }
+  };
+
   const getOverviewData = () => {
     explorerInstance.get(explorerGetOverviewData).then((data: any) => {
       setBlockHeight(data.BTC_height);
@@ -216,6 +227,7 @@ export const useExplorerAddressDetails = () => {
     const data = await accountsApi.getAccountNft({
       principal: address,
     });
+    console.log(data);
     const currentNfts = data.nft_events.map((nft) => {
       const asset = NFTS.find(
         (x) => x.asset_identifier === nft.asset_identifier
@@ -249,6 +261,7 @@ export const useExplorerAddressDetails = () => {
   useEffect(() => {
     if (address) {
       getOverviewData();
+      getName();
       getAddressTokensList();
       getRecentTransactions();
       getNativeInfo();
@@ -269,5 +282,6 @@ export const useExplorerAddressDetails = () => {
     blockHeight,
     address,
     tokens,
+    username,
   };
 };

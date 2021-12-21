@@ -41,6 +41,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
     overviewData,
     nativeInfo,
     hasNextPage,
+    username,
     getRecentTransactions,
     isLoading,
     blockHeight,
@@ -74,6 +75,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
       <div id="main">
         <ExplorerAddressDetailsHeader
           address={address}
+          username={username}
           headerDetails={overviewData}
         />
         <div className={"tabs"}>

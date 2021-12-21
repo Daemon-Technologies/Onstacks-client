@@ -1,7 +1,8 @@
 // eslint-disable-next-line
-import React from "react";
+import React, { useRef } from "react";
 import { numberWithCommas } from "../hooks/useOverview";
 import { ReactComponent as LeftArrow } from "../assets/side-menu/left-arrow-disabled.svg";
+import { ReactComponent as Copy } from "../assets/explorer/copy.svg";
 import { useHistory } from "react-router-dom";
 import { ExplorerOverview } from "../hooks/useExplorerAddressDetail";
 import useWindowDimensions from "../hooks/useWindowDimension";
@@ -10,9 +11,11 @@ import { truncateMiddle } from "../utils/utils";
 export const ExplorerAddressDetailsHeader: React.FC<{
   headerDetails: ExplorerOverview | undefined;
   address: string;
-}> = ({ headerDetails, address }) => {
+  username: string;
+}> = ({ headerDetails, address, username }) => {
   const { goBack } = useHistory();
   const dims = useWindowDimensions();
+
   return (
     <>
       <div
@@ -34,11 +37,32 @@ export const ExplorerAddressDetailsHeader: React.FC<{
           marginBottom: 10,
           width: "100%",
           alignItems: "center",
-          justifyContent: "space-between",
+          // justifyContent: "space-between",
         }}
       >
-        <p className="screen-title">
+        {username && (
+          <p
+            onClick={() => navigator.clipboard.writeText(username)}
+            style={{
+              color: "#5546FF",
+              cursor: "pointer",
+              borderRight: 2,
+              paddingRight: 16,
+              marginRight: 16,
+            }}
+            className="screen-title"
+          >
+            {username}
+            <Copy style={{ marginRight: 16, marginLeft: 16, marginTop: 16 }} />
+          </p>
+        )}
+        <p
+          style={{ cursor: "pointer", paddingRight: 16, marginRight: 16 }}
+          onClick={() => navigator.clipboard.writeText(address)}
+          className="screen-title"
+        >
           {dims.width > 700 ? address : truncateMiddle(address, 8)}
+          <Copy style={{ marginRight: 16, marginLeft: 16, marginTop: 10 }} />
         </p>
       </div>
       <div className={"info-card"}>

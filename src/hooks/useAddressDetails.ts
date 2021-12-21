@@ -62,6 +62,7 @@ export const useAddressDetails = () => {
     total_sats_committed: [],
   });
   const [currentBlocks, setCurrentBlocks] = useState<CurrentBlocks[]>([]);
+  const [username, setUsername] = useState("");
 
   const getMinerInfo = (stxAddress: string) => {
     axios.get(getBriefMinerInfo(stxAddress)).then((data: any) => {
@@ -112,6 +113,16 @@ export const useAddressDetails = () => {
   //   });
   // };
 
+  const getAddressName = async (address: string) => {
+    const result = await fetch(
+      `https://stacks-node-api.mainnet.stacks.co/v1/addresses/stacks/${address}`
+    );
+    const resData = await result.json();
+    if (resData && resData.names.length > 0) {
+      setUsername(resData.names[0]);
+    }
+  };
+
   return {
     blocks,
     currentBlock,
@@ -121,6 +132,8 @@ export const useAddressDetails = () => {
     getAddressSatsCommitted,
     satsCommitted,
     getBlocksForAddress,
+    getAddressName,
     currentBlocks,
+    username,
   };
 };

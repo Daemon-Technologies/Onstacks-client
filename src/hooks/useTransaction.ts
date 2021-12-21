@@ -84,11 +84,13 @@ export const useTransaction = () => {
       );
   };
 
-  const getContractCode = (tx: any) => {
+  const getContractCode = (tx: any, contractName?: string, addr?: string) => {
     const name = tx.split(".")[1];
     const address = tx.split(".")[0];
     fetch(
-      `https://stacks-node-api.mainnet.stacks.co/v2/contracts/source/${address}/${name}`
+      `https://stacks-node-api.mainnet.stacks.co/v2/contracts/source/${
+        addr || address
+      }/${contractName || name}`
     )
       .then((response) => response.json())
       .then((data) =>

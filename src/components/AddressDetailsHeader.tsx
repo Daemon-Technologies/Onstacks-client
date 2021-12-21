@@ -1,10 +1,12 @@
+// eslint-disable-next-line
 import React, { useEffect } from "react";
 import { numberWithCommas } from "../hooks/useOverview";
 import { ReactComponent as LeftArrow } from "../assets/side-menu/left-arrow-disabled.svg";
-import Search from "../assets/side-menu/search.svg";
+// import Search from "../assets/side-menu/search.svg";
 import { useHistory } from "react-router-dom";
 import useWindowDimensions from "../hooks/useWindowDimension";
 import { truncateMiddle } from "../utils/utils";
+import { ReactComponent as Copy } from "../assets/explorer/copy.svg";
 
 export interface AddressHeaderDetails {
   total_blocks_won: number;
@@ -15,8 +17,9 @@ export interface AddressHeaderDetails {
 export const AddressDetailsHeader: React.FC<{
   headerDetails: AddressHeaderDetails | undefined;
   address: string;
-}> = ({ headerDetails, address }) => {
-  const { goBack, push } = useHistory();
+  username: string;
+}> = ({ headerDetails, address, username }) => {
+  const { goBack } = useHistory();
   const dims = useWindowDimensions();
 
   useEffect(() => {}, [dims.width]);
@@ -41,19 +44,40 @@ export const AddressDetailsHeader: React.FC<{
           marginBottom: 10,
           width: "100%",
           alignItems: "center",
-          justifyContent: "space-between",
+          // justifyContent: "space-between",
         }}
       >
-        <p className="screen-title">
-          {dims.width > 700 ? address : truncateMiddle(address, 10)}
+        {username && (
+          <p
+            onClick={() => navigator.clipboard.writeText(username)}
+            style={{
+              color: "#5546FF",
+              cursor: "pointer",
+              borderRight: 2,
+              paddingRight: 16,
+              marginRight: 16,
+            }}
+            className="screen-title"
+          >
+            {username}
+            <Copy style={{ marginRight: 16, marginLeft: 16, marginTop: 16 }} />
+          </p>
+        )}
+        <p
+          style={{ cursor: "pointer", paddingRight: 16, marginRight: 16 }}
+          onClick={() => navigator.clipboard.writeText(address)}
+          className="screen-title"
+        >
+          {dims.width > 700 ? address : truncateMiddle(address, 8)}
+          <Copy style={{ marginRight: 16, marginLeft: 16, marginTop: 10 }} />
         </p>
-        <div
+        {/* <div
           className="button-view"
           onClick={() => push("/explorer/address/" + address)}
         >
           <img src={Search} alt={"search"} />
           View on explorer
-        </div>
+        </div> */}
       </div>
       <div className={"info-card"}>
         <div className="inner-info-card">

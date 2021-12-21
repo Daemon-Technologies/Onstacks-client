@@ -53,6 +53,8 @@ export const AddressDetails: React.FC<Props> = ({
     getBlocksMiner,
     getBlocksForAddress,
     currentBlocks,
+    username,
+    getAddressName,
   } = useAddressDetails();
 
   useEffect(() => {
@@ -98,6 +100,7 @@ export const AddressDetails: React.FC<Props> = ({
       getAddressSatsCommitted(address);
       getBlocksMiner(address);
       getBlocksForAddress(address);
+      getAddressName(address);
     }
   }, [address]);
 
@@ -117,7 +120,11 @@ export const AddressDetails: React.FC<Props> = ({
   return (
     <div className="addressDetails">
       <div id="main">
-        <AddressDetailsHeader address={address} headerDetails={minerInfo} />
+        <AddressDetailsHeader
+          username={username}
+          address={address}
+          headerDetails={minerInfo}
+        />
       </div>
       <div id="content1">
         <div
