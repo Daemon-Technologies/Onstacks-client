@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { numberWithCommas } from "../hooks/useOverview";
 import { ReactComponent as LeftArrow } from "../assets/side-menu/left-arrow-disabled.svg";
 import { useHistory } from "react-router-dom";
@@ -15,6 +15,7 @@ export const ExplorerAddressDetailsHeader: React.FC<{
 }> = ({ headerDetails, address, username }) => {
   const { goBack } = useHistory();
   const dims = useWindowDimensions();
+  const [copy, setCopy] = useState("");
 
   return (
     <>
@@ -42,14 +43,20 @@ export const ExplorerAddressDetailsHeader: React.FC<{
         }}
       >
         {username && (
-          <Tooltip message={`${username}`} position={"top"}>
+          <Tooltip
+            message={copy !== username ? `Copy BNS` : "Copied"}
+            position={"top"}
+          >
             <p
-              onClick={() => navigator.clipboard.writeText(username)}
+              onClick={() => {
+                setCopy(username);
+                navigator.clipboard.writeText(username);
+              }}
               style={{
                 color: "#5546FF",
                 cursor: "pointer",
                 paddingRight: 16,
-                fontSize: 20,
+                fontSize: "20px !importannt",
                 marginRight: 16,
                 borderRight: "2px solid #EBEAED",
               }}
@@ -59,18 +66,24 @@ export const ExplorerAddressDetailsHeader: React.FC<{
             </p>
           </Tooltip>
         )}
-        <Tooltip message={`Copy`} position={"top"}>
+        <Tooltip
+          message={copy !== address ? `Copy address` : "Copied"}
+          position={"top"}
+        >
           <p
             style={{
               cursor: "pointer",
               paddingRight: 16,
               marginRight: 16,
-              fontSize: 20,
+              fontSize: "20px !importannt",
             }}
-            onClick={() => navigator.clipboard.writeText(address)}
+            onClick={() => {
+              setCopy(address);
+              navigator.clipboard.writeText(address);
+            }}
             className="screen-title"
           >
-            {dims.width > 700 ? address : truncateMiddle(address, 8)}
+            {dims.width > 700 ? address : truncateMiddle(address, 6)}
           </p>
         </Tooltip>
       </div>
