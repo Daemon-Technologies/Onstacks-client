@@ -2061,7 +2061,7 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
 
 .tooltip-trigger {
   display: inline-block;
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 .tooltip-bubble {

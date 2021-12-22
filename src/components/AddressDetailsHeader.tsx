@@ -6,7 +6,7 @@ import { ReactComponent as LeftArrow } from "../assets/side-menu/left-arrow-disa
 import { useHistory } from "react-router-dom";
 import useWindowDimensions from "../hooks/useWindowDimension";
 import { truncateMiddle } from "../utils/utils";
-import { ReactComponent as Copy } from "../assets/explorer/copy.svg";
+import { Tooltip } from "../components/Tooltip";
 
 export interface AddressHeaderDetails {
   total_blocks_won: number;
@@ -43,33 +43,40 @@ export const AddressDetailsHeader: React.FC<{
           display: "flex",
           marginBottom: 10,
           width: "100%",
-          alignItems: "center",
+          alignItems: dims.width > 700 ? "center" : "flex-start",
+          flexDirection: dims.width > 700 ? "row" : "column",
           // justifyContent: "space-between",
         }}
       >
         {username && (
-          <p
-            onClick={() => navigator.clipboard.writeText(username)}
-            style={{
-              color: "#5546FF",
-              cursor: "pointer",
-              borderRight: 2,
-              paddingRight: 16,
-              marginRight: 16,
-            }}
-            className="screen-title"
-          >
-            {username}
-            <Copy style={{ marginRight: 16, marginLeft: 16, marginTop: 16 }} />
-          </p>
+          <Tooltip message={`${username}`} position={"top"}>
+            <p
+              onClick={() => navigator.clipboard.writeText(username)}
+              style={{
+                color: "#5546FF",
+                cursor: "pointer",
+                paddingRight: 16,
+                marginRight: 16,
+                fontSize: 20,
+                borderRight: "2px solid #EBEAED",
+              }}
+              className="screen-title"
+            >
+              {username}
+            </p>
+          </Tooltip>
         )}
         <p
-          style={{ cursor: "pointer", paddingRight: 16, marginRight: 16 }}
+          style={{
+            cursor: "pointer",
+            paddingRight: 16,
+            marginRight: 16,
+            fontSize: 20,
+          }}
           onClick={() => navigator.clipboard.writeText(address)}
           className="screen-title"
         >
           {dims.width > 700 ? address : truncateMiddle(address, 8)}
-          <Copy style={{ marginRight: 16, marginLeft: 16, marginTop: 10 }} />
         </p>
         {/* <div
           className="button-view"
