@@ -37,9 +37,9 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
     recentTransactions,
     setAddress,
     address,
-    nfts,
     overviewData,
     nativeInfo,
+    addressNfts,
     hasNextPage,
     username,
     getRecentTransactions,
@@ -92,7 +92,7 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
             Tokens
           </div>
           <div
-            // onClick={() => setTabIndex(2)}
+            onClick={() => setTabIndex(2)}
             className={tabIndex === 2 ? "active" : ""}
           >
             Collectibles (coming soon){" "}
@@ -303,17 +303,16 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
             </select>
           </div>
            */}
-          {nfts.map((nft) => {
+          {addressNfts.map((nft) => {
             return (
               <div className="card-img">
                 <img
                   className="nft-image"
-                  alt={nft.id.toString()}
-                  src={nft.url}
+                  alt={nft.image.toString()}
+                  src={nft.image}
                 />
-                <p>
-                  {nft.assetName} #{nft.id}
-                </p>
+                <p>{nft.name}</p>
+                <p>#{nft.id}</p>
               </div>
             );
           })}

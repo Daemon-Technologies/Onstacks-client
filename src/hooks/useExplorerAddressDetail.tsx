@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import Transaction from "../utils/explorer-types";
@@ -10,7 +11,8 @@ import {
   explorerGetOverviewData,
 } from "../axios/requests";
 import { AccountsApi, Configuration } from "@stacks/blockchain-api-client";
-
+import { SmartContractsApi } from "@stacks/blockchain-api-client";
+import { cvToString, deserializeCV } from "@stacks/transactions";
 export interface ExplorerOverview {
   total_sent: number;
   total_received: number;
@@ -165,13 +167,13 @@ export const useExplorerAddressDetails = () => {
     []
   );
   const [tokens, setTokens] = useState<TokensList[]>([]);
-  const [nfts, setNfts] = useState<AddressNFTs[]>([]);
+  const [addressNfts, setAddressNfts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [hasNextPage, sethasNextPage] = useState(true);
   const [blockHeight, setBlockHeight] = useState(0);
   const [username, setUsername] = useState("");
-
+  const api = new SmartContractsApi();
   const getRecentTransactions = () => {
     setIsLoading(true);
     try {
@@ -195,6 +197,74 @@ export const useExplorerAddressDetails = () => {
     } catch (error) {
       setIsLoading(false);
       setHasError(true);
+    }
+  };
+
+  const callContract = async (
+    contractAddress: string,
+    contractName: string,
+    args: string,
+    id: string
+  ) => {
+    try {
+      const res = await api.callReadOnlyFunction({
+        contractAddress,
+        contractName,
+        functionName: "get-token-uri",
+        readOnlyFunctionArgs: { sender: contractAddress, arguments: [args] },
+      });
+      if (res.result) {
+        const hex = res.result.slice(2);
+        const bufferCv = Buffer.from(hex, "hex");
+        const clarityValue = deserializeCV(bufferCv);
+        const x = cvToString(clarityValue);
+        const item = x.substring(10, x.length - 2);
+        successURL(item, id, contractName);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const successURL = async (item: string, id: string, contractName: string) => {
+    try {
+      if (item.includes("ipfs://")) {
+        const i = item
+          .replace("ipfs://", "https://gateway.ipfs.io/ipfs/")
+          .replace("{id}", id);
+        const url = i.includes("json") ? i : `${i}/${id}.json`;
+        const result = await fetch(url.replaceAll('"', ""));
+        const resData = await result.json();
+        setAddressNfts((oldArray) => [
+          ...oldArray,
+          {
+            image: resData.image.replace(
+              "ipfs://",
+              "https://gateway.ipfs.io/ipfs/"
+            ),
+            id,
+            name: contractName,
+          },
+        ]);
+      } else {
+        const result = await fetch(
+          item.replaceAll('"', "").replace("{id}", id)
+        );
+        const resData = await result.json();
+        setAddressNfts((oldArray) => [
+          ...oldArray,
+          {
+            image: resData.image.replace(
+              "ipfs://",
+              "https://gateway.ipfs.io/ipfs/"
+            ),
+            id,
+            name: contractName,
+          },
+        ]);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -226,19 +296,18 @@ export const useExplorerAddressDetails = () => {
   const getAddressNFTs = async () => {
     const data = await accountsApi.getAccountNft({
       principal: address,
+      limit: 50,
     });
-    console.log(data);
-    const currentNfts = data.nft_events.map((nft) => {
-      const asset = NFTS.find(
-        (x) => x.asset_identifier === nft.asset_identifier
+    console.log(data.nft_events);
+    data.nft_events.map((nft: any) => {
+      const assetId = nft.asset_identifier.split("::")[0];
+      callContract(
+        assetId.split(".")[0],
+        assetId.split(".")[1],
+        nft.value.hex,
+        nft.value.repr.substr(1)
       );
-      return {
-        url: asset?.img + nft.value.repr.substr(1) + ".png",
-        assetName: asset?.assetName || "",
-        id: nft.value.repr.substr(1),
-      };
     });
-    setNfts(currentNfts);
   };
 
   const getAddressTokensList = () => {
@@ -278,10 +347,11 @@ export const useExplorerAddressDetails = () => {
     isLoading,
     setAddress,
     hasNextPage,
-    nfts,
+    addressNfts,
     blockHeight,
     address,
     tokens,
+    callContract,
     username,
   };
 };

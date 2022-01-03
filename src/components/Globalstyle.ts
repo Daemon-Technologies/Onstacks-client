@@ -71,24 +71,25 @@ export const GlobalStyles = createGlobalStyle`
       text-align: 'right'
   }
   .card-img {
-    width: 200px;
-    height: 300px;
-    margin-right: 5px;
+    width: 290px;
+    height: 380px;
+    margin-right: 12px;
     margin-bottom: 16px;
     background-color: ${({ theme }: any) => theme.background};
     box-shadow: 0px 0px 1px 0px hsla(0, 0%, 0%, 0.04);
     box-shadow: 0px 2px 6px 0px hsla(0, 0%, 0%, 0.04);
     box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     p {
-      margin: 16px;
+      margin: 8px 16px;
       color: ${({ theme }: any) => theme.text};
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 700;
+      text-transform: capitalize;
     }
   }
   .nft-image {
-    width: 200px;
-    height: 200px;
+    width: 290px;
+    height: 290px;
     object-fit: contain;
     border-bottom: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
