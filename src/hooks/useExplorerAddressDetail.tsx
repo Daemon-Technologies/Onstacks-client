@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import Transaction from "../utils/explorer-types";
@@ -10,7 +11,8 @@ import {
   explorerGetOverviewData,
 } from "../axios/requests";
 import { AccountsApi, Configuration } from "@stacks/blockchain-api-client";
-
+import { SmartContractsApi } from "@stacks/blockchain-api-client";
+import { cvToString, deserializeCV } from "@stacks/transactions";
 export interface ExplorerOverview {
   total_sent: number;
   total_received: number;
@@ -23,96 +25,6 @@ export const STACK_API_URL = "https://stacks-node-api.mainnet.stacks.co";
 export const config = new Configuration({ basePath: STACK_API_URL });
 export const accountsApi = new AccountsApi(config);
 
-export const NFTS: {
-  asset_identifier: string;
-  img: string;
-  assetName: string;
-  assetType: string;
-}[] = [
-  {
-    assetName: "Bitcoin monkey",
-    asset_identifier:
-      "SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys::bitcoin-monkeys",
-    img: "https://ipfs.io/ipfs/QmYCnfeseno5cLpC75rmy6LQhsNYQCJabiuwqNUXMaA3Fo/",
-    assetType: ".png",
-  },
-  {
-    assetName: "Bubo",
-    asset_identifier: "SP3N81TKV43PN24NPHNNM8BBNQJ51Q31HE9G0GC46.bubo::bubo",
-    img: "https://ipfs.io/ipfs/QmdCtFNfFu8RnewyUNayiDuAUQAN6jarYE18c3NTKNhSYF/",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SP1T4Y4WK9DGZ2EDWSNHRE5HRRBPVG7S46JAHW552.panda-nft::Panda",
-    img: "https://ipfs.io/ipfs/Qmd73GqEbLEjNMCQZXhJg1i919ZRUJNyRuxDbLAPG9uG14/",
-    assetName: "Panda",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-pops::stacks-pops",
-    img: "https://ipfs.io/ipfs/Qmd73GqEbLEjNMCQZXhJg1i919ZRUJNyRuxDbLAPG9uG14/",
-    assetName: "Stacks Pops",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-punks-v3::stacks-punks",
-    img: "https://www.stackspunks.com/assets/punks/punk",
-    assetName: "Stacks Punks",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SP32AEEF6WW5Y0NMJ1S8SBSZDAY8R5J32NBZFPKKZ.free-punks-v0::free-punks",
-    img: "https://www.stackspunks.com/assets/punks/punk",
-    assetName: "Free Punks",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SP1T4Y4WK9DGZ2EDWSNHRE5HRRBPVG7S46JAHW552.panda-nft::Panda",
-    img: "https://ipfs.io/ipfs/Qmd73GqEbLEjNMCQZXhJg1i919ZRUJNyRuxDbLAPG9uG14/",
-    assetName: "Panda",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SP1T4Y4WK9DGZ2EDWSNHRE5HRRBPVG7S46JAHW552.panda-nft::Panda",
-    img: "https://ipfs.io/ipfs/Qmd73GqEbLEjNMCQZXhJg1i919ZRUJNyRuxDbLAPG9uG14/",
-    assetName: "Panda",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.byte-fighters::byte-fighters",
-    img: "https://stacksart.s3.amazonaws.com/byte-fighters/",
-    assetName: "Panda",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stx-youth::stx-youth",
-    img: "https://stacksart.s3.amazonaws.com/stx-youth/Youth",
-    assetName: "Panda",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-giantpandas::stacks-giantpandas",
-    img: "https://ipfs.io/ipfs/QmbfNSJQ1zEzyCnXN2mP4tcS5w6QpWmtW72xg4EpK2g6bR/",
-    assetName: "Panda",
-    assetType: ".png",
-  },
-  {
-    asset_identifier:
-      "SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.citadels::citadels",
-    img: "https://stacksart.s3.amazonaws.com/citadels/Mansion",
-    assetName: "Citadel",
-    assetType: ".png",
-  },
-];
 export interface AddressNativeInfo {
   assets_info: {
     balance: number;
@@ -165,13 +77,13 @@ export const useExplorerAddressDetails = () => {
     []
   );
   const [tokens, setTokens] = useState<TokensList[]>([]);
-  const [nfts, setNfts] = useState<AddressNFTs[]>([]);
+  const [addressNfts, setAddressNfts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [hasNextPage, sethasNextPage] = useState(true);
   const [blockHeight, setBlockHeight] = useState(0);
   const [username, setUsername] = useState("");
-
+  const api = new SmartContractsApi();
   const getRecentTransactions = () => {
     setIsLoading(true);
     try {
@@ -195,6 +107,74 @@ export const useExplorerAddressDetails = () => {
     } catch (error) {
       setIsLoading(false);
       setHasError(true);
+    }
+  };
+
+  const callContract = async (
+    contractAddress: string,
+    contractName: string,
+    args: string,
+    id: string
+  ) => {
+    try {
+      const res = await api.callReadOnlyFunction({
+        contractAddress,
+        contractName,
+        functionName: "get-token-uri",
+        readOnlyFunctionArgs: { sender: contractAddress, arguments: [args] },
+      });
+      if (res.result) {
+        const hex = res.result.slice(2);
+        const bufferCv = Buffer.from(hex, "hex");
+        const clarityValue = deserializeCV(bufferCv);
+        const x = cvToString(clarityValue);
+        const item = x.substring(10, x.length - 2);
+        await successURL(item, id, contractName);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const successURL = async (item: string, id: string, contractName: string) => {
+    try {
+      if (item.includes("ipfs://")) {
+        const i = item
+          .replace("ipfs://", "https://gateway.ipfs.io/ipfs/")
+          .replace("{id}", id);
+        const url = i.includes("json") ? i : `${i}/${id}.json`;
+        const result = await fetch(url.replaceAll('"', ""));
+        const resData = await result.json();
+        setAddressNfts((oldArray) => [
+          ...oldArray,
+          {
+            image: resData.image.replace(
+              "ipfs://",
+              "https://gateway.ipfs.io/ipfs/"
+            ),
+            id,
+            name: contractName,
+          },
+        ]);
+      } else {
+        const result = await fetch(
+          item.replaceAll('"', "").replace("{id}", id)
+        );
+        const resData = await result.json();
+        setAddressNfts((oldArray) => [
+          ...oldArray,
+          {
+            image: resData.image.replace(
+              "ipfs://",
+              "https://gateway.ipfs.io/ipfs/"
+            ),
+            id,
+            name: contractName,
+          },
+        ]);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -226,19 +206,17 @@ export const useExplorerAddressDetails = () => {
   const getAddressNFTs = async () => {
     const data = await accountsApi.getAccountNft({
       principal: address,
+      limit: 30,
     });
-    console.log(data);
-    const currentNfts = data.nft_events.map((nft) => {
-      const asset = NFTS.find(
-        (x) => x.asset_identifier === nft.asset_identifier
+    data.nft_events.map(async (nft: any) => {
+      const assetId = nft.asset_identifier.split("::")[0];
+      await callContract(
+        assetId.split(".")[0],
+        assetId.split(".")[1],
+        nft.value.hex,
+        nft.value.repr.substr(1)
       );
-      return {
-        url: asset?.img + nft.value.repr.substr(1) + ".png",
-        assetName: asset?.assetName || "",
-        id: nft.value.repr.substr(1),
-      };
     });
-    setNfts(currentNfts);
   };
 
   const getAddressTokensList = () => {
@@ -278,10 +256,11 @@ export const useExplorerAddressDetails = () => {
     isLoading,
     setAddress,
     hasNextPage,
-    nfts,
+    addressNfts,
     blockHeight,
     address,
     tokens,
+    callContract,
     username,
   };
 };
