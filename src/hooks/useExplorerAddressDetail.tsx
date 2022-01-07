@@ -140,38 +140,45 @@ export const useExplorerAddressDetails = () => {
     try {
       if (item.includes("ipfs://")) {
         const i = item
-          .replace("ipfs://", "https://gateway.ipfs.io/ipfs/")
-          .replace("{id}", id);
+          .replace("ipfs://", "https://ipfs.io/ipfs/")
+          .replace("{id}", id)
+          .replace("ipfs/ipfs", "ipfs/")
+          .replace(`${id}/${id}.`, `${id}.`);
         const url = i.includes("json") ? i : `${i}/${id}.json`;
         const result = await fetch(url.replaceAll('"', ""));
         const resData = await result.json();
-        setAddressNfts((oldArray) => [
-          ...oldArray,
-          {
-            image: resData.image.replace(
-              "ipfs://",
-              "https://gateway.ipfs.io/ipfs/"
-            ),
-            id,
-            name: contractName,
-          },
-        ]);
+        if (resData && resData.image) {
+          setAddressNfts((oldArray) => [
+            ...oldArray,
+            {
+              image: resData.image
+                .replace("ipfs://", "https://ipfs.io/ipfs/")
+                .replace("ipfs/ipfs", "ipfs/"),
+              id,
+              name: contractName,
+            },
+          ]);
+        }
       } else {
         const result = await fetch(
-          item.replaceAll('"', "").replace("{id}", id)
+          item
+            .replaceAll('"', "")
+            .replace("{id}", id)
+            .replace(`${id}/${id}.`, `${id}.`)
         );
         const resData = await result.json();
-        setAddressNfts((oldArray) => [
-          ...oldArray,
-          {
-            image: resData.image.replace(
-              "ipfs://",
-              "https://gateway.ipfs.io/ipfs/"
-            ),
-            id,
-            name: contractName,
-          },
-        ]);
+        if (resData && resData.image) {
+          setAddressNfts((oldArray) => [
+            ...oldArray,
+            {
+              image: resData.image
+                .replace("ipfs://", "https://ipfs.io/ipfs/")
+                .replace("ipfs/ipfs", "ipfs/"),
+              id,
+              name: contractName,
+            },
+          ]);
+        }
       }
     } catch (error) {
       console.log(error);
