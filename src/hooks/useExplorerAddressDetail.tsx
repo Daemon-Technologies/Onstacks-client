@@ -136,16 +136,42 @@ export const useExplorerAddressDetails = () => {
     }
   };
 
+  const getStacksArtImage = (item: string, id: string) => {
+    switch (
+      true // sourceStr
+    ) {
+      case /punks/i.test(item):
+        return `https://stacksart.s3.amazonaws.com/punks/punk${id}_lg.png`;
+      case /fighters/i.test(item):
+        return `https://stacksart.s3.amazonaws.com/byte-fighters/${id}.png`;
+      case /witches/i.test(item):
+        return `https://stacksart.s3.amazonaws.com/witches/${id}.png`;
+      default:
+        return "";
+    }
+  };
+
   const successURL = async (item: string, id: string, contractName: string) => {
     try {
-      if (item.includes("ipfs://")) {
+      if (item.includes("stacksart") || item.includes("punk")) {
+        setAddressNfts((oldArray) => [
+          ...oldArray,
+          {
+            image: getStacksArtImage(item, id),
+            id,
+            name: contractName,
+          },
+        ]);
+      } else if (item.includes("ipfs://")) {
         const i = item
           .replace("ipfs://", "https://ipfs.io/ipfs/")
           .replace("{id}", id)
           .replace("ipfs/ipfs", "ipfs/")
           .replace(`${id}/${id}.`, `${id}.`);
         const url = i.includes("json") ? i : `${i}/${id}.json`;
-        const result = await fetch(url.replaceAll('"', ""));
+        const result = await fetch(url.replaceAll('"', ""), {
+          mode: "cors",
+        });
         const resData = await result.json();
         if (resData && resData.image) {
           setAddressNfts((oldArray) => [
@@ -164,7 +190,10 @@ export const useExplorerAddressDetails = () => {
           item
             .replaceAll('"', "")
             .replace("{id}", id)
-            .replace(`${id}/${id}.`, `${id}.`)
+            .replace(`${id}/${id}.`, `${id}.`),
+          {
+            mode: "cors",
+          }
         );
         const resData = await result.json();
         if (resData && resData.image) {
@@ -187,7 +216,10 @@ export const useExplorerAddressDetails = () => {
 
   const getName = async () => {
     const result = await fetch(
-      `https://stacks-node-api.mainnet.stacks.co/v1/addresses/stacks/${address}`
+      `https://stacks-node-api.mainnet.stacks.co/v1/addresses/stacks/${address}`,
+      {
+        mode: "cors",
+      }
     );
     const resData = await result.json();
     if (resData && resData.names.length > 0) {

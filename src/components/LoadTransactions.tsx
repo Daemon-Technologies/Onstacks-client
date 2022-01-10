@@ -24,7 +24,7 @@ export const LoadTransactions: React.FC<{
   const { push } = useHistory();
 
   const LoadRecentTransactions = useCallback(() => {
-    const transactions = recentTransactions.map((transaction) => {
+    const transactions = recentTransactions.map((transaction, index) => {
       const isPending = transaction.tx_status === "pending";
       const isConfirmed = transaction.tx_status === "success";
       const isAnchored = !(transaction as any).is_unanchored;
@@ -32,6 +32,7 @@ export const LoadTransactions: React.FC<{
       return (
         <>
           <div
+            key={index}
             onClick={() => push("/explorer/txId/" + transaction.tx_id)}
             className="table-item"
           >
