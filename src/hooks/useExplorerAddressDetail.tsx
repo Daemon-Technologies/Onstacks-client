@@ -81,6 +81,8 @@ export const useExplorerAddressDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [hasNextPage, sethasNextPage] = useState(true);
+  const [isNftLoading, setIsNftLoading] = useState(false);
+  const [hasNftNextPage, sethasNftNextPage] = useState(true);
   const [blockHeight, setBlockHeight] = useState(0);
   const [username, setUsername] = useState("");
   const api = new SmartContractsApi();
@@ -140,7 +142,7 @@ export const useExplorerAddressDetails = () => {
     switch (
       true // sourceStr
     ) {
-      case /punks/i.test(item):
+      case /spunks/i.test(item):
         return `https://stacksart.s3.amazonaws.com/punks/punk${id}_lg.png`;
       case /fighters/i.test(item):
         return `https://stacksart.s3.amazonaws.com/byte-fighters/${id}.png`;
@@ -153,7 +155,7 @@ export const useExplorerAddressDetails = () => {
 
   const successURL = async (item: string, id: string, contractName: string) => {
     try {
-      if (item.includes("stacksart") || item.includes("punk")) {
+      if (item.includes("stacksart") || item.includes("spunk")) {
         setAddressNfts((oldArray) => [
           ...oldArray,
           {
@@ -243,21 +245,26 @@ export const useExplorerAddressDetails = () => {
   };
 
   const getAddressNFTs = async () => {
+    setIsNftLoading(true);
     const data = await accountsApi.getAccountNft({
       principal: address,
-      limit: 30,
+      limit: 10,
+      offset: addressNfts.length,
     });
-    data.nft_events.map(async (nft: any) => {
+    sethasNftNextPage(data.nft_events.length === 10);
+    data.nft_events.map((nft: any) => {
       const assetId = nft.asset_identifier.split("::")[0];
-      await callContract(
-        assetId.split(".")[0],
-        assetId.split(".")[1],
-        nft.value.hex,
-        nft.value.repr.substr(1)
-      );
+      setTimeout(async () => {
+        await callContract(
+          assetId.split(".")[0],
+          assetId.split(".")[1],
+          nft.value.hex,
+          nft.value.repr.substr(1)
+        );
+      }, 100);
     });
+    setIsNftLoading(false);
   };
-
   const getAddressTokensList = () => {
     explorerInstance.get(getAddressTokens(address, 10, 0)).then((data: any) => {
       setTokens(
@@ -296,10 +303,13 @@ export const useExplorerAddressDetails = () => {
     setAddress,
     hasNextPage,
     addressNfts,
+    isNftLoading,
+    hasNftNextPage,
     blockHeight,
     address,
     tokens,
     callContract,
+    getAddressNFTs,
     username,
   };
 };

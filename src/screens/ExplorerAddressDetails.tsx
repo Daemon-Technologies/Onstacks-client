@@ -15,6 +15,7 @@ import { LoadTransactions } from "../components/LoadTransactions";
 import Logo from "../assets/side-menu/no-search-results.svg";
 import ProgressBar from "../components/Progressbar";
 import { numberWithCommas } from "../hooks/useOverview";
+import useInfiniteScroll from "react-infinite-scroll-hook";
 
 interface Props {
   theme: any;
@@ -44,9 +45,30 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
     username,
     getRecentTransactions,
     isLoading,
+    hasNftNextPage,
+    isNftLoading,
     blockHeight,
     tokens,
+    getAddressNFTs,
   } = useExplorerAddressDetails();
+
+  const [loadMore, setLoadMore] = useState(false);
+
+  useEffect(() => {
+    setLoadMore(addressNfts.length > 0 && addressNfts.length % 10 === 0);
+  }, [addressNfts.length]);
+
+  const [sentryRef, { rootRef }] = useInfiniteScroll({
+    loading: isNftLoading,
+    hasNextPage: hasNftNextPage,
+    onLoadMore: () => {
+      if (loadMore) {
+        getAddressNFTs();
+      }
+    },
+    disabled: false,
+    rootMargin: "0px 0px 400px 0px",
+  });
 
   useEffect(() => {
     const { innerWidth: width } = window;
@@ -287,8 +309,9 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
         </>
       )}
       {tabIndex === 2 && (
-        <div id="transactionContainer" className="image-container">
-          {/* <div className="collections-header">
+        <div ref={rootRef} id="transactionContainer">
+          <div className="image-container">
+            {/* <div className="collections-header">
             <input
               className="search-bar"
               type="text"
@@ -303,19 +326,27 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
             </select>
           </div>
            */}
-          {addressNfts.map((nft) => {
-            return (
-              <div className="card-img">
-                <img
-                  className="nft-image"
-                  alt={nft.image.toString()}
-                  src={nft.image}
-                />
-                <p>{nft.name}</p>
-                <p>#{nft.id}</p>
-              </div>
-            );
-          })}
+            {addressNfts.map((nft) => {
+              return (
+                <div className="card-img">
+                  <img
+                    className="nft-image"
+                    alt={nft.image.toString()}
+                    src={nft.image}
+                  />
+                  <p>{nft.name}</p>
+                  <p>#{nft.id}</p>
+                </div>
+              );
+            })}
+          </div>
+          {(isNftLoading || hasNftNextPage) && (
+            <div className={"load-more"} ref={sentryRef}>
+              <p style={{ textAlign: "center", fontWeight: 600 }}>
+                {hasNftNextPage ? "Loading..." : "Load More"}
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>
