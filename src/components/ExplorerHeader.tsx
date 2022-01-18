@@ -33,11 +33,11 @@ export const ExplorerHeader: React.FC<{
 
   const _search = async () => {
     const result = await fetch(
-      `https://stacks-node-api.mainnet.stacks.co/v1/names/${searchTerm}`
+      `https://stacks-node-api.mainnet.stacks.co/v1/names/${searchTerm.toLowerCase()}`
     );
     const resData = await result.json();
     const res = await fetch(
-      `https://stacks-node-api.mainnet.stacks.co/extended/v1/search/${searchTerm}`
+      `https://stacks-node-api.mainnet.stacks.co/extended/v1/search/${searchTerm.toLowerCase()}`
     );
     const data = await res.json();
     // this is a workaround for the API not returning data for valid stx addresses
@@ -65,7 +65,7 @@ export const ExplorerHeader: React.FC<{
       setName(searchTerm);
     } else if (!data.message && data.found) {
       const results = await fetch(
-        `https://stacks-node-api.mainnet.stacks.co/v1/addresses/stacks/${searchTerm}`
+        `https://stacks-node-api.mainnet.stacks.co/v1/addresses/stacks/${searchTerm.toLowerCase()}`
       );
       const res = await results.json();
       setSearchData(data);
