@@ -16,7 +16,9 @@ export const InfoCard: React.FC<{ overviewData: OverviewProps }> = ({
       </div>
       <div className="inner-info-card">
         <p className="title">BTC spent all time</p>
-        <p className="sub-title">{overviewData.btc_total} BTC</p>
+        <p className="sub-title">
+          {overviewData.btc_total.toLocaleString()} BTC
+        </p>
       </div>
       <div className="inner-info-card">
         <p className="title">Tx fees per block *</p>
