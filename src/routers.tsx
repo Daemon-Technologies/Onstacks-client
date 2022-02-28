@@ -56,7 +56,7 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
           />
         </Route>
         <Route exact path="/protocol">
-          <Protocol theme={theme} logEvent={logEvent} />
+          <Protocol logEvent={logEvent} />
         </Route>
         <Route exact path="/terms">
           <Terms />

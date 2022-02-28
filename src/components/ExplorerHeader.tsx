@@ -37,9 +37,10 @@ export const ExplorerHeader: React.FC<{
     );
     const resData = await result.json();
     const res = await fetch(
-      `https://stacks-node-api.mainnet.stacks.co/extended/v1/search/${searchTerm.toLowerCase()}`
+      `https://stacks-node-api.mainnet.stacks.co/extended/v1/search/${searchTerm}`
     );
     const data = await res.json();
+
     // this is a workaround for the API not returning data for valid stx addresses
     if (
       data &&
