@@ -15,7 +15,8 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   const [data, setData] = useState<any[][]>([]);
   const [options, setOptions] = useState({
     backgroundColor: "transparent",
-    colors: ["#FFA043"],
+    areaOpacity: 0.3,
+    colors: ["#5546FF"],
     chartArea: { top: 30, width: "90%", height: "230px", left: 40 },
     legend: "none",
     vAxis: {
@@ -35,11 +36,14 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       hAxis: {
         textStyle: { color: themeMode.greyText },
         minorGridlines: { color: "transparent" },
-        gridlines: { color: theme === "light" ? "#EBEAED" : "#84818A" },
+        gridlines: { color: "none" },
       },
       vAxis: {
         format: "short",
-        gridlines: { color: "none", minSpacing: 20 },
+        gridlines: {
+          color: theme === "light" ? "#EBEAED" : "#84818A",
+          minSpacing: 40,
+        },
         textStyle: { color: themeMode.greyText },
       },
       aggregationTarget: "category",
@@ -74,15 +78,6 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       );
     }
   }, [satsCommitted]);
-
-  // useEffect(() => {
-  //   if (dims.width > 500 && dims.height > 1050) {
-  //     setOptions((o) => ({
-  //       ...o,
-  //       chartArea: { top: 10, width: "90%", right: 10, height: "85%" },
-  //     }));
-  //   }
-  // }, [dims]);
 
   return (
     <Chart

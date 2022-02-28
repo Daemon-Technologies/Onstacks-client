@@ -21,16 +21,11 @@ export const LineChart: React.FC<Props> = ({
   const [options, setOptions] = useState({
     backgroundColor: "transparent",
     isStacked: true,
-    areaOpacity: 0.9,
+    areaOpacity: 0.3,
+    curveType: "function",
     chartArea: { top: 45, width: "100%", right: 10, height: "100%", left: 0 },
     colors: colorPalette,
-    interpolateNulls: false,
-    vAxis: {
-      format: "short",
-      textStyle: { color: themeMode.text },
-      interpolateNulls: false,
-      gridlines: { count: -1, color: "none", minSpacing: 20 },
-    },
+    interpolateNulls: true,
     hAxis: {
       format: "0",
       minorGridlines: { color: "transparent" },
@@ -79,12 +74,15 @@ export const LineChart: React.FC<Props> = ({
           format: "0",
         },
         vAxis: {
-          textStyle: { color: themeMode.greyText },
-          textPosition: "none",
           format: "short",
-          interpolateNulls: true,
-          gridlines: { count: -1, color: "none", minSpacing: 20 },
+          gridlines: {
+            color: theme === "light" ? "#EBEAED" : "#84818A",
+            minSpacing: 40,
+          },
+          textStyle: { color: themeMode.greyText },
+          interpolateNulls: false,
         },
+        curveType: "function",
         tooltip: { isHtml: true },
         focusTarget: "category",
       }));

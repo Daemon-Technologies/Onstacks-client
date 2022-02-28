@@ -73,7 +73,6 @@ export const STXTransferDetails: React.FC<Props> = ({
   const dims = useWindowDimensions();
   useEffect(() => {
     if (params?.txId.includes(".")) {
-      console.log("ehhhh", params.txId);
       push(`/explorer/contract/${params.txId}`);
     }
     if (params?.txId) {
