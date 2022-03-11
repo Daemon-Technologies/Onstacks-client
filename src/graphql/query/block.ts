@@ -21,10 +21,34 @@ export const BlockInfo = gql`
 export const getBlocksList = gql`
   query getBlocksList($limit: Int!, $offset: Int!) {
     block_info(order_by: { timestamp: desc }, limit: $limit, offset: $offset) {
-      winner_stx_address
-      stacks_block_height
-      commit_value
+      winnerAddress: winner_stx_address
+      stacksBlockHeight: stacks_block_height
       timestamp
+      totalSpent: winner_to_all_commit_aggregate {
+        aggregate {
+          sum {
+            commit_value
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getRecentBlockCommits = gql`
+  query getRecentBlockCommitsAndRewards {
+    blocks: block_info(
+      limit: 100
+      offset: 0
+      order_by: { stacks_block_height: desc }
+    ) {
+      stacksBlockHeight: stacks_block_height
+      block_reward
+      winner_stx_address
+      commits: winner_to_all_commit {
+        address: stx_address
+        value: commit_value
+      }
     }
   }
 `;
