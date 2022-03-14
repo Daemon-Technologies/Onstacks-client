@@ -1,18 +1,21 @@
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
-import { SatsCommittedProps } from "../../hooks/useOverview";
 import { darkTheme, lightTheme } from "../Themes";
 import useWindowDimensions from "../../hooks/useWindowDimension";
 import Chart from "react-google-charts";
+import { useQuery } from "@apollo/client";
+import { getBtcCommitsPerBlock } from "../../graphql/query/commitValue";
 
 interface Props {
   theme: any;
-  satsCommitted: SatsCommittedProps;
 }
 
-export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
+export const AreaChart: React.FC<Props> = ({ theme }) => {
   const themeMode = theme === "light" ? lightTheme : darkTheme;
   const dims = useWindowDimensions();
-  const [data, setData] = useState<any[][]>([]);
+  const [dataa, setData] = useState<any[][]>([]);
+  const { data } = useQuery(getBtcCommitsPerBlock);
+
   const [options, setOptions] = useState({
     backgroundColor: "transparent",
     areaOpacity: 0.3,
@@ -53,31 +56,28 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
   }, [dims.height, dims.width, theme, themeMode]);
 
   useEffect(() => {
-    if (satsCommitted && satsCommitted.block_number.length > 0) {
-      let values: any = satsCommitted;
-      if (values.block_number[0] !== "Block Number") {
-        values.block_number.unshift("Block Number");
-        values.total_sats_committed.unshift("Sats");
+    if (data) {
+      let values: any = data.block_info.map((v: any, i: number) => {
+        return [
+          v.stacks_block_height,
+          v.totalSpent.aggregate.sum.commit_value,
+          //   i === 0
+          //     ? { role: "tooltip", type: "string", p: { html: true } }
+          //     : `<div class="tool-tip-chart">
+          //    <p class="header-text">#${v.stacks_block_height}</p>
+          //    <div style="display: flex; align-items: center">
+          //       <div style="width: 10px; height: 10px;border-radius: 5px; background-color: ${"#FFA043"}; margin-right: 10px"></div>
+          //       <p>${v.totalSpent.aggregate.sumcommit_value}</p>
+          //    </div>
+          // </div>`,
+        ];
+      });
+      if (values[0][0] !== "Block Number") {
+        values.unshift(["Block Number", "Sats"]);
       }
-      setData(
-        values.block_number.map((v: any, i: number) => {
-          return [
-            values.block_number[i],
-            values.total_sats_committed[i],
-            i === 0
-              ? { role: "tooltip", type: "string", p: { html: true } }
-              : `<div class="tool-tip-chart">
-             <p class="header-text">#${values.block_number[i]}</p>
-             <div style="display: flex; align-items: center">
-                <div style="width: 10px; height: 10px;border-radius: 5px; background-color: ${"#FFA043"}; margin-right: 10px"></div>
-                <p>${values.total_sats_committed[i]}</p>
-             </div>
-          </div>`,
-          ];
-        })
-      );
+      setData(values);
     }
-  }, [satsCommitted]);
+  }, [data]);
 
   return (
     <Chart
@@ -85,7 +85,7 @@ export const AreaChart: React.FC<Props> = ({ theme, satsCommitted }) => {
       chartType="AreaChart"
       loader={<div>Loading Chart</div>}
       options={options}
-      data={data}
+      data={dataa}
       legendToggle={false}
       rootProps={{ "data-testid": "2" }}
     />

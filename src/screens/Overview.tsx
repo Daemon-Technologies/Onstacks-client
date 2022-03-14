@@ -6,37 +6,25 @@ import { AreaChart } from "../components/charts/AreaChart";
 import { LineChart } from "../components/charts/LineChart";
 import { RecentBlocks } from "../components/RecentBlocks";
 import { PieChart } from "../components/charts/PieChart";
-import {
-  Blocks,
-  OverviewProps,
-  SatsCommittedProps,
-  TokenPriceProps,
-} from "../hooks/useOverview";
+import { Blocks } from "../hooks/useOverview";
 import useWindowDimensions from "../hooks/useWindowDimension";
 import { useHistory } from "react-router-dom";
 
 interface Props {
   theme: any;
-  overviewData: OverviewProps;
-  satsCommitted: SatsCommittedProps;
   areaBlocks: string[];
   areaSeries: any[];
   blocks: Blocks[];
   winnerAddresses: string[];
   totalWinners: number[];
   themeToggler: any;
-  tokens: TokenPriceProps;
   failure: boolean;
   logEvent: any;
 }
 
 export const Overview: React.FC<Props> = ({
   theme,
-  overviewData,
-  satsCommitted,
   areaBlocks,
-  tokens,
-  themeToggler,
   areaSeries,
   failure,
   blocks,
@@ -60,44 +48,11 @@ export const Overview: React.FC<Props> = ({
 
   return (
     <>
-      {/* <div id="main">
-        <p className="screen-title">Overview</p>
-        <InfoCard overviewData={overviewData} />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <p className="based">*Average of the last 100 blocks.</p>
-          <div className="data">
-            <a onClick={() => getBlockHash(overviewData.stx_block_height)}>
-              STX Block Height:&nbsp;{" "}
-              <span>#{overviewData.stx_block_height} </span>
-            </a>
-            <a
-              style={{ marginLeft: 16 }}
-              target="_blank"
-              href={
-                "https://btc.com/btc/block/" + overviewData.btc_block_height
-              }
-              rel="noopener noreferrer"
-            >
-              BTC Block Height: &nbsp;
-              <span>#{overviewData.btc_block_height}</span>
-            </a>
-          </div>
-        </div>
-      </div> */}
       <div id="content1" className={"containerContent"}>
         <div className="containerOne" style={{ width: "50%" }}>
-          <p className="title">Total sats committed in current block</p>
+          <p className="title">Total sats committed in each block</p>
           <div className="seprator">
-            {satsCommitted.block_number.length > 0 && (
-              <AreaChart satsCommitted={satsCommitted} theme={theme} />
-            )}
+            <AreaChart theme={theme} />
           </div>
         </div>
         <div id="content2" style={{ width: "50%" }}>

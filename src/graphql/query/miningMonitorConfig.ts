@@ -7,11 +7,12 @@ export const minerConfig = gql`
       comment
       name
     }
-    blockHeights: block_info(
-      order_by: { stacks_block_height: desc }
-      limit: 1
-      offset: 0
-    ) {
+  }
+`;
+
+export const getHeights = gql`
+  query heights {
+    block_info(order_by: { stacks_block_height: desc }, limit: 1, offset: 0) {
       stacks_block_height
       btc_block_height
     }

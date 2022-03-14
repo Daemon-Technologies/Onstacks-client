@@ -1,19 +1,15 @@
 import { gql } from "@apollo/client";
 
 export const getBtcCommits = gql`
-  fragment sumOfBtcCommits on commit_info_aggregate {
-    aggregate {
-      sum {
-        commit_value
-      }
-    }
-  }
-
   query getGeneralStats($stacks_block_height: Int!) {
     btcSpentRecent: commit_info_aggregate(
       where: { stacks_block_height: { _gte: $stacks_block_height } }
     ) {
-      ...sumOfBtcCommits
+      aggregate {
+        sum {
+          commit_value
+        }
+      }
     }
     blockFeesRecent: block_info_aggregate(
       where: { stacks_block_height: { _gte: $stacks_block_height } }
@@ -25,7 +21,11 @@ export const getBtcCommits = gql`
       }
     }
     btcSpentAllTime: commit_info_aggregate {
-      ...sumOfBtcCommits
+      aggregate {
+        sum {
+          commit_value
+        }
+      }
     }
     activeMinersCount: block_info_aggregate(
       distinct_on: winner_stx_address
@@ -39,12 +39,14 @@ export const getBtcCommits = gql`
 `;
 
 export const getBtcCommitsPerBlock = gql`
-block_info(order_by: {stacks_block_height: desc}, offset: 0, limit: 100) {
-    stacks_block_height
-    totalSpent: winner_to_all_commit_aggregate {
-      aggregate {
-        sum {
-          commit_value
+  query getBtcCommitsPerBlock {
+    block_info(order_by: { stacks_block_height: desc }, offset: 0, limit: 100) {
+      stacks_block_height
+      totalSpent: winner_to_all_commit_aggregate {
+        aggregate {
+          sum {
+            commit_value
+          }
         }
       }
     }

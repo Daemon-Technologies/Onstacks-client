@@ -30,8 +30,6 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
 }) => {
   const {
     overviewData,
-    tokens,
-    satsCommitted,
     areaBlocks,
     areaSeries,
     blocks,
@@ -40,11 +38,13 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
     failure,
   } = useOverview();
   const { logEvent } = useAmplitude();
-  const { getBlockByNumber, currentBlock } = useMiningData();
+  const { getBlockByNumber, currentBlock } = useMiningData({
+    STX_HEIGHT: "31232",
+  });
 
   return (
     <Router>
-      <Header themeToggler={themeToggler} tokens={tokens} theme={theme} />
+      <Header themeToggler={themeToggler} theme={theme} />
       <Switch>
         <Route exact path="/explorer">
           <Explorer
@@ -107,11 +107,9 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
             logEvent={logEvent}
             failure={failure}
             themeToggler={themeToggler}
-            tokens={tokens}
             blocks={blocks}
             areaBlocks={areaBlocks}
             areaSeries={areaSeries}
-            satsCommitted={satsCommitted}
             totalWinners={totalWinners}
             winnerAddresses={winnersAddresses}
             overviewData={overviewData}
@@ -123,8 +121,6 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
             logEvent={logEvent}
             failure={failure}
             themeToggler={themeToggler}
-            tokens={tokens}
-            satsCommitted={satsCommitted}
             totalWinners={totalWinners}
             winnerAddresses={winnersAddresses}
             blocks={blocks}

@@ -50,7 +50,7 @@ export interface MiningInfo {
   }[];
 }
 
-export const useMiningData = () => {
+export const useMiningData = (blockHeights: any) => {
   const [blocks, setBlocks] = useState<MinerInfo[]>([]);
   const [currentBlock, setCurrentBlock] = useState<CurrentBlock>();
   const [miningInfo, setMiningInfo] = useState<MiningInfo>({

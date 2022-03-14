@@ -5,7 +5,7 @@ export const createMiningMonitorClient = () => {
     link: new HttpLink({
       uri: process.env.REACT_APP_MINING_MONITOR_GRAPHQL,
       headers: {
-        "x-hasura-admin-secret": process.env.REACT_APP_MINING_MONITOR_ADMIN_KEY,
+        "x-hasura-admin-secret": "DaemonTechnologies123@",
       },
     }),
     cache: new InMemoryCache(),
