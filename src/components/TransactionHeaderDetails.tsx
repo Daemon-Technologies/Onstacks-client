@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Transaction from "../utils/explorer-types";

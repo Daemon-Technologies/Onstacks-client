@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from "react";
 
 const ProgressBar: React.FC<{ completed: any; theme: any }> = (props: any) => {

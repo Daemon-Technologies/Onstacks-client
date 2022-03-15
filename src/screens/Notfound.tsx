@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Logo from "../assets/side-menu/not-found.svg";

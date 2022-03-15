@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Transaction from "./explorer-types";
 
 export enum SearchResultType {

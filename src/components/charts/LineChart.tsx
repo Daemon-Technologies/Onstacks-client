@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import Chart from "react-google-charts";
 import { randomColorGenerator } from "../../utils/helper";
