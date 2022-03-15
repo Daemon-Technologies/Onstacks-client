@@ -6,7 +6,6 @@ import Menu from "../assets/side-menu/menu.svg";
 import Logo from "../assets/side-menu/daemon.svg";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
 import Stacks from "../assets/side-menu/stacks.svg";
-import { TokenPriceProps } from "../hooks/useOverview";
 import { useHistory } from "react-router-dom";
 import { ReactComponent as HighLightedSun } from "../assets/side-menu/sun.svg";
 import { ReactComponent as Moon } from "../assets/side-menu/cloud-dark.svg";
@@ -14,22 +13,37 @@ import { ReactComponent as Sun } from "../assets/side-menu/sun-dark.svg";
 import { ReactComponent as HighLightedMoon } from "../assets/side-menu/cloud-light.svg";
 // import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
 import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
+import { useQuery } from "@apollo/client";
+import { minerConfig } from "../graphql/query/miningMonitorConfig";
 export const Header: React.FC<{
   theme: any;
-  tokens: TokenPriceProps;
   themeToggler: any;
-}> = ({ theme, tokens, themeToggler }: any) => {
+}> = ({ theme, themeToggler }: any) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
   const [active, setActive] = useState(0);
   const { push, location } = useHistory();
+  const { data } = useQuery(minerConfig);
+  const [tokens, setTokens] = useState({
+    BTC: "",
+    STX: "",
+  });
+
+  useEffect(() => {
+    if (data && data.config.length > 0) {
+      setTokens({
+        BTC: Number.parseFloat(data.config[1].value).toFixed(2),
+        STX: Number.parseFloat(data.config[0].value).toFixed(2),
+      });
+    }
+  }, [data]);
 
   useEffect(() => {
     if (location.pathname === "/mining") {
-      setActive(1);
-    } else if (location.pathname === "/explorer") {
       setActive(0);
+    } else if (location.pathname === "/explorer") {
+      setActive(1);
     }
   }, [location.pathname]);
   return (
@@ -54,34 +68,20 @@ export const Header: React.FC<{
             onClick={() => {
               setActive(0);
               closeMobileMenu();
-              push("/explorer");
+              push("/mining");
             }}
           >
-            <p>Explorer</p>
+            <p>Home</p>
           </li>
           <li
             className={`option ${active === 1 ? "active" : ""}`}
             onClick={() => {
               setActive(1);
               closeMobileMenu();
-              push("/mining");
+              push("/explorer");
             }}
           >
-            <p>Mining</p>
-          </li>
-          <li
-            className={`option ${active === 2 ? "active" : ""}`}
-            onClick={closeMobileMenu}
-          >
-            <p
-              onClick={() => {
-                setActive(2);
-                closeMobileMenu();
-                push("/protocol");
-              }}
-            >
-              Protocols (Coming soon)
-            </p>
+            <p>Explorer</p>
           </li>
           <li className="option" onClick={closeMobileMenu}>
             <a

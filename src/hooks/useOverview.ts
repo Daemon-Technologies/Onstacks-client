@@ -4,23 +4,24 @@ import { getOverviewData } from "../axios/requests";
 import differenceInMinutes from "date-fns/differenceInMinutes";
 import { numFormatter } from "../utils/helper";
 import {
-  getBlocks,
   getRewardDistribution,
   getSatsCommittedPerBlock,
   getTokenPrice,
   getTopBurnFeePerBlock,
 } from "../axios/requests";
+import { useQuery } from "@apollo/client";
+import { getBlocksList } from "../graphql/query/block";
 export interface OverviewProps {
-  active_miners: number;
-  avg_tx_fees_per_block: number;
-  btc_block_height: string;
-  btc_hash_rate: string;
-  last_tx_fees: number;
-  next_stx_halving: number;
-  reward_payout_interval: number;
-  stx_block_height: number;
-  total_sats_committed: number;
-  btc_total: number;
+  active_miners?: number;
+  avg_tx_fees_per_block?: number;
+  btc_block_height?: string;
+  btc_hash_rate?: string;
+  last_tx_fees?: number;
+  next_stx_halving?: number;
+  reward_payout_interval?: number;
+  stx_block_height?: number;
+  total_sats_committed?: number;
+  btc_total?: number;
 }
 
 export interface TokenPriceProps {
@@ -83,6 +84,9 @@ export const useOverview = () => {
   const [areaSeries, setAreaSeries] = useState<any>([]);
 
   const [blocks, setBlocks] = useState<Blocks[]>([]);
+  const { data } = useQuery(getBlocksList, {
+    variables: { limit: 100, offset: 0 },
+  });
 
   useEffect(() => {
     try {
@@ -162,33 +166,34 @@ export const useOverview = () => {
           setTotalWinners(data.map((b: any) => b.actual_win));
         }
       });
-      axios.get(getBlocks).then((data: any) => {
-        if (data) {
-          setBlocks(
-            data.map((r: Blocks) => {
-              return {
-                address: r.winner_address,
-                block_number: "#" + r.block_number,
-                mined_at:
-                  differenceInMinutes(new Date(), r.mined_at * 1000) +
-                  (window.innerWidth > 800 ? " Mins" : "Mins"),
-                sats_spent: numFormatter(+r.sats_spent),
-                winner_address:
-                  r.winner_address.substring(0, 8) +
-                  ".." +
-                  r.winner_address.substring(
-                    r.winner_address.length - 8,
-                    r.winner_address.length
-                  ),
-              };
-            })
-          );
-        }
-      });
     } catch (error) {
       setFailure(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (data) {
+      setBlocks(
+        data.block_info.map((r: any) => {
+          return {
+            address: r.winnerAddress,
+            block_number: "#" + r.stacksBlockHeight,
+            mined_at:
+              differenceInMinutes(new Date(), r.timestamp * 1000) +
+              (window.innerWidth > 800 ? " Mins" : "Mins"),
+            sats_spent: numFormatter(+r.totalSpent.aggregate.sum.commit_value),
+            winner_address:
+              r.winnerAddress.substring(0, 8) +
+              ".." +
+              r.winnerAddress.substring(
+                r.winnerAddress.length - 8,
+                r.winnerAddress.length
+              ),
+          };
+        })
+      );
+    }
+  }, [data]);
 
   return {
     overviewData,

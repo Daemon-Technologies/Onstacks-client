@@ -125,7 +125,6 @@ export const useTransaction = () => {
         .then((response) => response.json())
         .then((data) => {
           sethasNextPage(data.results.length < 10);
-          console.log(data.results.length < 10, data.results.length);
           const transactions = contractTransactions.concat(data.results);
           setContractTransaction(transactions);
           setIsLoading(false);

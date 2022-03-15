@@ -43,7 +43,7 @@ export const AddressDetails: React.FC<Props> = ({
   const [status, setBlockStatus] = useState(1);
   const [address, setAddress] = useState("");
   const [timeElapsed, setTimeElapsed] = useState("0");
-
+  console.log("TEST hena");
   const {
     getMinerInfo,
     minerInfo,
@@ -377,9 +377,7 @@ export const AddressDetails: React.FC<Props> = ({
       <div id="content2">
         <p className="title">Total sats committed per block</p>
         <div className="seprator">
-          {satsCommitted.block_number.length > 0 && (
-            <AreaChart satsCommitted={satsCommitted} theme={theme} />
-          )}
+          {satsCommitted.block_number.length > 0 && <AreaChart theme={theme} />}
         </div>
       </div>
       <div id={"content4"} className={dims.width < 700 ? "mobile-table" : "s"}>

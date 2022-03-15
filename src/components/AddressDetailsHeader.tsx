@@ -94,7 +94,7 @@ export const AddressDetailsHeader: React.FC<{
         <div className="inner-info-card">
           <p className="title">Total STX earned</p>
           <p className="sub-title">
-            {numberWithCommas(headerDetails?.total_stx_earned.toFixed(2))} STX
+            {numberWithCommas(headerDetails?.total_stx_earned)} STX
           </p>
         </div>
         <div className="inner-info-card">
