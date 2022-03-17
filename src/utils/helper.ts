@@ -24,6 +24,32 @@ export const randomColorGenerator = () => {
   return colorPalette;
 };
 
+export const randomColorGeneratorOpacity = () => {
+  const colorPalette: string[] = [
+    "rgba(255, 160, 67, 0.2)",
+    "rgba(85, 70, 255, 0.2)",
+    "rgba(0, 165, 255, 0.2)",
+    "rgba(255, 69, 96, 0.2)",
+    "rgba(31, 202, 50, 0.2)",
+    "rgba(250, 100, 50, 0.2)",
+    "rgba(32, 201, 172, 0.2)",
+    "rgba(96, 125, 139, 0.2)",
+    "rgba(250, 105, 157, 0.2)",
+    "#5A6432",
+    "#f3ff00",
+    "#FA2560",
+    "#F0C9AC",
+    "#e91e63",
+    "#757927",
+    "#5e52ab",
+    "#F70892",
+  ];
+  // for (let index = 0; index < 50; index++) {
+  //   colorPalette.push(`#${Math.floor(Math.random() * 16777215).toString(16).toUpperCase()}`);
+  // }
+  return colorPalette;
+};
+
 var pow = Math.pow,
   floor = Math.floor,
   abs = Math.abs,

@@ -10,7 +10,10 @@ import {
 } from "recharts";
 import { getRecentBlockCommits } from "../../graphql/query/block";
 import { useQuery } from "@apollo/client";
-import { randomColorGenerator } from "../../utils/helper";
+import {
+  randomColorGenerator,
+  randomColorGeneratorOpacity,
+} from "../../utils/helper";
 import { truncateMiddle } from "../../utils/utils";
 
 interface Props {
@@ -21,6 +24,7 @@ interface Props {
 export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
   const [dataa, setData] = useState<any[]>([]);
   const colors = randomColorGenerator();
+  const opColors = randomColorGeneratorOpacity();
   const { data } = useQuery(getRecentBlockCommits);
   const [elements, setElements] = useState([]);
 
@@ -88,7 +92,7 @@ export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
               dataKey={v}
               stackId={1}
               stroke={colors[i]}
-              fill={colors[i]}
+              fill={opColors[i]}
             />
           );
         })}
