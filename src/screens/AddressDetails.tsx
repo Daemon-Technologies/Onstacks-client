@@ -43,7 +43,7 @@ export const AddressDetails: React.FC<Props> = ({
   const [status, setBlockStatus] = useState(1);
   const [address, setAddress] = useState("");
   const [timeElapsed, setTimeElapsed] = useState("0");
-  console.log("TEST hena");
+
   const {
     getMinerInfo,
     minerInfo,

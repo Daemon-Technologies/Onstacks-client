@@ -12,8 +12,6 @@ import { useHistory } from "react-router-dom";
 
 interface Props {
   theme: any;
-  areaBlocks: string[];
-  areaSeries: any[];
   blocks: Blocks[];
   winnerAddresses: string[];
   totalWinners: number[];
@@ -24,8 +22,6 @@ interface Props {
 
 export const Overview: React.FC<Props> = ({
   theme,
-  areaBlocks,
-  areaSeries,
   failure,
   blocks,
   logEvent,
@@ -50,7 +46,7 @@ export const Overview: React.FC<Props> = ({
     <>
       <div id="content1" className={"containerContent"}>
         <div className="containerOne" style={{ width: "50%" }}>
-          <p className="title">Total sats committed in each block</p>
+          <p className="title">Total sats committed</p>
           <div className="seprator">
             <AreaChart theme={theme} />
           </div>
@@ -58,13 +54,7 @@ export const Overview: React.FC<Props> = ({
         <div id="content2" style={{ width: "50%" }}>
           <p className="title">Top Miners - Sats spent per block</p>
           <div className="seprator">
-            {areaBlocks.length > 0 && areaSeries.length > 0 && (
-              <LineChart
-                areaBlocks={areaBlocks}
-                areaSeries={areaSeries}
-                theme={theme}
-              />
-            )}
+            <LineChart theme={theme} />
           </div>
         </div>
       </div>

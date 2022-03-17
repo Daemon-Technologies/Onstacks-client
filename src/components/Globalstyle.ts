@@ -24,7 +24,9 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.50s linear;
     height: 100vh;
   }
-
+  .recharts-tooltip-wrapper {
+    z-index: 1000000;
+  }
   text {
     fill: ${({ theme }: any) => theme.text};
   }

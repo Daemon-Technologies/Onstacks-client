@@ -9,12 +9,10 @@ import { LineChart } from "./charts/LineChart";
 import { RecentBlocks } from "./RecentBlocks";
 
 export const MiningDataOverview: React.FC<{
-  areaBlocks: string[];
-  areaSeries: any;
   miningInfo: MiningInfo;
   blocks: Blocks[];
   theme: any;
-}> = ({ areaBlocks, areaSeries, theme, blocks, miningInfo }) => {
+}> = ({ theme, blocks, miningInfo }) => {
   const dims = useWindowDimensions();
   const { push } = useHistory();
   return (
@@ -25,13 +23,7 @@ export const MiningDataOverview: React.FC<{
       <div id="content3">
         <p className="title">Top miners - Sats spent per block</p>
         <div className="seprator">
-          {areaBlocks.length > 0 && areaSeries.length > 0 && (
-            <LineChart
-              areaBlocks={areaBlocks}
-              areaSeries={areaSeries}
-              theme={theme}
-            />
-          )}
+          <LineChart theme={theme} />
         </div>
       </div>
       <div id={"content4"} className={dims.width < 700 ? "mobile-table" : "s"}>

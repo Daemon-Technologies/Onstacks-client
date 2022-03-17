@@ -20,8 +20,7 @@ interface Props {
   theme: any;
   overviewData: OverviewProps;
   themeToggler: any;
-  areaBlocks: string[];
-  areaSeries: any;
+
   blocks: Blocks[];
   winnerAddresses: string[];
   totalWinners: number[];
@@ -33,11 +32,9 @@ export const MiningData: React.FC<Props> = ({
   theme,
   overviewData,
   failure,
-  areaBlocks,
   blocks,
   totalWinners,
   winnerAddresses,
-  areaSeries,
   themeToggler,
   logEvent,
 }) => {
@@ -109,16 +106,12 @@ export const MiningData: React.FC<Props> = ({
           totalWinners={totalWinners}
           winnerAddresses={winnerAddresses}
           blocks={blocks}
-          areaBlocks={areaBlocks}
-          areaSeries={areaSeries}
           theme={theme}
         />
       )}
       {tabIndex === 1 && (
         <MiningDataOverview
-          areaBlocks={areaBlocks}
           miningInfo={miningInfo}
-          areaSeries={areaSeries}
           blocks={blocks}
           theme={theme}
         />

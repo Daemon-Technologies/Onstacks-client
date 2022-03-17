@@ -34,7 +34,7 @@ export const MiningDataHeader: React.FC<{
         avg_tx_fees_per_block: data.blockFeesRecent.aggregate.avg.tx_reward,
         btc_total: data.btcSpentAllTime.aggregate.sum.commit_value,
         btcSpent: data.btcSpentRecent.aggregate.sum.commit_value,
-        btc_hash_rate: "",
+        btc_hash_rate: data.config[0].value,
       });
     }
   }, [data]);

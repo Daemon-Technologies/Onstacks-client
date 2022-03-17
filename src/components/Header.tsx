@@ -40,7 +40,7 @@ export const Header: React.FC<{
   }, [data]);
 
   useEffect(() => {
-    if (location.pathname === "/mining") {
+    if (location.pathname === "/") {
       setActive(0);
     } else if (location.pathname === "/explorer") {
       setActive(1);
@@ -68,7 +68,7 @@ export const Header: React.FC<{
             onClick={() => {
               setActive(0);
               closeMobileMenu();
-              push("/mining");
+              push("/");
             }}
           >
             <p>Home</p>

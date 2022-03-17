@@ -1,107 +1,86 @@
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
-import Chart from "react-google-charts";
+import {
+  Area,
+  AreaChart as AreaCharts,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  Tooltip,
+} from "recharts";
+import { getRecentBlockCommits } from "../../graphql/query/block";
+import { useQuery } from "@apollo/client";
 import { randomColorGenerator } from "../../utils/helper";
-import { lightTheme, darkTheme } from "../Themes";
+import { truncateMiddle } from "../../utils/utils";
 
 interface Props {
   theme: any;
-  areaBlocks: string[];
-  areaSeries: any[];
 }
 
-export const LineChart: React.FC<Props> = ({
-  theme,
-  areaBlocks,
-  areaSeries,
-}) => {
-  const colorPalette = randomColorGenerator();
-  const themeMode = theme === "light" ? lightTheme : darkTheme;
-
-  const [data, setData] = useState<any[][]>([]);
-  const [options, setOptions] = useState({
-    backgroundColor: "transparent",
-    isStacked: true,
-    areaOpacity: 0.3,
-    curveType: "function",
-    chartArea: { top: 45, width: "100%", right: 10, height: "100%", left: 0 },
-    colors: colorPalette,
-    interpolateNulls: true,
-    hAxis: {
-      format: "0",
-      minorGridlines: { color: "transparent" },
-      gridlines: { color: theme === "light" ? "#EBEAED" : "#84818A" },
-    },
-  });
+export const LineChart: React.FC<Props> = ({ theme }) => {
+  const [dataa, setData] = useState<any[]>([]);
+  const colors = randomColorGenerator();
+  const { data } = useQuery(getRecentBlockCommits);
+  const [elements, setElements] = useState([]);
 
   useEffect(() => {
-    const values: any = [
-      areaSeries.map((series: any, index) => {
-        return (
-          series.name.substring(0, 4) +
-          ".." +
-          series.name.substring(series.name.length - 5, series.name.length - 1)
-        );
-      }),
-    ];
-    values[0].unshift("Miners");
-    areaBlocks.forEach((e, index) => {
-      values[index + 1] = [parseInt(e)];
-      areaSeries.forEach((x: any, i) => {
-        values[index + 1][i + 1] =
-          x.winner_blocks.indexOf(e) > -1
-            ? parseInt(x.data[index] ? x.data[index] : 0)
-            : 0;
-      });
-    });
-    setData(values);
-  }, [areaBlocks, areaSeries]);
-
-  useEffect(() => {
-    if (data.length > 0) {
-      setOptions((o) => ({
-        ...o,
-        hAxis: {
-          textStyle: { color: themeMode.greyText },
-          minorGridlines: { color: "transparent" },
-          gridlines: {
-            color: theme === "light" ? "#EBEAED" : "#84818A",
-            count: -1,
-          },
-          viewWindow: {
-            max: data[data.length - 1][0],
-            min: data[1][0],
-          },
-          format: "0",
-        },
-        vAxis: {
-          format: "short",
-          gridlines: {
-            color: theme === "light" ? "#EBEAED" : "#84818A",
-            minSpacing: 40,
-          },
-          textStyle: { color: themeMode.greyText },
-          interpolateNulls: false,
-        },
-        curveType: "function",
-        tooltip: { isHtml: true },
-        focusTarget: "category",
-      }));
+    if (data) {
+      setData(
+        data.blocks.map((v: any) => {
+          return {
+            // eslint-disable-next-line no-sequences
+            ...v.commits.reduce(
+              (obj: any, item: any) => (
+                (obj[truncateMiddle(item.address, 6)] = item.value), obj
+              ),
+              {}
+            ),
+            name: v.stacksBlockHeight,
+          };
+        })
+      );
+      setElements(
+        data.blocks[0].commits.map((element: any) => {
+          return truncateMiddle(element.address, 6);
+        })
+      );
     }
-  }, [theme.text, themeMode.text, themeMode.greyText, data, theme]);
+  }, [data]);
+
   return (
-    <>
-      {areaSeries.length > 0 && areaBlocks.length === 50 && (
-        <Chart
-          width={"100%"}
-          height={"100%"}
-          chartType="AreaChart"
-          loader={<div>Loading Chart</div>}
-          options={options}
-          data={data}
-          rootProps={{ "data-testid": "2" }}
+    <ResponsiveContainer width="100%" height={"100%"}>
+      <AreaCharts
+        data={dataa}
+        margin={{
+          top: 30,
+          right: 30,
+          left: 10,
+          bottom: 0,
+        }}
+      >
+        <XAxis dy={10} fontSize={12} dataKey="name" />
+        <YAxis
+          tickFormatter={(tick) => {
+            return tick.toLocaleString();
+          }}
+          fontSize={12}
         />
-      )}
-    </>
+        <Tooltip
+          labelStyle={{ fontSize: 14, fontWeight: 600 }}
+          contentStyle={{ fontSize: 14, fontWeight: 600 }}
+        />
+        {elements.map((v: any, i: number) => {
+          return (
+            <Area
+              type="monotone"
+              dataKey={v}
+              stackId={1}
+              stroke={colors[i]}
+              fill={colors[i]}
+            />
+          );
+        })}
+      </AreaCharts>
+    </ResponsiveContainer>
   );
 };

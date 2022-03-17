@@ -3,12 +3,7 @@ import { instance as axios } from "../axios/axios";
 import { getOverviewData } from "../axios/requests";
 import differenceInMinutes from "date-fns/differenceInMinutes";
 import { numFormatter } from "../utils/helper";
-import {
-  getRewardDistribution,
-  getSatsCommittedPerBlock,
-  getTokenPrice,
-  getTopBurnFeePerBlock,
-} from "../axios/requests";
+import { getRewardDistribution, getTokenPrice } from "../axios/requests";
 import { useQuery } from "@apollo/client";
 import { getBlocksList } from "../graphql/query/block";
 export interface OverviewProps {
@@ -75,14 +70,6 @@ export const useOverview = () => {
   const [totalWinners, setTotalWinners] = useState<any[]>([]);
   const [winnersAddresses, setwinnersAddresses] = useState<any[]>([]);
 
-  const [satsCommitted, setSatsCommitted] = useState<SatsCommittedProps>({
-    block_number: [],
-    total_sats_committed: [],
-  });
-
-  const [areaBlocks, setAreaBlocks] = useState<string[]>([]);
-  const [areaSeries, setAreaSeries] = useState<any>([]);
-
   const [blocks, setBlocks] = useState<Blocks[]>([]);
   const { data } = useQuery(getBlocksList, {
     variables: { limit: 100, offset: 0 },
@@ -105,44 +92,6 @@ export const useOverview = () => {
               data.find((token: any) => token.token_name === "STX").token_price
             ),
           });
-        }
-      });
-      axios.get(getSatsCommittedPerBlock).then((data: any) => {
-        if (data) {
-          setSatsCommitted({
-            block_number: data.map((item: any) => +item.block_number),
-            total_sats_committed: data.map(
-              (item: any) => +item.total_sats_committed
-            ),
-          });
-        }
-      });
-      axios.get(getTopBurnFeePerBlock).then((data: any) => {
-        if (data) {
-          let currentData: TotalBurnedMinerFees[] = data;
-          let series: { name: string; data: any[]; winner_blocks: any[] }[] =
-            [];
-          let blocks: any[] = [];
-          currentData.forEach((block: any) => {
-            blocks.push(block.block_number);
-            block.miner_list.forEach((element: any) => {
-              let index = series.findIndex(
-                (e) => e.name === element.leader_key_address
-              );
-              if (index !== -1) {
-                series[index].data.push(element.burn_fee);
-                series[index].winner_blocks.push(block.block_number);
-              } else {
-                series.push({
-                  name: element.leader_key_address,
-                  data: [element.burn_fee],
-                  winner_blocks: [block.block_number],
-                });
-              }
-            });
-          });
-          setAreaBlocks(blocks);
-          setAreaSeries(series);
         }
       });
       axios.get(getRewardDistribution).then((data: any) => {
@@ -198,9 +147,6 @@ export const useOverview = () => {
   return {
     overviewData,
     tokens,
-    areaBlocks,
-    areaSeries,
-    satsCommitted,
     blocks,
     totalWinners,
     failure,
