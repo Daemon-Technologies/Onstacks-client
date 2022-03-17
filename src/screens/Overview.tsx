@@ -9,6 +9,7 @@ import { PieChart } from "../components/charts/PieChart";
 import { Blocks } from "../hooks/useOverview";
 import useWindowDimensions from "../hooks/useWindowDimension";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
 
 interface Props {
   theme: any;
@@ -17,12 +18,14 @@ interface Props {
   totalWinners: number[];
   themeToggler: any;
   failure: boolean;
+  miningData: any;
   logEvent: any;
 }
 
 export const Overview: React.FC<Props> = ({
   theme,
   failure,
+  miningData,
   blocks,
   logEvent,
   winnerAddresses,
@@ -31,7 +34,7 @@ export const Overview: React.FC<Props> = ({
   const dims = useWindowDimensions();
   useEffect(() => {}, [totalWinners]);
   const { push } = useHistory();
-
+  const [pieData, setPieData] = useState();
   useEffect(() => {
     if (failure) {
       push("/upgrading");
@@ -41,37 +44,40 @@ export const Overview: React.FC<Props> = ({
   useEffect(() => {
     logEvent("Mining Overview");
   }, []);
-
   return (
     <>
       <div id="content1" className={"containerContent"}>
         <div className="containerOne" style={{ width: "50%" }}>
+          {miningData && miningData.btcSpent && (
+            <p className="sub-title">{miningData.btcSpent.toLocaleString()}</p>
+          )}
           <p className="title">Total sats committed</p>
-          <div className="seprator">
+          <div style={{ maxHeight: 220 }} className="seprator">
             <AreaChart theme={theme} />
           </div>
         </div>
         <div id="content2" style={{ width: "50%" }}>
+          {miningData && miningData.btcSpent && (
+            <p className="sub-title">{miningData.btcSpent.toLocaleString()}</p>
+          )}
+
           <p className="title">Top Miners - Sats spent per block</p>
-          <div className="seprator">
-            <LineChart theme={theme} />
+          <div style={{ maxHeight: 220 }} className="seprator">
+            <LineChart setPieData={setPieData} theme={theme} />
           </div>
         </div>
       </div>
 
       <div id="content3">
+        {miningData && miningData.active_miners && (
+          <p className="sub-title">
+            {miningData.active_miners.toLocaleString() + " Miners"}
+          </p>
+        )}
         <p className="title">
           Block reward distribution to miners (last 100 blocks)
         </p>
-        {totalWinners.length > 0 &&
-          winnerAddresses.length > 0 &&
-          totalWinners.length === winnerAddresses.length && (
-            <PieChart
-              totalWinners={totalWinners}
-              winnerAddresses={winnerAddresses}
-              theme={theme}
-            />
-          )}
+        {pieData && <PieChart pieData={pieData} theme={theme} />}
       </div>
       <div id={"content4"} className={dims.width < 700 ? "mobile-table" : "s"}>
         <p className={"title-table"}>Recent blocks</p>

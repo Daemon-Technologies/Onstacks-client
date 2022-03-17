@@ -52,6 +52,7 @@ export const MiningData: React.FC<Props> = ({
     currentBlock,
     miningInfo,
   } = useMiningData(blockHeights);
+  const [miningData, setMiningData] = useState();
 
   const dims = useWindowDimensions();
 
@@ -87,6 +88,7 @@ export const MiningData: React.FC<Props> = ({
         {blockHeights.STX_HEIGHT !== "" && (
           <MiningDataHeader
             blockHeights={blockHeights}
+            setMiningData={setMiningData}
             tabIndex={tabIndex}
             overviewData={overviewData}
           />
@@ -101,6 +103,7 @@ export const MiningData: React.FC<Props> = ({
       {tabIndex === 0 && (
         <Overview
           logEvent={logEvent}
+          miningData={miningData}
           failure={failure}
           themeToggler={themeToggler}
           totalWinners={totalWinners}

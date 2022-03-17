@@ -15,9 +15,10 @@ import { truncateMiddle } from "../../utils/utils";
 
 interface Props {
   theme: any;
+  setPieData?: any;
 }
 
-export const LineChart: React.FC<Props> = ({ theme }) => {
+export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
   const [dataa, setData] = useState<any[]>([]);
   const colors = randomColorGenerator();
   const { data } = useQuery(getRecentBlockCommits);
@@ -25,12 +26,22 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
 
   useEffect(() => {
     if (data) {
+      const x: any = {};
+      data.blocks.forEach((element: any) => {
+        x[element.winner_stx_address] =
+          element.block_reward +
+          (x[element.winner_stx_address] ? x[element.winner_stx_address] : 0);
+      });
+      if (setPieData) {
+        setPieData(x);
+      }
       setData(
         data.blocks.map((v: any) => {
           return {
             // eslint-disable-next-line no-sequences
             ...v.commits.reduce(
               (obj: any, item: any) => (
+                // eslint-disable-next-line no-sequences
                 (obj[truncateMiddle(item.address, 6)] = item.value), obj
               ),
               {}
@@ -45,10 +56,11 @@ export const LineChart: React.FC<Props> = ({ theme }) => {
         })
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
-    <ResponsiveContainer width="100%" height={"100%"}>
+    <ResponsiveContainer width="100%" height={"90%"}>
       <AreaCharts
         data={dataa}
         margin={{

@@ -12,8 +12,9 @@ import { InfoCard } from "./InfoCard";
 export const MiningDataHeader: React.FC<{
   overviewData: OverviewProps;
   blockHeights: any;
+  setMiningData: any;
   tabIndex?: number;
-}> = ({ overviewData, blockHeights }) => {
+}> = ({ blockHeights, setMiningData }) => {
   const { data } = useQuery(getBtcCommits, {
     variables: {
       stacks_block_height: blockHeights.STX_HEIGHT - 100,
@@ -36,7 +37,15 @@ export const MiningDataHeader: React.FC<{
         btcSpent: data.btcSpentRecent.aggregate.sum.commit_value,
         btc_hash_rate: data.config[0].value,
       });
+      setMiningData({
+        active_miners: data.activeMinersCount.aggregate.count,
+        avg_tx_fees_per_block: data.blockFeesRecent.aggregate.avg.tx_reward,
+        btc_total: data.btcSpentAllTime.aggregate.sum.commit_value,
+        btcSpent: data.btcSpentRecent.aggregate.sum.commit_value,
+        btc_hash_rate: data.config[0].value,
+      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (

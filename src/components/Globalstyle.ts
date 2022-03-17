@@ -878,7 +878,11 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     flex: 1;
     margin: 16px 0px;
   }
-
+  /* .miningData {
+    #content1 {
+      max-height: 300px !important;
+    }
+  } */
   .container {
     display: grid;
     grid-template-columns: repeat( 12, 1fr );
@@ -911,7 +915,7 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
         "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
     grid-gap: 16px;
     width: 100%;
-    max-width: 1280px;
+    max-width: 1600px;
     padding: 92px 32px 32px 32px;
     margin: auto;
   }

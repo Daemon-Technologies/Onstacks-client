@@ -34,7 +34,7 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
   }, [data]);
 
   return (
-    <ResponsiveContainer width={"100%"} height={"100%"}>
+    <ResponsiveContainer width={"100%"} maxHeight={270} height={"90%"}>
       <AreaCharts
         data={dataa}
         margin={{ top: 30, right: 30, left: 10, bottom: 0 }}
