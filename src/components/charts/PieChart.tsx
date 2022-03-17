@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import {
   Cell,
+  Label,
   Legend,
   Pie,
   PieChart as PieCharts,
@@ -21,8 +22,8 @@ interface Props {
 export const PieChart: React.FC<Props> = ({ theme, pieData }) => {
   const [data, setData] = useState<any[]>([]);
   const COLORS = randomColorGenerator();
+  const [value, setValue] = useState("100%");
   useEffect(() => {
-    console.log(pieData);
     const pie = Object.entries(pieData);
     setData(
       pie.map((x) => {
@@ -34,7 +35,6 @@ export const PieChart: React.FC<Props> = ({ theme, pieData }) => {
     );
   }, [pieData]);
 
-  console.log(data);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieCharts width={400} height={400}>
@@ -45,12 +45,21 @@ export const PieChart: React.FC<Props> = ({ theme, pieData }) => {
           isAnimationActive={false}
           cx="50%"
           cy="50%"
+          onClick={(e: any) => {
+            setValue((e.percent * 100).toFixed(0) + "%");
+          }}
+          onMouseOver={(e: any) => {
+            setValue((e.percent * 100).toFixed(0) + "%");
+          }}
+          onMouseLeave={(e: any) => {
+            setValue("100%");
+          }}
           outerRadius={80}
           innerRadius={60}
           fill="#8884d8"
           paddingAngle={1}
-          label
         >
+          <Label value={value} position="center" />
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}

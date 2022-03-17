@@ -54,11 +54,13 @@ export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
           };
         })
       );
-      setElements(
-        data.blocks[0].commits.map((element: any) => {
-          return truncateMiddle(element.address, 6);
-        })
-      );
+      const miners = data.blocks[0].commits.map((element: any) => {
+        return truncateMiddle(element.address, 6);
+      });
+      const minerso = data.blocks[10].commits.map((element: any) => {
+        return truncateMiddle(element.address, 6);
+      });
+      setElements(miners.length > minerso.length ? miners : minerso);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);

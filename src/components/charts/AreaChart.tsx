@@ -47,7 +47,12 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
           fontSize={12}
         />
         <Tooltip />
-        <Area type="linear" dataKey="sats" stroke="#5546FF" fill="#bbb7fe" />
+        <Area
+          type="linear"
+          dataKey="sats"
+          stroke="#5546FF"
+          fill="rgba(85, 70, 255, 0.2)"
+        />
       </AreaCharts>
     </ResponsiveContainer>
   );
