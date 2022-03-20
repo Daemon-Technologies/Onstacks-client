@@ -54,7 +54,8 @@ export const PieChart: React.FC<Props> = ({ theme, pieData }) => {
           onMouseLeave={(e: any) => {
             setValue("100%");
           }}
-          outerRadius={80}
+          strokeWidth={0}
+          outerRadius={100}
           innerRadius={60}
           fill="#8884d8"
           paddingAngle={1}

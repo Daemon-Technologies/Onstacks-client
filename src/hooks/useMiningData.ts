@@ -1,10 +1,9 @@
+import { truncateMiddle } from "./../utils/utils";
+import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { instance as axios } from "../axios/axios";
-import {
-  getMinersInfo,
-  getBlockNumber,
-  getMiningInfo,
-} from "../axios/requests";
+import { getBlockNumber, getMiningInfo } from "../axios/requests";
+import { minerList } from "../graphql/query/block";
 import useWindowDimensions from "./useWindowDimension";
 
 export interface MinerInfo {
@@ -60,48 +59,40 @@ export const useMiningData = (blockHeights: any) => {
   });
   const dims = useWindowDimensions();
 
+  const { data: miners } = useQuery(minerList);
+
   useEffect(() => {
-    axios.get(getMinersInfo).then((data: any) => {
+    if (miners) {
       setBlocks(
-        data.map((r: MinerInfo) => {
-          return {
-            address: r.stx_address,
-            stx_address:
-              window.innerWidth > 600
-                ? `${r.stx_address.substring(
-                    0,
-                    10
-                  )} ... ${r.stx_address.substring(
-                    r.stx_address.length - 10,
-                    r.stx_address.length
-                  )}`
-                : `${r.stx_address.substring(
-                    0,
-                    7
-                  )} ... ${r.stx_address.substring(
-                    r.stx_address.length - 7,
-                    r.stx_address.length
-                  )}`,
-            total_burnfee: r.total_burnfee
-              ? r.total_burnfee.toLocaleString()
-              : 0,
-            total_block_reward: r.total_block_reward
-              ? r.total_block_reward.toLocaleString()
-              : 0,
-            total_participation: r.total_participation
-              ? r.total_participation.toFixed(0)
-              : 0,
-            total_stx_reward: r.total_stx_reward
-              ? r.total_stx_reward.toLocaleString()
-              : 0,
-          };
-        })
+        miners.miner_info
+          .map((itm: any) => ({
+            ...miners.miner_rewards.find(
+              (item: any) => item.stx_address === itm.stx_address && item
+            ),
+            ...itm,
+          }))
+          .map((item: any) => {
+            return {
+              address: item.stx_address,
+              stx_address: truncateMiddle(item.stx_address, 8),
+              total_burnfee: item.total_commits.toLocaleString(),
+              total_participation: item.total_participations
+                ? item.total_participations.toLocaleString()
+                : 0,
+              total_block_reward: item.total_won
+                ? item.total_won.toLocaleString()
+                : 0,
+              total_stx_reward: item.total_reward
+                ? item.total_reward.toLocaleString()
+                : 0,
+            };
+          })
       );
-    });
+    }
     axios.get(getMiningInfo).then((data: any) => {
       setMiningInfo(data);
     });
-  }, [dims]);
+  }, [dims, miners]);
 
   const getBlockByNumber = (blockNumber: string) => {
     axios.get(getBlockNumber(blockNumber)).then((data: any) => {

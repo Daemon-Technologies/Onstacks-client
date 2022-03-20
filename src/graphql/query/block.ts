@@ -53,3 +53,18 @@ export const getRecentBlockCommits = gql`
     }
   }
 `;
+
+export const minerList = gql`
+  query getMinersList {
+    miner_rewards(limit: 100, offset: 0) {
+      total_reward
+      stx_address: winner_stx_address
+      total_won
+    }
+    miner_info(limit: 100, offset: 0) {
+      stx_address
+      total_commits
+      total_participations
+    }
+  }
+`;

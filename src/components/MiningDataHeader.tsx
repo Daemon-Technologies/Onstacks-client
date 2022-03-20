@@ -33,15 +33,23 @@ export const MiningDataHeader: React.FC<{
       setCurrentData({
         active_miners: data.activeMinersCount.aggregate.count,
         avg_tx_fees_per_block: data.blockFeesRecent.aggregate.avg.tx_reward,
-        btc_total: data.btcSpentAllTime.aggregate.sum.commit_value,
-        btcSpent: data.btcSpentRecent.aggregate.sum.commit_value,
+        btc_total:
+          data.btcSpentAllTime.aggregate.sum.commit_value +
+          data.btcFeesAllTime.aggregate.sum.commit_btc_gas_fee,
+        btcSpent:
+          data.btcSpentRecent.aggregate.sum.commit_value +
+          data.btcFeesRecent.aggregate.sum.commit_btc_gas_fee,
         btc_hash_rate: data.config[0].value,
       });
       setMiningData({
         active_miners: data.activeMinersCount.aggregate.count,
         avg_tx_fees_per_block: data.blockFeesRecent.aggregate.avg.tx_reward,
-        btc_total: data.btcSpentAllTime.aggregate.sum.commit_value,
-        btcSpent: data.btcSpentRecent.aggregate.sum.commit_value,
+        btc_total:
+          data.btcSpentAllTime.aggregate.sum.commit_value +
+          data.btcFeesAllTime.aggregate.sum.commit_btc_gas_fee,
+        btcSpent:
+          data.btcSpentRecent.aggregate.sum.commit_value +
+          data.btcFeesRecent.aggregate.sum.commit_btc_gas_fee,
         btc_hash_rate: data.config[0].value,
       });
     }
@@ -50,7 +58,7 @@ export const MiningDataHeader: React.FC<{
 
   return (
     <>
-      <p className="screen-title">Mining Explorer</p>
+      <p className="screen-title">Overview</p>
       <InfoCard overviewData={currentData} />
       <div
         style={{
