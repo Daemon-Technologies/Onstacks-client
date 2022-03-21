@@ -55,6 +55,7 @@ export const PieChart: React.FC<Props> = ({ theme, pieData }) => {
             setValue("100%");
           }}
           strokeWidth={0}
+          fontWeight={500}
           outerRadius={100}
           innerRadius={60}
           fill="#8884d8"

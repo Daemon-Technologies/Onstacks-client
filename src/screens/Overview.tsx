@@ -44,24 +44,25 @@ export const Overview: React.FC<Props> = ({
   useEffect(() => {
     logEvent("Mining Overview");
   }, []);
+
   return (
     <>
       <div id="content1" className={"containerContent"}>
         <div className="containerOne" style={{ width: "50%" }}>
-          {miningData && miningData.btcSpent && (
+          {/* {miningData && miningData.btcSpent && (
             <p className="sub-title">{miningData.btcSpent.toLocaleString()}</p>
-          )}
-          <p className="title">Total sats committed</p>
+          )} */}
+          <p className="sub-title">Total sats committed</p>
           <div style={{ maxHeight: 220 }} className="seprator">
             <AreaChart theme={theme} />
           </div>
         </div>
         <div id="content2" style={{ width: "50%" }}>
-          {miningData && miningData.btcSpent && (
+          {/* {miningData && miningData.btcSpent && (
             <p className="sub-title">{miningData.btcSpent.toLocaleString()}</p>
-          )}
+          )} */}
 
-          <p className="title">Top Miners - Sats spent per block</p>
+          <p className="sub-title">Top Miners - Sats spent per block</p>
           <div style={{ maxHeight: 220 }} className="seprator">
             <LineChart setPieData={setPieData} theme={theme} />
           </div>
@@ -69,12 +70,12 @@ export const Overview: React.FC<Props> = ({
       </div>
 
       <div id="content3">
-        {miningData && miningData.active_miners && (
+        {/* {miningData && miningData.active_miners && (
           <p className="sub-title">
             {miningData.active_miners.toLocaleString() + " Miners"}
           </p>
-        )}
-        <p className="title">
+        )} */}
+        <p className="sub-title">
           Block reward distribution to miners (last 100 blocks)
         </p>
         {pieData && <PieChart pieData={pieData} theme={theme} />}

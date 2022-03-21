@@ -19,7 +19,7 @@ export const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex, logEvent }) => {
       >
         Overview
       </div>
-      <div
+      {/* <div
         onClick={() => {
           setTabIndex(1);
           logEvent("Mining Data Tab");
@@ -27,7 +27,7 @@ export const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex, logEvent }) => {
         className={tabIndex === 1 ? "active" : ""}
       >
         Mining data
-      </div>
+      </div> */}
       <div
         onClick={() => {
           setTabIndex(2);

@@ -58,8 +58,6 @@ export const MiningDataHeader: React.FC<{
 
   return (
     <>
-      <p className="screen-title">Overview</p>
-      <InfoCard overviewData={currentData} />
       <div
         style={{
           display: "flex",
@@ -68,7 +66,7 @@ export const MiningDataHeader: React.FC<{
           justifyContent: "space-between",
         }}
       >
-        <p className="based">*Average of the last 100 blocks.</p>
+        <p className="screen-title">Overview</p>
         <div className="data">
           <a onClick={() => getBlockHash(blockHeights.STX_HEIGHT)}>
             STX block height:&nbsp; <span>#{blockHeights.STX_HEIGHT} </span>
@@ -84,6 +82,7 @@ export const MiningDataHeader: React.FC<{
           </a>
         </div>
       </div>
+      <InfoCard overviewData={currentData} />
     </>
   );
 };

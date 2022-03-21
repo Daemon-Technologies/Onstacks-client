@@ -72,6 +72,14 @@ export const GlobalStyles = createGlobalStyle`
       border-radius: 'inherit';
       text-align: 'right'
   }
+  .footer-p {
+    color: white;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
   .card-img {
     width: 290px;
     height: 380px;

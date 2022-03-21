@@ -1,19 +1,17 @@
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import {
-  Area,
-  AreaChart as AreaCharts,
+  Bar,
+  BarChart,
   ResponsiveContainer,
   XAxis,
   YAxis,
   Tooltip,
+  CartesianGrid,
 } from "recharts";
 import { getRecentBlockCommits } from "../../graphql/query/block";
 import { useQuery } from "@apollo/client";
-import {
-  randomColorGenerator,
-  randomColorGeneratorOpacity,
-} from "../../utils/helper";
+import { randomColorGenerator } from "../../utils/helper";
 import { truncateMiddle } from "../../utils/utils";
 
 interface Props {
@@ -24,7 +22,6 @@ interface Props {
 export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
   const [dataa, setData] = useState<any[]>([]);
   const colors = randomColorGenerator();
-  const opColors = randomColorGeneratorOpacity();
   const { data } = useQuery(getRecentBlockCommits);
   const [elements, setElements] = useState([]);
 
@@ -66,9 +63,11 @@ export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
   }, [data]);
 
   return (
-    <ResponsiveContainer width="100%" height={"90%"}>
-      <AreaCharts
-        data={dataa}
+    <ResponsiveContainer width="100%" height={"100%"}>
+      <BarChart
+        data={dataa.slice(0, 30)}
+        barSize={12}
+        barGap={10}
         margin={{
           top: 30,
           right: 30,
@@ -87,18 +86,30 @@ export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
           labelStyle={{ fontSize: 14, fontWeight: 600 }}
           contentStyle={{ fontSize: 14, fontWeight: 600 }}
         />
+        <CartesianGrid />
         {elements.map((v: any, i: number) => {
-          return (
-            <Area
-              type="monotone"
-              dataKey={v}
-              stackId={1}
-              stroke={colors[i]}
-              fill={opColors[i]}
-            />
-          );
+          if (elements.length - 1 === i) {
+            return (
+              <Bar
+                dataKey={v}
+                stackId={1}
+                radius={[4, 4, 0, 0]}
+                stroke={colors[i]}
+                fill={colors[i]}
+              />
+            );
+          } else {
+            return (
+              <Bar
+                dataKey={v}
+                stackId={1}
+                stroke={colors[i]}
+                fill={colors[i]}
+              />
+            );
+          }
         })}
-      </AreaCharts>
+      </BarChart>
     </ResponsiveContainer>
   );
 };
