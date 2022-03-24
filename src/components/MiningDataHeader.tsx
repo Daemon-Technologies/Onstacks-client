@@ -26,8 +26,8 @@ export const MiningDataHeader: React.FC<{
     avg_tx_fees_per_block: "",
     btc_hash_rate: "",
     btcSpent: "",
+    total_fees: "0",
   });
-
   useEffect(() => {
     if (data) {
       setCurrentData({
@@ -40,6 +40,7 @@ export const MiningDataHeader: React.FC<{
           data.btcSpentRecent.aggregate.sum.commit_value +
           data.btcFeesRecent.aggregate.sum.commit_btc_gas_fee,
         btc_hash_rate: data.config[0].value,
+        total_fees: data.btcFeesAllTime.aggregate.sum.commit_btc_gas_fee,
       });
       setMiningData({
         active_miners: data.activeMinersCount.aggregate.count,
