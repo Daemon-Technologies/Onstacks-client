@@ -7,6 +7,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  CartesianGrid,
 } from "recharts";
 import { useQuery } from "@apollo/client";
 import { getBtcCommitsPerBlock } from "../../graphql/query/commitValue";
@@ -47,6 +48,7 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
           fontSize={12}
         />
         <Tooltip />
+        <CartesianGrid vertical={false} />
         <Area
           type="linear"
           dataKey="sats"

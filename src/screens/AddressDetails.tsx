@@ -380,8 +380,11 @@ export const AddressDetails: React.FC<Props> = ({
           {satsCommitted.block_number.length > 0 && <AreaChart theme={theme} />}
         </div>
       </div>
-      <div id={"content4"} className={dims.width < 700 ? "mobile-table" : "s"}>
-        <p className={"title-table"}>Recent blocks</p>
+      <div
+        id={"content4"}
+        style={{ padding: 0 }}
+        className={dims.width < 700 ? "mobile-table" : "s"}
+      >
         {dims.width < 700 ? (
           blocks.map((block) => {
             return (

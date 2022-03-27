@@ -122,11 +122,12 @@ export const MiningData: React.FC<Props> = ({
       {tabIndex === 2 && (
         <div
           id={"content1"}
+          style={{ padding: 0 }}
           className={dims.width < 700 ? "mobile-table" : "s"}
         >
-          <p className={"title-table"}>
+          {/* <p className={"title-table"}>
             Recent active miners ({minersBlocks.length})
-          </p>
+          </p> */}
           {dims.width < 700 ? (
             minersBlocks.map((block) => {
               return (

@@ -61,12 +61,17 @@ export const PieChart: React.FC<Props> = ({ theme, pieData }) => {
           fill="#8884d8"
           paddingAngle={1}
         >
-          <Label value={value} position="center" />
+          <Label y={100} value={value} fontWeight={800} position="centerTop" />
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Legend layout="vertical" verticalAlign="middle" align="right" />
+        <Legend
+          layout="vertical"
+          fontSize={14}
+          verticalAlign="middle"
+          align="right"
+        />
         <Tooltip />
       </PieCharts>
     </ResponsiveContainer>

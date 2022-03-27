@@ -191,7 +191,9 @@ export const GlobalStyles = createGlobalStyle`
   }
   }
   //SIDEBAR
-
+  .recharts-legend-item  {
+    font-size: 14px;
+  }
   .terms-container {
     width: 100%;
     padding: 100px;
@@ -233,6 +235,37 @@ export const GlobalStyles = createGlobalStyle`
   }
   }
 
+  .table-headers {
+    display: flex;
+    flex: 1;
+    padding: 24px 26px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+  .table-headers p {
+    width: 20%;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-align: left;
+
+  }
+  .table-headers:hover {
+    background-color:  ${({ theme }: any) => theme.primaryHoverColor};
+    border-left: 5px solid #5546FF;
+  }
+  .table-heads {
+    padding: 12px 26px;
+  }
+  .table-heads:hover {
+    background-color:  transparent;
+    border-left: 0px solid #5546FF;
+  }
   .header {
     display: flex;
     /* background: linear-gradient(#6616fc, #f394d3); */
@@ -1199,9 +1232,14 @@ box-shadow: 7x 10px 20px 0px hsla(0, 0%, 0%, 0.04);
       color: ${({ theme }: any) => theme.greyText} !important;
     }
     .sub-title {
-      font-size: 25px;
-      font-weight: 600;
-      line-height: 40px;
+      font-family: Manrope;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: 0px;
+      text-align: left;
+
       color: ${({ theme }: any) => theme.text} !important;
     }
   }
@@ -1278,7 +1316,7 @@ box-shadow: 7x 10px 20px 0px hsla(0, 0%, 0%, 0.04);
     padding: 24px;
     border-radius: var(--main-radius);
     background: ${({ theme }: any) => theme.background} !important;
-    max-height: 344px;
+    max-height: 444px;
     border: ${({ theme }: any) =>
       theme.border === "#423F4B" ? "0px" : "1px"} solid ${({ theme }: any) =>
   theme.border};
@@ -1294,9 +1332,14 @@ box-shadow: 7x 10px 20px 0px hsla(0, 0%, 0%, 0.04);
       color: ${({ theme }: any) => theme.greyText} !important;
     }
     .sub-title {
-      font-size: 25px;
-      font-weight: 600;
-      line-height: 40px;
+      font-family: Manrope;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+      letter-spacing: 0px;
+      text-align: left;
+
       color: ${({ theme }: any) => theme.text} !important;
     }
   }
@@ -2166,9 +2209,8 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(255, 160, 67, 0.1);
+    background-color: ${({ theme }: any) => theme.primaryHoverColor};
     padding: 15px 20px;
-    position: absolute;
     bottom: 0;
     left: 0;
     div {

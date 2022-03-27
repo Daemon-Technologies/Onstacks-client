@@ -44,8 +44,8 @@ export const RecentBlocksAddress: React.FC<Props> = ({
     usePagination
   );
   const {
-    getTableProps,
-    getTableBodyProps,
+    // getTableProps,
+    // getTableBodyProps,
     headerGroups,
     prepareRow,
     page,
@@ -66,33 +66,34 @@ export const RecentBlocksAddress: React.FC<Props> = ({
   }, [initialPageSize]);
   return (
     <>
-      <table className={"small-table"} {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup: any) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: any) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                </th>
-              ))}
-            </tr>
+      {/* <table className={"small-table"} {...getTableProps()}>
+        <thead> */}
+      {headerGroups.map((headerGroup: any) => (
+        <div
+          className={"table-headers table-heads"}
+          {...headerGroup.getHeaderGroupProps()}
+        >
+          {headerGroup.headers.map((column: any) => (
+            <p {...column.getHeaderProps(column.getSortByToggleProps())}>
+              {column.render("Header")}
+            </p>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row: any) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell: any) => {
-                  return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        </div>
+      ))}
+      {/* </thead>
+        <tbody {...getTableBodyProps()}> */}
+      {page.map((row: any) => {
+        prepareRow(row);
+        return (
+          <div className={"table-headers"} {...row.getRowProps()}>
+            {row.cells.map((cell: any) => {
+              return <p {...cell.getCellProps()}>{cell.render("Cell")}</p>;
+            })}
+          </div>
+        );
+      })}
+      {/* </tbody>
+      </table> */}
       <div className="pagination">
         <div>
           Showing

@@ -47,8 +47,8 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
     usePagination
   );
   const {
-    getTableProps,
-    getTableBodyProps,
+    // getTableProps,
+    // getTableBodyProps,
     headerGroups,
     prepareRow,
     page,
@@ -70,42 +70,45 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
   }, [initialPageSize]);
   return (
     <>
-      <table id={"long"} {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup: any) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: any) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                </th>
-              ))}
-            </tr>
+      {/* <table id={"long"} {...getTableProps()}> */}
+      {/* <thead> */}
+      {headerGroups.map((headerGroup: any) => (
+        <div
+          className={"table-headers table-heads"}
+          {...headerGroup.getHeaderGroupProps()}
+        >
+          {headerGroup.headers.map((column: any) => (
+            <p {...column.getHeaderProps(column.getSortByToggleProps())}>
+              {column.render("Header")}
+            </p>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row: any) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell: any) => {
-                  return (
-                    <td
-                      onClick={() => {
-                        if (cell.column.id === "stx_address") {
-                          push("/miner/address/" + cell.row.original.address);
-                        }
-                      }}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        </div>
+      ))}
+      {/* </thead> */}
+      {/* <tbody {...getTableBodyProps()}> */}
+      {page.map((row: any) => {
+        prepareRow(row);
+        return (
+          <div className={"table-headers"} {...row.getRowProps()}>
+            {row.cells.map((cell: any) => {
+              return (
+                <p
+                  onClick={() => {
+                    if (cell.column.id === "stx_address") {
+                      push("/miner/address/" + cell.row.original.address);
+                    }
+                  }}
+                  {...cell.getCellProps()}
+                >
+                  {cell.render("Cell")}
+                </p>
+              );
+            })}
+          </div>
+        );
+      })}
+      {/* </tbody> */}
+      {/* </table> */}
       <div className="pagination">
         <div>
           Showing

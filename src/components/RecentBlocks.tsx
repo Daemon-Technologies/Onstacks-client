@@ -42,8 +42,8 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
     usePagination
   );
   const {
-    getTableProps,
-    getTableBodyProps,
+    // getTableProps,
+    // getTableBodyProps,
     headerGroups,
     prepareRow,
     page,
@@ -65,47 +65,49 @@ export const RecentBlocks: React.FC<Props> = ({ blocks, initialPageSize }) => {
   }, [initialPageSize]);
   return (
     <>
-      <table className={"small-table"} {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup: any) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column: any) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                </th>
-              ))}
-            </tr>
+      {/* <table className={"small-table"} {...getTableProps()}>
+        <thead> */}
+      {headerGroups.map((headerGroup: any) => (
+        <div
+          className={"table-headers table-heads"}
+          {...headerGroup.getHeaderGroupProps()}
+        >
+          {headerGroup.headers.map((column: any) => (
+            <p {...column.getHeaderProps(column.getSortByToggleProps())}>
+              {column.render("Header")}
+            </p>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {page.map((row: any) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell: any) => {
-                  return (
-                    <td
-                      onClick={() => {
-                        if (cell.column.id === "winner_address") {
-                          push("/miner/address/" + cell.row.original.address);
-                        } else if (cell.column.id === "block_number") {
-                          push(
-                            "/3/" +
-                              cell.row.original.block_number.substring(1, 10)
-                          );
-                        }
-                      }}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        </div>
+      ))}
+      {/* </thead>
+        <tbody {...getTableBodyProps()}> */}
+      {page.map((row: any) => {
+        prepareRow(row);
+        return (
+          <div className="table-headers" {...row.getRowProps()}>
+            {row.cells.map((cell: any) => {
+              return (
+                <p
+                  onClick={() => {
+                    if (cell.column.id === "winner_address") {
+                      push("/miner/address/" + cell.row.original.address);
+                    } else if (cell.column.id === "block_number") {
+                      push(
+                        "/3/" + cell.row.original.block_number.substring(1, 10)
+                      );
+                    }
+                  }}
+                  {...cell.getCellProps()}
+                >
+                  {cell.render("Cell")}
+                </p>
+              );
+            })}
+          </div>
+        );
+      })}
+      {/* </tbody>
+      </table> */}
       <div className="pagination">
         <div>
           Showing

@@ -132,10 +132,10 @@ export const useOverview = () => {
               (window.innerWidth > 800 ? " Mins" : "Mins"),
             sats_spent: numFormatter(+r.totalSpent.aggregate.sum.commit_value),
             winner_address:
-              r.winnerAddress.substring(0, 8) +
+              r.winnerAddress.substring(0, 4) +
               ".." +
               r.winnerAddress.substring(
-                r.winnerAddress.length - 8,
+                r.winnerAddress.length - 4,
                 r.winnerAddress.length
               ),
           };
