@@ -256,6 +256,43 @@ export const GlobalStyles = createGlobalStyle`
     text-align: left;
 
   }
+
+  .custom-tooltip {
+    background-color:  ${({ theme }: any) => theme.background};
+    padding: 16px;
+    display: flex ;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .custom-tooltip div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .custom-tooltip .label {
+    margin-right: 30px;
+    //styleName: Regular/Text/12px/Regular;
+    font-family: Manrope;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    margin-left: 8px;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: left;
+  }
+
+  .custom-tooltip .desc {
+    font-family: Manrope;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: right;
+  }
   .table-headers:hover {
     background-color:  ${({ theme }: any) => theme.primaryHoverColor};
     border-left: 5px solid #5546FF;

@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { useQuery } from "@apollo/client";
 import { getBtcCommitsPerBlock } from "../../graphql/query/commitValue";
+import { numFormatter } from "../../utils/helper";
 
 interface Props {
   theme: any;
@@ -33,7 +34,29 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
       );
     }
   }, [data]);
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      console.log(payload, active, label);
+      return (
+        <div className="custom-tooltip">
+          <div>
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: 4,
+                background: "#5546FF",
+              }}
+            ></div>
+            <p className="label">#{`${label}`}</p>
+          </div>
+          <p className="desc">{numFormatter(payload[0].value)}</p>
+        </div>
+      );
+    }
 
+    return null;
+  };
   return (
     <ResponsiveContainer width={"100%"} maxHeight={270} height={"100%"}>
       <AreaCharts
@@ -47,7 +70,7 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
           }}
           fontSize={12}
         />
-        <Tooltip />
+        <Tooltip content={<CustomTooltip />} />
         <CartesianGrid vertical={false} />
         <Area
           type="linear"
