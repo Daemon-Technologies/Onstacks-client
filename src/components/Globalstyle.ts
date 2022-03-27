@@ -243,6 +243,7 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #E5E7EB;
+    cursor: pointer;
   }
 
   .table-headers p {
@@ -261,6 +262,7 @@ export const GlobalStyles = createGlobalStyle`
   }
   .table-heads {
     padding: 12px 26px;
+    cursor: none;
   }
   .table-heads:hover {
     background-color:  transparent;

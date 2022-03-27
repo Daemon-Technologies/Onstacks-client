@@ -84,6 +84,16 @@ export const MiningDataHeader: React.FC<{
         </div>
       </div>
       <InfoCard overviewData={currentData} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-end",
+        }}
+      >
+        <p className="title">*last 100 block</p>
+      </div>
     </>
   );
 };

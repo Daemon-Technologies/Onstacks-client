@@ -5,7 +5,7 @@ export const InfoCard: React.FC<{ overviewData: any }> = ({ overviewData }) => {
   return (
     <div className={"info-card"}>
       <div className="inner-info-card">
-        <p className="title">BTC spent</p>
+        <p className="title">BTC spent*</p>
         <p className="sub-title">
           {(+overviewData.btcSpent / 100000000).toLocaleString()} BTC
         </p>
@@ -33,7 +33,7 @@ export const InfoCard: React.FC<{ overviewData: any }> = ({ overviewData }) => {
         <p className="sub-title">{overviewData.btc_hash_rate}0 EH/s</p>
       </div>
       <div className="inner-info-card">
-        <p className="title">Active miners</p>
+        <p className="title">Active miners*</p>
         <p className="sub-title">{overviewData.active_miners}</p>
       </div>
     </div>

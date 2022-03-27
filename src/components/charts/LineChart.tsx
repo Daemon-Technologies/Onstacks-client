@@ -54,7 +54,7 @@ export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
       const miners = data.blocks[0].commits.map((element: any) => {
         return truncateMiddle(element.address, 6);
       });
-      const minerso = data.blocks[10].commits.map((element: any) => {
+      const minerso = data.blocks[30].commits.map((element: any) => {
         return truncateMiddle(element.address, 6);
       });
       setElements(miners.length > minerso.length ? miners : minerso);
