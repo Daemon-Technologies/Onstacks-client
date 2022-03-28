@@ -4,10 +4,10 @@
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useTransaction } from "../hooks/useTransaction";
-import { toRelativeTime, truncateMiddle } from "../utils/utils";
-import BlockLight from "../assets/explorer/microblock-light.svg";
-import BlockDark from "../assets/explorer/microblock-dark.svg";
+import { useTransaction } from "../../hooks/useTransaction";
+import { toRelativeTime, truncateMiddle } from "../../utils/utils";
+import BlockLight from "../../assets/explorer/microblock-light.svg";
+import BlockDark from "../../assets/explorer/microblock-dark.svg";
 
 interface Props {
   theme: any;

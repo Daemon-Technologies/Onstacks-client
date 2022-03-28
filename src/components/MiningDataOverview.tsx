@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 import { MiningInfo } from "../hooks/useMiningData";
 import { Blocks } from "../hooks/useOverview";
 import useWindowDimensions from "../hooks/useWindowDimension";
-import { FlowChartNodes } from "./charts/FlowChartNodes";
-import { LineChart } from "./charts/LineChart";
+import { FlowChartNodes } from "../screens/MiningData/charts/FlowChartNodes";
+import { LineChart } from "../screens/MiningData/charts/LineChart";
 import { RecentBlocks } from "./RecentBlocks";
 
 export const MiningDataOverview: React.FC<{

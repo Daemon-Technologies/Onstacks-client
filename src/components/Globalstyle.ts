@@ -242,7 +242,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #2b2e38;
+    border-bottom: 1px solid  ${({ theme }: any) => theme.border} !important;;
     cursor: pointer;
   }
 

@@ -4,9 +4,9 @@
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useTransaction } from "../hooks/useTransaction";
-import { truncateMiddle } from "../utils/utils";
-import { LoadTransactions } from "../components/LoadTransactions";
+import { useTransaction } from "../../hooks/useTransaction";
+import { truncateMiddle } from "../../utils/utils";
+import { LoadTransactions } from "../../components/LoadTransactions";
 interface Props {
   theme: any;
   themeToggler: any;

@@ -7,19 +7,19 @@ import {
   Redirect,
 } from "react-router-dom";
 import { Notfound } from "./screens/Notfound";
-import { MiningData } from "./screens/MiningData";
+import { MiningData } from "./screens/MiningData/MiningData";
 import { Header } from "./components/Header";
-import { AddressDetails } from "./screens/AddressDetails";
+import { AddressDetails } from "./screens/MiningData/AddressDetails";
 import { Upgrading } from "./screens/Upgrading";
-import { Explorer } from "./screens/Explorer";
-import { ExplorerAddressDetails } from "./screens/ExplorerAddressDetails";
-import { STXTransferDetails } from "./screens/STXTransferDetails";
-import { Blockdetails } from "./screens/Blockdetails";
+import { Explorer } from "./screens/Explorer/Explorer";
+import { ExplorerAddressDetails } from "./screens/Explorer/ExplorerAddressDetails";
+import { STXTransferDetails } from "./screens/Explorer/STXTransferDetails";
+import { Blockdetails } from "./screens/MiningData/Blockdetails";
 import { Protocol } from "./screens/Protocol";
 import { Terms } from "./screens/Terms";
-import { MicroblockDetails } from "./screens/MicroblockDetails";
+import { MicroblockDetails } from "./screens/Explorer/MicroblockDetails";
 import { Footer } from "./components/Footer";
-import { ContractDetails } from "./screens/ContractDetails";
+import { ContractDetails } from "./screens/Explorer/ContractDetails";
 import { useOverview } from "./hooks/useOverview";
 import { useMiningData } from "./hooks/useMiningData";
 import useAmplitude from "./hooks/useAmplitude";

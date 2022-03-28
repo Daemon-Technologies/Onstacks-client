@@ -3,18 +3,18 @@
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { ExplorerAddressDetailsHeader } from "../components/ExplorerAddressDetailsHeader";
-import Stacks from "../assets/explorer/stacks-block.png";
-import Mining from "../assets/explorer/mining-block.svg";
-import MiningInfo from "../assets/explorer/mining-info.svg";
-import OtherAssets from "../assets/explorer/other-assets.svg";
-import Burn from "../assets/explorer/burn-block.svg";
-import { AddressTokens } from "../components/AddressTokens";
-import { useExplorerAddressDetails } from "../hooks/useExplorerAddressDetail";
-import { LoadTransactions } from "../components/LoadTransactions";
-import Logo from "../assets/side-menu/no-search-results.svg";
-import ProgressBar from "../components/Progressbar";
-import { numberWithCommas } from "../hooks/useOverview";
+import { ExplorerAddressDetailsHeader } from "../../components/ExplorerAddressDetailsHeader";
+import Stacks from "../../assets/explorer/stacks-block.png";
+import Mining from "../../assets/explorer/mining-block.svg";
+import MiningInfo from "../../assets/explorer/mining-info.svg";
+import OtherAssets from "../../assets/explorer/other-assets.svg";
+import Burn from "../../assets/explorer/burn-block.svg";
+import { AddressTokens } from "../../components/AddressTokens";
+import { useExplorerAddressDetails } from "../../hooks/useExplorerAddressDetail";
+import { LoadTransactions } from "../../components/LoadTransactions";
+import Logo from "../../assets/side-menu/no-search-results.svg";
+import ProgressBar from "../../components/Progressbar";
+import { numberWithCommas } from "../../hooks/useOverview";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 
 interface Props {

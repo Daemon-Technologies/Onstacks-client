@@ -2,12 +2,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // eslint-disable-next-line
 import React, { useEffect } from "react";
-import { AreaChart } from "../components/charts/AreaChart";
-import { LineChart } from "../components/charts/LineChart";
-import { RecentBlocks } from "../components/RecentBlocks";
-import { PieChart } from "../components/charts/PieChart";
-import { Blocks } from "../hooks/useOverview";
-import useWindowDimensions from "../hooks/useWindowDimension";
+import { AreaChart } from "./charts/AreaChart";
+import { LineChart } from "./charts/LineChart";
+import { RecentBlocks } from "../../components/RecentBlocks";
+import { PieChart } from "./charts/PieChart";
+import { Blocks } from "../../hooks/useOverview";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 

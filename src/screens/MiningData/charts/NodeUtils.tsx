@@ -1,4 +1,4 @@
-import { MiningInfo } from "../../hooks/useMiningData";
+import { MiningInfo } from "../../../hooks/useMiningData";
 import CustomEdge from "./CustomEdge";
 import { LeftNode } from "./LeftNode";
 import { CustomNode } from "./Node";

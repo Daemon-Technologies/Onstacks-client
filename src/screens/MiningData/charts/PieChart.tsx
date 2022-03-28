@@ -12,9 +12,9 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import useWindowDimensions from "../../hooks/useWindowDimension";
-import { randomColorGenerator } from "../../utils/helper";
-import { truncateMiddle } from "../../utils/utils";
+import useWindowDimensions from "../../../hooks/useWindowDimension";
+import { randomColorGenerator } from "../../../utils/helper";
+import { truncateMiddle } from "../../../utils/utils";
 interface Props {
   theme: any;
   pieData: any;

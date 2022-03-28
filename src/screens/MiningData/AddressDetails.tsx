@@ -3,23 +3,23 @@
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { AddressDetailsHeader } from "../components/AddressDetailsHeader";
-import { AreaChart } from "../components/charts/AreaChart";
-import { RecentBlocksAddress } from "../components/RecentBlocksAddress";
-import { Tooltip } from "../components/Tooltip";
-import { useAddressDetails } from "../hooks/useAddressDetails";
-import { numberWithCommas } from "../hooks/useOverview";
-import BitcoinVerified from "../assets/side-menu/bitcoin-verified.svg";
-import BitcoinPending from "../assets/side-menu/bitcoin-pending.svg";
-import STXVerified from "../assets/side-menu/stx-verified.svg";
-import NoMiner from "../assets/side-menu/No-miner.svg";
-import STXPending from "../assets/side-menu/stx-pending.svg";
-import Search from "../assets/side-menu/search.svg";
-import Reward from "../assets/side-menu/reward-verified.svg";
-import RewardPending from "../assets/side-menu/reward.svg";
-import { getBlockHash } from "../utils/helper";
-import { CurrentBlock } from "../hooks/useMiningData";
-import useWindowDimensions from "../hooks/useWindowDimension";
+import { AddressDetailsHeader } from "../../components/AddressDetailsHeader";
+import { AreaChart } from "./charts/AreaChart";
+import { RecentBlocksAddress } from "../../components/RecentBlocksAddress";
+import { Tooltip } from "../../components/Tooltip";
+import { useAddressDetails } from "../../hooks/useAddressDetails";
+import { numberWithCommas } from "../../hooks/useOverview";
+import BitcoinVerified from "../../assets/side-menu/bitcoin-verified.svg";
+import BitcoinPending from "../../assets/side-menu/bitcoin-pending.svg";
+import STXVerified from "../../assets/side-menu/stx-verified.svg";
+import NoMiner from "../../assets/side-menu/No-miner.svg";
+import STXPending from "../../assets/side-menu/stx-pending.svg";
+import Search from "../../assets/side-menu/search.svg";
+import Reward from "../../assets/side-menu/reward-verified.svg";
+import RewardPending from "../../assets/side-menu/reward.svg";
+import { getBlockHash } from "../../utils/helper";
+import { CurrentBlock } from "../../hooks/useMiningData";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 
 interface Props {
   theme: any;

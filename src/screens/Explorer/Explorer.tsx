@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
-import { OverviewProps } from "../hooks/useOverview";
+import { OverviewProps } from "../../hooks/useOverview";
 import { useHistory } from "react-router-dom";
-import { ExplorerHeader } from "../components/ExplorerHeader";
+import { ExplorerHeader } from "../../components/ExplorerHeader";
 
-import { useExplorer } from "../hooks/useExplorer";
+import { useExplorer } from "../../hooks/useExplorer";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-import { LoadTransactions } from "../components/LoadTransactions";
-import { LoadBlocks } from "../components/LoadBlocks";
+import { LoadTransactions } from "../../components/LoadTransactions";
+import { LoadBlocks } from "../../components/LoadBlocks";
 
 interface Props {
   theme: any;

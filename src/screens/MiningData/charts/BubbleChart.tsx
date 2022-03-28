@@ -3,8 +3,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { ResponsiveCirclePacking } from "@nivo/circle-packing";
-import { CurrentBlock } from "../../hooks/useMiningData";
-import { randomColorGenerator } from "../../utils/helper";
+import { CurrentBlock } from "../../../hooks/useMiningData";
+import { randomColorGenerator } from "../../../utils/helper";
 
 interface Props {
   theme: any;

@@ -1,20 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
-import { Blocks, OverviewProps } from "../hooks/useOverview";
-import { MiningDataHeader } from "../components/MiningDataHeader";
+import { Blocks, OverviewProps } from "../../hooks/useOverview";
+import { MiningDataHeader } from "../../components/MiningDataHeader";
 // import { MiningDataOverview } from "../components/MiningDataOverview";
-import { useMiningData } from "../hooks/useMiningData";
-import { Miners } from "../components/Miners";
+import { useMiningData } from "../../hooks/useMiningData";
+import { Miners } from "../../components/Miners";
 
-import { Tabs } from "../components/Tabs";
+import { Tabs } from "../../components/Tabs";
 
 import { useHistory, useParams } from "react-router-dom";
-import useWindowDimensions from "../hooks/useWindowDimension";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 import { Overview } from "./Overview";
 import { useQuery } from "@apollo/client";
-import { getHeights } from "../graphql/query/miningMonitorConfig";
-import { Block } from "../components/Block";
+import { getHeights } from "../../graphql/query/miningMonitorConfig";
+import { Block } from "../../components/Block";
 
 interface Props {
   theme: any;
