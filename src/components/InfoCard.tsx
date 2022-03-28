@@ -23,7 +23,7 @@ export const InfoCard: React.FC<{ overviewData: any }> = ({ overviewData }) => {
         </p>
       </div>
       <div className="inner-info-card">
-        <p className="title">Total Miners' fees</p>
+        <p className="title">Total btc fees from miners</p>
         <p className="sub-title">
           {overviewData.total_fees.toLocaleString()} Sats
         </p>
