@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 import { randomColorGenerator } from "../../utils/helper";
 import { truncateMiddle } from "../../utils/utils";
 interface Props {
@@ -23,6 +24,7 @@ export const PieChart: React.FC<Props> = ({ theme, pieData }) => {
   const [data, setData] = useState<any[]>([]);
   const COLORS = randomColorGenerator();
   const [value, setValue] = useState("100%");
+  const dims = useWindowDimensions();
   useEffect(() => {
     const pie = Object.entries(pieData);
     setData(
@@ -66,12 +68,14 @@ export const PieChart: React.FC<Props> = ({ theme, pieData }) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Legend
-          layout="vertical"
-          fontSize={14}
-          verticalAlign="middle"
-          align="right"
-        />
+        {dims.width > 700 && (
+          <Legend
+            layout="vertical"
+            fontSize={14}
+            verticalAlign="middle"
+            align="right"
+          />
+        )}
         <Tooltip />
       </PieCharts>
     </ResponsiveContainer>

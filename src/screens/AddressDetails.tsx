@@ -194,7 +194,9 @@ export const AddressDetails: React.FC<Props> = ({
             View on explorer
           </div>
         </div>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{ display: "flex", alignItems: "center", margin: "15px 0" }}
+        >
           <p className="sub-title" style={{ fontSize: 32, marginBottom: 10 }}>
             #{currentBlock?.blockNumber}
           </p>

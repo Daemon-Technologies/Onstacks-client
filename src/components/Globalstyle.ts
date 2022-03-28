@@ -1806,10 +1806,10 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     grid-template-columns: repeat( 12, 1fr );
     /* grid-template-rows: repeat( 10, 1fr ); */
     grid-template-areas:
-        "main"
-        "content1"
-        "content2"
-        "content4";
+    "main main main main main main main main main main main main"
+        "content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
+        "content2 content2 content2 content2 content2 content2 content2 content2 content2 content2 content2 content2"
+        "content4 content4 content4 content4 content4 content4 content4 content4 content4 content4 content4 content4";
     grid-gap: 16px;
     width: 100%;
     max-width: 1800px;
