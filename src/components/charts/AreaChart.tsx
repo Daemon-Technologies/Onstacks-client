@@ -70,7 +70,7 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
           fontSize={12}
         />
         <Tooltip content={<CustomTooltip />} />
-        <CartesianGrid vertical={false} />
+        <CartesianGrid fill="#2b2e38" vertical={false} />
         <Area
           type="linear"
           dataKey="sats"

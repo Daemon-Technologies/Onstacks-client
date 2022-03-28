@@ -13,6 +13,7 @@ import { getRecentBlockCommits } from "../../graphql/query/block";
 import { useQuery } from "@apollo/client";
 import { randomColorGenerator } from "../../utils/helper";
 import { truncateMiddle } from "../../utils/utils";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 
 interface Props {
   theme: any;
@@ -24,6 +25,7 @@ export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
   const colors = randomColorGenerator();
   const { data } = useQuery(getRecentBlockCommits);
   const [elements, setElements] = useState([]);
+  const dims = useWindowDimensions();
 
   useEffect(() => {
     if (data) {
@@ -65,7 +67,7 @@ export const LineChart: React.FC<Props> = ({ theme, setPieData }) => {
   return (
     <ResponsiveContainer width="100%" height={"100%"}>
       <BarChart
-        data={dataa.slice(0, 30)}
+        data={dataa.slice(0, dims.width > 700 ? 30 : 12)}
         barSize={12}
         barGap={10}
         margin={{

@@ -242,7 +242,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid #2b2e38;
     cursor: pointer;
   }
 
@@ -482,7 +482,7 @@ text-align: right;
   }
   .miningData {
     #main {
-    margin-top: 45px;
+    margin-top: 65px;
   }
   }
 
@@ -2054,7 +2054,7 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     height: auto;
   }
   #main {
-    margin-top: 45px;
+    margin-top: 65px;
   }
   .row-content {
     flex-direction: column;
