@@ -94,9 +94,7 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
               return (
                 <p
                   onClick={() => {
-                    if (cell.column.id === "stx_address") {
-                      push("/miner/address/" + cell.row.original.address);
-                    }
+                    push("/miner/address/" + cell.row.original.address);
                   }}
                   {...cell.getCellProps()}
                 >

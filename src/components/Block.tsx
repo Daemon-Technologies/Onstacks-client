@@ -17,6 +17,7 @@ export const Block: React.FC<any> = ({
   setTabIndex,
   blockHeights,
   theme,
+  currentBlockN,
 }) => {
   const { push } = useHistory();
   const [currentBlockIndex, setCurrentBlockIndex] = useState(1);
@@ -24,7 +25,9 @@ export const Block: React.FC<any> = ({
   const [winnerAddress, setWinnerAddress] = useState("");
   const colorPalette = randomColorGenerator();
   const [timeElapsed, setTimeElapsed] = useState("0");
-  const [currentBlockNumber, setCurrentBlockNumber] = useState(0);
+  const [currentBlockNumber, setCurrentBlockNumber] = useState(
+    currentBlockN || 0
+  );
 
   useEffect(() => {
     if (currentBlock) {

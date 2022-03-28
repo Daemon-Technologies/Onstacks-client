@@ -36,7 +36,6 @@ export const AreaChart: React.FC<Props> = ({ theme }) => {
   }, [data]);
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
-      console.log(payload, active, label);
       return (
         <div className="custom-tooltip">
           <div>

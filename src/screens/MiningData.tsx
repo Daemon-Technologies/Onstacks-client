@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Blocks, OverviewProps } from "../hooks/useOverview";
 import { MiningDataHeader } from "../components/MiningDataHeader";
-import { MiningDataOverview } from "../components/MiningDataOverview";
+// import { MiningDataOverview } from "../components/MiningDataOverview";
 import { useMiningData } from "../hooks/useMiningData";
 import { Miners } from "../components/Miners";
 
@@ -46,13 +46,15 @@ export const MiningData: React.FC<Props> = ({
     STX_HEIGHT: "",
     BTC_HEIGHT: "",
   });
+  const [currentBlockNumber, setCurrentBlockNumber] = useState("0");
   const {
     blocks: minersBlocks,
     getBlockByNumber,
     currentBlock,
-    miningInfo,
+    // miningInfo,
   } = useMiningData(blockHeights);
   const [miningData, setMiningData] = useState();
+  const [currentBlockIndex, setCurrentBlockIndex] = useState(1);
 
   const dims = useWindowDimensions();
 
@@ -66,6 +68,23 @@ export const MiningData: React.FC<Props> = ({
       });
     }
   }, [data]);
+
+  useEffect(() => {
+    if (blocks.length > 0 || params?.block) {
+      setCurrentBlockNumber(blocks[1].block_number.toString().substr(1));
+      getBlockByNumber(
+        params?.block || blocks[1].block_number.toString().substr(1)
+      );
+    }
+    if (params?.index || params?.block) {
+      setTabIndex(params?.index ? +params?.index : 0);
+      const index = blocks.findIndex((block: any) =>
+        block.block_number.toString().includes(params.block)
+      );
+      setCurrentBlockIndex(index !== -1 ? index : 0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [blocks, params]);
 
   useEffect(() => {
     if (failure) {
@@ -112,13 +131,13 @@ export const MiningData: React.FC<Props> = ({
           theme={theme}
         />
       )}
-      {tabIndex === 1 && (
+      {/* {tabIndex === 1 && (
         <MiningDataOverview
           miningInfo={miningInfo}
           blocks={blocks}
           theme={theme}
         />
-      )}
+      )} */}
       {tabIndex === 2 && (
         <div
           id={"content1"}
@@ -179,6 +198,8 @@ export const MiningData: React.FC<Props> = ({
           params={params}
           setTabIndex={setTabIndex}
           blockHeights={blockHeights}
+          currentBlockIndex={currentBlockIndex}
+          currentBlockN={currentBlockNumber}
           theme={theme}
         />
       )}

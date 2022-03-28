@@ -86,7 +86,7 @@ export const Header: React.FC<{
           <li className="option" onClick={closeMobileMenu}>
             <a
               target="_blank"
-              href="https://docs.stacks.co/understand-stacks/mining"
+              href="https://www.onstacks.com/wiki/stx-mining-starter"
               rel="noopener noreferrer"
             >
               Documentation

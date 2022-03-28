@@ -59,6 +59,9 @@ export const MiningDataHeader: React.FC<{
 
   return (
     <>
+      <p className="screen-title">Overview</p>
+
+      <InfoCard overviewData={currentData} />
       <div
         style={{
           display: "flex",
@@ -67,7 +70,8 @@ export const MiningDataHeader: React.FC<{
           justifyContent: "space-between",
         }}
       >
-        <p className="screen-title">Overview</p>
+        <p className="title">*last 100 block</p>
+
         <div className="data">
           <a onClick={() => getBlockHash(blockHeights.STX_HEIGHT)}>
             STX block height:&nbsp; <span>#{blockHeights.STX_HEIGHT} </span>
@@ -82,17 +86,6 @@ export const MiningDataHeader: React.FC<{
             <span>#{blockHeights.BTC_HEIGHT}</span>
           </a>
         </div>
-      </div>
-      <InfoCard overviewData={currentData} />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "flex-end",
-        }}
-      >
-        <p className="title">*last 100 block</p>
       </div>
     </>
   );
