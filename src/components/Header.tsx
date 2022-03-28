@@ -55,7 +55,7 @@ export const Header: React.FC<{
         <div
           onClick={() => {
             setActive(0);
-            push("/explorer");
+            push("/");
           }}
           className="logo-container"
         >
