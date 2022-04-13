@@ -1034,7 +1034,7 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
   .addressDetails {
     display: grid;
     grid-template-columns: repeat( 12, 1fr );
-    /* grid-template-rows: repeat( 10, 1fr ); */
+    /* grid-template-rows: repeat(3, 1fr ); */
     grid-template-areas:
         "main main main main main main main main main main main main"
         "content1 content1 content1 content1 content1 content1 content2 content2 content2 content2 content2 content2"

@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { numberWithCommas } from "../hooks/useOverview";
 import { ReactComponent as LeftArrow } from "../assets/side-menu/left-arrow-disabled.svg";
 // import Search from "../assets/side-menu/search.svg";
@@ -7,6 +7,8 @@ import { useHistory } from "react-router-dom";
 import useWindowDimensions from "../hooks/useWindowDimension";
 import { truncateMiddle } from "../utils/utils";
 import { Tooltip } from "../components/Tooltip";
+import { useQuery } from "@apollo/client";
+import { minerInfo } from "../graphql/query/miningMonitorConfig";
 
 export interface AddressHeaderDetails {
   total_blocks_won: number;
@@ -21,7 +23,27 @@ export const AddressDetailsHeader: React.FC<{
 }> = ({ headerDetails, address, username }) => {
   const { goBack } = useHistory();
   const dims = useWindowDimensions();
+  const { data } = useQuery(minerInfo, {
+    variables: {
+      minerStxAddress: address,
+    },
+  });
+  const [currentData, setCurrentData] = useState({
+    block_won: 0,
+    stx_earned: 0,
+    fees: 0,
+  });
 
+  useEffect(() => {
+    if (data) {
+      setCurrentData({
+        fees: data.miner_info[0].total_commits,
+        stx_earned: data.miner_rewards[0].total_reward,
+        block_won: data.miner_rewards[0].total_won,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
   useEffect(() => {}, [dims.width]);
   return (
     <>
@@ -89,19 +111,17 @@ export const AddressDetailsHeader: React.FC<{
       <div className={"info-card"}>
         <div className="inner-info-card">
           <p className="title">Total blocks won</p>
-          <p className="sub-title">{headerDetails?.total_blocks_won} Blocks</p>
+          <p className="sub-title">{currentData.block_won} Blocks</p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total STX earned</p>
           <p className="sub-title">
-            {numberWithCommas(headerDetails?.total_stx_earned)} STX
+            {numberWithCommas(currentData.stx_earned)} STX
           </p>
         </div>
         <div className="inner-info-card">
           <p className="title">Total Sats spent</p>
-          <p className="sub-title">
-            {numberWithCommas(headerDetails?.total_sats_spent)} Sats
-          </p>
+          <p className="sub-title">{numberWithCommas(currentData.fees)} Sats</p>
         </div>
         {/* <div className="inner-info-card">
         <p className="title">Mining participation</p>

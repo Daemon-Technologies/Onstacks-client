@@ -21,7 +21,6 @@ import { MicroblockDetails } from "./screens/Explorer/MicroblockDetails";
 import { Footer } from "./components/Footer";
 import { ContractDetails } from "./screens/Explorer/ContractDetails";
 import { useOverview } from "./hooks/useOverview";
-import { useMiningData } from "./hooks/useMiningData";
 import useAmplitude from "./hooks/useAmplitude";
 
 export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
@@ -31,9 +30,6 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
   const { overviewData, blocks, totalWinners, winnersAddresses, failure } =
     useOverview();
   const { logEvent } = useAmplitude();
-  const { getBlockByNumber, currentBlock } = useMiningData({
-    STX_HEIGHT: "31232",
-  });
 
   return (
     <Router>
@@ -123,8 +119,6 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
           <AddressDetails
             logEvent={logEvent}
             failure={failure}
-            currentBlock={currentBlock}
-            getBlockByNumber={getBlockByNumber}
             themeToggler={themeToggler}
             theme={theme}
           />
