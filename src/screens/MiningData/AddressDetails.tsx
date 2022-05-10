@@ -90,6 +90,7 @@ export const AddressDetails: React.FC<Props> = ({
 
   return (
     <div className="addressDetails">
+      <div className="header-wrapper"></div>
       <div id="main">
         <AddressDetailsHeader
           username={username}

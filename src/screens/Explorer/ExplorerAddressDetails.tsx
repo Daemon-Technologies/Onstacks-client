@@ -95,6 +95,8 @@ export const ExplorerAddressDetails: React.FC<Props> = ({
   return (
     <div className="explorer">
       <div id="main">
+        <div className="header-wrapper"></div>
+
         <ExplorerAddressDetailsHeader
           address={address}
           username={username}

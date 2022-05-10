@@ -105,6 +105,7 @@ export const STXTransferDetails: React.FC<Props> = ({
   }, [failure, theme]);
   return (
     <div className="explorer">
+      <div className="header-wrapper"></div>
       {transaction && (transaction as any).contract_call && (
         <>
           <TransactionHeaderDetails

@@ -103,6 +103,7 @@ export const MiningData: React.FC<Props> = ({
 
   return (
     <div className="miningData">
+      <div className="header-wrapper"></div>
       <div id="main">
         {blockHeights.STX_HEIGHT !== "" && (
           <MiningDataHeader
