@@ -9,11 +9,11 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
-import { getRecentBlockCommits } from "../../graphql/query/block";
+import { getRecentBlockCommits } from "../../../graphql/query/block";
 import { useQuery } from "@apollo/client";
-import { randomColorGenerator } from "../../utils/helper";
-import { truncateMiddle } from "../../utils/utils";
-import useWindowDimensions from "../../hooks/useWindowDimension";
+import { randomColorGenerator } from "../../../utils/helper";
+import { truncateMiddle } from "../../../utils/utils";
+import useWindowDimensions from "../../../hooks/useWindowDimension";
 
 interface Props {
   theme: any;

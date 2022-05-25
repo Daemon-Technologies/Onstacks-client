@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { randomColorGenerator } from "../utils/helper";
 import { BlockInformation } from "./BlockInformation";
-import { BubbleCharts } from "./charts/BubbleChart";
+import { BubbleCharts } from "../screens/MiningData/charts/BubbleChart";
 import right from "../assets/side-menu/right-arrow-active.svg";
 import rightDisabled from "../assets/side-menu/right-arrow-disabled.svg";
 import left from "../assets/side-menu/left-arrow-active.svg";

@@ -3,9 +3,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import ReactFlow, { PanOnScrollMode } from "react-flow-renderer";
-import { MiningInfo } from "../../hooks/useMiningData";
-import useWindowDimensions from "../../hooks/useWindowDimension";
-import { randomColorGenerator } from "../../utils/helper";
+import { MiningInfo } from "../../../hooks/useMiningData";
+import useWindowDimensions from "../../../hooks/useWindowDimension";
+import { randomColorGenerator } from "../../../utils/helper";
 import { nodeTypes, edgeTypes, customElements } from "./NodeUtils";
 
 export const FlowChartNodes: React.FC<{

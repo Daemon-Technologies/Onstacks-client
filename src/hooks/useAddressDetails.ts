@@ -1,15 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useQuery } from "@apollo/client";
 import differenceInMinutes from "date-fns/differenceInMinutes";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { instance as axios } from "../axios/axios";
-import {
-  getAddressBlocksHistory,
-  getBriefMinerInfo,
-  getSatsCommittedAdressPerBlock,
-  getBlocksForSpecificAddress,
-} from "../axios/requests";
+import { getBriefMinerInfo } from "../axios/requests";
 import { AddressHeaderDetails } from "../components/AddressDetailsHeader";
+import { minerInformations } from "../graphql/query/miningMonitorConfig";
 import { numFormatter } from "../utils/helper";
-import { Blocks, SatsCommittedProps } from "./useOverview";
+import { SatsCommittedProps } from "./useOverview";
 
 export interface MinerInfo {
   stx_address: string;
@@ -54,15 +52,40 @@ export interface CurrentBlocks {
 }
 
 export const useAddressDetails = () => {
-  const [blocks, setBlocks] = useState<Blocks[]>([]);
-  const [currentBlock] = useState<CurrentBlock>();
+  const [blocks, setBlocks] = useState<any[]>([]);
   const [minerInfo, setMinerInfo] = useState<AddressHeaderDetails>();
   const [satsCommitted, setSatsCommitted] = useState<SatsCommittedProps>({
     block_number: [],
     total_sats_committed: [],
   });
   const [currentBlocks, setCurrentBlocks] = useState<CurrentBlocks[]>([]);
+  const [currentBlock, setCurrentBlock] = useState<any>();
   const [username, setUsername] = useState("");
+  const [address, setAddress] = useState("");
+  const { data } = useQuery(minerInformations);
+
+  useEffect(() => {
+    if (data) {
+      const arr: CurrentBlocks[] = data.block_info.map((i: any) => {
+        const index = i.winner_to_all_commit.findIndex(
+          (s: any) => s.stx_address === address
+        );
+        const val = i.winner_to_all_commit[index];
+        return {
+          block_number: i.stacks_block_height,
+          timeElapsed: i.timestamp,
+          burn_fee: val ? val.commit_value : 0,
+          block_status: index === -1 ? 0 : val.is_winner ? 2 : 1,
+          tx_id: val ? val.commit_info_to_commit_gas.commit_btc_tx_id : "0",
+          btc_height: i.btc_block_height,
+          stacks_reward: i.block_reward,
+          return_rate: 0,
+        };
+      });
+      setCurrentBlocks(arr.reverse());
+    }
+    // setCurrentBlocks(data);
+  }, [address, data]);
 
   const getMinerInfo = (stxAddress: string) => {
     axios.get(getBriefMinerInfo(stxAddress)).then((data: any) => {
@@ -70,48 +93,51 @@ export const useAddressDetails = () => {
     });
   };
 
-  const getAddressSatsCommitted = (stxAddress: string) => {
-    axios.get(getSatsCommittedAdressPerBlock(stxAddress)).then((data: any) => {
+  useEffect(() => {
+    if (currentBlocks.length > 0) {
       setSatsCommitted({
-        block_number: data.map((item: any) => +item.block_number),
-        total_sats_committed: data.map(
-          (item: any) => +item.total_sats_committed
+        block_number: currentBlocks.map((block: any) => +block.block_number),
+        total_sats_committed: currentBlocks.map(
+          (block: any) => +block.burn_fee
         ),
       });
+      getBlocksMiner();
+      getBlockByNumber(currentBlocks[49].block_number);
+    }
+  }, [currentBlocks]);
+
+  const getAddressSatsCommitted = (stxAddress: string) => {
+    setSatsCommitted({
+      block_number: currentBlocks.map((block: any) => +block.block_number),
+      total_sats_committed: currentBlocks.map((block: any) => +block.burn_fee),
     });
   };
 
-  const getBlocksMiner = (stxAddress: string) => {
-    axios.get(getAddressBlocksHistory(stxAddress)).then((data: any) => {
-      setBlocks(
-        data.map((r: Blocks) => {
-          return {
-            block_number: "#" + r.block_number,
-            mined_at:
-              differenceInMinutes(new Date(), r.mined_at * 1000) + " Mins",
-            sats_spent: numFormatter(+r.sats_spent),
-            block_status:
-              r.block_status === 2
-                ? "Won"
-                : r.block_status === 1
-                ? "Lost"
-                : "Inactive",
-          };
-        })
-      );
-    });
+  const getBlocksMiner = () => {
+    setBlocks(
+      currentBlocks.map((r: any) => {
+        return {
+          block_number: "#" + r.block_number,
+          mined_at:
+            differenceInMinutes(new Date(), r.timeElapsed * 1000) + " Mins",
+          sats_spent: numFormatter(+r.burn_fee),
+          block_status:
+            r.block_status === 2
+              ? "Won"
+              : r.block_status === 1
+              ? "Lost"
+              : "Inactive",
+        };
+      })
+    );
   };
 
-  const getBlocksForAddress = (stxAddress: string) => {
-    axios.get(getBlocksForSpecificAddress(stxAddress)).then((data: any) => {
-      setCurrentBlocks(data.reverse());
-    });
+  const getBlockByNumber = (blockNumber: any) => {
+    const index = currentBlocks.findIndex(
+      (block) => block.block_number === blockNumber
+    );
+    setCurrentBlock(currentBlocks[index]);
   };
-  // const getBlockByNumber = (blockNumber: string) => {
-  //   axios.get(getBlockNumber(blockNumber.substring(1))).then((data: any) => {
-  //     setCurrentBlock({ ...data, blockNumber });
-  //   });
-  // };
 
   const getAddressName = async (address: string) => {
     const result = await fetch(
@@ -131,9 +157,10 @@ export const useAddressDetails = () => {
     minerInfo,
     getAddressSatsCommitted,
     satsCommitted,
-    getBlocksForAddress,
     getAddressName,
     currentBlocks,
+    getBlockByNumber,
     username,
+    setAddress,
   };
 };

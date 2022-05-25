@@ -3,29 +3,19 @@
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { AddressDetailsHeader } from "../components/AddressDetailsHeader";
-import { AreaChart } from "../components/charts/AreaChart";
-import { RecentBlocksAddress } from "../components/RecentBlocksAddress";
-import { Tooltip } from "../components/Tooltip";
-import { useAddressDetails } from "../hooks/useAddressDetails";
-import { numberWithCommas } from "../hooks/useOverview";
-import BitcoinVerified from "../assets/side-menu/bitcoin-verified.svg";
-import BitcoinPending from "../assets/side-menu/bitcoin-pending.svg";
-import STXVerified from "../assets/side-menu/stx-verified.svg";
-import NoMiner from "../assets/side-menu/No-miner.svg";
-import STXPending from "../assets/side-menu/stx-pending.svg";
-import Search from "../assets/side-menu/search.svg";
-import Reward from "../assets/side-menu/reward-verified.svg";
-import RewardPending from "../assets/side-menu/reward.svg";
-import { getBlockHash } from "../utils/helper";
-import { CurrentBlock } from "../hooks/useMiningData";
-import useWindowDimensions from "../hooks/useWindowDimension";
+import { AddressDetailsHeader } from "../../components/AddressDetailsHeader";
+import { AreaChart } from "./charts/AreaChart";
+import { RecentBlocksAddress } from "../../components/RecentBlocksAddress";
+import { Tooltip } from "../../components/Tooltip";
+import { useAddressDetails } from "../../hooks/useAddressDetails";
+import { numberWithCommas } from "../../hooks/useOverview";
+import NoMiner from "../../assets/side-menu/No-miner.svg";
+import Search from "../../assets/side-menu/search.svg";
+import useWindowDimensions from "../../hooks/useWindowDimension";
 
 interface Props {
   theme: any;
   themeToggler: any;
-  getBlockByNumber: (block: string) => void;
-  currentBlock: CurrentBlock | undefined;
   failure: boolean;
   logEvent: any;
 }
@@ -33,53 +23,29 @@ interface Props {
 export const AddressDetails: React.FC<Props> = ({
   theme,
   themeToggler,
-  currentBlock,
   failure,
   logEvent,
-  getBlockByNumber,
 }) => {
   const params: any = useParams();
   const [toggle, setToggle] = useState(false);
   const [status, setBlockStatus] = useState(1);
-  const [address, setAddress] = useState("");
-  const [timeElapsed, setTimeElapsed] = useState("0");
-
+  const [address, setAddresss] = useState("");
+  const [concurrentBlock, setConcurrentBlock] = useState<any>();
   const {
-    getMinerInfo,
     minerInfo,
-    getAddressSatsCommitted,
     satsCommitted,
     blocks,
-    getBlocksMiner,
-    getBlocksForAddress,
     currentBlocks,
     username,
     getAddressName,
+    currentBlock,
+    getBlockByNumber,
+    setAddress,
   } = useAddressDetails();
 
   useEffect(() => {
     logEvent("Mining Address Details");
   }, []);
-
-  useEffect(() => {
-    if (currentBlock) {
-      const block = blocks.find(
-        (block) =>
-          block.block_number.toString() ===
-          "#" + currentBlock.blockNumber.toString()
-      );
-      setTimeElapsed(block?.mined_at + " ");
-    }
-  }, [currentBlock, blocks]);
-
-  useEffect(() => {
-    const block = currentBlocks.find((block) => {
-      return block.block_number.toString() === currentBlock?.blockNumber;
-    });
-    if (block) {
-      setBlockStatus(+block?.block_status);
-    }
-  }, [currentBlock]);
 
   useEffect(() => {
     const { innerWidth: width } = window;
@@ -90,23 +56,28 @@ export const AddressDetails: React.FC<Props> = ({
 
   useEffect(() => {
     if (params?.address) {
-      setAddress(params.address);
+      setAddresss(params.address);
     }
   }, [params]);
 
   useEffect(() => {
     if (address) {
-      getMinerInfo(address);
-      getAddressSatsCommitted(address);
-      getBlocksMiner(address);
-      getBlocksForAddress(address);
+      setAddress(address);
+      // getMinerInfo(address);
       getAddressName(address);
     }
   }, [address]);
 
   useEffect(() => {
+    if (currentBlock && currentBlock.block_status) {
+      setBlockStatus(currentBlock.block_status);
+      setConcurrentBlock(currentBlock);
+    }
+  }, [currentBlock]);
+
+  useEffect(() => {
     if (blocks.length > 0) {
-      getBlockByNumber(blocks[0].block_number.toString().substr(1));
+      getBlockByNumber(blocks[49].block_number);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [blocks]);
@@ -119,6 +90,7 @@ export const AddressDetails: React.FC<Props> = ({
 
   return (
     <div className="addressDetails">
+      <div className="header-wrapper"></div>
       <div id="main">
         <AddressDetailsHeader
           username={username}
@@ -143,7 +115,7 @@ export const AddressDetails: React.FC<Props> = ({
                 <Tooltip message={`#${block.block_number}`} position={"top"}>
                   <div
                     onClick={() => {
-                      getBlockByNumber(block.block_number.toString());
+                      getBlockByNumber(block.block_number);
                       setBlockStatus(block.block_status);
                     }}
                     data-tip={block.block_number}
@@ -188,7 +160,9 @@ export const AddressDetails: React.FC<Props> = ({
           </p>
           <div
             className="button-view"
-            onClick={() => push("/explorer/block/" + currentBlock?.blockNumber)}
+            onClick={() =>
+              push("/explorer/block/" + concurrentBlock?.blockNumber)
+            }
           >
             <img src={Search} alt={"search"} />
             View on explorer
@@ -198,7 +172,7 @@ export const AddressDetails: React.FC<Props> = ({
           style={{ display: "flex", alignItems: "center", margin: "15px 0" }}
         >
           <p className="sub-title" style={{ fontSize: 32, marginBottom: 10 }}>
-            #{currentBlock?.blockNumber}
+            #{concurrentBlock?.block_number}
           </p>
           <div
             style={{
@@ -248,12 +222,12 @@ export const AddressDetails: React.FC<Props> = ({
             </div>
           ) : (
             <>
-              {status === 2 && (
+              {/* {status === 2 && (
                 <div className={"lines"}>
-                  <div onClick={() => getBlockHash(currentBlock?.blockNumber)}>
+                  <div onClick={() => getBlockHash(concurrentBlock?.blockNumber)}>
                     <img
                       src={
-                        currentBlock?.block_info.is_stx_pending
+                        concurrentBlock?.block_info.is_stx_pending
                           ? STXPending
                           : STXVerified
                       }
@@ -264,14 +238,14 @@ export const AddressDetails: React.FC<Props> = ({
                   <div
                     onClick={() =>
                       window.open(
-                        `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
+                        `https://www.blockchain.com/btc/tx/${concurrentBlock?.block_info.tx_id}`,
                         "_blank"
                       )
                     }
                   >
                     <img
                       src={
-                        currentBlock?.block_info.is_btc_pending
+                        concurrentBlock?.block_info.is_btc_pending
                           ? BitcoinPending
                           : BitcoinVerified
                       }
@@ -282,7 +256,7 @@ export const AddressDetails: React.FC<Props> = ({
                   <div>
                     <img
                       src={
-                        !currentBlock?.block_info.is_reward_pending
+                        !concurrentBlock?.block_info.is_reward_pending
                           ? RewardPending
                           : Reward
                       }
@@ -292,7 +266,7 @@ export const AddressDetails: React.FC<Props> = ({
                   </div>
                   <hr className={"hr"} />
                 </div>
-              )}
+              )} */}
               <hr className="divider" />
               <div>
                 {status === 2 && (
@@ -302,16 +276,13 @@ export const AddressDetails: React.FC<Props> = ({
                       className={"a-tag"}
                       onClick={() =>
                         window.open(
-                          `https://explorer.stacks.co/address/${currentBlock?.block_info.winning_address}`,
+                          `https://explorer.stacks.co/address/${address}`,
                           "_blank"
                         )
                       }
-                    >{`${currentBlock?.block_info.winning_address.substring(
-                      0,
-                      8
-                    )} ... ${currentBlock?.block_info.winning_address.substring(
-                      currentBlock?.block_info.winning_address.length - 9,
-                      currentBlock?.block_info.winning_address.length - 1
+                    >{`${address.substring(0, 8)} ... ${address.substring(
+                      address.length - 9,
+                      address.length - 1
                     )}`}</p>
                   </div>
                 )}
@@ -320,17 +291,17 @@ export const AddressDetails: React.FC<Props> = ({
                   <p
                     onClick={() =>
                       window.open(
-                        `https://www.blockchain.com/btc/tx/${currentBlock?.block_info.tx_id}`,
+                        `https://www.blockchain.com/btc/tx/${concurrentBlock?.tx_id}`,
                         "_blank"
                       )
                     }
                     className={"a-tag"}
-                  >{`${currentBlock?.block_info.tx_id.substring(
+                  >{`${concurrentBlock?.tx_id.substring(
                     0,
                     8
-                  )} ... ${currentBlock?.block_info.tx_id.substring(
-                    currentBlock?.block_info.tx_id.length - 9,
-                    currentBlock?.block_info.tx_id.length - 1
+                  )} ... ${concurrentBlock?.tx_id.substring(
+                    concurrentBlock?.tx_id.length - 9,
+                    concurrentBlock?.tx_id.length - 1
                   )}`}</p>
                 </div>
                 <div className={"row-content"}>
@@ -338,22 +309,20 @@ export const AddressDetails: React.FC<Props> = ({
                   <p
                     onClick={() =>
                       window.open(
-                        `https://www.blockchain.com/btc/block/${currentBlock?.block_info.block_height}`,
+                        `https://www.blockchain.com/btc/block/${concurrentBlock?.btc_height}`,
                         "_blank"
                       )
                     }
                     className={"a-tag"}
                   >
-                    #{currentBlock?.block_info.block_height}
+                    #{concurrentBlock?.btc_height}
                   </p>
                 </div>
                 <div className={"row-content"}>
                   <p>STX awarded</p>
                   <p className={"black"}>
                     {status === 2
-                      ? numberWithCommas(
-                          currentBlock?.block_info.stacks_awarded
-                        )
+                      ? numberWithCommas(concurrentBlock?.stacks_reward)
                       : 0}{" "}
                     STX
                   </p>
@@ -361,22 +330,19 @@ export const AddressDetails: React.FC<Props> = ({
                 <div className={"row-content"}>
                   <p>Burn fees</p>
                   <p className={"black"}>
-                    {numberWithCommas(
-                      currentBlock?.block_info.winning_miner_burn_fee
-                    )}{" "}
-                    Sats
+                    {numberWithCommas(concurrentBlock?.burn_fee)} Sats
                   </p>
                 </div>
                 <div className={"row-content"}>
                   <p>Time Elapsed</p>
-                  <p className={"black"}>{timeElapsed}</p>
+                  <p className={"black"}>{concurrentBlock?.timeElapsed}</p>
                 </div>
               </div>
             </>
           )}
         </>
       </div>
-      <div id="content2">
+      <div id="content2" style={{ height: 300 }}>
         <p className="title">Total sats committed per block</p>
         <div className="seprator">
           {satsCommitted.block_number.length > 0 && <AreaChart theme={theme} />}

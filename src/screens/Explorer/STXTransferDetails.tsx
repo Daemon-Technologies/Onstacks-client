@@ -3,7 +3,7 @@
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useTransaction } from "../hooks/useTransaction";
+import { useTransaction } from "../../hooks/useTransaction";
 import {
   capitalize,
   getAddressValue,
@@ -12,13 +12,13 @@ import {
   getPrettyCode,
   microToStacks,
   truncateMiddle,
-} from "../utils/utils";
+} from "../../utils/utils";
 // import { CopyBlock, dracula } from "react-code-blocks";
-import Stacks from "../assets/side-menu/stacks.svg";
-import { Events } from "../components/Events";
-import useWindowDimensions from "../hooks/useWindowDimension";
-import { TransactionHeaderDetails } from "../components/TransactionHeaderDetails";
-import { ReactComponent as Copy } from "../assets/explorer/copy.svg";
+import Stacks from "../../assets/side-menu/stacks.svg";
+import { Events } from "../../components/Events";
+import useWindowDimensions from "../../hooks/useWindowDimension";
+import { TransactionHeaderDetails } from "../../components/TransactionHeaderDetails";
+import { ReactComponent as Copy } from "../../assets/explorer/copy.svg";
 
 interface Props {
   theme: any;
@@ -105,6 +105,7 @@ export const STXTransferDetails: React.FC<Props> = ({
   }, [failure, theme]);
   return (
     <div className="explorer">
+      <div className="header-wrapper"></div>
       {transaction && (transaction as any).contract_call && (
         <>
           <TransactionHeaderDetails

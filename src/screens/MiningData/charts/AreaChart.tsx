@@ -10,8 +10,8 @@ import {
   CartesianGrid,
 } from "recharts";
 import { useQuery } from "@apollo/client";
-import { getBtcCommitsPerBlock } from "../../graphql/query/commitValue";
-import { numFormatter } from "../../utils/helper";
+import { getBtcCommitsPerBlock } from "../../../graphql/query/commitValue";
+import { numFormatter } from "../../../utils/helper";
 
 interface Props {
   theme: any;

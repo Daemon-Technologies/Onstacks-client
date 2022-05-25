@@ -3,11 +3,11 @@
 // eslint-disable-next-line
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useTransaction } from "../hooks/useTransaction";
-import { truncateMiddle } from "../utils/utils";
-import { Events } from "../components/Events";
-import useWindowDimensions from "../hooks/useWindowDimension";
-import { LoadTransactions } from "../components/LoadTransactions";
+import { useTransaction } from "../../hooks/useTransaction";
+import { truncateMiddle } from "../../utils/utils";
+import { Events } from "../../components/Events";
+import useWindowDimensions from "../../hooks/useWindowDimension";
+import { LoadTransactions } from "../../components/LoadTransactions";
 
 interface Props {
   theme: any;
@@ -88,6 +88,8 @@ export const ContractDetails: React.FC<Props> = ({
   }, [failure, theme]);
   return (
     <div className="explorer">
+      <div className="header-wrapper"></div>
+
       {contractData && (
         <>
           <div id="transactionContainer" className="transaction-container">
