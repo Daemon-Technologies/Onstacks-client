@@ -7,9 +7,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Staging deployment site
 
-Staging[https://loving-yonath-45638e.netlify.app/](https://loving-yonath-45638e.netlify.app/)<br>
+Staging: [https://loving-yonath-45638e.netlify.app/](https://loving-yonath-45638e.netlify.app/)<br>
 
-Production[https://app.onstacks.com/](https://app.onstacks.com/)
+Production: [https://app.onstacks.com/](https://app.onstacks.com/)
 
 ### For ESLint's and Prettier lint check,
 
