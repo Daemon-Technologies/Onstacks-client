@@ -8,10 +8,12 @@ import right from "../assets/side-menu/right-arrow-active.svg";
 import rightDisabled from "../assets/side-menu/right-arrow-disabled.svg";
 import left from "../assets/side-menu/left-arrow-active.svg";
 import leftDisabled from "../assets/side-menu/left-arrow-disabled.svg";
+import { useQuery } from "@apollo/client";
+import { BlockInfo } from "../graphql/query/block";
 
 export const Block: React.FC<any> = ({
-  currentBlock,
-  getBlockByNumber,
+  // currentBlock,
+  // getBlockByNumber,
   blocks,
   params,
   setTabIndex,
@@ -20,34 +22,45 @@ export const Block: React.FC<any> = ({
   currentBlockN,
 }) => {
   const { push } = useHistory();
+  const [currentBlockNumber, setCurrentBlockNumber] = useState(
+    currentBlockN || 0
+  );
+  const { data: blockInfo } = useQuery(BlockInfo, {
+    variables: {
+      stacks_block_height: currentBlockNumber,
+    },
+  });
+  const [currentBlock, setCurrentBlock] = useState<any>();
   const [currentBlockIndex, setCurrentBlockIndex] = useState(1);
   const [winnerAddressIndex, setWinnerAddressColor] = useState(0);
   const [winnerAddress, setWinnerAddress] = useState("");
   const colorPalette = randomColorGenerator();
   const [timeElapsed, setTimeElapsed] = useState("0");
-  const [currentBlockNumber, setCurrentBlockNumber] = useState(
-    currentBlockN || 0
-  );
+
+  useEffect(() => {
+    if (blockInfo && blockInfo.block_info.length > 0) {
+      setCurrentBlock(blockInfo.block_info[0]);
+    }
+  }, [blockInfo]);
 
   useEffect(() => {
     if (currentBlock) {
       const block = blocks.find(
         (block: any) =>
-          block.block_number
-            .toString()
-            .substr(1, block.block_number.toString().length) ===
-          currentBlock.blockNumber
+          block.block_number.toString().substr(1) ===
+          currentBlock.stacks_block_height.toString()
       );
+      console.log(currentBlock.stacks_block_height);
       setTimeElapsed(block?.mined_at + " ");
     }
   }, [currentBlock, blocks]);
 
   useEffect(() => {
-    if (currentBlock?.block_info.winning_address) {
-      setWinnerAddress(currentBlock?.block_info.winning_address);
+    if (currentBlock?.winner_stx_address) {
+      setWinnerAddress(currentBlock?.winner_stx_address);
     }
-    const index: any = currentBlock?.miners_info.findIndex(
-      (x: any) => x.miner_address === currentBlock.block_info.winning_address
+    const index: any = currentBlock?.blockCommits.findIndex(
+      (x: any) => x.stx_address === currentBlock.winner_stx_address
     );
     if (index !== -1) {
       setWinnerAddressColor(index);
@@ -57,9 +70,6 @@ export const Block: React.FC<any> = ({
   useEffect(() => {
     if (blocks.length > 0 || params?.block) {
       setCurrentBlockNumber(blocks[1].block_number.toString().substr(1));
-      getBlockByNumber(
-        params?.block || blocks[1].block_number.toString().substr(1)
-      );
     }
     if (params?.index || params?.block) {
       setTabIndex(params?.index ? +params?.index : 0);
@@ -73,9 +83,6 @@ export const Block: React.FC<any> = ({
 
   const nextBlock = () => {
     if (blocks.length - 1 > currentBlockIndex) {
-      getBlockByNumber(
-        blocks[currentBlockIndex + 1].block_number.toString().substr(1)
-      );
       setCurrentBlockNumber(
         blocks[currentBlockIndex + 1].block_number.toString().substr(1)
       );
@@ -85,9 +92,9 @@ export const Block: React.FC<any> = ({
 
   const prevBlock = () => {
     if (currentBlockIndex !== 0) {
-      getBlockByNumber(
-        blocks[currentBlockIndex - 1].block_number.toString().substr(1)
-      );
+      // getBlockByNumber(
+      //   blocks[currentBlockIndex - 1].block_number.toString().substr(1)
+      // );
       setCurrentBlockNumber(
         blocks[currentBlockIndex - 1].block_number.toString().substr(1)
       );
@@ -166,7 +173,7 @@ export const Block: React.FC<any> = ({
                 className="sub-title"
                 style={{ fontSize: 27, marginRight: 10 }}
               >
-                {currentBlock.miners_count} Miners
+                {currentBlock.blockCommits.length} Miners
               </p>
               {winnerAddress && (
                 <div
@@ -191,7 +198,7 @@ export const Block: React.FC<any> = ({
               )}
             </div>
             <p className="sub-title burn-address" style={{ fontSize: 16 }}>
-              {currentBlock.total_burn_fee
+              {currentBlock.commit_value
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
               sats
@@ -207,7 +214,7 @@ export const Block: React.FC<any> = ({
           <div className={"mob-address"}>
             <p className="title">Total fees burn</p>
             <p className="sub-title" style={{ fontSize: 16 }}>
-              {currentBlock.total_burn_fee
+              {currentBlock.commit_value
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
               sats
@@ -218,6 +225,8 @@ export const Block: React.FC<any> = ({
       {blockHeights.STX_HEIGHT !== "" && (
         <BlockInformation
           timeElapsed={timeElapsed}
+          currentBlock={currentBlock}
+          setCurrentBlock={setCurrentBlock}
           blockHeights={blockHeights}
           blockNumber={currentBlockNumber}
         />

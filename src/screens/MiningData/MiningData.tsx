@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { Blocks, OverviewProps } from "../../hooks/useOverview";
 import { MiningDataHeader } from "../../components/MiningDataHeader";
-// import { MiningDataOverview } from "../components/MiningDataOverview";
 import { useMiningData } from "../../hooks/useMiningData";
 import { Miners } from "../../components/Miners";
 
@@ -132,13 +131,6 @@ export const MiningData: React.FC<Props> = ({
           theme={theme}
         />
       )}
-      {/* {tabIndex === 1 && (
-        <MiningDataOverview
-          miningInfo={miningInfo}
-          blocks={blocks}
-          theme={theme}
-        />
-      )} */}
       {tabIndex === 2 && (
         <div
           id={"content1"}

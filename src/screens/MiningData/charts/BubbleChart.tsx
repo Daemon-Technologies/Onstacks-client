@@ -3,12 +3,11 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { ResponsiveCirclePacking } from "@nivo/circle-packing";
-import { CurrentBlock } from "../../../hooks/useMiningData";
 import { randomColorGenerator } from "../../../utils/helper";
 
 interface Props {
   theme: any;
-  currentBlock: CurrentBlock;
+  currentBlock: any;
   winnerAddress: string;
 }
 
@@ -22,11 +21,12 @@ export const BubbleCharts: React.FC<Props> = ({
 
   useEffect(() => {
     let bub: any[] = [];
-    currentBlock.miners_info.forEach((miner) => {
+    console.log(currentBlock);
+    currentBlock.blockCommits.forEach((miner: any) => {
       bub.push({
-        name: miner.miner_address,
-        value: miner.burn_fee,
-        prop: miner.win_probability,
+        name: miner.stx_address,
+        value: miner.commit_value,
+        // prop: miner.win_probability,
       });
     });
     setBubbles({ name: "root", children: bub });
@@ -75,9 +75,9 @@ export const BubbleCharts: React.FC<Props> = ({
             <div>
               <p>Fee Burned</p> <p>{x.data.value}</p>
             </div>
-            <div>
+            {/* <div>
               <p>Win Probabilty</p> <p>{x.data.prop}</p>
-            </div>
+            </div> */}
           </div>
         );
       }}

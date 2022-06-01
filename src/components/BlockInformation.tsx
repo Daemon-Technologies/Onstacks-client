@@ -7,34 +7,23 @@ import Search from "../assets/side-menu/search.svg";
 import Reward from "../assets/side-menu/reward-verified.svg";
 import { getBlockHash } from "../utils/helper";
 import { useHistory } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { BlockInfo } from "../graphql/query/block";
-import { useState } from "react";
 
 interface Props {
   blockNumber: number;
   timeElapsed: string;
   blockHeights: any;
+  currentBlock: any;
+  setCurrentBlock: any;
 }
 
 export const BlockInformation: React.FC<Props> = ({
   timeElapsed,
   blockNumber,
   blockHeights,
+  currentBlock,
+  setCurrentBlock,
 }) => {
   const { push } = useHistory();
-  const { data: blockInfo } = useQuery(BlockInfo, {
-    variables: {
-      stacks_block_height: blockNumber,
-    },
-  });
-  const [currentBlock, setCurrentBlock] = useState<any>();
-
-  useEffect(() => {
-    if (blockInfo && blockInfo.block_info.length > 0) {
-      setCurrentBlock(blockInfo.block_info[0]);
-    }
-  }, [blockInfo]);
 
   return (
     <>

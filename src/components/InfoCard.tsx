@@ -4,7 +4,7 @@ import React from "react";
 export const InfoCard: React.FC<{ overviewData: any }> = ({ overviewData }) => {
   return (
     <div className={"info-card"}>
-      <div className="inner-info-card">
+      <div className="inner-info-card" style={{ borderLeft: "none" }}>
         <p className="title">BTC spent*</p>
         <p className="sub-title">
           {(+overviewData.btcSpent / 100000000).toLocaleString()}{" "}

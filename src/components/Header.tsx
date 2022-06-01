@@ -7,12 +7,12 @@ import Logo from "../assets/side-menu/daemon.svg";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
 import Stacks from "../assets/side-menu/stacks.svg";
 import { useHistory } from "react-router-dom";
-import { ReactComponent as HighLightedSun } from "../assets/side-menu/sun.svg";
-import { ReactComponent as Moon } from "../assets/side-menu/cloud-dark.svg";
-import { ReactComponent as Sun } from "../assets/side-menu/sun-dark.svg";
-import { ReactComponent as HighLightedMoon } from "../assets/side-menu/cloud-light.svg";
-// import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
-import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
+// import { ReactComponent as HighLightedSun } from "../assets/side-menu/sun.svg";
+// import { ReactComponent as Moon } from "../assets/side-menu/cloud-dark.svg";
+// import { ReactComponent as Sun } from "../assets/side-menu/sun-dark.svg";
+// import { ReactComponent as HighLightedMoon } from "../assets/side-menu/cloud-light.svg";
+// // import { ReactComponent as Arrow } from "../assets/side-menu/download.svg";
+// import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
 import { useQuery } from "@apollo/client";
 import { minerConfig } from "../graphql/query/miningMonitorConfig";
 import { useConnect } from "@stacks/connect-react";
@@ -135,7 +135,7 @@ export const Header: React.FC<{
                     <img alt="stacks" src={Stacks} /> ${tokens.STX}
                   </a>
                 </li>
-                <li className="option" onClick={closeMobileMenu}>
+                {/* <li className="option" onClick={closeMobileMenu}>
                   {theme === "dark" ? (
                     <Sun style={{ cursor: "pointer" }} onClick={themeToggler} />
                   ) : (
@@ -156,7 +156,7 @@ export const Header: React.FC<{
                       onClick={themeToggler}
                     />
                   )}
-                </li>
+                </li> */}
               </>
             )}
           </ul>
@@ -181,7 +181,7 @@ export const Header: React.FC<{
               <img alt="stacks" src={Stacks} /> ${tokens.STX}
             </a>
           </li>
-          <li className="option head-colors" onClick={closeMobileMenu}>
+          {/* <li className="option head-colors" onClick={closeMobileMenu}>
             {theme === "dark" ? (
               <Sun style={{ cursor: "pointer" }} onClick={themeToggler} />
             ) : (
@@ -199,7 +199,7 @@ export const Header: React.FC<{
             ) : (
               <Moon style={{ cursor: "pointer" }} onClick={themeToggler} />
             )}
-          </li>
+          </li> */}
           <li className="aligning">
             <div className="connect">
               <p
