@@ -242,6 +242,7 @@ export const GlobalStyles = createGlobalStyle`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background: white;
     border-bottom: 1px solid  ${({ theme }: any) => theme.border} !important;;
     cursor: pointer;
   }
@@ -299,6 +300,10 @@ export const GlobalStyles = createGlobalStyle`
   }
   .table-heads {
     padding: 12px 26px;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    background-color: #F9FAFB;
+    border: 1px solid ${({ theme }: any) => theme.border};;
     cursor: none;
   }
   .table-heads:hover {
@@ -641,6 +646,65 @@ border-radius: 6px;
 
     }
   }
+  .pop-over-container {
+    background-color: #fff;
+    border-radius: 14px;
+    color: #000;
+    padding: 14px;
+    box-shadow: 0px 4px 6px -2px #0000000D;
+    width: 376px;
+    margin-right: 300px;
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    .row-space {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 20px;
+      justify-content: space-between;
+      .title {
+        //styleName: text-sm/leading-5/font-medium/tracking-wide/uppercase;
+        font-family: Manrope;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        letter-spacing: 0.025em;
+        text-align: left;
+        color: #6B7280
+      }
+    }
+    .Dropdown-root {
+      width: 100%;
+      text-align: left !important;
+    }
+    .dropdown-ss {
+      text-align: left;
+    }
+    input {
+      margin: 14px 0;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #D1D5DB;
+    box-shadow: 0px 1px 2px 0px #0000000d;
+    border-radius: 5px;
+    }
+    .row {
+      display: flex;
+      flex-direction: row;
+      cursor: pointer;
+      align-items: center;
+      .sub-title {
+        margin-left: 14px;
+        font-family: Manrope;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0em;
+        color: #1F222C;
+        text-align: left;
+      }
+    }
+  }
   .Dropdown-menu {
     box-shadow: 0px 0px 1px 0px #0000000A;
     box-shadow: 0px 2px 6px 0px #0000000A;
@@ -692,6 +756,9 @@ border-radius: 6px;
     margin-right: 3px;
     color: ${({ theme }: any) => theme.text};
     text-align: left;
+  }
+  .optionContainer .option {
+    color: black !important;
   }
   .transaction-title-span {
     font-family: Manrope;
@@ -2210,7 +2277,7 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
       padding-bottom: 30px;
     }
     .active {
-      border-bottom: 2px solid #FFA043;
+      border-bottom: 2px solid #4338CA;
       transition: width 1s;
     }
   }
@@ -2357,7 +2424,7 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     }
   }
   .button-view {
-    background-color: #FFA043;
+    background-color: #5546fe;
     padding: 8px 16px;
     border-radius: 4px;
     color: white  ;

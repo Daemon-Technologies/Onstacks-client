@@ -134,7 +134,12 @@ export const MiningData: React.FC<Props> = ({
       {tabIndex === 2 && (
         <div
           id={"content1"}
-          style={{ padding: 0 }}
+          style={{
+            padding: 0,
+            background: "transparent",
+            border: "none",
+            boxShadow: "none",
+          }}
           className={dims.width < 700 ? "mobile-table" : "s"}
         >
           {/* <p className={"title-table"}>
@@ -175,7 +180,7 @@ export const MiningData: React.FC<Props> = ({
               );
             })
           ) : (
-            <div>
+            <div style={{ borderTopLeftRadius: 14, borderTopRightRadius: 14 }}>
               {blocks.length > 0 && (
                 <Miners initialPageSize={10} blocks={minersBlocks} />
               )}

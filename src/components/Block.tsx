@@ -113,7 +113,7 @@ export const Block: React.FC<any> = ({
             style={{
               background:
                 blocks.length - 1 > currentBlockIndex
-                  ? "rgba(255, 160, 67, 0.25)"
+                  ? "rgb(85 70 254 / 20%)"
                   : "#EBEAED",
             }}
             onClick={nextBlock}
@@ -126,9 +126,7 @@ export const Block: React.FC<any> = ({
           <div
             style={{
               background:
-                currentBlockIndex !== 0
-                  ? "rgba(255, 160, 67, 0.25)"
-                  : "#EBEAED",
+                currentBlockIndex !== 0 ? "rgb(85 70 254 / 20%)" : "#EBEAED",
             }}
             onClick={prevBlock}
           >
