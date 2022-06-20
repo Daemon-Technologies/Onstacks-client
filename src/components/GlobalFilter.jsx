@@ -217,6 +217,19 @@ const GlobalFilter = ({
                       </div>
                     );
                   })}
+                  <div
+                    style={{
+                      marginLeft: 0,
+                      width: "100%",
+                      textAlign: "center",
+                    }}
+                    className="search-button"
+                    onClick={() => {
+                      setIsPopoverOpen(false);
+                    }}
+                  >
+                    Close
+                  </div>
                 </>
               </>
             ) : (
@@ -224,7 +237,11 @@ const GlobalFilter = ({
                 {state === 1 && (
                   <>
                     <div>
-                      <div onClick={() => setTheState(0)} className="row">
+                      <div
+                        onClick={() => setTheState(0)}
+                        style={{ marginBottom: 16 }}
+                        className="row"
+                      >
                         <img
                           className="icon"
                           src={require("../assets/drop-down/Chevron left.svg")}
@@ -268,7 +285,11 @@ const GlobalFilter = ({
                 {state === 2 && (
                   <>
                     <div>
-                      <div onClick={() => setTheState(0)} className="row">
+                      <div
+                        onClick={() => setTheState(0)}
+                        style={{ marginBottom: 16 }}
+                        className="row"
+                      >
                         <img
                           className="icon"
                           src={require("../assets/drop-down/Chevron left.svg")}
@@ -308,7 +329,11 @@ const GlobalFilter = ({
                 {state === 3 && (
                   <>
                     <div>
-                      <div onClick={() => setTheState(0)} className="row">
+                      <div
+                        onClick={() => setTheState(0)}
+                        style={{ marginBottom: 16 }}
+                        className="row"
+                      >
                         <img
                           className="icon"
                           src={require("../assets/drop-down/Chevron left.svg")}
@@ -348,7 +373,11 @@ const GlobalFilter = ({
                 {state === 4 && (
                   <>
                     <div>
-                      <div onClick={() => setTheState(0)} className="row">
+                      <div
+                        onClick={() => setTheState(0)}
+                        style={{ marginBottom: 16 }}
+                        className="row"
+                      >
                         <img
                           className="icon"
                           src={require("../assets/drop-down/Chevron left.svg")}

@@ -320,6 +320,7 @@ export const GlobalStyles = createGlobalStyle`
     /* height: 80px; */
     position: fixed;
     width: 100%;
+    z-index: 100;
     height: 66px;
     }
     .header-inner {
@@ -1054,7 +1055,6 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     margin: 40px 0 16px 0;
     max-width: 200px;
   }
-
   h3 {
     margin-bottom: 12px;
   }
@@ -1100,12 +1100,17 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     grid-template-areas:
         "main main main main main main main main main main main main"
         "content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
-        "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4";
+        "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4"
+        "content5 content5 content5 content5 content5 content5 content5 content5 content5 content5 content5 content5";
     grid-gap: 16px;
     width: 100%;
     max-width: 1600px;
     padding: 92px 32px 32px 32px;
     margin: auto;
+  }
+
+  #content5 {
+    grid-area: content5
   }
 
   .blocks-legend {
@@ -1815,7 +1820,9 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
     .logo {
       width: 150px
     }
-   
+    .table-blocks {
+      width: 100%
+    }
   }
   @media only screen and (max-width: 1200px) {
     #labelOverlay {

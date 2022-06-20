@@ -10,6 +10,7 @@ import left from "../assets/side-menu/left-arrow-active.svg";
 import leftDisabled from "../assets/side-menu/left-arrow-disabled.svg";
 import { useQuery } from "@apollo/client";
 import { BlockInfo } from "../graphql/query/block";
+import { TableBlock } from "./BlockMiners";
 
 export const Block: React.FC<any> = ({
   // currentBlock,
@@ -229,6 +230,11 @@ export const Block: React.FC<any> = ({
           blockNumber={currentBlockNumber}
         />
       )}
+      <div id={"content5"} className="table-blocks">
+        {currentBlock && currentBlock.blockCommits && (
+          <TableBlock blocks={currentBlock.blockCommits} />
+        )}
+      </div>
     </>
   );
 };
