@@ -24,10 +24,10 @@ export const TableBlock: React.FC<Props> = ({ blocks, initialPageSize }) => {
         Header: "Fees Burn",
         accessor: "commit_value",
       },
-      {
-        Header: "Total Block Won",
-        accessor: "is_winner",
-      },
+      // {
+      //   Header: "Total Block Won",
+      //   accessor: "is_winner",
+      // },
     ],
     []
   );

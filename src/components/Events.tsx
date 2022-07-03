@@ -7,7 +7,6 @@ import {
   getTicker,
   truncateMiddle,
 } from "../utils/utils";
-import EventDark from "../assets/explorer/Event-Dark.svg";
 import EventLight from "../assets/explorer/Event-Light.svg";
 
 export const Events: React.FC<{ events: any; theme: any }> = ({
@@ -68,7 +67,7 @@ export const Events: React.FC<{ events: any; theme: any }> = ({
             <img
               className="transaction-image"
               alt="transaction"
-              src={theme === "dark" ? EventDark : EventLight}
+              src={theme === "dark" ? EventLight : EventLight}
             />
             <div
               style={{

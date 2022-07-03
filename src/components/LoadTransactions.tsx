@@ -11,9 +11,6 @@ import {
 import StacksTransferLight from "../assets/explorer/stacks-transfer-light.svg";
 import FunctionCallLight from "../assets/explorer/function-call-light.svg";
 import FunctionCallLightFailed from "../assets/explorer/function-call-light-failed.svg";
-import StacksTransferDark from "../assets/explorer/stacks-transfer-dark.svg";
-import FunctionCallDark from "../assets/explorer/function-call-dark.svg";
-import FunctionCallDarkFailed from "../assets/explorer/function-call-dark-failed.svg";
 import { useHistory } from "react-router-dom";
 import Transaction from "../utils/explorer-types";
 
@@ -42,7 +39,9 @@ export const LoadTransactions: React.FC<{
                   className="transaction-image"
                   alt="transaction"
                   src={
-                    theme === "light" ? StacksTransferLight : StacksTransferDark
+                    theme === "light"
+                      ? StacksTransferLight
+                      : StacksTransferLight
                   }
                 />
               ) : (
@@ -55,8 +54,8 @@ export const LoadTransactions: React.FC<{
                         ? FunctionCallLightFailed
                         : FunctionCallLight
                       : didFail
-                      ? FunctionCallDarkFailed
-                      : FunctionCallDark
+                      ? FunctionCallLightFailed
+                      : FunctionCallLight
                   }
                 />
               )}

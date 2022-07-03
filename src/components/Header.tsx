@@ -15,9 +15,7 @@ import { useHistory } from "react-router-dom";
 // import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
 import { useQuery } from "@apollo/client";
 import { minerConfig } from "../graphql/query/miningMonitorConfig";
-import { useConnect } from "@stacks/connect-react";
 import { UserContext } from "../contexts/UserContext";
-import { truncateMiddle } from "../utils/utils";
 
 export const Header: React.FC<{
   theme: any;
@@ -29,7 +27,6 @@ export const Header: React.FC<{
   const [active, setActive] = useState(0);
   const { push, location } = useHistory();
   const { data } = useQuery(minerConfig);
-  const { doOpenAuth } = useConnect();
   const { userData } = useContext(UserContext);
   console.log(userData);
   const [tokens, setTokens] = useState({
@@ -200,19 +197,6 @@ export const Header: React.FC<{
               <Moon style={{ cursor: "pointer" }} onClick={themeToggler} />
             )}
           </li> */}
-          <li className="aligning">
-            <div className="connect">
-              <p
-                onClick={() => {
-                  doOpenAuth();
-                }}
-              >
-                {!(userData as any)?.identityAddress
-                  ? "Connect Wallet"
-                  : truncateMiddle((userData as any)?.identityAddress, 5)}
-              </p>
-            </div>
-          </li>
         </ul>
       </div>
     </div>

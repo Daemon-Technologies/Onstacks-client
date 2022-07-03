@@ -13,7 +13,6 @@ import {
   microToStacks,
   truncateMiddle,
 } from "../../utils/utils";
-// import { CopyBlock, dracula } from "react-code-blocks";
 import Stacks from "../../assets/side-menu/stacks.svg";
 import { Events } from "../../components/Events";
 import useWindowDimensions from "../../hooks/useWindowDimension";

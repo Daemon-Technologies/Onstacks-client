@@ -1102,7 +1102,7 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
         "content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1 content1"
         "content3 content3 content3 content3 content3 content3 content4 content4 content4 content4 content4 content4"
         "content5 content5 content5 content5 content5 content5 content5 content5 content5 content5 content5 content5";
-    grid-gap: 16px;
+    grid-gap: 16px; 
     width: 100%;
     max-width: 1600px;
     padding: 92px 32px 32px 32px;
@@ -1614,7 +1614,7 @@ box-shadow: 0px 10px 7px 0px hsla(0, 0%, 0%, 0.04);
   }
   .search-button {
     background-color: ${({ theme }: any) => theme.linkColor} !important;
-    padding: 10px 17px;
+    padding: 10px 22px;
     border-radius: 4px;
     color: white;
     /* margin-top: 33px; */

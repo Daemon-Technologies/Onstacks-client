@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { toRelativeTime, truncateMiddle } from "../utils/utils";
 import BlockLight from "../assets/explorer/microblock-light.svg";
-import BlockDark from "../assets/explorer/microblock-dark.svg";
 import { useHistory } from "react-router-dom";
 
 export const Microblock: React.FC<{
@@ -38,7 +37,7 @@ export const Microblock: React.FC<{
             <img
               className="transaction-image"
               alt="transaction"
-              src={theme === "light" ? BlockLight : BlockDark}
+              src={theme === "light" ? BlockLight : BlockLight}
             />
             <div>
               <p className="title">

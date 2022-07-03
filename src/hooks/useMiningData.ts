@@ -75,7 +75,9 @@ export const useMiningData = (blockHeights: any) => {
                 ? item.total_participations
                 : 0,
               total_block_reward: item.total_won ? item.total_won : 0,
-              total_stx_reward: item.total_reward ? item.total_reward : 0,
+              total_stx_reward: item.total_reward
+                ? +item.total_reward.toFixed(0)
+                : 0,
             };
           })
       );
