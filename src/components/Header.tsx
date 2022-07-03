@@ -93,16 +93,6 @@ export const Header: React.FC<{
             >
               <p>Explorer</p>
             </li>
-            <li
-              className={`option ${active === 2 ? "active" : ""}`}
-              onClick={() => {
-                setActive(2);
-                closeMobileMenu();
-                push("/watchlist");
-              }}
-            >
-              <p>Watchlist</p>
-            </li>
             <li className="option" onClick={closeMobileMenu}>
               <a
                 target="_blank"

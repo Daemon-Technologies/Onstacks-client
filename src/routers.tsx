@@ -22,7 +22,6 @@ import { Footer } from "./components/Footer";
 import { ContractDetails } from "./screens/Explorer/ContractDetails";
 import { useOverview } from "./hooks/useOverview";
 import useAmplitude from "./hooks/useAmplitude";
-import { Watchlist } from "./screens/Watchlist";
 
 export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
   theme,
@@ -47,9 +46,6 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
         </Route>
         <Route exact path="/protocol">
           <Protocol logEvent={logEvent} />
-        </Route>
-        <Route exact path="/watchlist">
-          <Watchlist />
         </Route>
         <Route exact path="/terms">
           <Terms />
