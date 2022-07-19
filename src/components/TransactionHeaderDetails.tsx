@@ -9,7 +9,6 @@ import Bottom from "../assets/explorer/Bottom.svg";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
 import Check from "../assets/explorer/check.png";
 import BlockLight from "../assets/explorer/block-light.svg";
-import BlockDark from "../assets/explorer/block-dark.svg";
 import Pending from "../assets/explorer/pending.svg";
 import Failed from "../assets/explorer/failed.svg";
 import dayjs from "dayjs";
@@ -104,7 +103,7 @@ export const TransactionHeaderDetails: React.FC<{
                   <img
                     className="transaction-image"
                     alt="transaction"
-                    src={theme === "light" ? BlockLight : BlockDark}
+                    src={theme === "light" ? BlockLight : BlockLight}
                   />
                   <div>
                     <p className="title">

@@ -13,7 +13,6 @@ import {
   microToStacks,
   truncateMiddle,
 } from "../../utils/utils";
-// import { CopyBlock, dracula } from "react-code-blocks";
 import Stacks from "../../assets/side-menu/stacks.svg";
 import { Events } from "../../components/Events";
 import useWindowDimensions from "../../hooks/useWindowDimension";
@@ -105,6 +104,7 @@ export const STXTransferDetails: React.FC<Props> = ({
   }, [failure, theme]);
   return (
     <div className="explorer">
+      <div className="header-wrapper"></div>
       {transaction && (transaction as any).contract_call && (
         <>
           <TransactionHeaderDetails

@@ -107,18 +107,25 @@ export const ExplorerHeader: React.FC<{
       >
         <p className="screen-title">Stacks’ Explorer</p>
         <div className="data">
-          <a onClick={() => getBlockHash(overviewData.STX_height)}>
+          <a
+            style={{ color: "white" }}
+            onClick={() => getBlockHash(overviewData.STX_height)}
+          >
             STX Block Height:&nbsp;{" "}
-            <span>#{numberWithCommas(overviewData.STX_height)} </span>
+            <span style={{ color: "rgb(255, 160, 67)" }}>
+              #{numberWithCommas(overviewData.STX_height)}{" "}
+            </span>
           </a>
           <a
-            style={{ marginLeft: 16 }}
+            style={{ marginLeft: 16, color: "white" }}
             target="_blank"
             href={"https://btc.com/btc/block/" + overviewData.BTC_height}
             rel="noopener noreferrer"
           >
             BTC Block Height: &nbsp;
-            <span>#{numberWithCommas(overviewData.BTC_height)}</span>
+            <span style={{ color: "rgb(255, 160, 67)" }}>
+              #{numberWithCommas(overviewData.BTC_height)}
+            </span>
           </a>
         </div>
       </div>

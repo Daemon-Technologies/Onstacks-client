@@ -7,7 +7,6 @@ import { useHistory, useParams } from "react-router-dom";
 import { useTransaction } from "../../hooks/useTransaction";
 import { toRelativeTime, truncateMiddle } from "../../utils/utils";
 import BlockLight from "../../assets/explorer/microblock-light.svg";
-import BlockDark from "../../assets/explorer/microblock-dark.svg";
 
 interface Props {
   theme: any;
@@ -99,7 +98,7 @@ export const MicroblockDetails: React.FC<Props> = ({
                       <img
                         className="transaction-image"
                         alt="transaction"
-                        src={theme === "light" ? BlockLight : BlockDark}
+                        src={theme === "light" ? BlockLight : BlockLight}
                       />
                       <div>
                         <p className="title">{truncateMiddle(tx, 10)}</p>

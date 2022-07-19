@@ -102,6 +102,7 @@ export const Explorer: React.FC<Props> = ({
   return (
     <div className="explorer">
       <div id="main">
+        <div className="header-wrapper"></div>
         <ExplorerHeader tabIndex={tabIndex} overviewData={overviewData} />
         <div className={"tabs"}>
           <div

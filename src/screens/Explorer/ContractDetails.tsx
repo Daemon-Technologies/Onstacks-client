@@ -88,6 +88,8 @@ export const ContractDetails: React.FC<Props> = ({
   }, [failure, theme]);
   return (
     <div className="explorer">
+      <div className="header-wrapper"></div>
+
       {contractData && (
         <>
           <div id="transactionContainer" className="transaction-container">

@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import { Microblock } from "./Microblock";
 import Stacks from "../assets/side-menu/stacks.svg";
 import BlockLight from "../assets/explorer/block-light.svg";
-import BlockDark from "../assets/explorer/block-dark.svg";
 import Bitcoin from "../assets/side-menu/bitcoin.svg";
 
 export const LoadBlocks: React.FC<{
@@ -34,7 +33,7 @@ export const LoadBlocks: React.FC<{
                 <img
                   className="transaction-image"
                   alt="transaction"
-                  src={theme === "light" ? BlockLight : BlockDark}
+                  src={theme === "light" ? BlockLight : BlockLight}
                 />
                 <div>
                   <p className="title">

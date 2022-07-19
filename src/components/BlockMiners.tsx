@@ -1,64 +1,41 @@
 // eslint-disable-next-line
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  useFilters,
-  useGlobalFilter,
-  usePagination,
-  useSortBy,
-  useTable,
-} from "react-table";
+import { usePagination, useSortBy, useTable } from "react-table";
 import { MinerInfo } from "../hooks/useMiningData";
 import useWindowDimensions from "../hooks/useWindowDimension";
-import GlobalFilter from "./GlobalFilter.jsx";
 
 interface Props {
   blocks: MinerInfo[];
   initialPageSize?: number;
 }
-export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
+export const TableBlock: React.FC<Props> = ({ blocks, initialPageSize }) => {
   const data = useMemo(() => blocks, [blocks]);
   const dims = useWindowDimensions();
 
-  const [cols, setCols] = useState([
-    {
-      Header: `Address.`,
-      accessor: "stx_address", // accessor is the "key" in the data
-      isVisible: true,
-    },
-    {
-      Header: "Total Spent (sats)",
-      accessor: "total_burnfee",
-      isVisible: true,
-      filter: "between",
-    },
-    {
-      Header: "Total Participation",
-      accessor: "total_participation",
-      isVisible: true,
-      filter: "between",
-    },
-    {
-      Header: "Total Block Won",
-      accessor: "total_block_reward",
-      isVisible: true,
-      filter: "between",
-    },
-    {
-      Header: "Total Reward (STX)",
-      accessor: "total_stx_reward",
-      isVisible: true,
-      filter: "between",
-    },
-  ]);
-  const columns: any = useMemo(() => cols, [cols]);
+  console.log(blocks);
+  const columns: any = useMemo(
+    () => [
+      {
+        Header: `Miners in current block`,
+        accessor: "stx_address", // accessor is the "key" in the data
+      },
+      {
+        Header: "Fees Burn",
+        accessor: "commit_value",
+      },
+      // {
+      //   Header: "Total Block Won",
+      //   accessor: "is_winner",
+      // },
+    ],
+    []
+  );
   const tableInstance: any = useTable(
     {
       columns,
       data,
     },
-    useFilters,
-    useGlobalFilter,
     useSortBy,
     usePagination
   );
@@ -73,14 +50,9 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
     // pageOptions,
     // pageCount,
     // gotoPage,
-
-    state,
-    setGlobalFilter,
-    preGlobalFilteredRows,
     nextPage,
     previousPage,
     setPageSize,
-    setHiddenColumns,
     state: { pageSize },
   } = tableInstance;
   const { push } = useHistory();
@@ -89,29 +61,9 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
     setPageSize(initialPageSize || 5);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialPageSize]);
-
-  React.useEffect(() => {
-    console.log(columns.filter((column: any) => !column.isVisible));
-    setHiddenColumns(
-      columns
-        .filter((column: any) => !column.isVisible)
-        .map((column: any) => column.accessor)
-    );
-  }, [setHiddenColumns, columns]);
-
   return (
     <>
       {/* <table id={"long"} {...getTableProps()}> */}
-      {/* rendering global filter */}
-      <GlobalFilter
-        preGlobalFilteredRows={preGlobalFilteredRows}
-        globalFilter={state.globalFilter}
-        headers={headerGroups[0].headers}
-        cols={columns}
-        setCols={setCols}
-        // filter={NumberRangeColumnFilter}
-        setGlobalFilter={setGlobalFilter}
-      />
       {/* <thead> */}
       {headerGroups.map((headerGroup: any) => (
         <div
