@@ -21,7 +21,6 @@ export const BubbleCharts: React.FC<Props> = ({
 
   useEffect(() => {
     let bub: any[] = [];
-    console.log(currentBlock);
     currentBlock.blockCommits.forEach((miner: any) => {
       bub.push({
         name: miner.stx_address,

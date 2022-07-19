@@ -12,6 +12,7 @@ import { useQuery } from "@apollo/client";
 import { BlockInfo } from "../graphql/query/block";
 import { TableBlock } from "./BlockMiners";
 
+
 export const Block: React.FC<any> = ({
   // currentBlock,
   // getBlockByNumber,
