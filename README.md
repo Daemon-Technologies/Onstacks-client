@@ -6,6 +6,7 @@ Onstacks is the leading analytics provider for miners on the Stacks network. Tra
 ## Features
 
 Mining monitor: Access all mining activities on stacks
+
 Explorer: View all transactions on stacks
 
 ## Developing
