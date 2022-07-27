@@ -27,8 +27,7 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
   theme,
   themeToggler,
 }) => {
-  const { overviewData, blocks, totalWinners, winnersAddresses, failure } =
-    useOverview();
+  const { blocks, totalWinners, winnersAddresses } = useOverview();
   const { logEvent } = useAmplitude();
 
   return (
@@ -38,8 +37,8 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
         <Route exact path="/explorer">
           <Explorer
             logEvent={logEvent}
-            failure={failure}
-            overviewData={overviewData}
+            failure={false}
+            overviewData={{}}
             theme={theme}
             themeToggler={themeToggler}
           />
@@ -53,7 +52,7 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
         <Route exact path="/explorer/address/:address">
           <ExplorerAddressDetails
             logEvent={logEvent}
-            failure={failure}
+            failure={false}
             themeToggler={themeToggler}
             theme={theme}
           />
@@ -61,7 +60,7 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
         <Route exact path="/explorer/txId/:txId">
           <STXTransferDetails
             logEvent={logEvent}
-            failure={failure}
+            failure={false}
             theme={theme}
             themeToggler={themeToggler}
           />
@@ -69,7 +68,7 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
         <Route exact path="/explorer/contract/:txId">
           <ContractDetails
             logEvent={logEvent}
-            failure={failure}
+            failure={false}
             theme={theme}
             themeToggler={themeToggler}
           />
@@ -77,7 +76,7 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
         <Route exact path="/explorer/block/:block">
           <Blockdetails
             logEvent={logEvent}
-            failure={failure}
+            failure={false}
             theme={theme}
             themeToggler={themeToggler}
           />
@@ -86,7 +85,7 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
         <Route exact path="/explorer/microblock/:microblock">
           <MicroblockDetails
             logEvent={logEvent}
-            failure={failure}
+            failure={false}
             theme={theme}
             themeToggler={themeToggler}
           />
@@ -94,31 +93,31 @@ export const Routers: React.FC<{ theme: any; themeToggler: any }> = ({
         <Route exact path="/">
           <MiningData
             logEvent={logEvent}
-            failure={failure}
+            failure={false}
             themeToggler={themeToggler}
             blocks={blocks}
             totalWinners={totalWinners}
             winnerAddresses={winnersAddresses}
-            overviewData={overviewData}
+            overviewData={{}}
             theme={theme}
           />
         </Route>
         <Route exact path="/:index/:block">
           <MiningData
             logEvent={logEvent}
-            failure={failure}
+            failure={false}
             themeToggler={themeToggler}
             totalWinners={totalWinners}
             winnerAddresses={winnersAddresses}
             blocks={blocks}
-            overviewData={overviewData}
+            overviewData={{}}
             theme={theme}
           />
         </Route>
         <Route exact path="/miner/address/:address">
           <AddressDetails
             logEvent={logEvent}
-            failure={failure}
+            failure={false}
             themeToggler={themeToggler}
             theme={theme}
           />

@@ -12,7 +12,6 @@ import { useQuery } from "@apollo/client";
 import { BlockInfo } from "../graphql/query/block";
 import { TableBlock } from "./BlockMiners";
 
-
 export const Block: React.FC<any> = ({
   // currentBlock,
   // getBlockByNumber,
@@ -52,7 +51,6 @@ export const Block: React.FC<any> = ({
           block.block_number.toString().substr(1) ===
           currentBlock.stacks_block_height.toString()
       );
-      console.log(currentBlock.stacks_block_height);
       setTimeElapsed(block?.mined_at + " ");
     }
   }, [currentBlock, blocks]);

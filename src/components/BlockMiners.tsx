@@ -13,7 +13,6 @@ export const TableBlock: React.FC<Props> = ({ blocks, initialPageSize }) => {
   const data = useMemo(() => blocks, [blocks]);
   const dims = useWindowDimensions();
 
-  console.log(blocks);
   const columns: any = useMemo(
     () => [
       {

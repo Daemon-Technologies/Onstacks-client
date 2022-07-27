@@ -91,7 +91,6 @@ export const Miners: React.FC<Props> = ({ blocks, initialPageSize }) => {
   }, [initialPageSize]);
 
   React.useEffect(() => {
-    console.log(columns.filter((column: any) => !column.isVisible));
     setHiddenColumns(
       columns
         .filter((column: any) => !column.isVisible)

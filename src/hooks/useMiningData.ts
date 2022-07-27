@@ -1,8 +1,6 @@
 import { truncateMiddle } from "./../utils/utils";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { instance as axios } from "../axios/axios";
-import { getBlockNumber } from "../axios/requests";
 import { minerList } from "../graphql/query/block";
 import useWindowDimensions from "./useWindowDimension";
 
@@ -51,7 +49,7 @@ export interface MiningInfo {
 
 export const useMiningData = (blockHeights: any) => {
   const [blocks, setBlocks] = useState<MinerInfo[]>([]);
-  const [currentBlock, setCurrentBlock] = useState<CurrentBlock>();
+  const [currentBlock] = useState<CurrentBlock>();
   const dims = useWindowDimensions();
 
   const { data: miners } = useQuery(minerList);
@@ -85,9 +83,9 @@ export const useMiningData = (blockHeights: any) => {
   }, [dims, miners]);
 
   const getBlockByNumber = (blockNumber: string) => {
-    axios.get(getBlockNumber(blockNumber)).then((data: any) => {
-      setCurrentBlock({ ...data, blockNumber: blockNumber });
-    });
+    // axios.get(getBlockNumber(blockNumber)).then((data: any) => {
+    //   setCurrentBlock({ ...data, blockNumber: blockNumber });
+    // });
   };
 
   return {

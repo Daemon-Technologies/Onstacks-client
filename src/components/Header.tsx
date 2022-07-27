@@ -15,7 +15,6 @@ import { useHistory } from "react-router-dom";
 // import { ReactComponent as Slash } from "../assets/side-menu/back-slash.svg";
 import { useQuery } from "@apollo/client";
 import { minerConfig } from "../graphql/query/miningMonitorConfig";
-import { UserContext } from "../contexts/UserContext";
 
 export const Header: React.FC<{
   theme: any;
@@ -27,8 +26,6 @@ export const Header: React.FC<{
   const [active, setActive] = useState(0);
   const { push, location } = useHistory();
   const { data } = useQuery(minerConfig);
-  const { userData } = useContext(UserContext);
-  console.log(userData);
   const [tokens, setTokens] = useState({
     BTC: "",
     STX: "",
@@ -50,10 +47,6 @@ export const Header: React.FC<{
       setActive(1);
     }
   }, [location.pathname]);
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
 
   return (
     <div className="header">
